@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vocci Homepage Demo 参考案例板</title>
+<style>
+  :root{
+    --bg:#f6f6f4;
+    --ink:#1c1c1a;
+    --ink-soft:#6b6b66;
+    --line:#dcdcd6;
+    --card:#ffffff;
+    --d1:#9a8874;   /* 时尚克制 暖灰 */
+    --d2:#3a3a38;   /* 精密工业 碳黑 */
+    --d3:#4a4fd4;   /* 疏离先锋 电蓝紫 */
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.6;
+  }
+  .wrap{max-width:1240px;margin:0 auto;padding:56px 32px 96px;}
+
+  header h1{
+    font-size:26px;font-weight:600;letter-spacing:.01em;
+  }
+  header p.sub{
+    color:var(--ink-soft);font-size:14px;margin-top:6px;max-width:64ch;
+  }
+
+  /* 坐标轴 */
+  .axis{margin:44px 0 12px;}
+  .axis-track{
+    position:relative;height:4px;border-radius:2px;
+    background:linear-gradient(90deg,var(--d1) 0%,#8a8a84 38%,var(--d2) 58%,var(--d3) 100%);
+  }
+  .axis-labels{
+    display:flex;justify-content:space-between;
+    font-size:12px;color:var(--ink-soft);margin-top:8px;
+  }
+  .axis-ticks{position:relative;height:34px;}
+  .tick{
+    position:absolute;top:0;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;
+    text-decoration:none;color:var(--ink-soft);font-size:11px;white-space:nowrap;
+  }
+  .tick::before{
+    content:"";width:1px;height:10px;background:var(--ink-soft);margin-bottom:3px;
+  }
+  .tick:hover{color:var(--ink);}
+  .axis-note{font-size:12px;color:var(--ink-soft);margin-top:20px;}
+
+  /* 分区 */
+  section{margin-top:72px;}
+  .sec-head{
+    display:flex;align-items:baseline;gap:14px;
+    border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px;
+  }
+  .sec-head .dot{
+    width:10px;height:10px;border-radius:50%;flex:none;position:relative;top:-1px;
+  }
+  #d1 .dot{background:var(--d1);} #d2 .dot{background:var(--d2);} #d3 .dot{background:var(--d3);}
+  .sec-head h2{font-size:19px;font-weight:600;}
+  .sec-head span{font-size:13px;color:var(--ink-soft);}
+
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:26px;
+  }
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .shot{
+    position:relative;aspect-ratio:16/10;background:#e9e9e5;overflow:hidden;
+  }
+  .shot img{
+    width:100%;height:100%;object-fit:cover;object-position:top;display:block;
+  }
+  .shot .loading{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-size:12px;color:var(--ink-soft);
+  }
+  .card-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1;}
+  .card-top{display:flex;align-items:center;gap:10px;}
+  .card-top h3{font-size:15px;font-weight:600;}
+  .badge{
+    font-size:11px;color:#8a2f22;background:#f6e7e4;border-radius:3px;padding:1px 7px;
+  }
+  .card p{font-size:13px;color:var(--ink-soft);flex:1;}
+  .card a.visit{
+    align-self:flex-start;font-size:13px;color:var(--ink);text-decoration:none;
+    border:1px solid var(--ink);border-radius:4px;padding:5px 14px;margin-top:4px;
+    transition:background .15s,color .15s;
+  }
+  .card a.visit:hover{background:var(--ink);color:var(--bg);}
+
+  footer{
+    margin-top:80px;border-top:1px solid var(--line);padding-top:18px;
+    font-size:12px;color:var(--ink-soft);
+  }
+  @media (max-width:600px){
+    .wrap{padding:36px 18px 72px;}
+    .tick{display:none;}
+    .axis-ticks{height:6px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Vocci Homepage Demo 视觉参考案例板</h1>
+  <p class="sub">对应已确认的收敛区间：时尚克制 至 精密透明，允许向疏离先锋适度延伸。三个 demo 方向各取 4–5 个参考站点，截图为当前线上首页实时抓取，点击可直接打开原站对比。</p>
+</header>
+
+<div class="axis">
+  <div class="axis-track"></div>
+  <div class="axis-labels">
+    <span>温暖真实</span><span>日常经典</span><span>时尚克制</span><span>精密透明</span><span>疏离先锋</span>
+  </div>
+  <div class="axis-ticks" id="ticks"></div>
+  <p class="axis-note">刻度为各参考站点在视觉语言轴上的大致位置，点击刻度可跳转到对应卡片。</p>
+</div>
+
+<section id="d1">
+  <div class="sec-head"><span class="dot"></span><h2>方向 1 · 时尚克制</h2><span>Apple / SENSIQ 一档：留白、单品聚焦、摄影承载高级感</span></div>
+  <div class="grid" data-sites='[
+    {"id":"apple","name":"Apple · AirPods Pro","url":"https://www.apple.com/airpods-pro/","note":"看产品页节奏：一屏只讲一件事，滚动驱动功能逐层展开。","pos":42},
+    {"id":"oura","name":"Oura","url":"https://ouraring.com","note":"同品类里时尚克制最成熟的版式节奏；借结构，色彩气质需拉开距离。","badge":"同品类竞品","pos":38},
+    {"id":"bo","name":"Bang & Olufsen","url":"https://www.bang-olufsen.com","note":"材质特写摄影 + 极少文案，靠摄影本身承载高级感。","pos":46},
+    {"id":"sonos","name":"Sonos","url":"https://www.sonos.com","note":"场景摄影中产品小而存在感明确，对应信任端人的处理方式。","pos":36}
+  ]'></div>
+</section>
+
+<section id="d2">
+  <div class="sec-head"><span class="dot"></span><h2>方向 2 · 包豪斯工业质感</h2><span>日德精工：网格裸露、参数化排版、工程图纸式呈现</span></div>
+  <div class="grid" data-sites='[
+    {"id":"te","name":"Teenage Engineering","url":"https://teenage.engineering","note":"方向标杆：页面本身像一份规格书，对工程师团队说服力强。","pos":62},
+    {"id":"leica","name":"Leica","url":"https://leica-camera.com","note":"德系克制：黑白灰加红点，金属材质打光可直接进摄影 brief。","pos":55},
+    {"id":"braun","name":"Braun Audio","url":"https://www.braun-audio.com","note":"包豪斯正源，可作为设计谱系引用增强方向合法性。","pos":58},
+    {"id":"analogue","name":"Analogue","url":"https://www.analogue.co","note":"纯色背景 + 产品正视图 + 参数化排版，工业设计本身撑起全站。","pos":64},
+    {"id":"balmuda","name":"Balmuda","url":"https://www.balmuda.com","note":"日系一侧参考，比德系多一层生活温度，可作为调温选项。","pos":50}
+  ]'></div>
+</section>
+
+<section id="d3">
+  <div class="sec-head"><span class="dot"></span><h2>方向 3 · AI native 先锋科技感</h2><span>Linear 谱系：深色底、UI 即视觉主角、发丝边框与光效工艺</span></div>
+  <div class="grid" data-sites='[
+    {"id":"linear","name":"Linear","url":"https://linear.app","note":"谱系原点：近黑底 #08090a、0.5px 发丝边框、产品 UI 是页面唯一的视觉纹理。","pos":86},
+    {"id":"attio","name":"Attio","url":"https://attio.com","note":"当前与 Linear 比肩的执行水准：hero 是实时 AI 指令演示，黑白基底加区块淡彩。","pos":84},
+    {"id":"cursor","name":"Cursor","url":"https://cursor.com","note":"AI native 叙事最纯粹：界面即品牌，产品即演示。","pos":88},
+    {"id":"raycast","name":"Raycast","url":"https://www.raycast.com","note":"克制的网格纹理；键盘等准硬件元素的渲染是软件美学接实体产品的现成桥。","pos":80},
+    {"id":"vercel","name":"Vercel","url":"https://vercel.com","note":"WebGL 与渐变着色器工艺的技术上限参考。","pos":90},
+    {"id":"reflect","name":"Reflect","url":"https://reflect.app","note":"发光星体加深空底的经典执行，光效怎么做才不廉价的对照组。","pos":92}
+  ]'></div>
+</section>
+
+<footer>截图由第三方抓取服务实时生成，首次打开如显示加载中，页面会自动重试；个别站点如持续无法生成截图，请直接点击打开原站查看。整理：VSD · Vocci 视觉方向项目</footer>
+
+</div>
+
+<script>
+(function(){
+  var allSites=[];
+  document.querySelectorAll('.grid').forEach(function(grid){
+    var sites=JSON.parse(grid.getAttribute('data-sites'));
+    sites.forEach(function(s){
+      allSites.push(s);
+      var card=document.createElement('div');
+      card.className='card';card.id='site-'+s.id;
+      var mshot='https://s0.wp.com/mshots/v1/'+encodeURIComponent(s.url)+'?w=1000';
+      var thum='https://image.thum.io/get/width/1000/'+s.url;
+      card.innerHTML=
+        '<div class="shot"><div class="loading">截图生成中…</div>'+
+        '<img loading="lazy" data-mshot="'+mshot+'" data-thum="'+thum+'" data-tries="0" src="'+mshot+'" alt="'+s.name+' 首页截图" style="opacity:0"></div>'+
+        '<div class="card-body"><div class="card-top"><h3>'+s.name+'</h3>'+
+        (s.badge?'<span class="badge">'+s.badge+'</span>':'')+
+        '</div><p>'+s.note+'</p>'+
+        '<a class="visit" href="'+s.url+'" target="_blank" rel="noopener">打开网站</a></div>';
+      grid.appendChild(card);
+    });
+  });
+
+  /* mShots 首次请求返回占位图（尺寸很小），定时重试直至拿到真实截图 */
+  document.querySelectorAll('.shot img').forEach(function(img){
+    function check(){
+      var tries=parseInt(img.getAttribute('data-tries'),10);
+      if(img.complete && img.naturalWidth>400){
+        img.style.opacity=1;
+        var l=img.parentElement.querySelector('.loading');
+        if(l) l.remove();
+        return;
+      }
+      if(tries<6){
+        img.setAttribute('data-tries',tries+1);
+        setTimeout(function(){
+          img.src=img.getAttribute('data-mshot')+'&r='+Date.now();
+        },3500);
+      }else if(tries===6){
+        img.setAttribute('data-tries',7);
+        img.src=img.getAttribute('data-thum');
+      }else{
+        img.style.opacity=1;
+        var l2=img.parentElement.querySelector('.loading');
+        if(l2) l2.textContent='截图暂不可用，请点击打开网站';
+      }
+    }
+    img.addEventListener('load',check);
+    img.addEventListener('error',check);
+    setTimeout(check,3500);
+  });
+
+  /* 坐标轴刻度 */
+  var ticks=document.getElementById('ticks');
+  allSites.forEach(function(s){
+    var a=document.createElement('a');
+    a.className='tick';a.href='#site-'+s.id;
+    a.style.left=s.pos+'%';
+    a.textContent=s.name.split('·')[0].trim();
+    ticks.appendChild(a);
+  });
+})();
+</script>
+</body>
+</html>
