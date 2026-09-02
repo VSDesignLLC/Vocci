@@ -137,9 +137,37 @@
   .side.right .stxt{align-items:flex-start;text-align:left;}
   .stxt .num{font-size:14px;letter-spacing:.14em;color:var(--ink-soft);margin-bottom:12px;}
   .stxt h3{font-size:clamp(24px,2.7vw,40px);font-weight:700;letter-spacing:-.01em;line-height:1.08;color:var(--ink);}
-  .rcard{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:22px 24px;width:min(320px,100%);box-shadow:0 20px 50px rgba(0,0,0,.06);}
-  .rcard .rlead{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px;}
-  .rcard p{font-size:clamp(14px,1.1vw,16px);color:var(--ink);line-height:1.55;}
+  /* floating software cards (#23 metric card · #24 floating cluster) */
+  .side.right .stxt{gap:16px;}
+  .fxcard{
+    position:relative;width:min(300px,100%);margin-left:-26px;
+    background:rgba(24,26,30,.60);
+    -webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);
+    border:1px solid rgba(255,255,255,.16);border-radius:20px;padding:18px 20px;color:#fff;
+    box-shadow:0 26px 64px rgba(0,0,0,.30);animation:floaty 6s ease-in-out infinite;
+  }
+  .fxrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;}
+  .fxlabel{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72);}
+  .fxpill{font-size:12px;font-weight:700;padding:4px 12px;border-radius:980px;border:1px solid rgba(255,255,255,.32);color:#fff;letter-spacing:.04em;}
+  .fxpill.ok{color:#d8f560;border-color:rgba(216,245,96,.55);}
+  .fxpill.rec{color:#ff8172;border-color:rgba(255,129,114,.55);}
+  .fxval{font-size:17px;font-weight:600;margin-bottom:14px;letter-spacing:-.01em;}
+  .fxbar{height:9px;border-radius:6px;position:relative;overflow:hidden;
+    background:repeating-linear-gradient(45deg,rgba(255,255,255,.06),rgba(255,255,255,.06) 6px,rgba(255,255,255,.12) 6px,rgba(255,255,255,.12) 12px);}
+  .fxbar > i{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:#f2efdf;}
+  .fxchip{
+    display:inline-flex;align-items:center;gap:10px;align-self:flex-start;margin-left:-58px;
+    background:rgba(24,26,30,.60);
+    -webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);
+    border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:11px 16px;color:#fff;
+    font-size:13.5px;font-weight:500;box-shadow:0 20px 48px rgba(0,0,0,.28);
+    animation:floaty 5s ease-in-out infinite .6s;
+  }
+  .fxchip .dot{width:20px;height:20px;border-radius:50%;background:#d8f560;color:#1d1d1f;
+    display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex:0 0 auto;line-height:1;}
+  .fxchip .dot.live{background:#ff8172;animation:pulse 1.3s ease-in-out infinite;}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
   .ring-stage{position:relative;width:clamp(240px,30vw,400px);height:min(58vh,440px);}
   .ring-stage::before{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:96%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(150,168,200,.18),transparent 68%);}
   .ring-img{position:absolute;left:50%;top:50%;max-width:82%;max-height:82%;width:auto;height:auto;
@@ -232,7 +260,7 @@
     .side.left .stxt,.side.right .stxt{align-items:center;text-align:center;}
     .side .stxt.active{position:relative;}
     .ring-stage{width:56vw;height:32vh;order:-1;}
-    .rcard{max-width:100%;}
+    .fxcard,.fxchip{margin-left:0;}
     .spec-inner{grid-template-columns:1fr;gap:8vh;}
     .spec-media{order:-1;min-height:34vh;}
     .wb-grid{grid-template-columns:1fr;}
@@ -356,10 +384,38 @@
     </div>
 
     <div class="side right">
-      <div class="stxt active"><div class="rcard"><span class="rlead">Listening</span><p>Vocci listens and turns everything around you into context — privately and securely.</p></div></div>
-      <div class="stxt"><div class="rcard"><span class="rlead">Transcribed</span><p>Summaries, action items and speaker-labeled minutes. Automatically. In 100+ languages.</p></div></div>
-      <div class="stxt"><div class="rcard"><span class="rlead">Anywhere</span><p>Notes, contacts or summaries — to Claude, Notion, Codex, or directly to whoever needs it.</p></div></div>
-      <div class="stxt"><div class="rcard"><span class="rlead">Agent-ready</span><p>Plan your day, draft emails, build on your ideas — hands-free.</p></div></div>
+      <div class="stxt active">
+        <div class="fxcard">
+          <div class="fxrow"><span class="fxlabel">Live capture</span><span class="fxpill rec">REC</span></div>
+          <div class="fxval">0:42 recorded</div>
+          <div class="fxbar"><i style="width:46%"></i></div>
+        </div>
+        <div class="fxchip"><span class="dot live"></span> Listening, on-device</div>
+      </div>
+      <div class="stxt">
+        <div class="fxcard">
+          <div class="fxrow"><span class="fxlabel">Transcribed</span><span class="fxpill ok">✓</span></div>
+          <div class="fxval">3 notes stored</div>
+          <div class="fxbar"><i style="width:100%"></i></div>
+        </div>
+        <div class="fxchip"><span class="dot">✓</span> 100+ languages</div>
+      </div>
+      <div class="stxt">
+        <div class="fxcard">
+          <div class="fxrow"><span class="fxlabel">Connected</span><span class="fxpill ok">MCP</span></div>
+          <div class="fxval">Notion · linked</div>
+          <div class="fxbar"><i style="width:100%"></i></div>
+        </div>
+        <div class="fxchip"><span class="dot">✓</span> Sent to Claude</div>
+      </div>
+      <div class="stxt">
+        <div class="fxcard">
+          <div class="fxrow"><span class="fxlabel">Agent task</span><span class="fxpill ok">Done</span></div>
+          <div class="fxval">Draft email ready</div>
+          <div class="fxbar"><i style="width:100%"></i></div>
+        </div>
+        <div class="fxchip"><span class="dot">✓</span> Task complete</div>
+      </div>
     </div>
 
     <div class="scrub-progress"><i class="on"></i><i></i><i></i><i></i></div>
