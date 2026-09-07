@@ -8,12 +8,67 @@
   menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
   document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();menuButton.focus();}});
   document.addEventListener('click',e=>{if(!menu.contains(e.target)&&!menuButton.contains(e.target))closeMenu();});
+  // The outer section supplies scroll distance; its one stage stays in place.
+  const useSection = document.querySelector('.use-pages');
+  const useStage = useSection.querySelector('.use-stage');
+  const useCopies = [...useSection.querySelectorAll('[data-use-copy]')];
+  const useVisuals = [...useSection.querySelectorAll('[data-use-visual]')];
+  const useSteps = [...useSection.querySelectorAll('[data-use-step]')];
+  const useRail = useSection.querySelector('.use-rail');
+  let useStart = 0;
+  let useDistance = 1;
+  let currentStep = -1;
+  let scrollFrame = 0;
+  function updateUseStep() {
+    scrollFrame = 0;
+    const progress = (window.scrollY - useStart) / useDistance;
+    const step = Math.max(0, Math.min(3, Math.floor(progress * 4 + .001)));
+    if (step === currentStep) return;
+    currentStep = step;
+    useStage.dataset.step = String(step);
+    useRail.style.setProperty('--step', step);
+    useCopies.forEach((copy, index) => {
+      const active = index === step;
+      copy.classList.toggle('active', active);
+      copy.setAttribute('aria-hidden', String(!active));
+      useVisuals[index].classList.toggle('active', active);
+      useVisuals[index].setAttribute('aria-hidden', String(!active));
+      useSteps[index].classList.toggle('active', active);
+      useSteps[index].classList.toggle('reached', index <= step);
+      if (active) useSteps[index].setAttribute('aria-current', 'step');
+      else useSteps[index].removeAttribute('aria-current');
+    });
+    document.getElementById('use-status').textContent = `Step ${step + 1} of 4: ${useCopies[step].querySelector('h2').textContent}`;
+  }
+  function measureUseSection() {
+    const navOffset = parseFloat(getComputedStyle(useStage).top);
+    useStart = useSection.getBoundingClientRect().top + window.scrollY - navOffset;
+    useDistance = Math.max(1, useSection.offsetHeight - useStage.offsetHeight);
+    updateUseStep();
+  }
+  window.addEventListener('scroll', () => {
+    if (!scrollFrame) scrollFrame = requestAnimationFrame(updateUseStep);
+  }, {passive: true});
+  window.addEventListener('resize', measureUseSection);
+  window.addEventListener('load', measureUseSection);
+  document.fonts.ready.then(measureUseSection);
+  measureUseSection();
+  useSteps.forEach((link, index) => link.addEventListener('click', event => {
+    event.preventDefault();
+    // Keep keyboard focus on the progress control while its scroll target changes.
+    history.replaceState(null, '', link.getAttribute('href'));
+    window.scrollTo({
+      top: useStart + useDistance * index / 4 + 1,
+      behavior: reduced.matches ? 'instant' : 'smooth'
+    });
+  }));
   const detailButtons=[...document.querySelectorAll('[data-detail]')];
   const frame=document.querySelector('.hardware-frame');
   const captions={titanium:'The ring, inside and out.',fit:'A closer look at proportion.',button:'A small gesture, up close.',water:'The surface, in detail.',recording:'Room for what matters.',case:'Ring and charging case.'};
   detailButtons.forEach(button=>button.addEventListener('click',()=>{
     const mode=button.dataset.detail;
-    detailButtons.forEach(b=>{const active=b===button;b.setAttribute('aria-expanded',String(active));b.parentElement.classList.toggle('active',active);b.querySelector('.toggle').textContent=active?'−':'+';});
+    const shouldOpen = button.getAttribute('aria-expanded') !== 'true';
+    detailButtons.forEach(b=>{const active=b===button&&shouldOpen;b.setAttribute('aria-expanded',String(active));b.parentElement.classList.toggle('active',active);b.querySelector('.toggle').textContent=active?'−':'+';});
     const alt=frame.querySelector('.hw-alt');
     alt.src=mode==='case'?'assets/product/vocci-ring-and-case-open.png':'assets/product/vocci-ring-front.png';
     alt.alt=mode==='case'?'Vocci ring with open charging case':'Front view of Vocci ring';
