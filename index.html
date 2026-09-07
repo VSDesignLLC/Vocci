@@ -1,13 +1,63 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vocci — Demos</title>
-<meta http-equiv="refresh" content="0; url=vocci-demos.html">
-<link rel="canonical" href="vocci-demos.html">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;background:#0b0b0d;}
+  .bar{
+    position:fixed;top:0;left:0;right:0;height:52px;z-index:10;
+    display:flex;align-items:center;gap:8px;padding:0 18px;
+    background:#0b0b0d;border-bottom:1px solid rgba(255,255,255,.10);
+  }
+  .bar .brand{color:#fff;font-weight:600;letter-spacing:.10em;font-size:14px;}
+  .bar .spacer{flex:1;}
+  .opt{
+    appearance:none;-webkit-appearance:none;border:1px solid rgba(255,255,255,.16);background:transparent;
+    color:rgba(255,255,255,.7);font:inherit;font-size:13px;font-weight:500;
+    padding:7px 16px;border-radius:980px;cursor:pointer;
+    transition:background .2s,color .2s,border-color .2s;
+  }
+  .opt:hover{color:#fff;border-color:rgba(255,255,255,.35);}
+  .opt.active{background:#fff;color:#0b0b0d;border-color:#fff;}
+  .frame{
+    position:fixed;top:52px;left:0;right:0;bottom:0;
+    width:100%;height:calc(100% - 52px);border:none;background:#fff;
+  }
+  @media (max-width:640px){
+    .bar{gap:6px;padding:0 10px;}
+    .bar .brand{display:none;}
+    .opt{padding:6px 12px;font-size:12px;}
+  }
+</style>
 </head>
 <body>
-<p>Opening Vocci demos… <a href="vocci-demos.html">Continue</a></p>
+  <div class="bar">
+    <span class="brand">VOCCI</span>
+    <span class="spacer"></span>
+    <button class="opt" data-src="2026-09-03-option-1.html">09/03 · Option 1</button>
+    <button class="opt" data-src="2026-09-03-option-2.html">09/03 · Option 2</button>
+    <button class="opt" data-src="2026-09-03-option-3.html">09/03 · Option 3</button>
+    <button class="opt" data-src="2026-09-03-option-4.html">09/03 · Option 4</button>
+    <button class="opt" data-src="2026-09-07-option-b1.html">09/07 · B1</button>
+    <button class="opt active" data-src="2026-09-07-option-b1.5.html">09/07 · B1.5</button>
+    <span class="spacer"></span>
+  </div>
+  <iframe class="frame" id="frame" src="2026-09-07-option-b1.5.html" title="Vocci demo"></iframe>
+  <script>
+    var frame = document.getElementById('frame');
+    var opts = document.querySelectorAll('.opt');
+    opts.forEach(function(b){
+      b.addEventListener('click', function(){
+        if(b.classList.contains('active')) return;
+        opts.forEach(function(o){ o.classList.remove('active'); });
+        b.classList.add('active');
+        frame.src = b.getAttribute('data-src');
+      });
+    });
+  </script>
 </body>
 </html>

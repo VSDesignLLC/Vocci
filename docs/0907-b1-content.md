@@ -2,7 +2,7 @@
 
 日期：2026-09-07。按用户授权完成本轮品牌文案定稿，不再等待逐句创意确认。产品功能、指标和权限表述仍以产品团队最终核实为发布依据。
 
-页面：[B1 原型](../vocci-option2-b1.html) · [全部方案入口](../vocci-demos.html)  
+页面：[B1 原型](../2026-09-07-option-b1.html) · [全部方案入口](../index.html)
 视觉规则：[设计计划](0907-b1-design-plan.md) · [图片生成记录与完整 prompts](../assets/b1/README.md)
 
 主张：在现实交流中保持投入，把用户选择留下的内容带入后续 AI 工作。五段依次是 Presence、Capture、Recall、Context、Everyday。
