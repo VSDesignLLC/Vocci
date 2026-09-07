@@ -1,10 +1,10 @@
 # Vocci 网站设计 Demo
 
-围绕 Vocci 戒指的品牌信息、视觉方向与 landing page 叙事进行设计探索。当前工作版本为 **Option B1.5**。
+围绕 Vocci 戒指的品牌信息、视觉方向与 landing page 叙事进行设计探索。当前工作版本为 **Option B2**。
 
 ## 打开项目
 
-打开 [index.html](index.html)，即可在原四个方案、B1 和 B1.5 之间切换，默认显示 B1.5。它现在直接承载方案切换功能，是根目录唯一入口。
+打开 [index.html](index.html)，即可在原四个方案、B1、B1.5 和 B2 之间切换，默认显示 B2。它现在直接承载方案切换功能，是根目录唯一入口。
 
 也可以从项目目录启动本地服务：
 
@@ -12,14 +12,15 @@
 python3 -m http.server 8765 --bind 127.0.0.1
 ```
 
-随后访问 [本地入口](http://127.0.0.1:8765/) 或 [B1.5 独立页面](http://127.0.0.1:8765/2026-09-07-option-b1.5.html)。B1.5 以 1440px 为设计基准，支持 1280px 及以上桌面浏览器宽度。
+随后访问 [本地入口](http://127.0.0.1:8765/) 或 [B2 独立页面](http://127.0.0.1:8765/2026-09-08-option-b2.html)。B2 以 1440px 为设计基准，支持 1280px 及以上桌面浏览器宽度。
 
 ## 页面与版本
 
 | 文件 | 用途 |
 | --- | --- |
-| [index.html](index.html) | 统一方案切换入口，默认 B1.5 |
-| [2026-09-07-option-b1.5.html](2026-09-07-option-b1.5.html) | 当前稿：玻璃导航、全屏叠卡、固定四步流程、产品网格与信任区 |
+| [index.html](index.html) | 统一方案切换入口，默认 B2 |
+| [2026-09-08-option-b2.html](2026-09-08-option-b2.html) | 当前稿：开场、四色轮换、五组场景与分层标注，每屏最多一张彩色透视卡 |
+| [2026-09-07-option-b1.5.html](2026-09-07-option-b1.5.html) | B1.5：玻璃导航、全屏叠卡、固定四步流程、产品网格与信任区 |
 | [2026-09-07-option-b1.html](2026-09-07-option-b1.html) | B1：日常佩戴场景、手部影像与 AI 工作流信息 |
 | [2026-09-03-option-1.html](2026-09-03-option-1.html) | 原 Option 1 |
 | [2026-09-03-option-2.html](2026-09-03-option-2.html) | 原 Option 2，B1 / B1.5 的探索起点 |
@@ -35,11 +36,14 @@ python3 -m http.server 8765 --bind 127.0.0.1
 ```text
 VOCCI/
 ├── index.html                         # 唯一日常入口
-├── 2026-09-07-option-b1.5.html         # 当前工作稿
+├── 2026-09-08-option-b2.html           # 当前工作稿
+├── 2026-09-07-option-b1.5.html         # 保留上一版
 ├── 2026-09-07-option-b1.html           # B1
 ├── 2026-09-03-option-1…4.html          # 原四方案
 ├── 2026-08-31-*.html                  # 早期合辑和参考板
 ├── assets/
+│   ├── b2/                            # B2 生成场景、透明戒指、CSS 与 JS
+│   ├── b2-tests/                      # 前期独立试验素材与抠图来源
 │   ├── b1-5/                          # B1.5 CSS、JS、Geist 字体与许可证
 │   ├── b1/                            # B1 CSS、JS、场景照片与生成记录
 │   ├── product/                       # 产品图片与产品参考素材
@@ -54,6 +58,12 @@ VOCCI/
 备份目录内的 [历史入口](<0903 website demo v1/2026-09-03-demo-shell.html>) 仅用于查看该次快照，共用图片从 `../assets/` 读取。平时从根目录 `index.html` 进入即可。
 
 ## 修改位置与设计依据
+
+- B2 页面：[2026-09-08-option-b2.html](2026-09-08-option-b2.html)
+- B2 样式与交互：[style.css](assets/b2/style.css)、[script.js](assets/b2/script.js)；样式复用 B1.5 基础层，B1.5 文件保持不变。
+- B2 交付与叙事分配：[0908-b2-delivery.md](docs/0908-b2-delivery.md)
+- B2 图片来源与提示词：[prompts.md](assets/b2/prompts.md)
+- 前期独立测试：[tests/b2/README.md](tests/b2/README.md)
 
 - B1.5 页面结构及文案：[2026-09-07-option-b1.5.html](2026-09-07-option-b1.5.html)
 - B1.5 样式：[assets/b1-5/style.css](assets/b1-5/style.css)；交互：[assets/b1-5/script.js](assets/b1-5/script.js)
@@ -70,7 +80,7 @@ GitHub 项目：[VSDesignLLC/Vocci](https://github.com/VSDesignLLC/Vocci)。当�
 
 已有 Vercel 项目：[VSDesign / vocci-demos](https://vercel.com/vsdesign/vocci-demos)。本地通过 `.vercel/project.json` 关联，后续部署继续使用该项目。
 
-上次线上预览对应提交 `8c0e61e`，本次文件重命名尚未重新部署。部署包仅包含网页和所需素材；内部 `docs/`、本地环境文件及历史备份不作为静态网站内容上传。
+上次线上预览对应提交 `8c0e61e`，文件重命名和 B2 尚未重新部署。部署包仅包含网页和所需素材；内部 `docs/`、本地环境文件及历史备份不作为静态网站内容上传。
 
 建议安装 Vercel CLI：
 
