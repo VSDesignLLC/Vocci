@@ -1,13 +1,45 @@
 (() => {
   'use strict';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const menuButton = document.querySelector('.menu-button');
-  const menu = document.getElementById('menu-panel');
-  function closeMenu(){menu.hidden=true;menuButton.setAttribute('aria-expanded','false');}
-  menuButton.addEventListener('click',()=>{menu.hidden=!menu.hidden;menuButton.setAttribute('aria-expanded',String(!menu.hidden));});
-  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();menuButton.focus();}});
-  document.addEventListener('click',e=>{if(!menu.contains(e.target)&&!menuButton.contains(e.target))closeMenu();});
+  const highlights = document.querySelector('.highlights');
+  const highlightStage = highlights.querySelector('.highlight-stage');
+  const highlightCards = [...highlights.querySelectorAll('.highlight')];
+  const navigation = document.querySelector('.nav');
+  let navScrollCheckpoint = window.scrollY;
+  let navWasInHighlights = false;
+  function updateNavigation() {
+    const scrollPosition = window.scrollY;
+    const delta = scrollPosition - navScrollCheckpoint;
+    const inHighlights = scrollPosition >= highlightStart && scrollPosition < highlightStart + highlights.offsetHeight;
+    let hidden = navigation.classList.contains('is-hidden');
+    if (!inHighlights) hidden = false;
+    else if (!navWasInHighlights) hidden = delta >= 0;
+    else if (Math.abs(delta) >= 4) hidden = delta > 0;
+    navigation.classList.toggle('is-hidden', hidden);
+    navigation.inert = hidden;
+    navigation.setAttribute('aria-hidden', String(hidden));
+    if (Math.abs(delta) >= 4 || inHighlights !== navWasInHighlights) navScrollCheckpoint = scrollPosition;
+    navWasInHighlights = inHighlights;
+  }
+  let highlightStart = 0;
+  let photoHeight = 1;
+  let photoHold = 0;
+  const cardPositions = [];
+  function measureHighlights() {
+    highlightStart = highlights.getBoundingClientRect().top + window.scrollY;
+    photoHeight = highlightStage.offsetHeight;
+    photoHold = (highlights.offsetHeight - photoHeight * highlightCards.length) / highlightCards.length;
+  }
+  function updateHighlights() {
+    const distance = window.scrollY - highlightStart;
+    highlightCards.forEach((card, index) => {
+      const transitionStart = (index - 1) * (photoHeight + photoHold) + photoHold;
+      const y = index === 0 ? 0 : Math.max(0, Math.min(photoHeight, photoHeight - (distance - transitionStart)));
+      if (cardPositions[index] === y) return;
+      cardPositions[index] = y;
+      card.style.transform = `translate3d(0, ${y}px, 0)`;
+    });
+  }
   // The outer section supplies scroll distance; its one stage stays in place.
   const useSection = document.querySelector('.use-pages');
   const useStage = useSection.querySelector('.use-stage');
@@ -21,6 +53,8 @@
   let scrollFrame = 0;
   function updateUseStep() {
     scrollFrame = 0;
+    updateHighlights();
+    updateNavigation();
     const progress = (window.scrollY - useStart) / useDistance;
     const step = Math.max(0, Math.min(3, Math.floor(progress * 4 + .001)));
     if (step === currentStep) return;
@@ -41,6 +75,7 @@
     document.getElementById('use-status').textContent = `Step ${step + 1} of 4: ${useCopies[step].querySelector('h2').textContent}`;
   }
   function measureUseSection() {
+    measureHighlights();
     const navOffset = parseFloat(getComputedStyle(useStage).top);
     useStart = useSection.getBoundingClientRect().top + window.scrollY - navOffset;
     useDistance = Math.max(1, useSection.offsetHeight - useStage.offsetHeight);
