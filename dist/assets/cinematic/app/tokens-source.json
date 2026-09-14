@@ -1,0 +1,225 @@
+{
+  "source": "Antian-Vocci官网草稿&app界面.fig",
+  "components": {
+    "78758": {
+      "name": "Frame 2117132484",
+      "size": {
+        "x": 328,
+        "y": 102
+      },
+      "rectangleTopLeftCornerRadius": 20,
+      "stackSpacing": 24,
+      "stackHorizontalPadding": 12,
+      "stackVerticalPadding": 12,
+      "stackPaddingRight": 12,
+      "stackPaddingBottom": 12,
+      "fillPaints": [
+        {
+          "type": "SOLID",
+          "color": {
+            "r": 0.9607843160629272,
+            "g": 0.9607843160629272,
+            "b": 0.9607843160629272,
+            "a": 1
+          },
+          "opacity": 1,
+          "visible": true,
+          "blendMode": "NORMAL",
+          "colorVar": {
+            "value": {
+              "alias": {
+                "assetRef": {
+                  "key": "a38334ac72037b0fd84ea90d90c52d11d7981a19",
+                  "version": "13327:8"
+                }
+              }
+            },
+            "dataType": "ALIAS",
+            "resolvedDataType": "COLOR"
+          },
+          "authoredColor": {
+            "space": "DEFAULT",
+            "c0": 0.9607843160629272,
+            "c1": 0.9607843160629272,
+            "c2": 0.9607843160629272,
+            "c3": 1
+          }
+        }
+      ]
+    },
+    "78761": {
+      "name": "Ask any question…",
+      "fontName": {
+        "family": "Inter 24pt",
+        "style": "Regular",
+        "postscript": "Inter24pt-Regular"
+      },
+      "fontSize": 14,
+      "size": {
+        "x": 119,
+        "y": 14
+      },
+      "fillPaints": [
+        {
+          "type": "SOLID",
+          "color": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 1
+          },
+          "opacity": 0.25,
+          "visible": true,
+          "blendMode": "NORMAL",
+          "authoredColor": {
+            "space": "DEFAULT",
+            "c0": 0,
+            "c1": 0,
+            "c2": 0,
+            "c3": 0.25
+          }
+        }
+      ]
+    },
+    "78762": {
+      "name": "Frame 2117132707",
+      "size": {
+        "x": 304,
+        "y": 32
+      },
+      "stackSpacing": 8
+    },
+    "78764": {
+      "name": "Frame 2117132724",
+      "size": {
+        "x": 32,
+        "y": 32
+      },
+      "rectangleTopLeftCornerRadius": 25.884078979492188,
+      "stackSpacing": 8.088774681091309,
+      "fillPaints": [
+        {
+          "type": "SOLID",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "opacity": 1,
+          "visible": true,
+          "blendMode": "NORMAL",
+          "authoredColor": {
+            "space": "DEFAULT",
+            "c0": 1,
+            "c1": 1,
+            "c2": 1,
+            "c3": 1
+          }
+        }
+      ]
+    },
+    "78766": {
+      "name": "Frame 2117132725",
+      "size": {
+        "x": 32,
+        "y": 32
+      },
+      "rectangleTopLeftCornerRadius": 25.884078979492188,
+      "stackSpacing": 8.088774681091309,
+      "fillPaints": [
+        {
+          "type": "SOLID",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "opacity": 1,
+          "visible": true,
+          "blendMode": "NORMAL",
+          "authoredColor": {
+            "space": "DEFAULT",
+            "c0": 1,
+            "c1": 1,
+            "c2": 1,
+            "c3": 1
+          }
+        }
+      ]
+    },
+    "78769": {
+      "name": "Frame 2117132726",
+      "size": {
+        "x": 32,
+        "y": 32
+      },
+      "rectangleTopLeftCornerRadius": 25.884078979492188,
+      "stackSpacing": 8.088774681091309,
+      "fillPaints": [
+        {
+          "type": "SOLID",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "opacity": 1,
+          "visible": true,
+          "blendMode": "NORMAL",
+          "authoredColor": {
+            "space": "DEFAULT",
+            "c0": 1,
+            "c1": 1,
+            "c2": 1,
+            "c3": 1
+          }
+        }
+      ]
+    },
+    "78710": {
+      "name": "Frame 2085664640",
+      "size": {
+        "x": 40,
+        "y": 40
+      },
+      "rectangleTopLeftCornerRadius": 9999,
+      "stackSpacing": 10,
+      "fillPaints": [
+        {
+          "type": "SOLID",
+          "color": {
+            "r": 0.9607843160629272,
+            "g": 0.9607843160629272,
+            "b": 0.9607843160629272,
+            "a": 1
+          },
+          "opacity": 1,
+          "visible": true,
+          "blendMode": "NORMAL",
+          "colorVar": {
+            "value": {
+              "alias": {
+                "assetRef": {
+                  "key": "a38334ac72037b0fd84ea90d90c52d11d7981a19",
+                  "version": "13327:8"
+                }
+              }
+            },
+            "dataType": "ALIAS",
+            "resolvedDataType": "COLOR"
+          },
+          "authoredColor": {
+            "space": "DEFAULT",
+            "c0": 0.9607843160629272,
+            "c1": 0.9607843160629272,
+            "c2": 0.9607843160629272,
+            "c3": 1
+          }
+        }
+      ]
+    }
+  }
+}
