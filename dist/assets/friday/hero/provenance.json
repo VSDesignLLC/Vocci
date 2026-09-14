@@ -1,0 +1,13 @@
+{
+  "generated": {
+    "file": "gesture.png",
+    "tool": "image_gen",
+    "reference": "vocci product images/Frame 2117132937.png",
+    "prompt": "Create a premium photorealistic website hero photograph 16:9 landscape. Reference supplied is the EXACT silver Vocci AI voice ring, preserve its narrow polished band, two fine grooves and single elongated oval physical button, realistic finger scale. Close-up of ONE person's natural hands: left hand wearing this exact ring on index finger, right index fingertip clearly pressing the oval button on the worn ring. Hands enter from left and lower-left, ring at 40% x 53% y, crisp realistic anatomy, one ring only, no separate ring or case. Restrained clean pale gray-white studio tabletop, softly blurred gray sleeve at far left, subtle laptop corner far lower-left. Right 40% mostly empty light gray space for HTML interface. Soft daylight, natural warm skin with visible fine texture, precise premium metal reflections. Neutral desaturated Option B editorial visual, no text, logos, graphic lines, UI, grid or waveforms baked into image. Hands and product sharp, no distorted fingers. Wide composition with generous breathing room."
+  },
+  "original": {
+    "file": "ring-front.png",
+    "source": "vocci product images/戒指渲染图/2.1.png",
+    "treatment": "Original file copied unchanged; native aspect ratio preserved in CSS."
+  }
+}
