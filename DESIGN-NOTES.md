@@ -18,3 +18,10 @@ Mira focus/blur, corner pixels and line work: https://trymira.com/
 
 ## Validation
 Browser review at desktop and 390px mobile frame. Verified scene navigation, independent path shortcuts, review modal, simulated send, source asset references, unchanged Hero/lower section markup. Black primary CTAs retained; orange reserved for AI/focus/progress accents.
+
+## Revision 2
+Removed the duplicate top navigation, non-document taglines, technical captions, illustrative footer label and invented AI replies/action-list content. A single bottom story navigation now uses action labels. Copy and App are laid out in one flex column, with dedicated footer space and a short-screen overflow fallback. The sticky stage uses overflow:clip to prevent hidden-container scroll offsets. Photography uses a ring-centered crop with partial face framing.
+
+Original Figma source components were decoded to SVG: Top Menu 311:78709, Input Box 311:78758, AI Mark 311:78726. The SVGs retain original geometry and source styling; unused input modes are hidden for the displayed state. Conversation wording is from the provided Alex scenario; Review/Send remains an illustrative interaction.
+
+Responsive QA: 1440×900, 1280×720, 1024×600, 390×844. Measured copy-to-UI gaps 20–27px, no component overlap, one story navigation row, no page horizontal overflow. Hero and all sections after Highlights are byte-for-byte unchanged from version 1.
