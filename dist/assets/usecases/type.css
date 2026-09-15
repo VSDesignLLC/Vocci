@@ -7,3 +7,21 @@ body .person-description{left:12px;right:12px;bottom:12px;padding:16px;backgroun
 @media(max-width:700px){:root{--section-title:29px;--section-body:12px}body .person-description{font-size:14px;padding:14px}}
 body #breather .breather-copy h2,body #community .breather-copy h2{font-size:var(--section-title);line-height:1.06;letter-spacing:-.045em;font-weight:450}body #breather .breather-copy p,body #community .breather-copy p{font-size:var(--section-body);line-height:1.6}
 body .restored-community #community .breather-copy h2{font-size:var(--section-title);line-height:1.06;letter-spacing:-.045em;font-weight:450}
+
+@media(min-width:1001px){.result-after{right:15%}}
+
+/* Keep the product ring visually clear of the two interface overlays. */
+@media(max-width:700px){
+ .result-photo img{transform:translateY(calc(var(--scene-drift,0px) - 11svh)) scale(1.22)!important}
+ .result-card:nth-child(1) .result-photo img{object-position:56% center}
+ .result-card:nth-child(2) .result-photo img{object-position:36% center}
+ .result-card:nth-child(3) .result-photo img{object-position:60% center}
+ .result-card:nth-child(4) .result-photo img{object-position:46% center}
+ .result-copy{top:78px}
+ .result-before,.result-after{top:360px}
+}
+@media(max-width:700px) and (max-height:740px){
+ .result-photo img{transform:translateY(calc(var(--scene-drift,0px) - 12svh)) scale(1.24)!important}
+ .result-copy{top:70px}
+ .result-before,.result-after{top:330px}
+}
