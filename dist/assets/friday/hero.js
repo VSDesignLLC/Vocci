@@ -31,7 +31,7 @@
   for(const el of hero.querySelectorAll('.identity-caption,.identity-detail'))animations.push(el.animate([{opacity:0,transform:'translate3d(0,12px,0)'},{opacity:1,transform:'translate3d(0,0,0)'}],{delay:5700,duration:1100,fill:'both',easing:'cubic-bezier(.22,1,.36,1)'}));
   await move.finished.catch(()=>{});if(thisRun===run&&!identity.hidden)recording();
  }
- hero.querySelector('.hero-replay').addEventListener('click',()=>{window.scrollTo({top:hero.getBoundingClientRect().top+scrollY,behavior:'instant'});opening();});
+ hero.querySelector('.hero-replay')?.addEventListener('click',()=>{window.scrollTo({top:hero.getBoundingClientRect().top+scrollY,behavior:'instant'});opening();});
  reduce.addEventListener('change',()=>{if(!identity.hidden){stop();recording();}});
  window.addEventListener('resize',()=>{if(!identity.hidden){stop();recording();}});
  if(ring.complete)opening();else ring.addEventListener('load',opening,{once:true});

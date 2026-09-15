@@ -1,0 +1,9 @@
+/* Shared editorial scale, matching Highlights. App interface tokens stay local. */
+:root{--section-title:clamp(30px,3.4vw,54px);--section-body:clamp(13px,1.03vw,16px)}
+body #hero .identity-caption h1,body #needs>.block-heading h2,body .result-copy h2,body .breather-copy h2,body .hardware .section-title,body .manufacture .section-title,body .testimonial-head .section-title,body .faq>.section-title{font-size:var(--section-title);line-height:1.06;letter-spacing:-.045em;font-weight:450}
+body .hero-identity .identity-caption p,body .result-copy-item p,body .breather-copy p,body .detail-option p,body .section-top>p,body .faq-list p,body .contact-card p{font-size:var(--section-body);line-height:1.6}
+body .person-description{left:12px;right:12px;bottom:12px;padding:16px;background:#f3f3f3b5;color:#232523;border:1px solid #ffffffd9;box-shadow:0 5px 24px #0000000a;backdrop-filter:blur(20px) saturate(1.15);-webkit-backdrop-filter:blur(20px) saturate(1.15);border-radius:5px;font-size:var(--section-body);line-height:1.6}
+@media(max-height:760px) and (min-width:701px){:root{--section-title:34px;--section-body:12px}}
+@media(max-width:700px){:root{--section-title:29px;--section-body:12px}body .person-description{font-size:14px;padding:14px}}
+body #breather .breather-copy h2,body #community .breather-copy h2{font-size:var(--section-title);line-height:1.06;letter-spacing:-.045em;font-weight:450}body #breather .breather-copy p,body #community .breather-copy p{font-size:var(--section-body);line-height:1.6}
+body .restored-community #community .breather-copy h2{font-size:var(--section-title);line-height:1.06;letter-spacing:-.045em;font-weight:450}
