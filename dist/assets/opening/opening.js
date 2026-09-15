@@ -24,11 +24,16 @@
  const cinema=document.querySelector('.cinema'),card=document.querySelector('[data-prototype="2"]');if(!card)return;
  const media=document.createElement('div');media.className='connect-media';
  const video=document.createElement('video');video.src='assets/opening/connect-ai.mp4';video.muted=true;video.loop=true;video.playsInline=true;video.preload='metadata';video.setAttribute('aria-label','Vocci connects your context to your AI tools');
- const toggle=document.createElement('button');toggle.type='button';toggle.textContent='▶';toggle.setAttribute('aria-label','Play connection animation');media.append(video,toggle);card.querySelector('.app-panel-title').after(media);
+ const toggle=document.createElement('button');toggle.type='button';toggle.textContent='▶';toggle.setAttribute('aria-label','Play connection animation');media.append(video,toggle);cinema.querySelector('.cinema-stage').append(media);
  let visible=false,userPaused=false;
- function sync(){const active=visible&&cinema.dataset.scene==='2';if(active&&!reduce.matches&&!userPaused)video.play().catch(()=>{});else video.pause();}
+ function sync(){media.hidden=cinema.dataset.scene!=='2';const active=visible&&!media.hidden;if(active&&!reduce.matches&&!userPaused)video.play().catch(()=>{});else video.pause();}
  toggle.addEventListener('click',()=>{if(video.paused){userPaused=false;video.play().catch(()=>{})}else{userPaused=true;video.pause()}});
  video.addEventListener('play',()=>{toggle.textContent='Ⅱ';toggle.setAttribute('aria-label','Pause connection animation')});video.addEventListener('pause',()=>{toggle.textContent='▶';toggle.setAttribute('aria-label','Play connection animation')});
  new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync()},{threshold:.1}).observe(media);
- new MutationObserver(sync).observe(cinema,{attributes:true,attributeFilter:['data-scene']});reduce.addEventListener('change',sync);
+ new MutationObserver(sync).observe(cinema,{attributes:true,attributeFilter:['data-scene']});reduce.addEventListener('change',sync);sync();
+ const community=document.querySelector('#community'),shell=community?.parentElement;
+ if(community&&shell){shell.classList.add('community-page-shell');let frame=0;
+  function paint(){frame=0;const p=reduce.matches?1:Math.max(0,Math.min(1,(innerHeight-shell.getBoundingClientRect().top)/(innerHeight*.9)));const rest=Math.pow(1-p,2);community.style.setProperty('--page-turn',rest);}
+  function queue(){if(!frame)frame=requestAnimationFrame(paint)}addEventListener('scroll',queue,{passive:true});addEventListener('resize',queue);reduce.addEventListener('change',queue);paint();
+ }
 })();
