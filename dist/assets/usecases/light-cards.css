@@ -36,3 +36,30 @@ body #use-cases .result-copy-item p{font-size:15px;line-height:1.55;color:#62696
 @media(max-width:760px){#use-cases .result-visuals{inset:82px auto 78px 5vw;gap:4vw}#use-cases .result-card{width:90vw;flex-basis:90vw;border-radius:22px}#use-cases .case-badge{left:16px;top:16px;font-size:12px;padding:9px 13px}#use-cases .result-photo{inset:0 0 44% 0}#use-cases .result-photo:after{background:linear-gradient(0deg,#edf0ed,transparent 35%)}#use-cases .case-glass{left:14px;bottom:14px;width:calc(100% - 28px);padding:18px;border-radius:17px}#use-cases .result-copy-item h3{font-size:24px;margin-bottom:10px}body #use-cases .result-copy-item p{font-size:14px}#use-cases .result-before{margin-top:12px;padding-top:12px}#use-cases .result-before p{font-size:13px}#use-cases .result-after{right:14px;top:65px;bottom:auto;width:175px;max-width:48%;max-height:37%;overflow:auto;border-radius:14px}#use-cases .prototype-app{padding:10px}#use-cases .prototype-prompt{font-size:11px}#use-cases .prototype-top{font-size:12px}#use-cases .prototype-output h4{font-size:14px}#use-cases .after-label{font-size:9px}#use-cases .result-rail{left:5vw;right:auto;width:auto;gap:2px}#use-cases .case-arrows{right:5vw}#use-cases .case-arrows button{width:40px;height:40px}}
 @media(max-height:720px) and (min-width:761px){#use-cases .case-glass{padding:20px}#use-cases .result-copy-item h3{font-size:25px}#use-cases .result-before{margin-top:10px;padding-top:10px}#use-cases .result-after{width:235px}.prototype-session{display:none}}
 @media(prefers-reduced-motion:reduce){#use-cases .result-card,#use-cases .result-photo img{transition:none;transform:none!important}}
+#testimonials.testimonials{background:#fff!important}
+#use-cases .usecases-heading{position:absolute;left:7vw;top:100px;margin:0;font-size:var(--section-title);font-weight:450;letter-spacing:-.045em;line-height:1.06;color:#202420}
+#use-cases .result-visuals{top:185px}
+#use-cases .case-glass{width:38%;max-height:calc(100% - 95px);overflow:auto;padding:22px}
+#use-cases .result-copy-item h3{font-size:clamp(22px,2vw,30px);margin-bottom:10px}
+#use-cases .case-state-tabs{display:flex;padding:4px;background:#e8ebe6;border-radius:999px;margin-top:18px;gap:4px}
+#use-cases .case-state-tabs button{flex:1;border:0;border-radius:999px;background:transparent;color:#737970;padding:9px;font:14px inherit;cursor:pointer}
+#use-cases .case-state-tabs button[aria-pressed=true]{background:white;color:#202420;box-shadow:0 2px 6px #00000008}
+#use-cases .case-glass .result-after{position:static;width:100%;max-width:none;max-height:none;margin-top:14px;overflow:visible}
+#use-cases .case-glass .result-before{margin-top:14px;border:0;padding-top:0}
+#use-cases .result-after[hidden],#use-cases .result-before[hidden]{display:none!important}
+#use-cases .after-label{display:none}
+#use-cases .prototype-app{box-shadow:none;padding:14px;border:1px solid #e6e8e4}
+#use-cases .case-badge{top:20px;left:22px}
+#use-cases .result-photo{left:30%}
+@media(max-width:760px){#use-cases .usecases-heading{left:5vw;top:88px;font-size:26px;max-width:85vw}#use-cases .result-visuals{top:158px}#use-cases .case-glass{width:calc(100% - 28px);max-height:59%;padding:16px}#use-cases .result-copy-item h3{font-size:22px}#use-cases .result-photo{inset:0 0 33%}#use-cases .case-badge{top:16px;left:16px}#use-cases .case-state-tabs{margin-top:12px}#use-cases .case-glass .result-after{max-height:none}}
+body .person-description{font-size:clamp(14px,1.03vw,16px);line-height:1.5}
+#use-cases .case-glass[data-state=after] .result-copy-item p{display:none}
+#use-cases .case-glass[data-state=after] .result-copy-item h3{font-size:22px;line-height:1.12;margin-bottom:8px}
+#use-cases .case-glass[data-state=after] .case-state-tabs{margin-top:8px}
+#use-cases .case-glass[data-state=after] .prototype-prompt{display:none}
+#use-cases .case-glass[data-state=after] .prototype-top{margin-bottom:8px}
+#use-cases .case-glass[data-state=after] .prototype-field{margin:8px 0}
+#use-cases .case-glass[data-state=after] textarea{height:65px}
+#use-cases .case-glass[data-state=after] .prototype-save{margin-top:8px}
+#use-cases .case-glass[data-state=after]{padding:16px}
+@media(min-width:761px){#use-cases .case-glass[data-state=after]{max-height:calc(100% - 76px);bottom:16px}#use-cases .case-glass[data-state=after] .prototype-app{padding:10px}#use-cases .case-glass[data-state=after] .result-after{margin-top:8px}#use-cases .case-glass[data-state=after] .prototype-top{margin-bottom:5px}#use-cases .case-glass[data-state=after] .prototype-output h4{margin-bottom:5px}}
