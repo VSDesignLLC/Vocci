@@ -4,7 +4,6 @@
   const captions={titanium:'Lumen · Polished silver',fit:'3–5 g · 6.8 mm wide · 2.85 mm thin',button:'2 presses → 2 vibrations',water:'Recording · Storage · Connectivity',recording:'Up to 8 hours · IP67',case:'30 min to 80% · Up to 3 full charges · USB-C'};
   detailButtons.forEach(button=>button.addEventListener('click',()=>{
     const mode=button.dataset.detail;
-    frame.querySelector(".restored-finishes").hidden=mode!=="titanium";
     const shouldOpen = button.getAttribute('aria-expanded') !== 'true';
     detailButtons.forEach(b=>{const active=b===button&&shouldOpen;b.setAttribute('aria-expanded',String(active));b.parentElement.classList.toggle('active',active);b.querySelector('.toggle').textContent=active?'−':'+';});
     const alt=frame.querySelector('.hw-alt');
@@ -13,7 +12,7 @@
     const showAlt=mode==='case'||mode==='fit';
     alt.setAttribute('aria-hidden',String(!showAlt));
     frame.querySelector('.hw-angle').setAttribute('aria-hidden',String(showAlt));
-    frame.dataset.mode=mode;frame.querySelector('.hardware-caption').textContent=captions[mode];
+    frame.dataset.mode=mode;
   }));
   const track = document.getElementById('mfgTrack');
 
@@ -88,6 +87,6 @@
   document.getElementById('mfgNext').addEventListener('click', () => move(1));
   syncDots();
   }
-document.querySelectorAll('[data-restored-finish]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-restored-finish]').forEach(x=>x.setAttribute('aria-pressed',x===b));frame.querySelector('.hw-angle').src='assets/b2/ring-'+b.dataset.restoredFinish+'.png';frame.querySelector('.hw-angle').alt=b.dataset.name+' Vocci ring';frame.querySelector('.hardware-caption').textContent=b.dataset.name;}));
+
 
 })();
