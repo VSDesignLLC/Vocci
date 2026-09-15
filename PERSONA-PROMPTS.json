@@ -1,0 +1,44 @@
+[
+  {
+    "name": "01-team-leader",
+    "prompt": "Use case: photorealistic-natural. Asset type: illustrative persona portrait for a premium website audience card. Primary request: A woman team leader in a bright creative studio, blurred coworkers in the background. Style: cinematic editorial lifestyle portrait photograph, photorealistic skin texture, authentic candid expression. Composition: vertical 3:4 portrait, one centered main person framed waist-up, both hands visible, subtle silver ring on one finger. Lighting: natural daylight, sophisticated soft contrast, pleasing shallow depth of field. Clothing: sophisticated black and cream. Constraints: fictional illustrative persona, no text, no UI, no logos, no watermarks, no collage. Create exactly one photograph.",
+    "source": "/Users/jia/.codex/generated_images/01a0a25e-500a-7b62-94a6-e6792304ccfe/exec-35a48639-d3b6-4b22-80d1-f34c5ea42a82.png",
+    "path": "/Users/jia/Desktop/Vocci/work/persona-portraits/01-team-leader.png"
+  },
+  {
+    "name": "02-founder",
+    "prompt": "Use case: photorealistic-natural. Asset type: illustrative persona portrait for a premium website audience card. Primary request: A male founder about age 40 in a small design workshop. Style: cinematic editorial lifestyle portrait photograph, photorealistic skin texture, authentic candid expression. Composition: vertical 3:4 portrait, one centered main person framed waist-up, both hands visible, subtle silver ring on one finger. Lighting: natural daylight, sophisticated soft contrast, pleasing shallow depth of field. Clothing: sophisticated black and cream. Constraints: fictional illustrative persona, no text, no UI, no logos, no watermarks, no collage. Create exactly one photograph.",
+    "source": "/Users/jia/.codex/generated_images/01a0a25e-500a-7b62-94a6-e6792304ccfe/exec-09e1f26c-3589-4b19-aafe-38cb0a24ca5f.png",
+    "path": "/Users/jia/Desktop/Vocci/work/persona-portraits/02-founder.png"
+  },
+  {
+    "name": "03-consultant",
+    "prompt": "Use case: photorealistic-natural. Asset type: illustrative persona portrait for a premium website audience card. Primary request: A woman client-facing consultant about age 35 outside an urban office. Style: cinematic editorial lifestyle portrait photograph, photorealistic skin texture, authentic candid expression. Composition: vertical 3:4 portrait, one centered main person framed waist-up, both hands visible, subtle silver ring on one finger. Lighting: natural daylight, sophisticated soft contrast, pleasing shallow depth of field. Clothing: sophisticated black and cream. Constraints: fictional illustrative persona, no text, no UI, no logos, no watermarks, no collage. Create exactly one photograph.",
+    "source": "/Users/jia/.codex/generated_images/01a0a25e-500a-7b62-94a6-e6792304ccfe/exec-a97f50b6-8d08-4751-a361-76218ea2a1dc.png",
+    "path": "/Users/jia/Desktop/Vocci/work/persona-portraits/03-consultant.png"
+  },
+  {
+    "name": "04-knowledge-professional",
+    "prompt": "Use case: photorealistic-natural. Asset type: illustrative persona portrait for a premium website audience card. Primary request: A male knowledge professional about age 45 in a sunlit library. Style: cinematic editorial lifestyle portrait photograph, photorealistic skin texture, authentic candid expression. Composition: vertical 3:4 portrait, one centered main person framed waist-up, both hands visible, subtle silver ring on one finger. Lighting: natural daylight, sophisticated soft contrast, pleasing shallow depth of field. Clothing: sophisticated black and cream. Constraints: fictional illustrative persona, no text, no UI, no logos, no watermarks, no collage. Create exactly one photograph.",
+    "source": "/Users/jia/.codex/generated_images/01a0a25e-500a-7b62-94a6-e6792304ccfe/exec-980a3433-2d18-4799-a06d-8b35f0dea860.png",
+    "path": "/Users/jia/Desktop/Vocci/work/persona-portraits/04-knowledge-professional.png"
+  },
+  {
+    "name": "05-everyday-thinker",
+    "prompt": "Use case: photorealistic-natural. Asset type: illustrative persona portrait for a premium website audience card. Primary request: A young adult everyday thinker seated at an outdoor cafe. Style: cinematic editorial lifestyle portrait photograph, photorealistic skin texture, authentic candid expression. Composition: vertical 3:4 portrait, one centered main person framed waist-up, both hands visible, subtle silver ring on one finger. Lighting: natural daylight, sophisticated soft contrast, pleasing shallow depth of field. Clothing: sophisticated black and cream. Constraints: fictional illustrative persona, no text, no UI, no logos, no watermarks, no collage. Create exactly one photograph.",
+    "source": "/Users/jia/.codex/generated_images/01a0a25e-500a-7b62-94a6-e6792304ccfe/exec-f0820d7e-6af1-44f1-b175-e92f009342e1.png",
+    "path": "/Users/jia/Desktop/Vocci/work/persona-portraits/05-everyday-thinker.png"
+  },
+  {
+    "name": "06-creative",
+    "prompt": "Use case: photorealistic-natural. Asset type: illustrative persona portrait for a premium website audience card. Primary request: A young adult creative at home holding a small notebook; neutral everyday context, no diagnostic or ADHD stereotypes. Style: cinematic editorial lifestyle portrait photograph, photorealistic skin texture, authentic candid expression. Composition: vertical 3:4 portrait, one centered main person framed waist-up, both hands visible, subtle silver ring on one finger. Lighting: natural daylight, sophisticated soft contrast, pleasing shallow depth of field. Clothing: sophisticated black and cream. Constraints: fictional illustrative persona, no text, no UI, no logos, no watermarks, no collage. Create exactly one photograph.",
+    "source": "/Users/jia/.codex/generated_images/01a0a25e-500a-7b62-94a6-e6792304ccfe/exec-c7771278-c950-4f32-93a5-54dc7c93276a.png",
+    "path": "/Users/jia/Desktop/Vocci/work/persona-portraits/06-creative.png"
+  },
+  {
+    "name": "07-educator",
+    "prompt": "Use case: photorealistic-natural. Asset type: illustrative persona portrait for a premium website audience card. Primary request: A female educator about age 50 in a bright classroom. Style: cinematic editorial lifestyle portrait photograph, photorealistic skin texture, authentic candid expression. Composition: vertical 3:4 portrait, one centered main person framed waist-up, both hands visible, subtle silver ring on one finger. Lighting: natural daylight, sophisticated soft contrast, pleasing shallow depth of field. Clothing: sophisticated black and cream. Constraints: fictional illustrative persona, no text, no UI, no logos, no watermarks, no collage. Create exactly one photograph.",
+    "source": "/Users/jia/.codex/generated_images/01a0a25e-500a-7b62-94a6-e6792304ccfe/exec-b9cad031-42ed-42b4-9851-103a4bdda574.png",
+    "path": "/Users/jia/Desktop/Vocci/work/persona-portraits/07-educator.png"
+  }
+]
