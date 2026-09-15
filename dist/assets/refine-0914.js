@@ -1,0 +1,8 @@
+(()=>{'use strict';
+ const nav=document.querySelector('.nav');const setNav=()=>nav.classList.toggle('is-split',scrollY>72);addEventListener('scroll',setNav,{passive:true});setNav();
+ const viewport=document.querySelector('.testimonials'),rail=viewport?.querySelector('.stories'),cards=rail?[...rail.querySelectorAll('.story')]:[];if(!viewport||!rail||!cards.length)return;
+ let active=3,frame=0,lockedUntil=0;function center(){frame=0;const card=cards[active],vr=viewport.getBoundingClientRect(),cr=card.getBoundingClientRect(),current=parseFloat(getComputedStyle(rail).getPropertyValue('--stories-x'))||0,baseCenter=cr.left-vr.left-current+cr.width/2,x=viewport.clientWidth/2-baseCenter;rail.style.setProperty('--stories-x',`${x}px`)}function queue(){if(!frame)frame=requestAnimationFrame(center)}
+ function choose(i,force=false){if(!force&&performance.now()<lockedUntil)return;active=i;lockedUntil=performance.now()+850;cards.forEach((card,n)=>card.classList.toggle('active',n===i));queue();setTimeout(center,820)}
+ cards.forEach((card,i)=>{card.addEventListener('pointerenter',()=>choose(i));card.addEventListener('focus',()=>choose(i,true));card.addEventListener('click',()=>choose(i,true));card.addEventListener('keydown',e=>{let n;if(e.key==='ArrowRight')n=(i+1)%cards.length;else if(e.key==='ArrowLeft')n=(i+cards.length-1)%cards.length;else return;e.preventDefault();cards[n].focus({preventScroll:true});choose(n,true)})});
+ rail.addEventListener('pointerleave',()=>{if(!rail.contains(document.activeElement))choose(3,true)});addEventListener('resize',()=>{queue();setTimeout(center,820)});choose(innerWidth<=700?0:3,true);
+})();

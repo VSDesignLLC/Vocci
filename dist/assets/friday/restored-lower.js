@@ -15,12 +15,9 @@
     frame.querySelector('.hw-angle').setAttribute('aria-hidden',String(showAlt));
     frame.dataset.mode=mode;frame.querySelector('.hardware-caption').textContent=captions[mode];
   }));
-  const stories=[...document.querySelectorAll('.story')];
-  const selectStory=index=>stories.forEach((s,i)=>s.classList.toggle('active',i===index));
-  stories.forEach((story,i)=>{story.addEventListener('pointerenter',()=>selectStory(i));story.addEventListener('focus',()=>selectStory(i));story.addEventListener('click',()=>selectStory(i));});
-  document.querySelector('.stories').addEventListener('pointerleave',()=>{if(!document.querySelector('.stories').contains(document.activeElement))selectStory(3);});
   const track = document.getElementById('mfgTrack');
 
+  if(track){
   const mfg = track.closest('.mfg');
   const viewport = track.parentElement;
   const dotsWrap = document.getElementById('mfgDots');
@@ -90,6 +87,7 @@
   document.getElementById('mfgPrev').addEventListener('click', () => move(-1));
   document.getElementById('mfgNext').addEventListener('click', () => move(1));
   syncDots();
+  }
 document.querySelectorAll('[data-restored-finish]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-restored-finish]').forEach(x=>x.setAttribute('aria-pressed',x===b));frame.querySelector('.hw-angle').src='assets/b2/ring-'+b.dataset.restoredFinish+'.png';frame.querySelector('.hw-angle').alt=b.dataset.name+' Vocci ring';frame.querySelector('.hardware-caption').textContent=b.dataset.name;}));
 
 })();
