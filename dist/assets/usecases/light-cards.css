@@ -1,0 +1,38 @@
+/* Light editorial carousel, with native Vocci App surfaces. */
+#use-cases{height:360svh;background:#fafaf8;color:#202420}
+#use-cases .result-stage{height:100svh;display:block;background:#fafaf8;padding:0;overflow:hidden}
+#use-cases .result-visuals{position:absolute;inset:100px auto 90px 7vw;width:auto;height:auto;display:flex;gap:3vw;perspective:none;touch-action:pan-y;will-change:transform}
+#use-cases .result-card{position:relative;inset:auto;flex:0 0 86vw;width:86vw;height:100%;border-radius:30px;overflow:hidden;background:#edf0ed;border:1px solid #e0e4de;opacity:1;filter:none;transform:scale(calc(1 - var(--distance,0)*.035));transition:transform .2s ease;pointer-events:auto}
+#use-cases .result-photo{inset:0 0 0 34%;border-radius:0;background:#eef0ed}
+#use-cases .result-photo:after{background:linear-gradient(90deg,#edf0ed 0%,#edf0ed55 16%,transparent 38%)}
+#use-cases .result-photo img{object-fit:cover;object-position:center;transform:scale(calc(1.02 + var(--distance,0)*.04))!important;filter:brightness(1.25);transition:transform .4s}
+#use-cases .case-badge{position:absolute;left:28px;top:26px;padding:12px 20px;border:1px solid #fff;background:#ffffffb8;backdrop-filter:blur(22px);border-radius:999px;font-size:14px;color:#333b34}
+#use-cases .case-glass{position:absolute;left:28px;bottom:28px;width:36%;padding:28px;box-sizing:border-box;border:1px solid #fff;background:#ffffffc9;backdrop-filter:blur(28px) saturate(1.1);border-radius:22px;box-shadow:0 10px 40px #2635270b}
+#use-cases .result-copy-item{opacity:1;transform:none;pointer-events:auto}
+#use-cases .result-copy-item h3{font-size:clamp(23px,2.35vw,38px);line-height:1.12;letter-spacing:-.04em;color:#202420;margin:0 0 16px}
+body #use-cases .result-copy-item p{font-size:15px;line-height:1.55;color:#626963;max-width:none}
+#use-cases .result-before{position:static;width:auto;max-width:none;padding:18px 0 0;margin-top:20px;border:0;border-top:1px solid #d8ddd6;background:none;backdrop-filter:none;box-shadow:none;transform:none;opacity:1;border-radius:0}
+#use-cases .result-before>span{color:#70786e;font-size:11px}
+#use-cases .result-before p{color:#313830;font-size:15px;line-height:1.5}
+#use-cases .moment-wave{margin:10px 0;height:18px}
+#use-cases .result-after{left:auto;right:24px;top:auto;bottom:26px;width:260px;max-width:27%;transform:none!important;opacity:1;transition:none}
+#use-cases .after-label{background:#ffffffd9;color:#b34c23;border:1px solid #fff;padding:8px 10px;border-radius:8px;font-size:10px;margin-bottom:8px;backdrop-filter:blur(16px)}
+#use-cases .prototype-app{padding:14px;box-shadow:0 12px 40px #17241818;border-color:#e6e8e4}
+#use-cases .prototype-composer{display:none}
+#use-cases .prototype-prompt{font-size:12px;padding:10px;margin-bottom:12px}
+#use-cases .prototype-output h4{font-size:17px}
+#use-cases .prototype-field textarea,#use-cases .prototype-field input{font-size:12px;padding:9px}
+#use-cases .prototype-check{font-size:12px;padding:7px 0}
+#use-cases .result-rail{position:absolute;top:auto;bottom:21px;left:40%;right:40%;width:20%;height:44px;display:flex;flex-direction:row;justify-content:center;gap:12px;border:0;padding:0;overflow:visible}
+#use-cases .result-rail button{padding:0 12px;margin:0!important;color:#8b9188;border-bottom:1px solid transparent}
+#use-cases .result-rail button span{display:none}
+#use-cases .result-rail button b{background:none;color:inherit;font-size:14px;width:20px}
+#use-cases .result-rail button[aria-current=step]{color:#242a23;border-color:#242a23}
+#use-cases .result-rail button[aria-current=step] b{background:none;color:inherit}
+#use-cases .case-arrows{position:absolute;right:7vw;bottom:20px;display:flex;gap:10px}
+#use-cases .case-arrows button{width:46px;height:46px;border:1px solid #d5dad2;border-radius:50%;background:white;font-size:24px;color:#232923;cursor:pointer;transition:background .2s,transform .2s}
+#use-cases .case-arrows button:hover{background:#e8ece5;transform:translateX(2px)}
+#use-cases .case-arrows button:disabled{opacity:.3;cursor:default}
+@media(max-width:760px){#use-cases .result-visuals{inset:82px auto 78px 5vw;gap:4vw}#use-cases .result-card{width:90vw;flex-basis:90vw;border-radius:22px}#use-cases .case-badge{left:16px;top:16px;font-size:12px;padding:9px 13px}#use-cases .result-photo{inset:0 0 44% 0}#use-cases .result-photo:after{background:linear-gradient(0deg,#edf0ed,transparent 35%)}#use-cases .case-glass{left:14px;bottom:14px;width:calc(100% - 28px);padding:18px;border-radius:17px}#use-cases .result-copy-item h3{font-size:24px;margin-bottom:10px}body #use-cases .result-copy-item p{font-size:14px}#use-cases .result-before{margin-top:12px;padding-top:12px}#use-cases .result-before p{font-size:13px}#use-cases .result-after{right:14px;top:65px;bottom:auto;width:175px;max-width:48%;max-height:37%;overflow:auto;border-radius:14px}#use-cases .prototype-app{padding:10px}#use-cases .prototype-prompt{font-size:11px}#use-cases .prototype-top{font-size:12px}#use-cases .prototype-output h4{font-size:14px}#use-cases .after-label{font-size:9px}#use-cases .result-rail{left:5vw;right:auto;width:auto;gap:2px}#use-cases .case-arrows{right:5vw}#use-cases .case-arrows button{width:40px;height:40px}}
+@media(max-height:720px) and (min-width:761px){#use-cases .case-glass{padding:20px}#use-cases .result-copy-item h3{font-size:25px}#use-cases .result-before{margin-top:10px;padding-top:10px}#use-cases .result-after{width:235px}.prototype-session{display:none}}
+@media(prefers-reduced-motion:reduce){#use-cases .result-card,#use-cases .result-photo img{transition:none;transform:none!important}}
