@@ -1,0 +1,10 @@
+.hero.intro-running .identity-lockup,.hero.intro-running .identity-caption{visibility:hidden}
+.product-opening{position:absolute;inset:0;z-index:9;pointer-events:none;display:grid;place-items:center;mix-blend-mode:multiply}
+.product-opening img{position:absolute;width:min(68svh,76vw,650px);height:min(68svh,76vw,650px);object-fit:contain;opacity:0}
+.product-opening .opening-front{object-fit:fill}
+.connect-media{position:relative;margin:8px 0 12px;border-radius:14px;overflow:hidden;background:#f1f1f3;height:176px}
+.connect-media video{width:100%;height:100%;object-fit:contain;display:block}
+.connect-media button{position:absolute;right:8px;bottom:8px;border:0;border-radius:50%;width:28px;height:28px;background:rgba(255,255,255,.86);color:#17171a;cursor:pointer}
+.app-prototype[data-prototype="2"] .app-session-row{padding:8px 0}
+@media(max-height:760px){.connect-media{height:132px}}
+@media(prefers-reduced-motion:reduce){.product-opening{display:none}}
