@@ -332,6 +332,25 @@ m = re.search(r'(<section id="press"[^>]*><div class="stage flat">)(.*?)(<div cl
 lines = ''.join(re.findall(r'<i class="(?:vl|hl|sqr)"[^>]*></i>', m.group(2)))
 s = s[:m.start(2)] + lines + press_new + s[m.end(3):]   # columns span both rows: no row line across the cards
 
+# ---------- 0929-u · Finishes → 3D finish picker in the 4×2 grid (title + spec left, live ring centre, options + CTA right) ----------
+FIN = [('lumen', 'Lumen', 'Mirror silver', '#e9e8e4', 'Polished to a mirror. Catches the light in every room.'),
+       ('midnight', 'Midnight', 'Matte black', '#1c1c1f', 'Black inside and out. Quiet, low-glare, easy to forget.'),
+       ('dawn', 'Dawn', 'Mirror gold', '#c9a063', 'Warm gold outside, a bright silver band inside.'),
+       ('lux', 'Lux', 'Black & silver', 'linear-gradient(135deg,#1c1c1f 55%,#cfcfd2 55%)', 'Matte black shell, silver edge and inner band.')]
+opts = ''.join('<li><button class="fn-opt%s" data-f="%s" data-name="%s" data-sub="%s"><span class="label"><b>%02d</b></span><i class="fn-sw" style="background:%s"></i><span class="fn-tx"><b>%s</b><span>%s</span></span><span class="fn-d">%s</span></button></li>'
+               % (' on' if k == 0 else '', f, n, sub.replace('&', '&amp;'), k + 1, sw, n, sub.replace('&', '&amp;'), d) for k, (f, n, sub, sw, d) in enumerate(FIN))
+fin_new = ('<div class="pn" style="--gc:1/span 1;--gr:1/span 1;--tc:1/span 2;--tr:1/span 1"><h2>Four finishes. One ring.</h2><p class="end">Same titanium, same 3–5 g, same button. Pick the surface you’ll live with.</p></div>'
+    '<div class="pn fn-spec" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 1;--tr:3/span 1"><span class="label">Selected</span><h3 class="fn-name">Lumen</h3>'
+    '<dl><dt>Finish</dt><dd class="fn-sub">Mirror silver</dd><dt>Material</dt><dd>Titanium</dd><dt>Weight</dt><dd>3–5 g</dd><dt>Water</dt><dd>IP67</dd></dl></div>'
+    '<div class="pn pic contain fn-stage" style="--gc:2/span 2;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1">'
+    + ''.join('<img loading="lazy" decoding="async" class="fn-img%s" data-f="%s" src="img3/finish-%s.png" alt="Vocci ring in %s">' % (' on' if k == 0 else '', f, f, n) for k, (f, n, sub, sw, d) in enumerate(FIN))
+    + '<span class="fn-bp label">VOCCI R1 · Ø 26.9 mm</span></div>'
+    '<div class="pn fn-list" style="--gc:4/span 1;--gr:1/span 2;--tc:2/span 1;--tr:3/span 1"><span class="label">Choose a finish</span><ul>' + opts + '</ul>'
+    '<div class="end fn-cta"><a class="btn" href="#">Buy now</a><a class="tlink" href="#">Get a sizing kit</a><span class="fn-offer">Current offer available in the store</span></div></div>')
+m = re.search(r'(<section id="finishes"[^>]*><div class="stage flat soft">)(.*?)(</div></section>)', s, re.S)
+lines = ''.join(re.findall(r'<i class="(?:vl|hl|sqr)"[^>]*></i>', m.group(2)))
+s = s[:m.start(2)] + lines + fin_new + s[m.start(3):]
+
 # ---------- 0929-m · Vocci logo (vector redraw of the mark in Vocci_3Dmodel_demo) replaces the typed wordmarks ----------
 logo = re.sub(r'<title>.*?</title>\n?', '', (R/'img3/vocci-logo.svg').read_text()).replace('role="img" aria-label="VOCCI"', 'aria-hidden="true"').strip()
 assert s.count('<a class="wordmark" href="#hero">VOCCI</a>') == 1 and s.count('<span class="wmbig split">VOCCI</span>') == 1

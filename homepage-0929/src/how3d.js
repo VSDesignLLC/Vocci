@@ -28,6 +28,8 @@ const stage = sec && sec.querySelector('.stage');
 if (stage) init();
 const hwSec = document.getElementById('hardware');
 if (hwSec) initHW(hwSec);
+const fnSec = document.getElementById('finishes');
+if (fnSec) initFinish(fnSec);
 
 function init() {
   const ORANGE = new THREE.Color(0xF47546);
@@ -397,6 +399,77 @@ function initHW(sec) {
       cards[i].classList.toggle('lit', grow >= 1); cards[i].classList.toggle('hot', hot === i);
     });
     if (visible) raf = requestAnimationFrame(frame);
+  }
+  function kick() { if (!raf && model) raf = requestAnimationFrame(frame); }
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) kick(); }, { rootMargin: '100px 0px' }).observe(sec);
+  addEventListener('scroll', kick, { passive: true });
+  size3();
+}
+
+/* ---------- Finishes · live ring that takes the selected finish (0929-u) ----------
+   motion.js sets section[data-finish]; shell colour/roughness (and the inner band for Midnight) ease toward it. */
+function initFinish(sec) {
+  const cell = sec.querySelector('.fn-stage'); if (!cell) return;
+  const FIN = {
+    lumen:    { shell: [.94, .935, .92], rough: .07, inner: null },
+    midnight: { shell: [.05, .05, .055], rough: .34, inner: [.06, .06, .065] },
+    dawn:     { shell: [.86, .66, .38], rough: .16, inner: null },
+    lux:      { shell: [.05, .05, .055], rough: .3, inner: null }
+  };
+  const glc = document.createElement('canvas'); glc.className = 'fn-gl'; cell.appendChild(glc);
+  const renderer = new THREE.WebGLRenderer({ canvas: glc, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = .95;
+  const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(26, 1, 10, 20000);
+  const pivot = new THREE.Group(), orient = new THREE.Group(); pivot.add(orient); scene.add(pivot);
+  let model = null, diam = 1, shells = [], inners = [];
+
+  shared().then(({ scene: src, exr }) => {
+    scene.environment = envFor(renderer, exr);
+    model = src.clone(true);
+    ['case_lid', 'case_lidin', 'case_base', 'case_inner', 'AIM_A', 'AIM_B'].forEach(n => { const o = model.getObjectByName(n); o && o.parent.remove(o); });
+    model.traverse(o => { if (!o.isMesh) return; o.material = o.material.clone(); o.material.envMapIntensity = 1.4;
+      const n = o.material.name || '';
+      if (n.includes('ShellSatin')) shells.push(o.material);
+      if (n.includes('LinerSilver') || n.includes('Titanium')) { o.material._c0 = o.material.color.clone(); o.material._r0 = o.material.roughness; inners.push(o.material); } });
+    model.updateMatrixWorld(true);
+    const box = new THREE.Box3().setFromObject(model), size = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
+    diam = Math.max(size.x, size.y, size.z);
+    const d = [size.x, size.y, size.z], k = d.indexOf(Math.min(...d)), A = new THREE.Vector3(+(k === 0), +(k === 1), +(k === 2));
+    const btn = model.getObjectByName('part_02');
+    const B = (btn ? new THREE.Box3().setFromObject(btn).getCenter(new THREE.Vector3()) : c.clone().add(new THREE.Vector3(0, diam / 2, 0))).sub(c);
+    B.addScaledVector(A, -B.dot(A)).normalize();
+    const C = new THREE.Vector3().crossVectors(A, B);
+    orient.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(C, A, B).invert()).premultiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), .5));
+    model.position.copy(c).multiplyScalar(-1); orient.add(model);
+    apply(1); sec.classList.add('fn3d'); size3(); kick();
+  }).catch(() => glc.remove());
+
+  const tmp = new THREE.Color();
+  function apply(a) {                                              // ease materials toward the selected finish (a = 1 snaps)
+    const f = FIN[sec.dataset.finish] || FIN.lumen;
+    shells.forEach(m => { m.color.lerp(tmp.setRGB(...f.shell), a); m.roughness += (f.rough - m.roughness) * a; });
+    inners.forEach(m => { const to = f.inner ? tmp.setRGB(...f.inner) : m._c0; m.color.lerp(to, a); m.roughness += ((f.inner ? .3 : m._r0) - m.roughness) * a; });
+  }
+  let W = 0, H = 0, camZ = 1;
+  function size3() {
+    W = cell.clientWidth; H = cell.clientHeight; renderer.setSize(W, H, false); cam.aspect = W / H;
+    camZ = (H / 2) / Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)); cam.position.set(0, 0, camZ); cam.near = camZ * .2; cam.far = camZ * 4; cam.updateProjectionMatrix();
+  }
+  addEventListener('resize', () => { size3(); kick(); });
+  const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), eout = t => 1 - Math.pow(1 - t, 3);
+  let raf = 0, visible = false, last = 0;
+  function frame(now) {
+    raf = 0; if (!model || !W) return;
+    const dt = Math.min(.1, last ? (now - last) / 1000 : .016); last = now;
+    const r = sec.getBoundingClientRect(), e = eout(cl((innerHeight - r.top) / (innerHeight * .8))), tt = now / 1000;
+    const S = Math.min(W * .56, H * .5);
+    pivot.scale.setScalar(S / diam * (.82 + .18 * e));
+    pivot.position.set(0, -H * .18 * (1 - e), 0);                    // rises into the cell as the section arrives
+    pivot.rotation.set(Math.sin(tt * .5) * .06, tt * .35 + (1 - e) * 1.2, 0);
+    apply(1 - Math.exp(-dt * 7));                                   // ~0.5 s to settle, whatever the frame rate
+    renderer.render(scene, cam);
+    if (visible) raf = requestAnimationFrame(frame); else last = 0;
   }
   function kick() { if (!raf && model) raf = requestAnimationFrame(frame); }
   new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) kick(); }, { rootMargin: '100px 0px' }).observe(sec);
