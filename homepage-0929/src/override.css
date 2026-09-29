@@ -549,7 +549,11 @@
 /* 0929-n · Every detail, considered: live exploded view + leader lines to the cards (desktop, vendor/how3d.js) */
 @media(min-width:1101px){
   #hardware.hw3d .exploded>img{visibility:hidden}
-  .hw-gl{position:absolute;inset:0;width:100%;height:100%;z-index:2}
+  .hw-gl{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none}
+  /* the three picture cards stay closed until their leader line reaches them, then open from that side */
+  #hardware.hw3d .pn.hasimg{clip-path:inset(0 100% 0 0)!important;transition:clip-path 1s cubic-bezier(.65,0,.35,1),background .3s!important}
+  #hardware.hw3d .pn.hasimg[style*="--gc:1/"]{clip-path:inset(0 0 0 100%)!important}
+  #hardware.hw3d .pn.hasimg.lit{clip-path:inset(0 0 0 0)!important}
   .hw-bp{position:absolute;inset:0;z-index:1;pointer-events:none;display:none}
   #hardware.hw3d .hw-bp{display:block}
   .hw-bp .axis{position:absolute;left:6%;right:6%;top:50%;height:0;border-top:1px dashed rgba(29,29,31,.18)}

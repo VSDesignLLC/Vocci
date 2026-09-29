@@ -290,10 +290,11 @@ function initHW(sec) {
   if (!cell) return;
   const ORANGE = new THREE.Color(0xF47546);
   const cards = [...stage.querySelectorAll(':scope>.pn:not(.exploded)')];               // title, button, ruler, ip67
+  cards.forEach(c => c.querySelectorAll('img').forEach(i => { i.loading = 'eager'; }));   // they open mid-scroll; don't let them open empty
   const TARGET = ['part_liner', 'part_02', null, 'part_11'];   // titanium inner band · button · (6.8 mm dimension) · end seal
   const EXPLODE = { part_shell: .42, part_11: .62, part_12: -.62, part_liner: -.28 };
 
-  const glc = document.createElement('canvas'); glc.className = 'hw-gl'; cell.appendChild(glc);
+  const glc = document.createElement('canvas'); glc.className = 'hw-gl'; stage.appendChild(glc);   // whole grid: the parts break out of the centre cell
   const bp = document.createElement('div'); bp.className = 'hw-bp';
   bp.innerHTML = '<i class="axis"></i><span class="k">Exploded view</span><span class="s">VOCCI R1 · Ø 26.9 mm · IP67</span>';
   cell.appendChild(bp);
@@ -304,7 +305,8 @@ function initHW(sec) {
 
   const renderer = new THREE.WebGLRenderer({ canvas: glc, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
-  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = .9;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = .9; renderer.localClippingEnabled = true; renderer.autoClear = false;
+  const clip = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0), clips = [clip];
   const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(26, 1, 10, 20000);
   const pivot = new THREE.Group(), orient = new THREE.Group(); pivot.add(orient); scene.add(pivot);
   let model = null, diam = 1, A = new THREE.Vector3(), parts = {}, samples = [], halfW = 0, hot = -1;
@@ -313,7 +315,7 @@ function initHW(sec) {
     scene.environment = envFor(renderer, exr);
     model = src.clone(true);
     ['case_lid', 'case_lidin', 'case_base', 'case_inner', 'AIM_A', 'AIM_B'].forEach(n => { const o = model.getObjectByName(n); o && o.parent.remove(o); });
-    model.traverse(o => { if (!o.isMesh) return; o.material = o.material.clone(); o.material.envMapIntensity = 1.35; o.material.emissive = ORANGE.clone(); o.material.emissiveIntensity = 0; });
+    model.traverse(o => { if (!o.isMesh) return; o.material = o.material.clone(); o.material.clippingPlanes = clips; o.material.envMapIntensity = 1.35; o.material.emissive = ORANGE.clone(); o.material.emissiveIntensity = 0; });
     model.updateMatrixWorld(true);
     const box = new THREE.Box3().setFromObject(model), size = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
     diam = Math.max(size.x, size.y, size.z);
@@ -336,13 +338,13 @@ function initHW(sec) {
     sec.classList.add('hw3d'); size3(); kick();
   }).catch(() => { glc.remove(); bp.remove(); svg.remove(); });
 
-  let W = 0, H = 0, camZ = 1, CX = 0, CY = 0, SW = 0, SH = 0, R = [];
+  let C0 = null, W = 0, H = 0, camZ = 1, CX = 0, CY = 0, SW = 0, SH = 0, R = [];
   const rel = el => { const a = el.getBoundingClientRect(), b = stage.getBoundingClientRect(); return { x: a.left - b.left, y: a.top - b.top, w: a.width, h: a.height }; };
   function size3() {
-    W = cell.clientWidth; H = cell.clientHeight; SW = stage.clientWidth; SH = stage.clientHeight;
+    SW = W = stage.clientWidth; SH = H = stage.clientHeight;
     renderer.setSize(W, H, false); cam.aspect = W / H;
     camZ = (H / 2) / Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)); cam.position.set(0, 0, camZ); cam.near = camZ * .2; cam.far = camZ * 4; cam.updateProjectionMatrix();
-    CX = cell.offsetLeft; CY = cell.offsetTop;                                                // layout boxes, not rects: cards may still be mid-entrance (scaled)
+    CX = 0; CY = 0; C0 = { x: cell.offsetLeft, y: cell.offsetTop, w: cell.offsetWidth, h: cell.offsetHeight };                                               // layout boxes, not rects: cards may still be mid-entrance (scaled)
     svg.setAttribute('viewBox', '0 0 ' + SW + ' ' + SH);
     R = cards.map(el => { const lab = el.querySelector('.label') || el.querySelector('p') || el, left = el.offsetLeft + el.offsetWidth / 2 < SW / 2;
       let ly = lab.offsetHeight / 2; for (let n = lab; n && n !== el; n = n.offsetParent) ly += n.offsetTop;
@@ -358,13 +360,17 @@ function initHW(sec) {
   function frame(now) {
     raf = 0; if (!model || !W) return;
     const r = sec.getBoundingClientRect(), e = ease(band((innerHeight - r.top) / innerHeight, .3, 1.05)), tt = now / 1000;
-    for (const n in EXPLODE) if (parts[n]) parts[n].position.copy(parts[n]._base).addScaledVector(A, EXPLODE[n] * diam * e);
-    const S = Math.min(W * .36, H * .3);
-    pivot.scale.setScalar(S / diam);
+    const x = ease(band(e, .2, 1));                                                            // explode lags the push-out
+    for (const n in EXPLODE) if (parts[n]) parts[n].position.copy(parts[n]._base).addScaledVector(A, EXPLODE[n] * 1.7 * diam * x);
+    const S = Math.min(C0.w * .36, C0.h * .3), z = -S * 1.4 + S * 2.1 * ease(band(e, 0, .65));   // sunk behind the grid → through the plane → in front
+    pivot.position.set(C0.x + C0.w / 2 - W / 2, H / 2 - (C0.y + C0.h / 2), z);
+    pivot.scale.setScalar(S / diam * (camZ - z) / camZ);
     pivot.rotation.set(.32 + Math.sin(tt * .4) * .03, -.62 + e * .28 + Math.sin(tt * .3) * .06, 0);
     TARGET.forEach((n, i) => { const o = n ? parts[n] : parts.part_shell; if (o) o.traverse(m => { if (m.isMesh) m.material.emissiveIntensity = hot === i ? .45 : 0; }); });
     scene.updateMatrixWorld(true);
-    renderer.render(scene, cam);
+    renderer.setScissorTest(false); renderer.clear();
+    clip.normal.set(0, 0, -1); renderer.setScissorTest(true); renderer.setScissor(C0.x, H - C0.y - C0.h, C0.w, C0.h); renderer.render(scene, cam);   // behind the plane: only inside the centre cell
+    renderer.setScissorTest(false); clip.normal.set(0, 0, 1); renderer.render(scene, cam);
 
     let dimMid = null;
     /* 6.8 mm dimension under the titanium shell once it has slid out */
