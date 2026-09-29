@@ -546,3 +546,26 @@
 .wordmark svg{display:block;height:20px;width:auto;overflow:visible}
 .wmbig svg{display:block;height:.74em;width:auto;overflow:visible}
 .wmbig .w{display:inline-block;overflow:hidden;padding:.04em 0}
+/* 0929-n · Every detail, considered: live exploded view + leader lines to the cards (desktop, vendor/how3d.js) */
+@media(min-width:1101px){
+  #hardware.hw3d .exploded>img{visibility:hidden}
+  .hw-gl{position:absolute;inset:0;width:100%;height:100%;z-index:2}
+  .hw-bp{position:absolute;inset:0;z-index:1;pointer-events:none;display:none}
+  #hardware.hw3d .hw-bp{display:block}
+  .hw-bp .axis{position:absolute;left:6%;right:6%;top:50%;height:0;border-top:1px dashed rgba(29,29,31,.18)}
+  .hw-bp .axis::after{content:"";position:absolute;left:50%;top:-40%;height:0;width:0}
+  .hw-bp span{position:absolute;font:500 10px/1.3 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .hw-bp .k{left:22px;top:20px;color:var(--ink)}.hw-bp .s{left:22px;bottom:20px}
+  .hw-lines{position:absolute;inset:0;width:100%;height:100%;z-index:5;pointer-events:none;overflow:visible}
+  .hw-lines .lead path{fill:none;stroke:rgba(29,29,31,.45);stroke-width:1;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke .3s,stroke-width .3s}
+  .hw-lines .lead circle{fill:#fff;stroke:var(--accent);stroke-width:1.5;opacity:0;transition:opacity .3s}
+  .hw-lines .lead rect{fill:#1d1d1f;opacity:0;transition:opacity .3s,fill .3s}
+  .hw-lines .lead.in circle{opacity:1}.hw-lines .lead.done rect{opacity:1}
+  .hw-lines .lead.hot path{stroke:var(--accent);stroke-width:1.6}.hw-lines .lead.hot rect{fill:var(--accent)}.hw-lines .lead.hot circle{fill:var(--accent)}
+  .hw-lines .dim{opacity:0;transition:opacity .5s}.hw-lines .dim.in{opacity:1}
+  .hw-lines .dim path{fill:none;stroke:var(--accent);stroke-width:1.2}
+  .hw-lines .dim text{font:500 10.5px var(--font-mono);letter-spacing:.1em;fill:var(--accent-text)}
+  #hardware .pn .label{transition:color .3s}
+  #hardware .pn.lit .label{color:var(--accent-text)}
+  #hardware .pn.hot{background:var(--bg-soft)}
+}
