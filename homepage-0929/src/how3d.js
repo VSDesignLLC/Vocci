@@ -30,8 +30,6 @@ const hwSec = document.getElementById('hardware');
 if (hwSec) initHW(hwSec);
 const fnSec = document.getElementById('finishes');
 if (fnSec) initFinish(fnSec);
-const ftSec = document.getElementById('footer');
-if (ftSec) initFooter(ftSec);
 
 function init() {
   const ORANGE = new THREE.Color(0xF47546);
@@ -468,9 +466,9 @@ function initFinish(sec) {
     raf = 0; if (!model || !W) return;
     const dt = Math.min(.1, last ? (now - last) / 1000 : .016); last = now;
     const r = sec.getBoundingClientRect(), e = eout(cl((innerHeight - r.top) / (innerHeight * .8))), tt = now / 1000;
-    const S = Math.min(C0.w * .6, C0.h * .5), z = -S * 1.3 + S * 1.75 * e;   // sunk behind the grid → pushes through it as the section arrives
+    const S = Math.min(C0.w * .44, C0.h * .38), z = -S * 1.3 + S * 1.75 * e;   // sunk behind the grid → pushes through it as the section arrives
     pivot.position.set(C0.x + C0.w / 2 - W / 2, H / 2 - (C0.y + C0.h / 2) - C0.h * .12 * (1 - e), z);
-    pivot.scale.setScalar(S / diam * (camZ - z) / camZ * (1 + .62 * e));   // settles wider than its cell: the rim crosses both grid lines
+    pivot.scale.setScalar(S / diam * (camZ - z) / camZ * (1 + .06 * e));   // settles inside the centre of its cell
     pivot.rotation.set(Math.sin(tt * .5) * .06, tt * .35 + (1 - e) * 1.2, 0);
     apply(1 - Math.exp(-dt * 7));                                   // ~0.5 s to settle, whatever the frame rate
     renderer.setScissorTest(false); renderer.clear();
@@ -480,75 +478,6 @@ function initFinish(sec) {
   }
   function kick() { if (!raf && model) raf = requestAnimationFrame(frame); }
   new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) kick(); }, { rootMargin: '100px 0px' }).observe(sec);
-  addEventListener('scroll', kick, { passive: true });
-  size3();
-}
-
-/* ---------- Footer · the ring docks into its charging case (0929-w, after the "dock" chapter of Vocci_3Dmodel_demo) ----------
-   Driven by how far the FAQ has uncovered the footer: ring hovers over the case → lid swings open → ring turns flat
-   and settles into the case. Reversible. Case parts, hinge and dock point follow the demo's own numbers. */
-function initFooter(sec) {
-  const stage = sec.querySelector('.stage'), faq = document.getElementById('faq'); if (!stage) return;
-  const glc = document.createElement('canvas'); glc.className = 'ft-gl'; stage.appendChild(glc);
-  const renderer = new THREE.WebGLRenderer({ canvas: glc, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
-  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1;
-  const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(26, 1, 10, 20000);
-  const view = new THREE.Group(), world = new THREE.Group(); view.add(world); scene.add(view);
-  let ring = null, hinge = null, yt = new THREE.Vector3(), dock = new THREE.Vector3(), hover = new THREE.Vector3(), span = 1, ct = 1;
-
-  shared().then(({ scene: src, exr }) => {
-    scene.environment = envFor(renderer, exr);
-    ring = src.clone(true);
-    ['AIM_A', 'AIM_B'].forEach(n => { const o = ring.getObjectByName(n); o && o.parent.remove(o); });
-    ring.traverse(o => { if (o.isMesh) { o.material = o.material.clone(); o.material.envMapIntensity = 1.5; } });
-    const box = new THREE.Group(); world.add(ring); world.add(box);
-    ['case_lid', 'case_lidin', 'case_base', 'case_inner'].forEach(n => { const o = ring.getObjectByName(n); if (o) { o.visible = true; box.attach(o); } });
-    box.traverse(o => { if (!o.isMesh) return; const n = o.name.toLowerCase(), m = o.material;
-      if (n === 'case_lid') { m.color.setRGB(.355, .365, .378); m.metalness = 1; m.roughness = .52; }               // satin lid
-      else if (n === 'case_base') { m.color.setRGB(.87, .875, .885); m.metalness = 1; m.roughness = .025; }         // mirror rim
-      else { m.color.setRGB(.038, .038, .041); m.metalness = 0; m.roughness = .6; } });                            // soft inside
-    ring.updateMatrixWorld(true);
-    const rb = new THREE.Box3().setFromObject(ring), rs = rb.getSize(new THREE.Vector3()); rb.getCenter(yt); ct = Math.max(rs.x, rs.y, rs.z);
-    const cb = new THREE.Box3().setFromObject(box), d = cb.getCenter(new THREE.Vector3()), m = cb.getSize(new THREE.Vector3());
-    const va = yt.clone().add(new THREE.Vector3(0, -ct * 1.55, 0));
-    box.position.add(va).sub(d); box.updateMatrixWorld(true);
-    hinge = new THREE.Group(); hinge.position.set(0, 0, -.3971 * m.z); box.add(hinge);
-    ['case_lid', 'case_lidin'].forEach(n => { const o = box.getObjectByName(n); o && hinge.attach(o); });
-    dock.copy(va).add(new THREE.Vector3(.0211 * m.x, .087 * m.y, .0302 * m.z));
-    hover.copy(yt).add(new THREE.Vector3(0, -ct * .44, 0));
-    span = Math.max(m.x, m.z, ct) ;
-    world.position.copy(va.clone().lerp(yt, .35)).multiplyScalar(-1);                                              // frame case + hovering ring
-    sec.classList.add('ft3d'); size3(); kick();
-  }).catch(() => glc.remove());
-
-  let W = 0, H = 0, camZ = 1;
-  function size3() {
-    W = stage.clientWidth; H = stage.clientHeight; renderer.setSize(W, H, false); cam.aspect = W / H;
-    camZ = (H / 2) / Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)); cam.position.set(0, 0, camZ); cam.near = camZ * .2; cam.far = camZ * 4; cam.updateProjectionMatrix();
-  }
-  addEventListener('resize', () => { size3(); kick(); });
-  const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), band = (p, a, b) => cl((p - a) / (b - a));
-  const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-  const q0 = new THREE.Quaternion(), tmpV = new THREE.Vector3();
-  let raf = 0;
-  function frame(now) {
-    raf = 0; if (!ring || !W) return;
-    if (sec.style.visibility === 'hidden') return;
-    const fb = faq ? faq.getBoundingClientRect().bottom : 0, q = cl((innerHeight - fb) / Math.max(1, sec.offsetHeight)), tt = now / 1000;
-    const u = ease(band(q, .15, .45)), h = ease(band(q, .4, .9));                    // lid opens, then the ring settles in
-    hinge.rotation.y = 2.36 * u;
-    ring.rotation.set(-Math.PI / 2 * h, 0, 0);
-    tmpV.copy(yt).applyEuler(ring.rotation);
-    ring.position.copy(hover.clone().lerp(dock, h)).sub(tmpV);
-    const S = Math.min(W * .22, H * .5);
-    view.scale.setScalar(S / span);
-    view.position.set(0, -H * .1 - (1 - q) * H * .08, 0);                        // lower middle of the footer, clear of the wordmark and links
-    view.rotation.set(.42, (-22 + 26 * q) * Math.PI / 180 + Math.sin(tt * .35) * .05, 0);
-    renderer.render(scene, cam);
-    raf = requestAnimationFrame(frame);
-  }
-  function kick() { if (!raf && ring) raf = requestAnimationFrame(frame); }
   addEventListener('scroll', kick, { passive: true });
   size3();
 }
