@@ -298,7 +298,7 @@ function initHW(sec) {
 
   const glc = document.createElement('canvas'); glc.className = 'hw-gl'; stage.appendChild(glc);   // whole grid: the parts break out of the centre cell
   const bp = document.createElement('div'); bp.className = 'hw-bp';
-  bp.innerHTML = '<i class="axis"></i><span class="k">Exploded view</span><span class="s">VOCCI R1 · Ø 26.9 mm · IP67</span>';
+  bp.innerHTML = '<i class="axis"></i>';
   cell.appendChild(bp);
   const NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'hw-lines'); stage.appendChild(svg);
   const mk = (tag, attrs, parent = svg) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; };
@@ -416,19 +416,21 @@ function initFinish(sec) {
     dawn:     { shell: [.86, .66, .38], rough: .16, inner: null },
     lux:      { shell: [.05, .05, .055], rough: .3, inner: null }
   };
-  const glc = document.createElement('canvas'); glc.className = 'fn-gl'; cell.appendChild(glc);
+  const stage = sec.querySelector('.stage');
+  const glc = document.createElement('canvas'); glc.className = 'fn-gl'; stage.appendChild(glc);   // whole grid, so the ring can break out of its cell
   const renderer = new THREE.WebGLRenderer({ canvas: glc, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
-  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = .95;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = .95; renderer.localClippingEnabled = true; renderer.autoClear = false;
+  const clip = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0), clips = [clip];
   const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(26, 1, 10, 20000);
   const pivot = new THREE.Group(), orient = new THREE.Group(); pivot.add(orient); scene.add(pivot);
-  let model = null, diam = 1, shells = [], inners = [];
+  let model = null, diam = 1, shells = [], inners = [], C0 = null;
 
   shared().then(({ scene: src, exr }) => {
     scene.environment = envFor(renderer, exr);
     model = src.clone(true);
     ['case_lid', 'case_lidin', 'case_base', 'case_inner', 'AIM_A', 'AIM_B'].forEach(n => { const o = model.getObjectByName(n); o && o.parent.remove(o); });
-    model.traverse(o => { if (!o.isMesh) return; o.material = o.material.clone(); o.material.envMapIntensity = 1.4;
+    model.traverse(o => { if (!o.isMesh) return; o.material = o.material.clone(); o.material.envMapIntensity = 1.4; o.material.clippingPlanes = clips;
       const n = o.material.name || '';
       if (n.includes('ShellSatin')) shells.push(o.material);
       if (n.includes('LinerSilver') || n.includes('Titanium')) { o.material._c0 = o.material.color.clone(); o.material._r0 = o.material.roughness; inners.push(o.material); } });
@@ -453,7 +455,8 @@ function initFinish(sec) {
   }
   let W = 0, H = 0, camZ = 1;
   function size3() {
-    W = cell.clientWidth; H = cell.clientHeight; renderer.setSize(W, H, false); cam.aspect = W / H;
+    W = stage.clientWidth; H = stage.clientHeight; C0 = { x: cell.offsetLeft, y: cell.offsetTop, w: cell.offsetWidth, h: cell.offsetHeight };
+    renderer.setSize(W, H, false); cam.aspect = W / H;
     camZ = (H / 2) / Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)); cam.position.set(0, 0, camZ); cam.near = camZ * .2; cam.far = camZ * 4; cam.updateProjectionMatrix();
   }
   addEventListener('resize', () => { size3(); kick(); });
@@ -463,12 +466,14 @@ function initFinish(sec) {
     raf = 0; if (!model || !W) return;
     const dt = Math.min(.1, last ? (now - last) / 1000 : .016); last = now;
     const r = sec.getBoundingClientRect(), e = eout(cl((innerHeight - r.top) / (innerHeight * .8))), tt = now / 1000;
-    const S = Math.min(W * .56, H * .5);
-    pivot.scale.setScalar(S / diam * (.82 + .18 * e));
-    pivot.position.set(0, -H * .18 * (1 - e), 0);                    // rises into the cell as the section arrives
+    const S = Math.min(C0.w * .6, C0.h * .5), z = -S * 1.3 + S * 1.75 * e;   // sunk behind the grid → pushes through it as the section arrives
+    pivot.position.set(C0.x + C0.w / 2 - W / 2, H / 2 - (C0.y + C0.h / 2) - C0.h * .12 * (1 - e), z);
+    pivot.scale.setScalar(S / diam * (camZ - z) / camZ * (1 + .62 * e));   // settles wider than its cell: the rim crosses both grid lines
     pivot.rotation.set(Math.sin(tt * .5) * .06, tt * .35 + (1 - e) * 1.2, 0);
     apply(1 - Math.exp(-dt * 7));                                   // ~0.5 s to settle, whatever the frame rate
-    renderer.render(scene, cam);
+    renderer.setScissorTest(false); renderer.clear();
+    clip.normal.set(0, 0, -1); renderer.setScissorTest(true); renderer.setScissor(C0.x, H - C0.y - C0.h, C0.w, C0.h); renderer.render(scene, cam);   // behind the plane: inside the cell only
+    renderer.setScissorTest(false); clip.normal.set(0, 0, 1); renderer.render(scene, cam);
     if (visible) raf = requestAnimationFrame(frame); else last = 0;
   }
   function kick() { if (!raf && model) raf = requestAnimationFrame(frame); }

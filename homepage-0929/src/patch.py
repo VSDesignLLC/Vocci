@@ -344,11 +344,11 @@ fin_new = ('<div class="pn" style="--gc:1/span 1;--gr:1/span 1;--tc:1/span 2;--t
     '<dl><dt>Finish</dt><dd class="fn-sub">Mirror silver</dd><dt>Material</dt><dd>Titanium</dd><dt>Weight</dt><dd>3–5 g</dd><dt>Water</dt><dd>IP67</dd></dl></div>'
     '<div class="pn pic contain fn-stage" style="--gc:2/span 2;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1">'
     + ''.join('<img loading="lazy" decoding="async" class="fn-img%s" data-f="%s" src="img3/finish-%s.png" alt="Vocci ring in %s">' % (' on' if k == 0 else '', f, f, n) for k, (f, n, sub, sw, d) in enumerate(FIN))
-    + '<span class="fn-bp label">VOCCI R1 · Ø 26.9 mm</span></div>'
+    + '</div>'
     '<div class="pn fn-list" style="--gc:4/span 1;--gr:1/span 2;--tc:2/span 1;--tr:3/span 1"><span class="label">Choose a finish</span><ul>' + opts + '</ul>'
     '<div class="end fn-cta"><a class="btn" href="#">Buy now</a><a class="tlink" href="#">Get a sizing kit</a><span class="fn-offer">Current offer available in the store</span></div></div>')
 m = re.search(r'(<section id="finishes"[^>]*><div class="stage flat soft">)(.*?)(</div></section>)', s, re.S)
-lines = ''.join(re.findall(r'<i class="(?:vl|hl|sqr)"[^>]*></i>', m.group(2)))
+lines = ''.join(x for x in re.findall(r'<i class="(?:vl|hl|sqr)"[^>]*></i>', m.group(2)) if 'left:50%' not in x)   # no centre line through the ring cell
 s = s[:m.start(2)] + lines + fin_new + s[m.start(3):]
 
 # ---------- 0929-m · Vocci logo (vector redraw of the mark in Vocci_3Dmodel_demo) replaces the typed wordmarks ----------
