@@ -1417,6 +1417,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 .gridall #hero{position:sticky;top:0;z-index:1!important}
 .gridall #hero .stage>.bgimg{transition:none}
 .gridall #footer{position:sticky;bottom:0;z-index:0!important}
+@media(min-width:701px){.gridall #scenes2{position:sticky;top:0;z-index:1!important}.gridall #scenes2 .stage>.bgimg{transition:none}.gridall #how{background:#fff!important}}
 .gridall #faq{position:relative;z-index:2}
 /* 2 · one screen per section */
 .stage{--row:max(272px,50svh)}
@@ -1796,10 +1797,13 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 
   /* sangar-style scrubs · hero sinks under the page, footer surfaces beneath the FAQ */
   var hero=document.getElementById('hero'), heroPn=hero&&hero.querySelector('.pn'), heroImg=hero&&hero.querySelector('.bgimg'), faq=document.getElementById('faq'), foot=document.getElementById('footer');
+  /* same cover as hero → section 2: Where the ring earns its place pins, How it works slides over it */
+  var s2=document.getElementById('scenes2'), how=document.getElementById('how'), s2Img=s2&&s2.querySelector('.stage>.bgimg'), s2Pn=s2?Array.prototype.slice.call(s2.querySelectorAll('.stage>.pn')):[];
   function scrub(){
     if(hero) hero.style.visibility=scrollY>hero.offsetHeight+20?'hidden':'visible';
     if(innerWidth<=700) return;
     if(hero){ var p=Math.min(1,Math.max(0,scrollY/hero.offsetHeight));  if(heroPn&&heroPn.classList.contains('in')){ if(p>0) heroPn.classList.add('driven'); heroPn.style.translate='0 '+(p*140)+'px';heroPn.style.opacity=1-p*1.4;} if(heroImg){heroImg.style.filter='brightness('+(1-p*.45)+')';heroImg.style.scale=String(1+p*.12);} }
+    if(s2&&how){ var hr=how.getBoundingClientRect(), sr=s2.getBoundingClientRect(); s2.style.top=Math.min(0,innerHeight-s2.offsetHeight)+'px'; s2.style.visibility=hr.top<-20?'hidden':'visible'; var p2=Math.min(1,Math.max(0,(sr.bottom-hr.top)/sr.height)); s2Pn.forEach(function(pn){ if(!pn.classList.contains('in')) return; if(p2>0) pn.classList.add('driven'); pn.style.translate='0 '+(p2*140)+'px'; pn.style.opacity=1-p2*1.4; }); if(s2Img){s2Img.style.filter='brightness('+(1-p2*.45)+')';s2Img.style.scale=String(1+p2*.12);} }
     if(faq&&foot){ var fb=faq.getBoundingClientRect().bottom, fh=foot.offsetHeight; foot.style.visibility=fb<innerHeight+40?'visible':'hidden'; var _u=1, q=Math.min(1,Math.max(0,(innerHeight-fb)/fh)); foot.querySelectorAll('.pn').forEach(function(pn,i){ if(q>0&&pn.classList.contains('in')) pn.classList.add('driven'); pn.style.translate='0 '+((1-q)*(-90-i*12))+'px'; pn.style.opacity=.25+q*.75; }); }
   }
   var br=document.getElementById('breather'), brImg=br&&br.querySelector('.bgimg'), brPn=br&&br.querySelector('.pn'), brSt=br&&br.querySelector('.stage');

@@ -47,6 +47,7 @@
 .gridall #hero{position:sticky;top:0;z-index:1!important}
 .gridall #hero .stage>.bgimg{transition:none}
 .gridall #footer{position:sticky;bottom:0;z-index:0!important}
+@media(min-width:701px){.gridall #scenes2{position:sticky;top:0;z-index:1!important}.gridall #scenes2 .stage>.bgimg{transition:none}.gridall #how{background:#fff!important}}
 .gridall #faq{position:relative;z-index:2}
 /* 2 · one screen per section */
 .stage{--row:max(272px,50svh)}
