@@ -156,3 +156,4 @@ Awards 四张、Certified 四张：hover 时底图淡入并从 1.08 缩回 1（�
   - 04 · Claude：提问 "What did we decide about the launch?" → 「Reading Vocci · Product Sync」通过 MCP 取上下文 → 回答逐字流出 → context via Vocci MCP 标签 + 可接入工具（ChatGPT / Claude / Claude Code / any MCP tool）。
   - 已走过的格保留 App 最终画面（随非当前列一起压暗），往回滚则恢复照片。
 - 0929-k：How it works 上排三张占位图（手持手机、戴戒指的手、聊天截图）在 3D 模式下去掉（平板/手机无 3D 时仍显示）。开场改为：3D 戒指停在上排正中央（02/03 两格交界），滚动时像车轮一样向左滚进 01 格，到位后沉入格子后方，再照原流程从 01 格冲出、走完 01→04；02–04 格在对应步骤出现 App 卡片。钉住距离由 3 屏加到 3.6 屏，各步时间点整体后移。
+- 0929-l：「Seen through everyday experience」评价屏并入社区屏，人脸大图删除。社区照片里原本印着的三个气泡（其中「Build with us」被裁断）已从照片中抹掉（`img3/community-clean.jpg`）。三条真实评价做成白色毛玻璃对话气泡贴在照片空墙处：进入视口后依次弹出，先显示「正在输入」三点，再出现引言和来源；之后每 3.4 秒轮流高亮一条（橙色描边 + 首字母头像变橙），鼠标悬停可停在某条。右下卡片合并为「Seen through everyday experience.」+ 加入社区文案 + Discord / Reddit 按钮 + 「Quotes as posted on Reddit & Discord」。导航 Stories 指向这一屏。平板为左上/右上/左下三处气泡，手机为照片下方的气泡列表。占位评价 04–06 与翻页去掉。

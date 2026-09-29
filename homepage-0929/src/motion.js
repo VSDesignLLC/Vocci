@@ -132,21 +132,12 @@
     txts.forEach(function(x,k){ x.addEventListener('mouseenter',function(){stop();show(k)}); x.addEventListener('mouseleave',play); });
     new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){show(0);play();} else stop(); }); },{threshold:.4}).observe(how); }
 
-  /* testimonials · quotes window (3 visible) + centre photo swap */
-  var REVIEWS=[
-    {q:'I am always wearing it which makes it super easy to click & record.',src:'<b class="src">Discord</b> davad0716 · Feb 2026',img:0},
-    {q:'Styling gets comments from many in my office. They say it looks very cool!',src:'<b class="src">Reddit</b> u/kuped · Feb 2026',img:1},
-    {q:'I’m extremely impressed by the battery life.',src:'<b class="src">Reddit</b> zeroskills21 · Feb 2026',img:2},
-    {q:'Placeholder · awaiting owner quote 04.',src:'<b class="src">Placeholder</b> owner · 2026',img:3},
-    {q:'Placeholder · awaiting owner quote 05.',src:'<b class="src">Placeholder</b> owner · 2026',img:4},
-    {q:'Placeholder · awaiting owner quote 06.',src:'<b class="src">Placeholder</b> owner · 2026',img:5}];
-  var rvCells=Array.prototype.slice.call(document.querySelectorAll('#testimonials .pn.rv')), rvImgs=Array.prototype.slice.call(document.querySelectorAll('#testimonials .rv-img')), rvMore=document.querySelector('.rv-more'), rvCount=document.querySelector('.rv-count'), rvStart=0;
-  function rvShow(k){ rvImgs.forEach(function(im,j){ im.classList.toggle('on',j===REVIEWS[k].img); }); rvCells.forEach(function(c){ c.classList.toggle('on',+c.dataset.k===k); }); }
-  function rvRender(){ rvCells.forEach(function(c,i){ var k=(rvStart+i)%REVIEWS.length, d=REVIEWS[k]; c.dataset.k=k; c.style.transition='opacity .3s'; c.style.opacity=0; setTimeout(function(){ c.querySelector('q').textContent=d.q; c.querySelector('.label').innerHTML=d.src; c.style.opacity=1; },300); });
-    if(rvCount){ var a=rvStart+1, b=Math.min(rvStart+3,REVIEWS.length); rvCount.textContent=String(a).padStart(2,'0')+'–'+String(b).padStart(2,'0')+' / '+String(REVIEWS.length).padStart(2,'0'); }
-    setTimeout(function(){rvShow(rvStart)},320); }
-  if(rvCells.length){ rvCells.forEach(function(c){ c.addEventListener('click',function(){ rvShow(+c.dataset.k); }); c.addEventListener('mouseenter',function(){ rvShow(+c.dataset.k); }); }); rvCells.forEach(function(c,i){c.dataset.k=i;}); rvShow(0);
-    if(rvMore) rvMore.addEventListener('click',function(e){ e.preventDefault(); rvStart=(rvStart+3)%REVIEWS.length; rvRender(); }); }
+  /* community · owner quotes arrive as chat bubbles (typing dots → quote), then take turns in focus */
+  (function(){ var sec=document.getElementById('community'), qb=sec?Array.prototype.slice.call(sec.querySelectorAll('.qb')):[]; if(!qb.length) return; var k=0, t=null;
+    function focus(i){ qb.forEach(function(b,j){ b.classList.toggle('on',j===i); }); }
+    function arrive(){ qb.forEach(function(b,i){ setTimeout(function(){ b.classList.add('shown'); setTimeout(function(){ b.classList.add('said'); if(i===qb.length-1){ focus(0); t=setInterval(function(){ k=(k+1)%qb.length; focus(k); },3400); } }, reduce?0:900); }, reduce?0:500+i*650); }); }
+    qb.forEach(function(b,i){ b.addEventListener('mouseenter',function(){ clearInterval(t); k=i; focus(i); }); });
+    new IntersectionObserver(function(es,o){ if(es[0].isIntersecting){ o.disconnect(); arrive(); } },{threshold:.35}).observe(sec); })();
 
   /* nav · hides while scrolling down, returns on scroll up */
   (function(){ var last=scrollY, navEl=document.querySelector('.gridall>.nav'); if(!navEl) return; var hot=document.createElement('div'); hot.className='nav-hot'; document.body.appendChild(hot); var hover=false, hideT=null;

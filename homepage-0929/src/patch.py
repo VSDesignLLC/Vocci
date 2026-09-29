@@ -25,7 +25,7 @@ def hero(t):
     t = t.replace('<a class="ulink">Watch the film</a>', '')
     t = t.replace('<a class="btn">Buy Now</a>', '<a class="btn" href="#finishes">Buy now</a>')
     t = t.replace('<a>About</a><a>How it works</a><a>Stories</a><a>FAQ</a><a>Store</a>',
-                  '<a href="#why"><span>About</span><span>About</span></a><a href="#how"><span>How it works</span><span>How it works</span></a><a href="#testimonials"><span>Stories</span><span>Stories</span></a><a href="#faq"><span>FAQ</span><span>FAQ</span></a><a href="#finishes"><span>Store</span><span>Store</span></a>')
+                  '<a href="#why"><span>About</span><span>About</span></a><a href="#how"><span>How it works</span><span>How it works</span></a><a href="#community"><span>Stories</span><span>Stories</span></a><a href="#faq"><span>FAQ</span><span>FAQ</span></a><a href="#finishes"><span>Store</span><span>Store</span></a>')
     t = t.replace('<a class="wordmark">VOCCI</a>', '<a class="wordmark" href="#hero">VOCCI</a>')
     t = t.replace('<a class="cart">', '<a class="cart" href="#finishes" aria-label="Store">')
     return t
@@ -152,6 +152,15 @@ def community(t):
     t = t.replace('<div class="pn " style="grid-column:1/span 1;grid-row:1/span 1"><h2>Join our community.</h2>', '<div class="pn " style="grid-column:4/span 1;grid-row:2/span 1"><h2>Join our community.</h2>')
     t = re.sub(r'<div class="pn mid" style="grid-column:4/span 1;grid-row:2/span 1"><i class="play"></i>.*?</div>', '', t, flags=re.S)
     t = t.replace('<a class="btn">Discord</a><a class="btn ghost">Reddit</a>', '<a class="btn" href="#">Discord</a><a class="btn ghost" href="#">Reddit</a>')
+    # 0929-l · testimonials merged in: owner quotes become chat bubbles on the community photo (bubbles baked into the photo removed)
+    t = t.replace('img3/community.jpg', 'img3/community-clean.jpg')
+    t = t.replace('<h2>Join our community.</h2><p>Talk face-to-face with the founding team, and receive a special gift. Quotes are reproduced as posted on Reddit, Discord and YouTube.</p>',
+                  '<h2>Seen through everyday experience.</h2><p>Real words from owners. Join them — talk face-to-face with the founding team, and receive a special gift.</p><span class="label qb-note">Quotes as posted on Reddit &amp; Discord</span>')
+    qs = [('q1', 'D', 'I am always wearing it which makes it super easy to click &amp; record.', 'Discord', 'davad0716'),
+          ('q2', 'K', 'Styling gets comments from many in my office. They say it looks very cool!', 'Reddit', 'u/kuped'),
+          ('q3', 'Z', 'I’m extremely impressed by the battery life.', 'Reddit', 'zeroskills21')]
+    qb = ''.join('<figure class="qb %s"><i class="qb-av" aria-hidden="true">%s</i><figcaption><span class="qb-typing"><i></i><i></i><i></i></span><q>%s</q><span class="label"><b class="src">%s</b> %s · Feb 2026</span></figcaption></figure>' % q for q in qs)
+    t = t.replace('<div class="rowline"', qb + '<div class="rowline"', 1)
     return t
 edit('community', community)
 
@@ -305,6 +314,9 @@ def glass(sid):
     t = re.sub(r'(<div class="pn mid)("(?: style="[^"]*")?>)', rep, t)
     s = s[:m.start()] + t + s[m.end():]
 glass('awards'); glass('certs')
+
+# ---------- 0929-l · testimonials section folded into community ----------
+s = re.sub(r'<section id="testimonials".*?</section>', '', s, count=1, flags=re.S)
 
 # ---------- assets: local fonts, override css, motion js ----------
 s = s.replace('<main class="page gridall" data-ui="classic" data-skin="v2">', '<main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928">')
