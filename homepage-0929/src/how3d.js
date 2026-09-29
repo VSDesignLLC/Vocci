@@ -51,11 +51,13 @@ function init() {
   let model = null, btn = null, btnBase = null, btnDir = new THREE.Vector3(), diam = 1, mats = [];
 
   const gltf = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
-  const envReady = new Promise(res => {
-    new EXRLoader().load('img3/studio.exr', t => { t.mapping = THREE.EquirectangularReflectionMapping; res(pmrem.fromEquirectangular(t).texture); },
-      undefined, () => res(pmrem.fromScene(new RoomEnvironment(), .04).texture));
-  });
-  Promise.all([new Promise((res, rej) => gltf.load('img3/ring.glb', res, undefined, rej)), envReady]).then(([g, env]) => {
+  /* model + studio light come as base64 in vendor/how3d-assets.js (artifacts can't serve .glb/.exr; also works from file://) */
+  const b64 = str => { const b = atob(str), u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u.buffer; };
+  const assets = new Promise((res, rej) => { if (window.__VOCCI_RING) return res(); const sc = document.createElement('script'); sc.src = 'vendor/how3d-assets.js'; sc.onload = res; sc.onerror = rej; document.body.appendChild(sc); });
+  const envOf = () => { try { const t = new EXRLoader().parse(b64(window.__VOCCI_EXR)), tx = new THREE.DataTexture(t.data, t.width, t.height, t.format, t.type);
+      tx.mapping = THREE.EquirectangularReflectionMapping; tx.needsUpdate = true; return pmrem.fromEquirectangular(tx).texture; }
+    catch (e) { return pmrem.fromScene(new RoomEnvironment(), .04).texture; } };
+  assets.then(() => new Promise((res, rej) => gltf.parse(b64(window.__VOCCI_RING), '', res, rej))).then(g => [g, envOf()]).then(([g, env]) => {
     scene.environment = env;
     model = g.scene;
     ['case_lid', 'case_lidin', 'case_base', 'case_inner', 'AIM_A', 'AIM_B'].forEach(n => { const o = model.getObjectByName(n); o && o.parent.remove(o); });
