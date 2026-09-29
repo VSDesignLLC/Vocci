@@ -150,3 +150,8 @@ Awards 四张、Certified 四张：hover 时底图淡入并从 1.08 缩回 1（�
   - 冲出后戒指落到第二行中段，随滚动依次走到 01→04（格间有小跳跃 + 转一圈），当前列高亮、其余列压暗去色，说明文字展开；身后拖出录音波形，每步留下橙色手势符号（双击 ‖ / 转写三行 / 长按 ⊓）。
   - 每步反馈：01 按键闪两下 + 两次震动，胶囊 REC 计时；02 TRANSCRIBING；03 按键按下、橙光渐强、外圈进度环随滚动填满，胶囊进度条 → SENT；04 按键常亮橙光、两圈涟漪、胶囊变橙 AGENT ACTIVE。
   - 01 格在戒指离开后显示蓝图组件（虚线轮廓、按键位置、规格标注），作为这一格的示意画面。
+- 0929-j：How it works 上排 02–04 格在戒指走到该步时，照片模糊淡出，换成深色 Vocci App 卡片（界面与文案取自 Vocci_3Dmodel_demo 的演示台，强调色改为品牌橙），内容随滚动播放、可倒回：
+  - 02 · Vocci App：录音页 "ready for transcription" → 点 Transcribe（进度条走满）→ Chat 转写逐条出现（Mia / Ian / Ray），两条高亮变橙并展开 Insight，标签切到 Highlights → Notes 页（会议纪要 + Summary）。
+  - 03 · Vocci Agent：长按时中央橙点呼吸「Holding · listening」，语音指令逐字出现 → 松手 Send to Agent 变橙 → 思考三点 → 「Reminder set」「Draft ready in Mail」两张结果卡。
+  - 04 · Claude：提问 "What did we decide about the launch?" → 「Reading Vocci · Product Sync」通过 MCP 取上下文 → 回答逐字流出 → context via Vocci MCP 标签 + 可接入工具（ChatGPT / Claude / Claude Code / any MCP tool）。
+  - 已走过的格保留 App 最终画面（随非当前列一起压暗），往回滚则恢复照片。

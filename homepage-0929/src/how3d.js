@@ -33,6 +33,34 @@ function init() {
     '<path class="h" d="M20 100H180M100 20V180"/><rect class="a" x="88" y="34" width="24" height="10" rx="5"/></svg>' +
     '<span class="k">VOCCI R1</span><span class="s">Ø 26.9 mm · 3–5 g · IP67</span><span class="s2">Titanium · 1 MEMS mic</span>';
   pics[0].appendChild(bp);
+  /* Vocci app screens that replace the photos in cells 02–04 once the ring reaches that step (content after Vocci_3Dmodel_demo) */
+  const APP = [
+    '<div class="r3-ph a2"><div class="sb"><b>9:41</b><i></i></div>' +
+      '<div class="scr s1"><div class="dt">8/19/2026 2:14 PM <span class="x1">1X</span></div><div class="tm"><span>0:00:00</span><span>0:32:14</span></div><div class="trk"><i></i></div>' +
+      '<div class="ctl"><span>↺15</span><i class="pl">▶</i><span>↻15</span></div><div class="hr"></div><div class="msg">Your recording is ready for transcription.</div>' +
+      '<div class="lab">Language</div><div class="fld">English</div><div class="chk"><i>✓</i><div><b>Auto transcribe</b><span>Automatically transcribe after uploading</span></div></div><button class="cta">Transcribe</button></div>' +
+      '<div class="scr s2"><div class="hd">‹ <b>Product Sync — Launch Planning</b> ⋮</div><div class="tabs"><span class="tb">Chat</span><span class="tb">Highlights</span><span class="tb">Notes</span></div>' +
+      '<div class="aud"><i class="pl">▶</i> 0:32:14 <em></em></div><div class="lst">' +
+      [['S1', '#3a3d45', 'Mia', '2:02 PM', 'Okay — launch. Thursday or not?'], ['S2', '#6b5844', 'Ian', '2:03 PM', 'Thursday works if the sizing-kit flow ships first.'],
+       ['S3', '#F47546', 'Ray', '2:03 PM', 'I can have the flow ready by Wednesday noon.', 'Sizing-kit flow is the launch blocker — owner Ray, due Wed noon.'],
+       ['S2', '#6b5844', 'Ian', '2:05 PM', 'Then charger copy is on me tonight.'], ['S1', '#3a3d45', 'Mia', '2:06 PM', 'Deal. Launch moves to Thursday.', 'Launch date confirmed: Thursday.']]
+        .map(r => '<div class="rw' + (r[5] ? ' mk' : '') + '"><i class="av" style="background:' + r[1] + '">' + r[0] + '</i><div><b>' + r[2] + '</b><t>' + r[3] + '</t><p>' + r[4] + '</p>' +
+          (r[5] ? '<div class="ins"><b>Insight:</b> ' + r[5] + '</div>' : '') + '</div></div>').join('') + '</div></div>' +
+      '<div class="scr s3"><div class="hd">‹ <b>Product Sync — Launch Planning</b> ⋮</div><div class="tabs"><span class="tb">Chat</span><span class="tb">Highlights</span><span class="tb on">Notes</span></div>' +
+      '<h5>Product Sync — Launch Planning.md</h5><div class="nd">8/19/2026, 14:38</div><div class="pills"><span>Copy</span><span>View the file</span></div>' +
+      '<div class="qt">Team confirmed Thursday launch, contingent on the sizing-kit flow shipping Wednesday noon. Ian revises the charger copy tonight.</div>' +
+      '<h6>Summary</h6><p>Mia, Ian and Ray aligned on the date. The sizing-kit flow is the single blocker — Ray ships it by Wednesday noon. The two moments tapped live on the ring were pinned as highlights.</p></div></div>',
+    '<div class="r3-ph a3"><div class="sb"><b>9:41</b><i></i></div><div class="ag"><span class="vdot"></span>VOCCI · Agent</div>' +
+      '<div class="hold"><i class="hring"></i><span>Holding · listening</span></div>' +
+      '<div class="cmd"><i class="wv5"><b></b><b></b><b></b><b></b><b></b></i><div><q></q><t>long-press · voice command</t></div></div>' +
+      '<button class="send">Send to Agent</button><div class="think"><b></b><b></b><b></b></div>' +
+      '<div class="res"><i>✓</i><div><b>Reminder set</b><span>Tomorrow 9:00 AM — Send sizing-kit build to Mia</span></div></div>' +
+      '<div class="res r2"><i>✓</i><div><b>Draft ready in Mail</b><span>To Mia · “Sizing-kit build — tomorrow 9:00”</span></div></div></div>',
+    '<div class="r3-ph a4"><div class="ex"><i></i><i></i><i></i><span>Claude</span></div><div class="uq">What did we decide about the launch?</div>' +
+      '<div class="pull"><i class="lnk"></i>Reading <b>Vocci · Product Sync</b> · 32 min</div><div class="ans"><span class="typ"></span></div>' +
+      '<div class="cite">⟵ context via <b>Vocci MCP</b></div><div class="mcp"><span>ChatGPT</span><span>Claude</span><span>Claude Code</span><span class="any">any MCP tool</span></div>' +
+      '<div class="inp">Reply…</div></div>'];
+  const apps = APP.map((h, k) => { const d = document.createElement('div'); d.className = 'r3-app'; d.innerHTML = h; pics[k + 1].appendChild(d); return d; });
   const glc = ov.querySelector('.r3-gl'), wvc = ov.querySelector('.r3-wave'), wx = wvc.getContext('2d');
   const pill = ov.querySelector('.r3-pill'), pillT = pill.querySelector('.t'), pillBar = pill.querySelector('.bar i');
   const arc = ov.querySelector('.r3-arc'), arcOn = ov.querySelector('.r3-arc-on');
@@ -94,6 +122,7 @@ function init() {
     cam.aspect = W / H; camZ = (H / 2) / Math.tan(THREE.MathUtils.degToRad(cam.fov / 2));
     cam.position.set(0, 0, camZ); cam.near = camZ * .2; cam.far = camZ * 4; cam.updateProjectionMatrix();
     R = { p: pics.map(rel), t: txts.map(rel) };
+    stage.style.setProperty('--appk', Math.min(R.p[1].w * .8 / 280, R.p[1].h * .9 / 470).toFixed(3));
   }
   addEventListener('resize', () => { size3(); kick(); });
 
@@ -180,12 +209,38 @@ function init() {
     renderer.setScissorTest(true); renderer.setScissor(cell.x, H - cell.y - cell.h, cell.w, cell.h); renderer.render(scene, cam);
     renderer.setScissorTest(false); clip.normal.set(0, 0, 1); renderer.render(scene, cam);
 
+    appsUpdate(p);
     drawWave(p, x, y, size, tt);
     if (visible) raf = requestAnimationFrame(frame);
   }
   const diamPx = S => S;   // depth scales with the ring size so small screens behave the same
   const pulse = (t, at) => Math.exp(-Math.pow((t - at) / .07, 2));
   function travelPhase(p) { for (let k = 0; k < 3; k++) if (p > STEPS[k][1] && p < STEPS[k + 1][0]) return ease(band(p, STEPS[k][1], STEPS[k + 1][0])) + k; return p >= STEPS[3][0] ? 3 : p >= STEPS[2][0] ? 2 : p >= STEPS[1][0] ? 1 : 0; }
+
+  /* app screens: shown once the ring reaches their step, played by scroll (reversible) */
+  const $ = (el, q) => el.querySelector(q), $$ = (el, q) => [...el.querySelectorAll(q)];
+  const CMD = '“Remind me to send the sizing-kit build to Mia tomorrow at 9.”';
+  const ANS = 'Thursday — as long as Ray ships the sizing-kit flow by Wednesday noon. Ian is revising the charger copy tonight.';
+  const tog = (el, c, on) => { if (el.classList.contains(c) !== on) el.classList.toggle(c, on); };
+  const txt = (el, t) => { if (el.textContent !== t) el.textContent = t; };
+  function appsUpdate(p) {
+    [.38, .58, .8].forEach((a, k) => tog(pics[k + 1], 'appon', p >= a));
+    /* 02 · recording → transcript → notes */
+    const a2 = apps[0], q2 = band(p, .38, .6), sp = $$(a2, '.rw'), segs = $$(a2, '.s2 .tb');
+    tog($(a2, '.s1'), 'on', q2 < .3); tog($(a2, '.s2'), 'on', q2 >= .3 && q2 < .78); tog($(a2, '.s3'), 'on', q2 >= .78);
+    tog($(a2, '.cta'), 'busy', q2 > .14); txt($(a2, '.cta'), q2 > .14 ? 'Transcribing…' : 'Transcribe'); $(a2, '.trk i').style.transform = 'scaleX(' + cl(q2 / .3).toFixed(3) + ')';
+    const n = Math.floor(band(q2, .32, .66) * 5.99); sp.forEach((e, i) => tog(e, 'in', i < n)); $$(a2, '.ins').forEach(e => tog(e, 'in', q2 > .66));
+    segs.forEach((e, i) => tog(e, 'on', i === (q2 > .66 ? 1 : 0)));
+    /* 03 · hold → the command types itself → send → think → done */
+    const a3 = apps[1], h = band(p, .6, .72);
+    txt($(a3, 'q'), CMD.slice(0, Math.round(CMD.length * h))); tog($(a3, '.hold'), 'on', p < .74); tog(a3.firstChild, 'holding', p >= .6 && p < .72);
+    tog($(a3, '.send'), 'hot', p >= .72); txt($(a3, '.send'), p >= .74 ? 'Sent' : 'Send to Agent');
+    tog($(a3, '.think'), 'in', p >= .74 && p < .77); tog($(a3, '.res'), 'in', p >= .77); tog($(a3, '.r2'), 'in', p >= .79);
+    /* 04 · ask anywhere: context pulled through MCP, answer streams */
+    const a4 = apps[2], q4 = band(p, .8, .98);
+    tog($(a4, '.pull'), 'in', q4 > .05); tog($(a4, '.pull'), 'done', q4 > .25);
+    txt($(a4, '.typ'), ANS.slice(0, Math.round(ANS.length * band(q4, .25, .8)))); tog($(a4, '.cite'), 'in', q4 > .8); tog($(a4, '.mcp'), 'in', q4 > .9);
+  }
 
   /* waveform trail on the ring's rail + gesture marks per step */
   function noise(v, t) { return Math.sin(v * 1.7 + t * 2.1) * .5 + Math.sin(v * 3.9 - t * 1.3) * .3 + Math.sin(v * 7.3 + t * 3.7) * .2; }
