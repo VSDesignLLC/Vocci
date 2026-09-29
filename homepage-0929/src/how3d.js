@@ -116,7 +116,7 @@ function init() {
   let W = 0, H = 0, camZ = 1, R = { p: [], t: [] };
   const rel = el => { const a = el.getBoundingClientRect(), b = stage.getBoundingClientRect(); return { x: a.left - b.left, y: a.top - b.top, w: a.width, h: a.height }; };
   function size3() {
-    sec.style.height = (stage.offsetHeight + innerHeight * 3) + 'px';
+    sec.style.height = (stage.offsetHeight + innerHeight * 3.6) + 'px';
     W = stage.clientWidth; H = stage.clientHeight;
     renderer.setSize(W, H, false); wvc.width = W * 2; wvc.height = H * 2;
     cam.aspect = W / H; camZ = (H / 2) / Math.tan(THREE.MathUtils.degToRad(cam.fov / 2));
@@ -130,10 +130,11 @@ function init() {
   const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), lerp = (a, b, t) => a + (b - a) * t;
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, eout = t => 1 - Math.pow(1 - t, 3);
   const band = (p, a, b) => cl((p - a) / (b - a));
-  const STEPS = [[.2, .34], [.42, .54], [.62, .76], [.84, 1]];   // dwell windows; travel between them
-  const EMERGE = [0, .2];
+  const STEPS = [[.3, .42], [.5, .6], [.67, .78], [.86, 1]];   // dwell windows; travel between them
+  const ROLL = [0, .12];      // centre of the top row → rolls left and sinks into cell 01
+  const EMERGE = [.12, .3];   // bursts back out of cell 01 and drops onto step 01
   function progress() { const r = sec.getBoundingClientRect(), tr = sec.offsetHeight - stage.offsetHeight; return tr > 0 ? cl(-r.top / tr) : 0; }
-  function stepOf(p) { return p < .18 ? -1 : p < .38 ? 0 : p < .58 ? 1 : p < .8 ? 2 : 3; }
+  function stepOf(p) { return p < .28 ? -1 : p < .46 ? 0 : p < .64 ? 1 : p < .82 ? 2 : 3; }
   const restOf = i => { const t = R.t[i]; return { x: t.x + t.w / 2, y: t.y + t.h * .5 }; };
 
   let cur = -2, t0 = 0, crossed = false, raf = 0, visible = false;
@@ -155,7 +156,13 @@ function init() {
     const S0 = Math.min(cell.w, cell.h) * .6, Sf = Math.min(R.t[0].w * .44, R.t[0].h * .36);
     const e = band(p, EMERGE[0], EMERGE[1]), ez = ease(cl(e / .7)), ey = ease(band(e, .45, 1));
     let x, y, z, size;
-    if (p <= EMERGE[1]) {
+    const r = band(p, ROLL[0], ROLL[1]), ru = ease(r), mid = { x: W / 2, y: start.y };
+    let roll = 0;
+    if (p < EMERGE[0]) {
+      x = lerp(mid.x, start.x, ease(band(r, 0, .72))); y = start.y;
+      z = lerp(S0 * .3, -diamPx(S0) * 1.1, ease(band(r, .74, 1)));     // in front of the grid while it rolls, then back into cell 01
+      size = S0; roll = (ease(band(r, 0, .72)) - 1) * (mid.x - start.x) / (S0 * .5);      // rolls like a wheel, ending upright
+    } else if (p <= EMERGE[1]) {
       const r0 = restOf(0);
       x = lerp(start.x, r0.x, ey); y = lerp(start.y, r0.y, ey);
       z = lerp(-diamPx(S0) * 1.1, S0 * .55, ez) - S0 * .35 * ey;     // push through the plane, then settle a little
@@ -168,9 +175,9 @@ function init() {
       z = S0 * .2 + Math.sin(u * Math.PI) * S0 * .25; size = Sf;
     }
     /* burst the moment the ring's centre crosses the grid plane */
-    if (z > 0 && !crossed && p > .02) { crossed = true; burst.classList.remove('go'); void burst.offsetWidth; burst.classList.add('go'); }
+    if (z > 0 && !crossed && p > EMERGE[0] + .01) { crossed = true; burst.classList.remove('go'); void burst.offsetWidth; burst.classList.add('go'); }
     if (z < -S0 * .2) crossed = false;
-    stage.classList.toggle('broke', p > .06);
+    stage.classList.toggle('broke', p > EMERGE[0] + .05);
 
     const f = camZ / (camZ - z);
     pivot.position.set(x - W / 2, H / 2 - y, z);
@@ -184,11 +191,11 @@ function init() {
     /* step reactions */
     let glow = 0, press = 0;
     if (s === 0) { const k = since; glow = pulse(k, .15) + pulse(k, .5); shake = (pulse(k, .15) + pulse(k, .5)) * Math.sin(k * 90) * .05;
-      pillT.textContent = 'REC 00:' + String(Math.floor(cl(band(p, .18, .38)) * 42) + 3).padStart(2, '0'); }
-    if (s === 2) { const h = band(p, .6, .76); press = cl(h * 4); glow = .25 + .75 * h; pillBar.style.transform = 'scaleX(' + h.toFixed(3) + ')';
+      pillT.textContent = 'REC 00:' + String(Math.floor(cl(band(p, .28, .46)) * 42) + 3).padStart(2, '0'); }
+    if (s === 2) { const h = band(p, .65, .78); press = cl(h * 4); glow = .25 + .75 * h; pillBar.style.transform = 'scaleX(' + h.toFixed(3) + ')';
       arcOn.style.strokeDashoffset = (1 - h).toFixed(3); pillT.textContent = h >= 1 ? 'SENT' : 'HOLD TO SEND'; }
     if (s === 3) { glow = .85 + Math.sin(tt * 3) * .15; }
-    pivot.rotation.set(pitch, yaw, shake);
+    pivot.rotation.set(pitch, yaw, shake + roll);
     if (btn) {
       btn.material.emissiveIntensity = glow * 2.2;
       btn.material.color.copy(btn._c0).lerp(ORANGE, cl(glow) * .7);
@@ -224,20 +231,20 @@ function init() {
   const tog = (el, c, on) => { if (el.classList.contains(c) !== on) el.classList.toggle(c, on); };
   const txt = (el, t) => { if (el.textContent !== t) el.textContent = t; };
   function appsUpdate(p) {
-    [.38, .58, .8].forEach((a, k) => tog(pics[k + 1], 'appon', p >= a));
+    [.46, .64, .82].forEach((a, k) => tog(pics[k + 1], 'appon', p >= a));
     /* 02 · recording → transcript → notes */
-    const a2 = apps[0], q2 = band(p, .38, .6), sp = $$(a2, '.rw'), segs = $$(a2, '.s2 .tb');
+    const a2 = apps[0], q2 = band(p, .46, .64), sp = $$(a2, '.rw'), segs = $$(a2, '.s2 .tb');
     tog($(a2, '.s1'), 'on', q2 < .3); tog($(a2, '.s2'), 'on', q2 >= .3 && q2 < .78); tog($(a2, '.s3'), 'on', q2 >= .78);
     tog($(a2, '.cta'), 'busy', q2 > .14); txt($(a2, '.cta'), q2 > .14 ? 'Transcribing…' : 'Transcribe'); $(a2, '.trk i').style.transform = 'scaleX(' + cl(q2 / .3).toFixed(3) + ')';
     const n = Math.floor(band(q2, .32, .66) * 5.99); sp.forEach((e, i) => tog(e, 'in', i < n)); $$(a2, '.ins').forEach(e => tog(e, 'in', q2 > .66));
     segs.forEach((e, i) => tog(e, 'on', i === (q2 > .66 ? 1 : 0)));
     /* 03 · hold → the command types itself → send → think → done */
-    const a3 = apps[1], h = band(p, .6, .72);
-    txt($(a3, 'q'), CMD.slice(0, Math.round(CMD.length * h))); tog($(a3, '.hold'), 'on', p < .74); tog(a3.firstChild, 'holding', p >= .6 && p < .72);
-    tog($(a3, '.send'), 'hot', p >= .72); txt($(a3, '.send'), p >= .74 ? 'Sent' : 'Send to Agent');
-    tog($(a3, '.think'), 'in', p >= .74 && p < .77); tog($(a3, '.res'), 'in', p >= .77); tog($(a3, '.r2'), 'in', p >= .79);
+    const a3 = apps[1], h = band(p, .65, .76);
+    txt($(a3, 'q'), CMD.slice(0, Math.round(CMD.length * h))); tog($(a3, '.hold'), 'on', p < .78); tog(a3.firstChild, 'holding', p >= .65 && p < .76);
+    tog($(a3, '.send'), 'hot', p >= .76); txt($(a3, '.send'), p >= .78 ? 'Sent' : 'Send to Agent');
+    tog($(a3, '.think'), 'in', p >= .78 && p < .8); tog($(a3, '.res'), 'in', p >= .8); tog($(a3, '.r2'), 'in', p >= .81);
     /* 04 · ask anywhere: context pulled through MCP, answer streams */
-    const a4 = apps[2], q4 = band(p, .8, .98);
+    const a4 = apps[2], q4 = band(p, .84, .99);
     tog($(a4, '.pull'), 'in', q4 > .05); tog($(a4, '.pull'), 'done', q4 > .25);
     txt($(a4, '.typ'), ANS.slice(0, Math.round(ANS.length * band(q4, .25, .8)))); tog($(a4, '.cite'), 'in', q4 > .8); tog($(a4, '.mcp'), 'in', q4 > .9);
   }
@@ -246,8 +253,8 @@ function init() {
   function noise(v, t) { return Math.sin(v * 1.7 + t * 2.1) * .5 + Math.sin(v * 3.9 - t * 1.3) * .3 + Math.sin(v * 7.3 + t * 3.7) * .2; }
   function drawWave(p, rx, ry, size, t) {
     const k = 2; wx.setTransform(k, 0, 0, k, 0, 0); wx.clearRect(0, 0, W, H);
-    if (p < .12) return;
-    const y0 = restOf(0).y, x0 = restOf(0).x - R.t[0].w * .42, x1 = p <= EMERGE[1] ? x0 + (rx - x0) * band(p, .12, .2) : rx;
+    if (p < .24) return;
+    const y0 = restOf(0).y, x0 = restOf(0).x - R.t[0].w * .42, x1 = p <= EMERGE[1] ? x0 + (rx - x0) * band(p, .24, .3) : rx;
     wx.lineCap = 'round'; wx.lineWidth = 2; wx.strokeStyle = 'rgba(29,29,31,.28)'; wx.beginPath();
     for (let x = x0; x <= x1 - size * .55; x += 6) { const h = Math.max(1.5, Math.abs(noise(x / 40, t * .6)) * 18 * (x > restOf(1).x - 20 && x < restOf(1).x + 60 ? .4 : 1)); wx.moveTo(x, y0 - h); wx.lineTo(x, y0 + h); }
     wx.stroke();

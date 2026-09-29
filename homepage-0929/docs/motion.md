@@ -155,3 +155,4 @@ Awards 四张、Certified 四张：hover 时底图淡入并从 1.08 缩回 1（�
   - 03 · Vocci Agent：长按时中央橙点呼吸「Holding · listening」，语音指令逐字出现 → 松手 Send to Agent 变橙 → 思考三点 → 「Reminder set」「Draft ready in Mail」两张结果卡。
   - 04 · Claude：提问 "What did we decide about the launch?" → 「Reading Vocci · Product Sync」通过 MCP 取上下文 → 回答逐字流出 → context via Vocci MCP 标签 + 可接入工具（ChatGPT / Claude / Claude Code / any MCP tool）。
   - 已走过的格保留 App 最终画面（随非当前列一起压暗），往回滚则恢复照片。
+- 0929-k：How it works 上排三张占位图（手持手机、戴戒指的手、聊天截图）在 3D 模式下去掉（平板/手机无 3D 时仍显示）。开场改为：3D 戒指停在上排正中央（02/03 两格交界），滚动时像车轮一样向左滚进 01 格，到位后沉入格子后方，再照原流程从 01 格冲出、走完 01→04；02–04 格在对应步骤出现 App 卡片。钉住距离由 3 屏加到 3.6 屏，各步时间点整体后移。
