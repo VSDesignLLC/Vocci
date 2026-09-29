@@ -373,6 +373,8 @@ s = re.sub(r'<section id="testimonials".*?</section>', '', s, count=1, flags=re.
 s = s.replace('<main class="page gridall" data-ui="classic" data-skin="v2">', '<main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928">')
 override = (R/'src/override.css').read_text()
 motion = (R/'src/motion.js').read_text()
+import hashlib   # cache-bust the 3D bundle so a republish never runs yesterday's copy
+motion = motion.replace("'vendor/how3d.js'", "'vendor/how3d.js?v=%s'" % hashlib.md5((R/'vendor/how3d.js').read_bytes()).hexdigest()[:8])
 s = s.replace('<main class="page gridall"', '<style id="round-0928">\n' + override + '\n</style>' + pre + '<main class="page gridall"', 1)
 s = s.replace('</main>\n</body>', '</main>\n<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" onerror="this.remove()"></script>\n<script>\n' + motion + '\n</script>\n</body>')
 (R/'index.html').write_text(s)
