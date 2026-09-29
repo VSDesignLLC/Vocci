@@ -152,14 +152,6 @@
     txts.forEach(function(x,k){ x.addEventListener('mouseenter',function(){stop();show(k)}); x.addEventListener('mouseleave',play); });
     new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){show(0);play();} else stop(); }); },{threshold:.4}).observe(how); }
 
-  /* 0929-z · privacy promises take turns in the glass card while on screen; hover to hold one */
-  (function(){ var sec=document.getElementById('privacy'); if(!sec) return; var it=Array.prototype.slice.call(sec.querySelectorAll('.pv-it')), k=0, t=null; if(!it.length) return;
-    function pick(i){ k=i; it.forEach(function(x,j){ x.classList.toggle('on',j===i); }); }
-    function play(){ clearInterval(t); if(!reduce) t=setInterval(function(){ pick((k+1)%it.length); },3600); }
-    it.forEach(function(x,i){ x.addEventListener('mouseenter',function(){ clearInterval(t); pick(i); }); });
-    sec.querySelector('.pv-list').addEventListener('mouseleave',play);
-    new IntersectionObserver(function(es){ if(es[0].isIntersecting){ pick(0); play(); } else clearInterval(t); },{threshold:.4}).observe(sec); })();
-
   /* 0929-u · finishes: pick a finish (click / hover), auto-cycles while on screen; the 3D ring (vendor/how3d.js) follows data-finish */
   (function(){ var sec=document.getElementById('finishes'); if(!sec) return;
     var opts=Array.prototype.slice.call(sec.querySelectorAll('.fn-opt')), imgs=Array.prototype.slice.call(sec.querySelectorAll('.fn-img')), nm=sec.querySelector('.fn-name'), sub=sec.querySelector('.fn-sub'), k=0, t=null, list=sec.querySelector('.fn-list');
