@@ -122,7 +122,10 @@
 
   /* how it works · steps cycle while in view */
   var how=document.getElementById('how');
-  if(how){ var txts=Array.prototype.slice.call(how.querySelectorAll('.pn:not(.pic)')), i=0, t=null;
+  /* desktop: the 3D ring (vendor/how3d.js) drives the steps from scroll instead of the timer */
+  var how3d=how&&!reduce&&innerWidth>1100&&matchMedia('(hover:hover)').matches&&(function(){try{return !!document.createElement('canvas').getContext('webgl2');}catch(e){return false;}})();
+  if(how3d){ how.classList.add('how3d'); var s3=document.createElement('script'); s3.src='vendor/how3d.js'; s3.onerror=function(){how.classList.remove('how3d');}; document.body.appendChild(s3); }
+  if(how&&!how3d){ var txts=Array.prototype.slice.call(how.querySelectorAll('.pn:not(.pic)')), i=0, t=null;
     function show(k){ i=k; txts.forEach(function(x,j){ x.classList.toggle('on',j===k); }); }
     function play(){ stop(); t=setInterval(function(){ show((i+1)%txts.length); },3200); }
     function stop(){ clearInterval(t); t=null; }

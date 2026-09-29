@@ -345,3 +345,66 @@
 .pre.go .sq3{transition-delay:.9s;transform:translate(-50%,-50%) scale(1) rotate(0)}
 .pre.go .mark{transition:opacity .6s var(--ease) .6s,transform .6s var(--ease) .6s;opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.js .pn,.js .pn.pic,.js .hl,.js .rowline,.js .sqr,.js .rowline i,.js .orbit,.js .a-bubble,.split .w>span,.js .gridall>.nav,.js #hero .stage>.bgimg{opacity:1;transform:none;clip-path:none;transition:none;animation:none}.pre{display:none}}
+/* 0929-i · How it works: 3D ring breaks out of cell 01 and walks the steps (desktop; vendor/how3d.js) */
+@media(min-width:1101px){
+  #how.how3d .stage{position:sticky;top:0}
+  #how.how3d .r3{position:absolute;inset:0;z-index:6;pointer-events:none}
+  #how.how3d .r3>*{position:absolute;left:0;top:0}
+  .r3-gl,.r3-wave{width:100%;height:100%}
+  .r3-gl{z-index:3}.r3-wave{z-index:1}
+  .r3-shadow{z-index:2;height:22px;border-radius:50%;background:radial-gradient(closest-side,rgba(29,29,31,.22),transparent);filter:blur(4px)}
+  #how.r3ready .pn.pic[data-col="0"]>img{visibility:hidden}
+  #how.r3ready .pn.pic[data-col="0"]{background:radial-gradient(70% 70% at 50% 50%,#fff 0,#f1f1ef 70%,#e7e7e4 100%);box-shadow:inset 0 0 0 1px rgba(29,29,31,.06),inset 0 18px 40px -20px rgba(29,29,31,.18)}
+  #how.r3ready .pn.pic[data-col="0"] .pic-cap{display:none}
+  /* dim everything except the active column while the ring walks */
+  #how .pn>*,#how .pn.pic>img{transition:opacity .5s var(--ease),filter .5s var(--ease)}
+  #how .stage.stepping .pn:not(.act)>*:not(.r3-bp){opacity:.3}
+  #how .stage.stepping .pn.pic:not(.act)>img{filter:grayscale(1)}
+  #how .stage.stepping .pn.act .label b{color:var(--accent-text)}
+  /* blueprint component left behind in cell 01 */
+  .r3-bp{position:absolute;inset:0;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .8s var(--ease) .2s}
+  #how.r3ready .r3-bp{display:flex}
+  #how .stage.broke .r3-bp{opacity:1}
+  .r3-bp svg{width:58%;max-width:230px;overflow:visible}
+  .r3-bp .c{fill:none;stroke:rgba(29,29,31,.35);stroke-width:.8;stroke-dasharray:9 3 1.5 3}
+  .r3-bp .h{fill:none;stroke:rgba(29,29,31,.2);stroke-width:.6;stroke-dasharray:2 4}
+  .r3-bp .a{fill:none;stroke:var(--accent);stroke-width:1.2}
+  .r3-bp span{position:absolute;font:500 10px/1.3 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .r3-bp .k{left:20px;top:18px;color:var(--ink)}.r3-bp .s{left:20px;bottom:18px}.r3-bp .s2{right:20px;top:18px}
+  /* the break-through: cell frame flashes orange, a shockwave leaves it */
+  .r3-burst{position:absolute;z-index:4;opacity:0}
+  .r3-burst::before{content:"";position:absolute;inset:0;border:2px solid var(--accent);box-shadow:0 0 24px rgba(244,117,70,.45),inset 0 0 24px rgba(244,117,70,.25)}
+  .r3-burst i{position:absolute;left:50%;top:50%;width:40%;aspect-ratio:1;border-radius:50%;border:2px solid var(--accent);translate:-50% -50%}
+  .r3-burst.go{animation:r3flash 1.1s cubic-bezier(.2,.7,.2,1) forwards}
+  .r3-burst.go i{animation:r3wave 1.1s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes r3flash{0%{opacity:0}12%{opacity:1}100%{opacity:0}}
+  @keyframes r3wave{0%{scale:.3;opacity:1}100%{scale:3.2;opacity:0}}
+  /* status pill (REC → TRANSCRIBING → HOLD TO SEND → AGENT ACTIVE) */
+  .r3-pill{z-index:5;display:flex;align-items:center;gap:8px;height:30px;padding:0 13px;margin-left:0;border-radius:999px;transform:translate(-50%,-100%);white-space:nowrap;
+    background:rgba(20,20,22,.9);color:#f4f4f2;font:600 10.5px/1 var(--font-mono);letter-spacing:.14em;backdrop-filter:blur(10px);box-shadow:0 8px 24px rgba(0,0,0,.18);opacity:0;transition:opacity .4s,background .4s,color .4s,box-shadow .4s}
+  .r3-pill.on{opacity:1}
+  .r3-pill.pop{animation:r3pop .5s cubic-bezier(.2,1.6,.4,1)}
+  @keyframes r3pop{35%{transform:translate(-50%,-100%) scale(1.16)}}
+  .r3-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:r3blink 1s infinite}
+  .r3-pill .wv{display:flex;gap:2px;align-items:center;height:12px}
+  .r3-pill .wv i{width:2px;height:10px;border-radius:2px;background:currentColor;opacity:.7;animation:r3wv .9s ease-in-out infinite}
+  .r3-pill .wv i:nth-child(2){animation-delay:.12s;height:6px}.r3-pill .wv i:nth-child(3){animation-delay:.24s}.r3-pill .wv i:nth-child(4){animation-delay:.36s;height:7px}.r3-pill .wv i:nth-child(5){animation-delay:.48s}
+  .r3-pill .bar{display:none;width:46px;height:3px;border-radius:2px;background:rgba(255,255,255,.2);overflow:hidden}
+  .r3-pill .bar i{display:block;height:100%;background:var(--accent);transform-origin:left;transform:scaleX(0)}
+  .r3-pill[data-s="1"] .dot{animation:none;background:#f4f4f2;opacity:.6}
+  .r3-pill[data-s="2"] .wv{display:none}.r3-pill[data-s="2"] .bar{display:block}
+  .r3-pill[data-s="3"]{background:var(--accent);color:#1d1d1f;box-shadow:0 0 28px rgba(244,117,70,.6)}
+  .r3-pill[data-s="3"] .dot{background:#1d1d1f;animation:r3blink 1.4s infinite}
+  .r3-pill[data-s="3"] .wv i{opacity:.8}
+  @keyframes r3blink{50%{opacity:.25}}
+  @keyframes r3wv{50%{transform:scaleY(.35)}}
+  /* hold progress arc + agent ripples */
+  .r3-arc{z-index:4;opacity:0;transition:opacity .4s;overflow:visible;rotate:-90deg}
+  .r3-arc.on{opacity:1}
+  .r3-arc circle{fill:none;stroke:rgba(29,29,31,.1);stroke-width:1.2}
+  .r3-arc .r3-arc-on{stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 4px rgba(244,117,70,.6))}
+  .r3-ripple{z-index:2;border-radius:50%;border:1.5px solid var(--accent);opacity:0}
+  .r3-ripple.on{animation:r3rip 2.4s cubic-bezier(.2,.6,.3,1) infinite}
+  .r3-ripple.on+.r3-ripple.on{animation-delay:1.2s}
+  @keyframes r3rip{0%{scale:.7;opacity:.9}100%{scale:2.1;opacity:0}}
+}
