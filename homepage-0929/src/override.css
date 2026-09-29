@@ -542,3 +542,7 @@
   #community .qb:last-of-type{margin-bottom:10px}
 }
 @media(prefers-reduced-motion:reduce){#community .qb{opacity:1;transform:none;transition:none}#community .qb q,#community .qb .label{display:block}#community .qb-typing{display:none}}
+/* 0929-m · vector logo */
+.wordmark svg{display:block;height:20px;width:auto;overflow:visible}
+.wmbig svg{display:block;height:.74em;width:auto;overflow:visible}
+.wmbig .w{display:inline-block;overflow:hidden;padding:.04em 0}

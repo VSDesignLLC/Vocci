@@ -315,6 +315,12 @@ def glass(sid):
     s = s[:m.start()] + t + s[m.end():]
 glass('awards'); glass('certs')
 
+# ---------- 0929-m · Vocci logo (vector redraw of the mark in Vocci_3Dmodel_demo) replaces the typed wordmarks ----------
+logo = re.sub(r'<title>.*?</title>\n?', '', (R/'img3/vocci-logo.svg').read_text()).replace('role="img" aria-label="VOCCI"', 'aria-hidden="true"').strip()
+assert s.count('<a class="wordmark" href="#hero">VOCCI</a>') == 1 and s.count('<span class="wmbig split">VOCCI</span>') == 1
+s = s.replace('<a class="wordmark" href="#hero">VOCCI</a>', '<a class="wordmark" href="#hero" aria-label="VOCCI">' + logo + '</a>')
+s = s.replace('<span class="wmbig split">VOCCI</span>', '<span class="wmbig split" data-split="1" role="img" aria-label="VOCCI"><span class="w"><span>' + logo + '</span></span></span>')
+
 # ---------- 0929-l · testimonials section folded into community ----------
 s = re.sub(r'<section id="testimonials".*?</section>', '', s, count=1, flags=re.S)
 
