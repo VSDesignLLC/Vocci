@@ -351,6 +351,23 @@ m = re.search(r'(<section id="finishes"[^>]*><div class="stage flat soft">)(.*?)
 lines = ''.join(x for x in re.findall(r'<i class="(?:vl|hl|sqr)"[^>]*></i>', m.group(2)) if 'left:50%' not in x)   # no centre line through the ring cell
 s = s[:m.start(2)] + lines + fin_new + s[m.start(3):]
 
+# ---------- 0929-z · Privacy + Certified merged: title/badges/CTA left, macro photo centre (no centre line), promises list right ----------
+PROM = [('Encrypted on the device', 'Recordings are encrypted on the ring, with permission-based access.'),
+        ('Never used to train AI', 'Your conversations are not used to train AI models.'),
+        ('Local storage option', 'You control sync, and choose which context is shared.')]
+certs_html = ''.join('<li><img loading="lazy" decoding="async" src="img2/%s" alt=""><span><b>%s</b><small>%s</small></span></li>' % c for c in
+    [('cert-iso.png', 'ISO 27001', 'Information security'), ('cert-iso.png', 'ISO 27701', 'Privacy management'), ('cert-soc2.png', 'SOC 2', 'Type II'), ('cert-gdpr.png', 'GDPR', 'Compliant')])
+priv_new = ('<div class="pn pv-head" style="--gc:1/span 1;--gr:1/span 2;--tc:1/span 2;--tr:1/span 1"><h2>Your data is yours.<br>We protect it that way.</h2>'
+    '<p>Independent standards stand behind every promise.</p><ul class="pv-certs end">' + certs_html + '</ul><div class="btns"><a class="btn" href="#">Trust Center</a></div></div>'
+    '<div class="pn pic sharp" style="--gc:2/span 2;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1"><img loading="lazy" decoding="async" src="img3/ring-macro.jpg" alt="Macro of the Vocci ring" style="object-position:50% 50%"></div>'
+    '<div class="pn pv-list" style="--gc:4/span 1;--gr:1/span 2;--tc:1/span 2;--tr:3/span 1"><span class="label">Our promises</span><ol>'
+    + ''.join('<li class="pv-it%s"><span class="label"><b>%02d</b></span><h3>%s</h3><p>%s</p></li>' % (' on' if k == 0 else '', k + 1, h, d) for k, (h, d) in enumerate(PROM))
+    + '</ol></div>')
+m = re.search(r'(<section id="privacy"[^>]*><div class="stage ">)(.*?)(</div></section>)', s, re.S)
+lines = ''.join(x for x in re.findall(r'<i class="(?:vl|hl|sqr)"[^>]*></i>', m.group(2)) if 'left:50%' not in x)
+s = s[:m.start(2)] + lines + priv_new + s[m.start(3):]
+s = re.sub(r'<section id="certs".*?</section>', '', s, count=1, flags=re.S)
+
 # ---------- 0929-m · Vocci logo (vector redraw of the mark in Vocci_3Dmodel_demo) replaces the typed wordmarks ----------
 logo = re.sub(r'<title>.*?</title>\n?', '', (R/'img3/vocci-logo.svg').read_text()).replace('role="img" aria-label="VOCCI"', 'aria-hidden="true"').strip()
 assert s.count('<a class="wordmark" href="#hero">VOCCI</a>') == 1 and s.count('<span class="wmbig split">VOCCI</span>') == 1
