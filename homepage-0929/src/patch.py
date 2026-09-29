@@ -315,6 +315,21 @@ def glass(sid):
     s = s[:m.start()] + t + s[m.end():]
 glass('awards'); glass('certs')
 
+# ---------- 0929-p · In their words → video wall (2 creator reviews + invite card) ----------
+def _vc(col, tc, tr, img, pos, title, chan):
+    return ('<a class="pn vc" href="#" style="--gc:%d/span 1;--gr:1/span 2;--tc:%s;--tr:%s"><span class="vc-th"><img loading="lazy" decoding="async" src="%s" alt="" style="object-position:%s">'
+            '<i class="vc-play" aria-hidden="true"></i><span class="vc-yt">YouTube</span></span><span class="vc-meta"><span class="label"><b class="src">YouTube</b> %s</span><h3>%s</h3>'
+            '<span class="vc-go">Watch review <b>→</b></span></span></a>') % (col, tc, tr, img, pos, chan, title)
+press_new = ('<div class="pn vc-head" style="--gc:1/span 1;--gr:1/span 2;--tc:1/span 2;--tr:1/span 1"><h2>In their words.</h2><p>Creators who tried the ring in their own workflow — unscripted, on their own channels.</p>'
+    '<a class="tlink end" href="#">Watch all on YouTube</a></div>'
+    + _vc(2, '1/span 1', '2/span 1', 'img2/creator-01.jpg', '50% 45%', 'Vocci Ring: This Tiny AI Assistant Changed My Workflow', 'Product Manager')
+    + _vc(3, '2/span 1', '2/span 1', 'img2/v09.jpg', '50% 40%', 'Vocci Ring Review: real-world context for your AI tools', 'Creator')
+    + '<a class="pn vc invite" href="#" style="--gc:4/span 1;--gr:1/span 2;--tc:1/span 2;--tr:3/span 1"><span class="vc-th"><i class="vc-plus" aria-hidden="true"></i><span class="label">Your review here</span></span>'
+      '<span class="vc-meta"><span class="label"><b class="src">Creators</b> Program</span><h3>Made something with Vocci?</h3><p>Get early hardware, talk to the team, and we’ll feature your review here.</p><span class="vc-go">Become a creator <b>→</b></span></span></a>')
+m = re.search(r'(<section id="press"[^>]*><div class="stage flat">)(.*?)(<div class="rowline")', s, re.S)
+lines = ''.join(re.findall(r'<i class="(?:vl|hl|sqr)"[^>]*></i>', m.group(2)))
+s = s[:m.start(2)] + lines + press_new + s[m.end(2):]
+
 # ---------- 0929-m · Vocci logo (vector redraw of the mark in Vocci_3Dmodel_demo) replaces the typed wordmarks ----------
 logo = re.sub(r'<title>.*?</title>\n?', '', (R/'img3/vocci-logo.svg').read_text()).replace('role="img" aria-label="VOCCI"', 'aria-hidden="true"').strip()
 assert s.count('<a class="wordmark" href="#hero">VOCCI</a>') == 1 and s.count('<span class="wmbig split">VOCCI</span>') == 1
