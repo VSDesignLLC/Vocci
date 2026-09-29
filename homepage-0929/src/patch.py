@@ -315,26 +315,20 @@ def glass(sid):
     s = s[:m.start()] + t + s[m.end():]
 glass('awards'); glass('certs')
 
-# ---------- 0929-r · In their words, laid out after sangar.framer.website "Our process": big title above, staggered cards with a top bar and a bottom strip ----------
-def _card(n, col, tc, tr, label, body, strip, extra=''):
-    return ('<div class="pn tw-card%s" style="--gc:%d/span 1;--gr:2/span 1;--tc:%s;--tr:%s"><span class="tw-no">%s</span>%s<span class="tw-strip">%s</span></div>'
+# ---------- 0929-s · In their words inside the standard 4×2 grid: title cell left, one full-height card per column (top bar + bottom strip) ----------
+def _card(col, tc, tr, label, body, strip, extra=''):
+    return ('<div class="pn tw-card%s" style="--gc:%d/span 1;--gr:1/span 2;--tc:%s;--tr:%s"><span class="label">%s</span>%s<span class="tw-strip">%s</span></div>'
             % (extra, col, tc, tr, label, body, strip))
 def _thumb(img, pos):
     return '<a class="tw-th" href="#"><img loading="lazy" decoding="async" src="%s" alt="" style="object-position:%s"><i class="vc-play" aria-hidden="true"></i></a>' % (img, pos)
-press_new = ('<div class="pn tw-eye" style="--gc:1/span 1;--gr:1/span 1;--tc:1/span 1;--tr:1/span 1"><span class="label"><i></i>Creator reviews</span></div>'
-    '<div class="pn tw-title" style="--gc:2/span 2;--gr:1/span 1;--tc:1/span 2;--tr:2/span 1"><h2>In their words.</h2></div>'
-    '<div class="pn tw-year" style="--gc:4/span 1;--gr:1/span 1;--tc:2/span 1;--tr:1/span 1"><span class="label">[ 2026 ]</span></div>'
-    + _card(0, 1, '1/span 1', '3/span 1', '<b>00</b> Unscripted', '<h3>Tried in their own workflow.</h3><p>Creators wore the ring for weeks and filmed it on their own channels — no script, no edit from us.</p>',
-            '<a class="btn" href="#">Watch all on YouTube</a>', ' intro')
-    + _card(1, 2, '2/span 1', '3/span 1', '<b>01</b> YouTube · Product Manager', _thumb('img2/creator-01.jpg', '50% 45%') + '<h3>Vocci Ring: This Tiny AI Assistant Changed My Workflow</h3>',
-            '<a href="#">Watch review <b>→</b></a>')
-    + _card(2, 3, '1/span 1', '4/span 1', '<b>02</b> YouTube · Creator', _thumb('img2/v09.jpg', '50% 40%') + '<h3>Vocci Ring Review: real-world context for your AI tools</h3>',
-            '<a href="#">Watch review <b>→</b></a>')
-    + _card(3, 4, '2/span 1', '4/span 1', '<b>03</b> Creators program', '<a class="tw-th invite" href="#"><i class="vc-plus" aria-hidden="true"></i><span class="label">Your review here</span></a><h3>Made something with Vocci?</h3><p>Early hardware, time with the team, and a feature right here.</p>',
-            '<a href="#">Become a creator <b>→</b></a>', ' invite'))
+press_new = ('<div class="pn" style="--gc:1/span 1;--gr:1/span 2;--tc:1/span 2;--tr:1/span 1"><h2>In their words.</h2><p>Creators who tried the ring in their own workflow — unscripted, on their own channels.</p>'
+    '<div class="end btns"><a class="btn" href="#">Watch all on YouTube</a></div></div>'
+    + _card(2, '1/span 1', '2/span 1', '<b class="src">YouTube</b> Product Manager', _thumb('img2/creator-01.jpg', '50% 45%') + '<h3>Vocci Ring: This Tiny AI Assistant Changed My Workflow</h3>', '<a class="tlink" href="#">Watch review</a>')
+    + _card(3, '2/span 1', '2/span 1', '<b class="src">YouTube</b> Creator', _thumb('img2/v09.jpg', '50% 40%') + '<h3>Vocci Ring Review: real-world context for your AI tools</h3>', '<a class="tlink" href="#">Watch review</a>')
+    + _card(4, '1/span 2', '3/span 1', '<b class="src">Creators</b> Program', '<a class="tw-th invite" href="#"><img loading="lazy" decoding="async" src="img2/n451.jpg" alt="" style="object-position:50% 50%"><span class="tw-add"><i class="vc-plus" aria-hidden="true"></i><span class="label">Your review here</span></span></a><h3>Made something with Vocci?</h3><p>Early hardware, time with the team, and a feature right here.</p>', '<a class="tlink" href="#">Become a creator</a>', ' invite'))
 m = re.search(r'(<section id="press"[^>]*><div class="stage flat">)(.*?)(<div class="rowline".*?</div>)', s, re.S)
 lines = ''.join(re.findall(r'<i class="(?:vl|hl|sqr)"[^>]*></i>', m.group(2)))
-s = s[:m.start(2)] + lines + press_new + s[m.end(3):]   # rowline dropped: no line across the cards
+s = s[:m.start(2)] + lines + press_new + s[m.end(3):]   # cards span both rows, so no row line across them
 
 # ---------- 0929-m · Vocci logo (vector redraw of the mark in Vocci_3Dmodel_demo) replaces the typed wordmarks ----------
 logo = re.sub(r'<title>.*?</title>\n?', '', (R/'img3/vocci-logo.svg').read_text()).replace('role="img" aria-label="VOCCI"', 'aria-hidden="true"').strip()
