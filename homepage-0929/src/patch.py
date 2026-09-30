@@ -379,7 +379,10 @@ s = s.replace('<main class="page gridall" data-ui="classic" data-skin="v2">', '<
 override = (R/'src/override.css').read_text()
 motion = (R/'src/motion.js').read_text()
 import hashlib   # cache-bust the 3D bundle so a republish never runs yesterday's copy
-motion = motion.replace("'vendor/how3d.js'", "'vendor/how3d.js?v=%s'" % hashlib.md5((R/'vendor/how3d.js').read_bytes()).hexdigest()[:8])
+_h = hashlib.md5((R/'vendor/how3d.js').read_bytes()).hexdigest()[:8]           # hashed file name (the preview host ignores/404s query strings)
+for _old in (R/'vendor').glob('how3d.*.js'): _old.unlink()
+(R/('vendor/how3d.%s.js' % _h)).write_bytes((R/'vendor/how3d.js').read_bytes())
+motion = motion.replace("'vendor/how3d.js'", "'vendor/how3d.%s.js'" % _h)
 s = s.replace('<main class="page gridall"', '<style id="round-0928">\n' + override + '\n</style>' + pre + '<main class="page gridall"', 1)
 s = s.replace('</main>\n</body>', '</main>\n<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" onerror="this.remove()"></script>\n<script>\n' + motion + '\n</script>\n</body>')
 (R/'index.html').write_text(s)

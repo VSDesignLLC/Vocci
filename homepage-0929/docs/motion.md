@@ -185,3 +185,4 @@ Awards 四张、Certified 四张：hover 时底图淡入并从 1.08 缩回 1（�
 - 0930-a：替换五张照片为客户新图：ring-macro（Privacy）、mcp-hands（MCP）、recording-presenter（Recording）、pain-ideas、pain-workflow（Three moments），并重新生成对应模糊底图。
 - 0930-b：MCP 区 mcp-hands 换为客户新图（戒指按键可见的版本），模糊底图同步更新。
 - 0930-c：MCP 轨道圆心移到新图戒指按键上（--cx 23% / --cy 40%，轨道层坐标；入场放大原点 42% 41%），1280/1440/1920 宽实测对位。
+- 0930-d：修复 3D 不加载：预览站不支持带 ?v= 的脚本地址（请求失败后回退到静态图）。改为按内容哈希命名的文件 vendor/how3d.<hash>.js（patch.py 生成并引用）。
