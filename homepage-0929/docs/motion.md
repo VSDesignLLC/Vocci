@@ -182,3 +182,4 @@ Awards 四张、Certified 四张：hover 时底图淡入并从 1.08 缩回 1（�
 - 0929-ac：Recording（演讲者）与 MCP（交叠的手）两张照片里的戒指换成真实 Vocci 渲染（正面带按键与边线的一段，按手指上戒指的四角透视贴合、按场景光调暗调暖）；两张图 2× Lanczos 放大 + 锐化（recording-presenter 2808×1800、mcp-hands 3776×2160）。注：环境内无法调用 AI 超分，清晰度提升有限，原图素材本身分辨率低。
 - 0929-ad：Hero 盒子投影改为与照片里植物影子同色同强度（按实测 R/G/B 衰减 0.67/0.65/0.62 相乘，暖色、边缘更实），盒子本体调暖以匹配下午暖光。
 - 0929-ae：去掉开场与离站的 liquid glass 竖板幕布（#tx），页面直接开始入场动效。
+- 0930-a：替换五张照片为客户新图：ring-macro（Privacy）、mcp-hands（MCP）、recording-presenter（Recording）、pain-ideas、pain-workflow（Three moments），并重新生成对应模糊底图。
