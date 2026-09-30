@@ -302,7 +302,7 @@ s = s.replace(m.group(0), '<div class="marquee"><div class="marquee__track">' + 
 for sid, op in [('hero','0'),('why','0'),('why-b','0'),('scenes','.5'),('needs','0'),('scenes2','0'),('how','.4'),('breather','0'),('privacy','0'),('certs','.5'),('testimonials','0'),('community','0'),('press','.4'),('awards','.5'),('hardware','.4'),('finishes','.5'),('faq','.4')]:
     s = s.replace('<section id="%s">' % sid, '<section id="%s" data-bgop="%s">' % (sid, op))
 s = s.replace('<footer id="footer">', '<footer id="footer" data-bgop="0">')
-pre = '<div class="tx" id="tx" aria-hidden="true">' + '<i></i>' * 8 + '</div><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div>'
+pre = '<div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div>'
 
 # ---------- award / certification cards: colour glass backgrounds on hover ----------
 def glass(sid):
