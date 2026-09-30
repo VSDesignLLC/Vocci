@@ -183,3 +183,4 @@ Awards 四张、Certified 四张：hover 时底图淡入并从 1.08 缩回 1（�
 - 0929-ad：Hero 盒子投影改为与照片里植物影子同色同强度（按实测 R/G/B 衰减 0.67/0.65/0.62 相乘，暖色、边缘更实），盒子本体调暖以匹配下午暖光。
 - 0929-ae：去掉开场与离站的 liquid glass 竖板幕布（#tx），页面直接开始入场动效。
 - 0930-a：替换五张照片为客户新图：ring-macro（Privacy）、mcp-hands（MCP）、recording-presenter（Recording）、pain-ideas、pain-workflow（Three moments），并重新生成对应模糊底图。
+- 0930-b：MCP 区 mcp-hands 换为客户新图（戒指按键可见的版本），模糊底图同步更新。
