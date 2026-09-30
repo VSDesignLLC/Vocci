@@ -184,3 +184,4 @@ Awards 四张、Certified 四张：hover 时底图淡入并从 1.08 缩回 1（�
 - 0929-ae：去掉开场与离站的 liquid glass 竖板幕布（#tx），页面直接开始入场动效。
 - 0930-a：替换五张照片为客户新图：ring-macro（Privacy）、mcp-hands（MCP）、recording-presenter（Recording）、pain-ideas、pain-workflow（Three moments），并重新生成对应模糊底图。
 - 0930-b：MCP 区 mcp-hands 换为客户新图（戒指按键可见的版本），模糊底图同步更新。
+- 0930-c：MCP 轨道圆心移到新图戒指按键上（--cx 23% / --cy 40%，轨道层坐标；入场放大原点 42% 41%），1280/1440/1920 宽实测对位。
