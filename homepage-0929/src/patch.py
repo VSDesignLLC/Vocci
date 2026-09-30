@@ -21,7 +21,7 @@ def swap_bg(t, src, pos):
 
 # ---------- 1 hero ----------
 def hero(t):
-    t = swap_bg(t, 'img3/hero-flatlay.jpg', '50% 50%')
+    t = swap_bg(t, 'img3/hero-linen.jpg', '50% 50%')
     t = t.replace('<a class="ulink">Watch the film</a>', '')
     t = t.replace('<a class="btn">Buy Now</a>', '<a class="btn" href="#finishes">Buy now</a>')
     t = t.replace('<a>About</a><a>How it works</a><a>Stories</a><a>FAQ</a><a>Store</a>',
@@ -245,7 +245,7 @@ head_end = s.index('<section id="why-b">')
 tail = s[head_end:]
 tail = re.sub(r'<img (?![^>]*loading=)', '<img loading="lazy" decoding="async" ', tail)
 s = s[:head_end] + tail
-s = s.replace('<img class="bgimg" src="img3/hero-flatlay.jpg"', '<img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-flatlay.jpg"')
+s = s.replace('<img class="bgimg" src="img3/hero-linen.jpg"', '<img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-linen.jpg"')
 
 # ---------- sections 2 & 3: prototype moves to its own glass cell at bottom-right ----------
 def split_proto(sid):
