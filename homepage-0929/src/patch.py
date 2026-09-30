@@ -360,6 +360,11 @@ t = t.replace('<div class="pn lazy " style="--gc:4/span 1;--gr:1/span 1;', '<div
 assert t.count('class="pn pv"') == 3
 s = s[:m.start()] + t + s[m.end():]
 
+# ---------- 0929-ab · hero: the case sits ON the grid — a cut-out of it (same canvas as the photo) above the grid lines ----------
+s, n = re.subn(r'(<section id="hero"[^>]*><div class="stage[^"]*"><img class="bgimg"[^>]*src="img3/hero-linen.jpg"[^>]*>)',
+              r'\1<img class="bgimg hero-top" decoding="async" src="img3/hero-case.webp" alt="" aria-hidden="true" style="object-position:50% 50%;opacity:1">', s, count=1)
+assert n == 1
+
 # ---------- 0929-m · Vocci logo (vector redraw of the mark in Vocci_3Dmodel_demo) replaces the typed wordmarks ----------
 logo = re.sub(r'<title>.*?</title>\n?', '', (R/'img3/vocci-logo.svg').read_text()).replace('role="img" aria-label="VOCCI"', 'aria-hidden="true"').strip()
 assert s.count('<a class="wordmark" href="#hero">VOCCI</a>') == 1 and s.count('<span class="wmbig split">VOCCI</span>') == 1

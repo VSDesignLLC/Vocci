@@ -627,3 +627,6 @@
 /* 0929-z · privacy promises: description always visible */
 #privacy .pn.pv p{opacity:1;transform:none;margin-top:0;font-size:15px;line-height:1.55;color:var(--muted);max-width:30ch}
 #privacy .pn.pv{justify-content:flex-start}
+/* 0929-ab · hero: case cut-out above the grid lines (lines run under the case) */
+#hero .stage>.bgimg.hero-top{z-index:4;pointer-events:none}
+@media(max-width:700px){#hero .stage>.bgimg.hero-top{display:none}}
