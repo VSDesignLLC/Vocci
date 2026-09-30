@@ -186,3 +186,4 @@ Awards 四张、Certified 四张：hover 时底图淡入并从 1.08 缩回 1（�
 - 0930-b：MCP 区 mcp-hands 换为客户新图（戒指按键可见的版本），模糊底图同步更新。
 - 0930-c：MCP 轨道圆心移到新图戒指按键上（--cx 23% / --cy 40%，轨道层坐标；入场放大原点 42% 41%），1280/1440/1920 宽实测对位。
 - 0930-d：修复 3D 不加载：预览站不支持带 ?v= 的脚本地址（请求失败后回退到静态图）。改为按内容哈希命名的文件 vendor/how3d.<hash>.js（patch.py 生成并引用）。
+- 0930-e：新增 src/embed.py，生成单文件版 dist/vocci-homepage-standalone.html（全部图片/字体为 data URI，3D 代码与模型内联，去掉 Google Fonts 与 Lenis CDN；约 16 MB，离线可用）。
