@@ -24,6 +24,30 @@ const OUT = process.argv[2] || 'dist';
       (window.__snap = window.__snap || {})[id] = sec.querySelector('.stage').outerHTML; }, id);
   };
   await bake('how', .9, 9000);          // step 04: all three app screens shown
+  /* How it works for Figma: no floating layers over the text. Ring cropped from the WebGL frame into cell 01,
+     each picture cell flattened to a screenshot (the app cards use CSS `scale`, which importers drop). */
+  await p.evaluate(async () => {
+    const sec = document.getElementById('how'), st = sec.querySelector('.stage'), gl = st.querySelector('img.baked[data-for="r3-gl"]');
+    const ring = await new Promise(res => { const im = new Image(); im.onload = () => { const c = document.createElement('canvas'); c.width = im.width; c.height = im.height; const g = c.getContext('2d'); g.drawImage(im, 0, 0);
+      const d = g.getImageData(0, 0, c.width, c.height).data; let x0 = 1e9, y0 = 1e9, x1 = -1, y1 = -1;
+      for (let y = 0; y < c.height; y++) for (let x = 0; x < c.width; x++) if (d[(y * c.width + x) * 4 + 3] > 8) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+      const o = document.createElement('canvas'); o.width = x1 - x0 + 1; o.height = y1 - y0 + 1; o.getContext('2d').drawImage(c, x0, y0, o.width, o.height, 0, 0, o.width, o.height); res(o.toDataURL('image/png')); }; im.src = gl ? gl.src : ''; });
+    st.querySelectorAll('.r3,.r3-bp').forEach(e => e.remove()); st.querySelectorAll('img.baked').forEach(e => e.remove());
+    st.classList.remove('stepping','broke');
+    const cell0 = st.querySelector('.pn.pic[data-col="0"]'), ri = document.createElement('img'); ri.src = ring; ri.className = 'fig-ring';
+    ri.style.cssText = 'position:absolute;left:50%;top:50%;width:62%;max-height:70%;object-fit:contain;transform:translate(-50%,-50%);visibility:visible;z-index:3'; cell0.appendChild(ri);
+    st.querySelectorAll('.pn:not(.pic)').forEach(t => { t.classList.remove('act'); t.querySelectorAll('p').forEach(x => { x.style.opacity = '1'; x.style.transform = 'none'; }); t.style.setProperty('--x', '0'); });
+    st.querySelectorAll('.pn:not(.pic)>*').forEach(x => { x.style.opacity = '1'; });
+    st.querySelectorAll('.pn.pic').forEach(x => x.classList.remove('act'));
+  });
+  await p.waitForTimeout(400);
+  const boxes = await p.evaluate(() => [...document.querySelectorAll('#how .stage>.pn.pic')].map(e => { const r = e.getBoundingClientRect(); return { x: r.left, y: r.top, width: r.width, height: r.height }; }));
+  const cells = await p.locator('#how .stage>.pn.pic').all();
+  for (let i = 0; i < cells.length; i++) {                 // clip one still frame: element screenshots would scroll and re-run the scrub
+    const png = (await p.screenshot({ clip: boxes[i] })).toString('base64');
+    await cells[i].evaluate((el, d) => { el.innerHTML = '<div class="fig-cell" style="position:absolute;inset:0;background:url(data:image/png;base64,' + d + ') center/100% 100% no-repeat"></div>'; el.classList.remove('appon', 'contain', 'phone', 'act'); }, png);   // background layer: the site's img rules can't restyle it }, png);
+  }
+  await p.evaluate(() => { window.__snap.how = document.getElementById('how').querySelector('.stage').outerHTML; });
   await bake('hardware', 0, 6000);      // fully exploded, cards open
   await bake('finishes', 0, 6000);
   await p.evaluate(() => scrollTo(0, 0)); await p.waitForTimeout(2500);

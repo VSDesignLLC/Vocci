@@ -11,4 +11,5 @@ for name in ['figma-static.html', 'figma-static-hover.html']:
     s = re.sub(r'<link rel="stylesheet" href="https://fonts\.googleapis\.com[^>]*>', '', s)
     s = re.sub(r'(?<![\w/.-])(img[23]/[A-Za-z0-9._-]+\.(?:jpg|png|webp|ttf|svg))', lambda m: uri(m.group(1)), s)
     s = s.replace('http://127.0.0.1:8732/', '')
+    s = s.replace('<title>Vocci Big Grid</title>', '<title>%s</title>' % ('Vocci Figma Hover' if 'hover' in name else 'Vocci Figma Static'), 1)
     f.write_text(s); print(name, round(len(s) / 1e6, 1), 'MB')

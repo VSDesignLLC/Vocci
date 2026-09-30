@@ -188,3 +188,4 @@ Awards 四张、Certified 四张：hover 时底图淡入并从 1.08 缩回 1（�
 - 0930-d：修复 3D 不加载：预览站不支持带 ?v= 的脚本地址（请求失败后回退到静态图）。改为按内容哈希命名的文件 vendor/how3d.<hash>.js（patch.py 生成并引用）。
 - 0930-e：新增 src/embed.py，生成单文件版 dist/vocci-homepage-standalone.html（全部图片/字体为 data URI，3D 代码与模型内联，去掉 Google Fonts 与 Lenis CDN；约 16 MB，离线可用）。
 - 0930-f：Figma 导入用静态稿：src/figma_static.js + src/embed_static.py 生成 dist/figma-static.html（hover 前）与 dist/figma-static-hover.html（所有 :hover 规则强制生效）。1440 宽，动效全部停在终态，3D 画面烘焙为 PNG（How it works 停在第 04 步），去掉脚本/钉住/逐字拆分，素材全部内嵌（各约 13 MB）。
+- 0930-g：Figma 静态稿 How it works 修正：上排四格改为整格截图（App 卡片用了 CSS scale，导入工具不识别会被裁半），3D 戒指裁出放进 01 格，去掉浮在文字上的波形/状态胶囊/戒指层，四步说明全部正常显示。
