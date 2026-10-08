@@ -2008,13 +2008,52 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 .pn.lazy::after{display:none}
 #breather .stage .pn.pending{opacity:1!important;transform:none!important;pointer-events:auto}
 #faq .pn p.end{opacity:1;transform:none;transition:none}
-#community .qb,#community .qb.shown{opacity:1!important;transform:none!important}
-#community .qb q,#community .qb .label{display:block!important;animation:none!important}
-#community .qb-typing{display:none!important}
 .hero-ch,.bc,.p-scroll .u,.split .w>span{opacity:1!important;filter:none!important;transform:none!important;translate:none!important}
 
 #how .pn.pic.still3d{background:#ecebe7}#how .pn.pic.still3d>img{object-fit:contain;padding:0;top:0;height:100%}
 @media(max-width:700px){#how .pn.pic.still3d{height:auto!important;aspect-ratio:4/5}}
+
+/* ===== 1007-b ===== */
+/* 1 · grid crossings: white circles (hairline ring so they read on white sections too) */
+.sqr,.rowline i{width:7px!important;height:7px!important;border-radius:50%;background:#fff!important;box-shadow:0 0 0 1px rgba(20,20,22,.32)}
+.sqr{transform:translate(-3px,-3px)!important}.rowline i{top:-4px!important;transform:translateX(-3px)!important}
+/* phones */
+@media(max-width:700px){
+  /* 4 · even rhythm: no tall empty cells */
+  .stage .pn:not(.pic){min-height:0!important;height:auto!important;padding:22px 20px 24px}
+  .stage .pn .end,.stage .pn .foot{margin-top:14px!important}
+  /* 5 · breather: one whole picture (desktop growth sizes never apply here) */
+  #breather{height:auto!important}#breather .stage{position:relative!important;top:auto!important}
+  #breather .stage>.bgimg{width:100%!important;height:auto!important;aspect-ratio:1/1;position:relative!important;left:auto!important;top:auto!important;opacity:1!important}
+  /* 6 · photos whole and centred: no parallax offsets / half-revealed clips left from desktop */
+  .stage>.bgimg:not(.blur),.pn.pic>img{translate:none!important;scale:none!important}
+  .pn.pic.sharp>img{top:0!important;height:100%!important}
+  .js .pn.pic>img{clip-path:none!important}
+  .stage>.bgimg.blur{display:none!important}
+  /* 7 · community: owner bubbles first, then the copy and buttons */
+  #community .stage>.bgimg{order:0}#community .qb{order:1}#community .stage>.pn{order:2}
+  #community .qb:first-of-type{margin-top:16px}
+  /* 9 · footer: a normal block at the end of the page (no sticky reveal on phones) */
+  #footer{position:relative!important;visibility:visible!important;z-index:1!important}
+  #footer .pn{translate:none!important;opacity:1!important}
+  #faq{z-index:2;background:#fff}
+  /* 3 · How it works: the desktop four-step strip, kept as a swipeable row (picture over text, one step per card) */
+  #how{height:auto!important}
+  #how .stage{min-height:0!important;height:auto!important;position:relative!important;top:auto!important;display:grid!important;grid-template-columns:repeat(4,82vw);grid-template-rows:auto 1fr;grid-auto-flow:column;
+    overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:0 10px;padding:0 16px 18px;scroll-padding:0 16px}
+  #how .stage::-webkit-scrollbar{display:none}
+  #how .stage>.pn{grid-column:var(--mcol);scroll-snap-align:start;border:0;box-shadow:none}
+  #how .stage>.pn.pic{grid-row:1;border-radius:12px 12px 0 0;overflow:hidden}
+  #how .stage>.pn:not(.pic){grid-row:2;background:var(--bg-soft);border-radius:0 0 12px 12px;padding:16px 18px 20px}
+  #how .stage>.pn:not(.pic).on{background:#fff;box-shadow:inset 0 3px 0 var(--accent)}
+  #how .pic-cap{display:none}
+  #how .how-hint{display:flex;gap:6px;justify-content:center;padding:0 0 24px}
+  #how .stage>.pn:not(.pic){transform:none!important}
+  #how .how-hint i{width:6px;height:6px;border-radius:50%;background:rgba(20,20,22,.2);transition:background .3s,width .3s}
+  #how .how-hint i.on{width:18px;border-radius:3px;background:var(--accent)}
+}
+
+@media(min-width:701px){#how .how-hint{display:none}}
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-linen.jpg" alt="" style="object-position:50% 50%;opacity:1"><img class="bgimg hero-top" decoding="async" src="img3/hero-case.webp" alt="" aria-hidden="true" style="object-position:50% 50%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav"><div class="nav-right navbar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
@@ -2147,9 +2186,13 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
   var how=document.getElementById('how');
   /* desktop: the 3D ring (vendor/how3d.js) drives the steps from scroll instead of the timer */
   var how3d=how&&!reduce&&innerWidth>1100&&matchMedia('(hover:hover)').matches&&(function(){try{return !!document.createElement('canvas').getContext('webgl2');}catch(e){return false;}})();
-  if(how3d){ how.classList.add('how3d'); var s3=document.createElement('script'); s3.src='vendor/how3d.dc2da3b6.js'; s3.onerror=function(){how.classList.remove('how3d');}; document.body.appendChild(s3); }
+  if(how3d){ how.classList.add('how3d'); var s3=document.createElement('script'); s3.src='vendor/how3d.86276e0f.js'; s3.onerror=function(){how.classList.remove('how3d');}; document.body.appendChild(s3); }
   /* 1007 · no 3D (phones, tablets, no WebGL2): show stills baked from the desktop 3D sequence instead of the old placeholder photos */
-  if(how&&!how3d){ Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn.pic'),function(p,k){ var im=p.querySelector('img'); if(!im) return; im.src='img3/how-static-'+(k+1)+'.jpg'; im.removeAttribute('srcset'); im.alt=['Vocci ring','Vocci app · meeting notes','Vocci Agent · voice command','Claude via Vocci MCP'][k]||''; p.classList.remove('contain','phone'); p.classList.add('still3d'); }); }
+  if(how&&!how3d){ Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn.pic'),function(p,k){ var im=p.querySelector('img'); if(!im) return; im.src='img3/how-static-'+(k+1)+'.jpg'; im.removeAttribute('srcset'); im.alt=['Vocci ring','Vocci app · meeting notes','Vocci Agent · voice command','Claude via Vocci MCP'][k]||''; p.classList.remove('contain','phone'); p.classList.add('still3d'); });
+    Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn.pic'),function(p,k){ p.style.setProperty('--mcol',k+1); });
+    Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn:not(.pic)'),function(p,k){ p.style.setProperty('--mcol',k+1); });
+    var hst=how.querySelector('.stage'), hint=document.createElement('div'); hint.className='how-hint'; hint.innerHTML='<i class="on"></i><i></i><i></i><i></i>'; hst.parentNode.insertBefore(hint,hst.nextSibling);
+    hst.addEventListener('scroll',function(){ var w=hst.scrollWidth/4, k=Math.round(hst.scrollLeft/w); Array.prototype.forEach.call(hint.children,function(d,j){ d.classList.toggle('on',j===k); }); Array.prototype.forEach.call(hst.querySelectorAll(':scope>.pn:not(.pic)'),function(p,j){ p.classList.toggle('on',j===k); }); },{passive:true}); }
   if(how&&!how3d){ var txts=Array.prototype.slice.call(how.querySelectorAll('.pn:not(.pic)')), i=0, t=null;
     function show(k){ i=k; txts.forEach(function(x,j){ x.classList.toggle('on',j===k); }); }
     function play(){ stop(); t=setInterval(function(){ show((i+1)%txts.length); },3200); }
@@ -2189,6 +2232,9 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 
   /* background layer opacity follows the section at the viewport centre */
   (function(){ var bg=document.getElementById('pagebg'); if(!bg) return; var blocks=document.querySelectorAll('[data-bgop]'); var io3=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) bg.style.setProperty('--pgop',e.target.dataset.bgop); }); },{rootMargin:'-49% 0px -49% 0px',threshold:0}); blocks.forEach(function(b){ io3.observe(b); }); })();
+
+  /* 1007-b · crossing 700 / 1100 px while resizing reloads the page (desktop-only scripts are set up once at load) */
+  (function(){ var band=function(w){ return w<=700?0:w<=1100?1:2; }, b0=band(innerWidth), t=null; addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(function(){ if(band(innerWidth)!==b0) location.reload(); },250); }); })();
 
   /* FAQ accordion */
   document.querySelectorAll('#faq .pn .qn').forEach(function(qn){ var cell=qn.closest('.pn'); var h=qn.nextElementSibling; function tog(){ var open=!cell.classList.contains('open'); cell.classList.toggle('open',open); qn.querySelector('i').textContent=open?'–':'+'; } qn.addEventListener('click',tog); h&&h.addEventListener('click',tog); });
