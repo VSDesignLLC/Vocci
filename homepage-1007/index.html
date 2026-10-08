@@ -2364,7 +2364,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
   var how=document.getElementById('how');
   /* desktop: the 3D ring (vendor/how3d.js) drives the steps from scroll instead of the timer */
   var how3d=how&&!reduce&&innerWidth>1100&&matchMedia('(hover:hover)').matches&&(function(){try{return !!document.createElement('canvas').getContext('webgl2');}catch(e){return false;}})();
-  if(how3d){ how.classList.add('how3d'); var s3=document.createElement('script'); s3.src='vendor/how3d.86276e0f.js'; s3.onerror=function(){how.classList.remove('how3d');}; document.body.appendChild(s3); }
+  if(how3d){ how.classList.add('how3d'); var s3=document.createElement('script'); s3.src='vendor/how3d.dc2da3b6.js'; s3.onerror=function(){how.classList.remove('how3d');}; document.body.appendChild(s3); }
   /* 1007 · no 3D (phones, tablets, no WebGL2): show stills baked from the desktop 3D sequence instead of the old placeholder photos */
   if(how&&!how3d){ Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn.pic'),function(p,k){ var im=p.querySelector('img'); if(!im) return; im.loading='eager'; im.src=k===0?'img3/how-ring.webp':'img3/how-static-'+(k+1)+'.jpg'; im.removeAttribute('srcset'); im.alt=['Vocci ring','Vocci app · meeting notes','Vocci Agent · voice command','Claude via Vocci MCP'][k]||''; p.classList.remove('contain','phone'); p.classList.add('still3d'); });
     /* 1007-d · ~5s loops built from the desktop app screens + ring pill (same markup/CSS as vendor/how3d.js) */
