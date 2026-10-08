@@ -286,7 +286,8 @@ def caps(sid, titles):
         return mm.group(0) + ('<span class="pic-cap">%s</span>' % titles[i] if i < len(titles) else '')
     t = re.sub(r'(<div class="pn pic(?! sharp)[^"]*"[^>]*><img[^>]*>)', rep, t)
     s = s[:m.start()] + t + s[m.end():]
-caps('scenes', ['Noisy rooms — clear transcripts anyway', 'Your workflow — connect once with MCP', 'Everyday ideas — capture between appointments'])
+# 1007-h · screen 4 hover captions removed
+# caps('scenes', ['Noisy rooms — clear transcripts anyway', 'Your workflow — connect once with MCP', 'Everyday ideas — capture between appointments'])
 caps('how', ['01 · Double-click to record', '02 · Transcribed automatically', '03 · Press and hold to send', '04 · AI agent takes over'])
 caps('press', ['Vocci Ring: This Tiny AI Assistant Changed My Workflow', 'Vocci Ring Review: real-world context for your AI tools', 'Creator title placeholder'])
 
