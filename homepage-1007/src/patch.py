@@ -480,6 +480,12 @@ _k = _t.rindex('</div></section>')
 _t = _t[:_k] + ''.join('<i class="sqr pdot" style="left:%s;top:%s"></i>' % (x, y) for y in ('30%', '65%') for x in ('25%', '50%', '75%')) + _t[_k:]
 s = s[:_m.start()] + _t + s[_m.end():]
 
+# ---------- 1007-y · hero: new desk photo (ring + case), no separate case layer ----------
+_a = '<img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-linen.jpg" alt="" style="object-position:50% 50%;opacity:1">'
+assert _a in s
+s = s.replace(_a, '<img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1">', 1)
+s = re.sub(r'<img class="bgimg hero-top"[^>]*>', '', s, count=1)
+
 # ---------- assets: local fonts, override css, motion js ----------
 s = s.replace('<main class="page gridall" data-ui="classic" data-skin="v2">', '<main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928">')
 override = (R/'src/override.css').read_text()
