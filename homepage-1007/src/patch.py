@@ -438,6 +438,17 @@ for _a, _b in [('class="pn tw-col intro" style="--gc:1/span 1;--gr:1/span 2;', '
     assert _a in _t, _a; _t = _t.replace(_a, _b, 1)
 s = s[:_m.start()] + _t + s[_m.end():]
 
+# ---------- 1007-q · press: text band on top (cols 2–3), four creator videos in a 2×2 grid below ----------
+_m = re.search(r'<section id="press".*?</section>', s, re.S); _t = _m.group()
+_t = _t.replace('class="pn tw-col vid" style="--gc:2/span 1;--gr:2/span 1;', 'class="pn tw-col vid" style="--gc:2/span 1;--gr:2/span 1;', 1)
+_k = _t.index('<div class="pn tw-col invite"')
+def _vid(n, who, img, pos, title, row, col):
+    return ('<div class="pn tw-col vid" style="--gc:%d/span 1;--gr:%d/span 1;--tc:%d/span 1;--tr:4/span 1"><div class="tw-card"><span class="tw-no"><b>%02d</b> %s</span>'
+            '<a class="tw-th" href="#"><img loading="lazy" decoding="async" src="img2/%s" alt="" style="object-position:%s"><i class="vc-play" aria-hidden="true"></i></a>'
+            '<h3>%s</h3><span class="tw-strip"><a href="#">Watch review <b>→</b></a></span></div></div>') % (col, row, col - 1, n, who, img, pos, title)
+_t = _t[:_k] + _vid(3, 'YouTube · Designer', 'v16.jpg', '50% 55%', 'A week wearing the Vocci Ring', 3, 2) + _vid(4, 'YouTube · Founder', 'v18.jpg', '50% 40%', 'Vocci + Claude: my meeting workflow', 3, 3) + _t[_k:]
+s = s[:_m.start()] + _t + s[_m.end():]
+
 # ---------- assets: local fonts, override css, motion js ----------
 s = s.replace('<main class="page gridall" data-ui="classic" data-skin="v2">', '<main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928">')
 override = (R/'src/override.css').read_text()
