@@ -1492,7 +1492,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 }
 /* copy swap · no opacity animation inside backdrop-filter panels (Safari repaint bug); a brief colour flash instead */
 .swapped{animation:swapin .5s var(--ease)}
-@keyframes swapin{0%{color:var(--accent-text);transform:translateY(4px)}100%{color:inherit;transform:none}}
+@keyframes swapin{0%{opacity:0}100%{opacity:1}}
 /* prototypes · app-like UI (states s1…s4 from motion.js) */
 .proto{margin-top:auto;display:flex;flex-direction:column;gap:10px;background:#fff;border:1px solid rgba(20,20,22,.14);border-radius:12px;padding:14px 16px;font-size:13px;color:#3a3a3f;line-height:1.45;overflow:hidden;max-height:100%}
 .pn .proto+*{display:none}
@@ -2296,7 +2296,10 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
   function fade(el,txt){ if(!el||typeof txt!=='string'||!txt||el.textContent===txt) return; el.textContent=txt; el.classList.remove('swapped'); void el.offsetWidth; el.classList.add('swapped'); }
   document.querySelectorAll('ol.pl[data-swap]').forEach(function(list){
     var card=list.closest('.stage'); var items=Array.prototype.slice.call(list.children);
-    function set(li){ items.forEach(function(x){ x.classList.toggle('on',x===li); }); var d=li.dataset;
+    /* 1007-n · reserve the tallest text per slot so swapping never moves the list under the cursor (stops the hover loop) */
+    function lock(){ ['title','copy','quote','src','label'].forEach(function(k){ var el=card.querySelector('[data-'+k+']:not(li)'); if(!el) return; var t0=el.textContent, h=0; el.style.minHeight=''; items.forEach(function(li){ if(li.dataset[k]){ el.textContent=li.dataset[k]; h=Math.max(h,el.offsetHeight); } }); el.textContent=t0; el.style.minHeight=h+'px'; }); }
+    lock(); addEventListener('resize',lock); document.fonts&&document.fonts.ready.then(lock);
+    function set(li){ if(li.classList.contains('on')) return; items.forEach(function(x){ x.classList.toggle('on',x===li); }); var d=li.dataset;
       ['title','copy','quote','src','label'].forEach(function(k){ fade(card.querySelector('[data-'+k+']:not(li)'),d[k]); });
       }
     items.forEach(function(li){ li.tabIndex=0; ['mouseenter','click','focus'].forEach(function(ev){ li.addEventListener(ev,function(){set(li)}); }); });

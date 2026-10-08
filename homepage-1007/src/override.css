@@ -122,7 +122,7 @@
 }
 /* copy swap · no opacity animation inside backdrop-filter panels (Safari repaint bug); a brief colour flash instead */
 .swapped{animation:swapin .5s var(--ease)}
-@keyframes swapin{0%{color:var(--accent-text);transform:translateY(4px)}100%{color:inherit;transform:none}}
+@keyframes swapin{0%{opacity:0}100%{opacity:1}}
 /* prototypes · app-like UI (states s1…s4 from motion.js) */
 .proto{margin-top:auto;display:flex;flex-direction:column;gap:10px;background:#fff;border:1px solid rgba(20,20,22,.14);border-radius:12px;padding:14px 16px;font-size:13px;color:#3a3a3f;line-height:1.45;overflow:hidden;max-height:100%}
 .pn .proto+*{display:none}

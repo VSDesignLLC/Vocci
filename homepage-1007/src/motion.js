@@ -102,7 +102,10 @@
   function fade(el,txt){ if(!el||typeof txt!=='string'||!txt||el.textContent===txt) return; el.textContent=txt; el.classList.remove('swapped'); void el.offsetWidth; el.classList.add('swapped'); }
   document.querySelectorAll('ol.pl[data-swap]').forEach(function(list){
     var card=list.closest('.stage'); var items=Array.prototype.slice.call(list.children);
-    function set(li){ items.forEach(function(x){ x.classList.toggle('on',x===li); }); var d=li.dataset;
+    /* 1007-n · reserve the tallest text per slot so swapping never moves the list under the cursor (stops the hover loop) */
+    function lock(){ ['title','copy','quote','src','label'].forEach(function(k){ var el=card.querySelector('[data-'+k+']:not(li)'); if(!el) return; var t0=el.textContent, h=0; el.style.minHeight=''; items.forEach(function(li){ if(li.dataset[k]){ el.textContent=li.dataset[k]; h=Math.max(h,el.offsetHeight); } }); el.textContent=t0; el.style.minHeight=h+'px'; }); }
+    lock(); addEventListener('resize',lock); document.fonts&&document.fonts.ready.then(lock);
+    function set(li){ if(li.classList.contains('on')) return; items.forEach(function(x){ x.classList.toggle('on',x===li); }); var d=li.dataset;
       ['title','copy','quote','src','label'].forEach(function(k){ fade(card.querySelector('[data-'+k+']:not(li)'),d[k]); });
       }
     items.forEach(function(li){ li.tabIndex=0; ['mouseenter','click','focus'].forEach(function(ev){ li.addEventListener(ev,function(){set(li)}); }); });
