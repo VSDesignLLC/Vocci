@@ -797,3 +797,10 @@
 .pn ul.feats{gap:8px}
 .pn ul.feats li{padding:10px 12px;background:rgba(255,255,255,.62);border:1px solid rgba(20,20,22,.08);border-radius:10px;color:var(--ink);font-size:11.5px}
 .pn ul.feats svg{width:18px;height:18px}
+/* 1007-m · breather: no scroll growth — static full-bleed image, one screen tall */
+@media(min-width:701px){
+  #breather{height:auto!important}
+  #breather .stage{position:relative!important;top:auto!important}
+  #breather .stage>.bgimg{width:100%!important;height:100%!important}
+  #breather .stage .pn.pending{opacity:1!important;transform:none!important}
+}
