@@ -1778,8 +1778,8 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
   .r3-ripple.on+.r3-ripple.on{animation-delay:1.2s}
   @keyframes r3rip{0%{scale:.7;opacity:.9}100%{scale:2.1;opacity:0}}
 }
-/* 0929-j · cells 02–04 turn into the Vocci app when the ring reaches them (dark app UI after Vocci_3Dmodel_demo) */
-@media(min-width:1101px){
+/* 0929-j · cells 02–04 turn into the Vocci app (desktop when the ring reaches them; 1007-d phone/tablet loops) */
+@media all{
   .r3-app{display:none}
   #how.r3ready .r3-app{display:grid;place-items:center;position:absolute;inset:0;z-index:2;pointer-events:none}
   #how.r3ready .pn.pic>img{transition:opacity .6s var(--ease),filter .6s var(--ease),transform .8s var(--ease)}
@@ -2078,6 +2078,46 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 @keyframes hpRip{0%{opacity:1;transform:scale(.6)}100%{opacity:0;transform:scale(1.5)}}
 @media(prefers-reduced-motion:reduce){.hp .s{opacity:1;transform:none;transition:none}}
 
+/* 1007-d · phone/tablet: How it works loops reuse the desktop app screens and ring pill */
+#how .hp{display:none}
+@media(max-width:1100px){
+  #how .r3m{display:grid;place-items:center;position:absolute;inset:0;z-index:2;pointer-events:none}
+  #how .stage .pn.pic.appon>img{opacity:0!important}
+  #how .pn.pic.appon{background:radial-gradient(70% 70% at 50% 50%,#fff 0,#f1f1ef 70%,#e7e7e4 100%)}
+  .r3m-ring{position:absolute;inset:0;pointer-events:none}
+  #how .r3m .r3-ph{position:absolute;left:50%;top:50%;margin:-235px 0 0 -140px;translate:none}
+  .r3-pill{z-index:5;display:flex;align-items:center;gap:8px;height:30px;padding:0 13px;margin-left:0;border-radius:999px;transform:translate(-50%,-100%);white-space:nowrap;
+    background:rgba(20,20,22,.9);color:#f4f4f2;font:600 10.5px/1 var(--font-mono);letter-spacing:.14em;backdrop-filter:blur(10px);box-shadow:0 8px 24px rgba(0,0,0,.18);opacity:0;transition:opacity .4s,background .4s,color .4s,box-shadow .4s}
+  .r3-pill.on{opacity:1}
+  .r3-pill.pop{animation:r3pop .5s cubic-bezier(.2,1.6,.4,1)}
+  @keyframes r3pop{35%{transform:translate(-50%,-100%) scale(1.16)}}
+  .r3-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:r3blink 1s infinite}
+  .r3-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:r3blink 1s infinite}
+  .r3-pill .wv{display:flex;gap:2px;align-items:center;height:12px}
+  .r3-pill .wv i{width:2px;height:10px;border-radius:2px;background:currentColor;opacity:.7;animation:r3wv .9s ease-in-out infinite}
+  .r3-pill .wv i:nth-child(2){animation-delay:.12s;height:6px}.r3-pill .wv i:nth-child(3){animation-delay:.24s}.r3-pill .wv i:nth-child(4){animation-delay:.36s;height:7px}.r3-pill .wv i:nth-child(5){animation-delay:.48s}
+  .r3-pill .bar{display:none;width:46px;height:3px;border-radius:2px;background:rgba(255,255,255,.2);overflow:hidden}
+  .r3-pill .bar i{display:block;height:100%;background:var(--accent);transform-origin:left;transform:scaleX(0)}
+  .r3-pill[data-s="1"] .dot{animation:none;background:#f4f4f2;opacity:.6}
+  .r3-pill[data-s="2"] .wv{display:none}.r3-pill[data-s="2"] .bar{display:block}
+  .r3-pill[data-s="3"]{background:var(--accent);color:#1d1d1f;box-shadow:0 0 28px rgba(244,117,70,.6)}
+  .r3-pill[data-s="3"] .dot{background:#1d1d1f;animation:r3blink 1.4s infinite}
+  .r3-pill[data-s="3"] .wv i{opacity:.8}
+  @keyframes r3blink{50%{opacity:.25}}
+  @keyframes r3wv{50%{transform:scaleY(.35)}}
+  .r3-ripple{z-index:2;border-radius:50%;border:1.5px solid var(--accent);opacity:0}
+  .r3-ripple.on{animation:r3rip 2.4s cubic-bezier(.2,.6,.3,1) infinite}
+  .r3-ripple.on+.r3-ripple.on{animation-delay:1.2s}
+  @keyframes r3rip{0%{scale:.7;opacity:.9}100%{scale:2.1;opacity:0}}
+  .r3m-ring .r3-pill{position:absolute;left:50%;top:20%}
+  .r3m-ring .r3-ripple{position:absolute;left:50%;top:50%;width:46%;aspect-ratio:1;translate:-50% -50%}
+}
+@media(max-width:700px){
+  #how .how-head{padding:28px 16px 18px} #how .how-head h2{margin:0}
+  #scenes .stage>.pn.lazy{padding-bottom:28px}
+}
+@media(min-width:701px){ #how .how-head{display:none} }
+
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-linen.jpg" alt="" style="object-position:50% 50%;opacity:1"><img class="bgimg hero-top" decoding="async" src="img3/hero-case.webp" alt="" aria-hidden="true" style="object-position:50% 50%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav"><div class="nav-right navbar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
 <path stroke-width="2.6" d="M58.39 3.66A26.30 26.30 0 0 1 80.61 3.66"/>
@@ -2211,9 +2251,49 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
   var how3d=how&&!reduce&&innerWidth>1100&&matchMedia('(hover:hover)').matches&&(function(){try{return !!document.createElement('canvas').getContext('webgl2');}catch(e){return false;}})();
   if(how3d){ how.classList.add('how3d'); var s3=document.createElement('script'); s3.src='vendor/how3d.86276e0f.js'; s3.onerror=function(){how.classList.remove('how3d');}; document.body.appendChild(s3); }
   /* 1007 · no 3D (phones, tablets, no WebGL2): show stills baked from the desktop 3D sequence instead of the old placeholder photos */
-  if(how&&!how3d){ Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn.pic'),function(p,k){ var im=p.querySelector('img'); if(!im) return; im.src='img3/how-static-'+(k+1)+'.jpg'; im.removeAttribute('srcset'); im.alt=['Vocci ring','Vocci app · meeting notes','Vocci Agent · voice command','Claude via Vocci MCP'][k]||''; p.classList.remove('contain','phone'); p.classList.add('still3d'); var hp=document.createElement('div'); hp.className='hp hp'+(k+1); hp.setAttribute('aria-hidden','true'); hp.innerHTML=['<div class="hp-ring"><b class="s" data-at="1"></b></div><span class="hp-pill s" data-at="1"><em></em>Recording</span><span class="hp-tag s" data-at="3">Double-tap · captured</span>','<div class="hp-card"><div class="hp-h s" data-at="0">Product Sync <small>32 min</small></div><div class="hp-chip s" data-at="1">Transcribed</div><p class="s" data-at="2"><b>Mia</b> Launch moves to the 14th.</p><p class="s" data-at="3"><b>Ian</b> I’ll send the deck Friday.</p><div class="hp-note s" data-at="4">Notes · 3 decisions · 2 actions</div></div>','<div class="hp-card"><div class="hp-h s" data-at="0">Vocci Agent</div><div class="hp-mic s" data-at="1"><i></i>Holding to talk…</div><p class="hp-q s" data-at="2">“Remind Ian to send the deck tomorrow.”</p><div class="hp-chip s" data-at="3">Sent</div><div class="hp-note s" data-at="4">Reminder set · Tomorrow 9:00</div></div>','<div class="hp-card"><div class="hp-h s" data-at="0">Claude</div><p class="hp-q s" data-at="1">What did we decide about the launch?</p><div class="hp-chip s" data-at="2">Reading Vocci · Product Sync</div><p class="s" data-at="3">Launch moves to the 14th. Ian sends the deck Friday.</p><div class="hp-note s" data-at="4">via Vocci MCP</div></div>'][k]||''; p.appendChild(hp); });
-    /* 1007-c · ~5s looping prototypes, only while visible */
-    (function(){ var T=[0,700,1500,2400,3300]; Array.prototype.forEach.call(how.querySelectorAll('.hp'),function(hp){ var els=hp.querySelectorAll('.s'), tm=[], run=false; function cyc(){ tm.forEach(clearTimeout); tm=[]; Array.prototype.forEach.call(els,function(e){ e.classList.remove('on'); }); T.forEach(function(t,i){ tm.push(setTimeout(function(){ Array.prototype.forEach.call(els,function(e){ if(+e.dataset.at===i) e.classList.add('on'); }); },t+150)); }); tm.push(setTimeout(function(){ if(run) cyc(); },5000)); } new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting&&!run){ run=true; cyc(); } else if(!e.isIntersecting&&run){ run=false; tm.forEach(clearTimeout); } }); },{threshold:.4}).observe(hp); }); })();
+  if(how&&!how3d){ Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn.pic'),function(p,k){ var im=p.querySelector('img'); if(!im) return; im.src='img3/how-static-'+(k+1)+'.jpg'; im.removeAttribute('srcset'); im.alt=['Vocci ring','Vocci app · meeting notes','Vocci Agent · voice command','Claude via Vocci MCP'][k]||''; p.classList.remove('contain','phone'); p.classList.add('still3d'); });
+    /* 1007-d · ~5s loops built from the desktop app screens + ring pill (same markup/CSS as vendor/how3d.js) */
+    (function(){ var APP=[
+    '<div class="r3-ph a2"><div class="sb"><b>9:41</b><i></i></div>' +
+      '<div class="scr s1"><div class="dt">8/19/2026 2:14 PM <span class="x1">1X</span></div><div class="tm"><span>0:00:00</span><span>0:32:14</span></div><div class="trk"><i></i></div>' +
+      '<div class="ctl"><span>↺15</span><i class="pl">▶</i><span>↻15</span></div><div class="hr"></div><div class="msg">Your recording is ready for transcription.</div>' +
+      '<div class="lab">Language</div><div class="fld">English</div><div class="chk"><i>✓</i><div><b>Auto transcribe</b><span>Automatically transcribe after uploading</span></div></div><button class="cta">Transcribe</button></div>' +
+      '<div class="scr s2"><div class="hd">‹ <b>Product Sync — Launch Planning</b> ⋮</div><div class="tabs"><span class="tb">Chat</span><span class="tb">Highlights</span><span class="tb">Notes</span></div>' +
+      '<div class="aud"><i class="pl">▶</i> 0:32:14 <em></em></div><div class="lst">' +
+      [['S1', '#3a3d45', 'Mia', '2:02 PM', 'Okay — launch. Thursday or not?'], ['S2', '#6b5844', 'Ian', '2:03 PM', 'Thursday works if the sizing-kit flow ships first.'],
+       ['S3', '#F47546', 'Ray', '2:03 PM', 'I can have the flow ready by Wednesday noon.', 'Sizing-kit flow is the launch blocker — owner Ray, due Wed noon.'],
+       ['S2', '#6b5844', 'Ian', '2:05 PM', 'Then charger copy is on me tonight.'], ['S1', '#3a3d45', 'Mia', '2:06 PM', 'Deal. Launch moves to Thursday.', 'Launch date confirmed: Thursday.']]
+        .map(r => '<div class="rw' + (r[5] ? ' mk' : '') + '"><i class="av" style="background:' + r[1] + '">' + r[0] + '</i><div><b>' + r[2] + '</b><t>' + r[3] + '</t><p>' + r[4] + '</p>' +
+          (r[5] ? '<div class="ins"><b>Insight:</b> ' + r[5] + '</div>' : '') + '</div></div>').join('') + '</div></div>' +
+      '<div class="scr s3"><div class="hd">‹ <b>Product Sync — Launch Planning</b> ⋮</div><div class="tabs"><span class="tb">Chat</span><span class="tb">Highlights</span><span class="tb on">Notes</span></div>' +
+      '<h5>Product Sync — Launch Planning.md</h5><div class="nd">8/19/2026, 14:38</div><div class="pills"><span>Copy</span><span>View the file</span></div>' +
+      '<div class="qt">Team confirmed Thursday launch, contingent on the sizing-kit flow shipping Wednesday noon. Ian revises the charger copy tonight.</div>' +
+      '<h6>Summary</h6><p>Mia, Ian and Ray aligned on the date. The sizing-kit flow is the single blocker — Ray ships it by Wednesday noon. The two moments tapped live on the ring were pinned as highlights.</p></div></div>',
+    '<div class="r3-ph a3"><div class="sb"><b>9:41</b><i></i></div><div class="ag"><span class="vdot"></span>VOCCI · Agent</div>' +
+      '<div class="hold"><i class="hring"></i><span>Holding · listening</span></div>' +
+      '<div class="cmd"><i class="wv5"><b></b><b></b><b></b><b></b><b></b></i><div><q></q><t>long-press · voice command</t></div></div>' +
+      '<button class="send">Send to Agent</button><div class="think"><b></b><b></b><b></b></div>' +
+      '<div class="res"><i>✓</i><div><b>Reminder set</b><span>Tomorrow 9:00 AM — Send sizing-kit build to Mia</span></div></div>' +
+      '<div class="res r2"><i>✓</i><div><b>Draft ready in Mail</b><span>To Mia · “Sizing-kit build — tomorrow 9:00”</span></div></div></div>',
+    '<div class="r3-ph a4"><div class="ex"><i></i><i></i><i></i><span>Claude</span></div><div class="uq">What did we decide about the launch?</div>' +
+      '<div class="pull"><i class="lnk"></i>Reading <b>Vocci · Product Sync</b> · 32 min</div><div class="ans"><span class="typ"></span></div>' +
+      '<div class="cite">⟵ context via <b>Vocci MCP</b></div><div class="mcp"><span>ChatGPT</span><span>Claude</span><span>Claude Code</span><span class="any">any MCP tool</span></div>' +
+      '<div class="inp">Reply…</div></div>']; var CMD='“Remind me to send the sizing-kit build to Mia tomorrow at 9.”', ANS='Thursday — as long as Ray ships the sizing-kit flow by Wednesday noon. Ian is revising the charger copy tonight.';
+      var cl=function(v){ return v<0?0:v>1?1:v; }, band=function(v,a,b){ return cl((v-a)/(b-a)); }, $=function(r,q){ return r.querySelector(q); }, $$=function(r,q){ return Array.prototype.slice.call(r.querySelectorAll(q)); };
+      var tog=function(el,c,on){ if(el&&el.classList.contains(c)!==on) el.classList.toggle(c,on); }, txt=function(el,t){ if(el&&el.textContent!==t) el.textContent=t; };
+      var pics=how.querySelectorAll('.stage>.pn.pic'), loops=[];
+      var o=document.createElement('div'); o.className='r3m-ring'; o.innerHTML='<i class="r3-ripple"></i><i class="r3-ripple"></i><div class="r3-pill" data-s="0"><i class="dot"></i><span class="t">REC 00:00</span><b class="wv"><i></i><i></i><i></i><i></i><i></i></b><b class="bar"><i></i></b></div>'; pics[0]&&pics[0].appendChild(o);
+      loops.push({el:pics[0], f:function(q){ var pl=$(o,'.r3-pill'); tog(pl,'on',q>.06); $$(o,'.r3-ripple').forEach(function(r){ tog(r,'on',q>.06&&q<.9); }); var hi=q>.55&&q<.72; if(hi!==pl._hi){ pl._hi=hi; if(hi){ pl.classList.remove('pop'); void pl.offsetWidth; pl.classList.add('pop'); } } pl.dataset.s=hi?'3':'0'; txt($(pl,'.t'),hi?'HIGHLIGHT':'REC 00:'+String(Math.floor(band(q,.1,.95)*42)+3).padStart(2,'0')); }});
+      [1,2,3].forEach(function(k){ var pic=pics[k]; if(!pic) return; var d=document.createElement('div'); d.className='r3-app r3m'; d.setAttribute('aria-hidden','true'); d.innerHTML=APP[k-1]; pic.appendChild(d); pic.classList.add('appon');
+        var a=d.firstChild, f;
+        if(k===1) f=function(q){ var sp=$$(a,'.rw'); tog($(a,'.s1'),'on',q<.3); tog($(a,'.s2'),'on',q>=.3&&q<.8); tog($(a,'.s3'),'on',q>=.8); tog($(a,'.cta'),'busy',q>.14); txt($(a,'.cta'),q>.14?'Transcribing…':'Transcribe'); $(a,'.trk i').style.transform='scaleX('+cl(q/.3).toFixed(3)+')'; var n=Math.floor(band(q,.32,.66)*5.99); sp.forEach(function(e,i){ tog(e,'in',i<n); }); $$(a,'.ins').forEach(function(e){ tog(e,'in',q>.66); }); $$(a,'.s2 .tb').forEach(function(e,i){ tog(e,'on',i===(q>.66?1:0)); }); };
+        if(k===2) f=function(q){ var h=band(q,.05,.45); txt($(a,'q'),CMD.slice(0,Math.round(CMD.length*h))); tog($(a,'.hold'),'on',q<.55); tog(a,'holding',q>=.05&&q<.45); tog($(a,'.send'),'hot',q>=.45); txt($(a,'.send'),q>=.55?'Sent':'Send to Agent'); tog($(a,'.think'),'in',q>=.55&&q<.62); tog($(a,'.res'),'in',q>=.62); tog($(a,'.r2'),'in',q>=.7); };
+        if(k===3) f=function(q){ var r=band(q,0,.9); tog($(a,'.pull'),'in',r>.05); tog($(a,'.pull'),'done',r>.25); txt($(a,'.typ'),ANS.slice(0,Math.round(ANS.length*band(r,.25,.8)))); tog($(a,'.cite'),'in',r>.8); tog($(a,'.mcp'),'in',r>.9); };
+        loops.push({el:pic, f:f}); });
+      function fit(){ $$(how,'.r3m .r3-ph').forEach(function(ph){ var c=ph.parentNode.parentNode; ph.style.setProperty('--appk',Math.min(c.clientWidth/310,c.clientHeight/500).toFixed(3)); }); } fit(); addEventListener('resize',fit);
+      loops.forEach(function(L){ var t0=0, raf=0, vis=false; L.f(0); function tick(now){ if(!t0) t0=now; L.f(((now-t0)%9000)/9000); raf=vis?requestAnimationFrame(tick):0; }
+        new IntersectionObserver(function(es){ es.forEach(function(e){ vis=e.isIntersecting; if(vis&&!raf){ t0=0; raf=requestAnimationFrame(tick); } }); },{threshold:.35}).observe(L.el); });
+    })();
     Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn.pic'),function(p,k){ p.style.setProperty('--mcol',k+1); });
     Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn:not(.pic)'),function(p,k){ p.style.setProperty('--mcol',k+1); });
     var hst=how.querySelector('.stage'), hint=document.createElement('div'); hint.className='how-hint'; hint.innerHTML='<i class="on"></i><i></i><i></i><i></i>'; hst.parentNode.insertBefore(hint,hst.nextSibling);
@@ -2261,6 +2341,17 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 
   /* FAQ accordion */
   document.querySelectorAll('#faq .pn .qn').forEach(function(qn){ var cell=qn.closest('.pn'); var h=qn.nextElementSibling; function tog(){ var open=!cell.classList.contains('open'); cell.classList.toggle('open',open); qn.querySelector('i').textContent=open?'–':'+'; } qn.addEventListener('click',tog); h&&h.addEventListener('click',tog); });
+})();
+
+/* 1007-d · phone structure: every section reads title → image → its text, so pictures never look like they belong to the neighbour */
+(function(){ if(innerWidth>700) return;
+  var Q=function(id){ var s=document.getElementById(id); return s?Array.prototype.slice.call(s.querySelectorAll('.stage>*')):[]; };
+  var head=function(e){ return !e.classList.contains('pic')&&!e.classList.contains('bgimg')&&e.querySelector('h2'); };
+  ['why','scenes2','privacy','hardware'].forEach(function(id){ Q(id).forEach(function(e){ e.style.order=head(e)?0:(e.classList.contains('pic')||e.classList.contains('bgimg'))?1:2; }); });
+  var sc=Q('scenes'), pics=sc.filter(function(e){ return e.classList.contains('pic'); }), txt=sc.filter(function(e){ return !e.classList.contains('pic')&&!head(e)&&e.classList.contains('pn'); });
+  sc.forEach(function(e){ if(head(e)) e.style.order=0; }); pics.forEach(function(e,i){ e.style.order=2*i+1; }); (txt.length===pics.length?txt:[]).forEach(function(e,i){ e.style.order=2*i+2; });
+  Q('finishes').forEach(function(e){ e.style.order=e.classList.contains('fn-stage')?1:e.classList.contains('fn-spec')?2:e.classList.contains('fn-list')?3:0; });
+  var how=document.getElementById('how'); if(how&&!how.querySelector('.how-head')){ var h=document.createElement('div'); h.className='how-head'; h.innerHTML='<h2>How it works.</h2>'; how.insertBefore(h,how.firstChild); }
 })();
 
 </script>

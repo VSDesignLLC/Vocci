@@ -206,3 +206,7 @@ Awards 四张、Certified 四张：hover 时底图淡入并从 1.08 缩回 1（�
   8. Every detail 去掉实时 3D 爆炸模型（vendor 包不再挂载 #hardware），所有设备显示客户稿里的静态爆炸渲染图。
   9. 手机页脚改为普通区块，排在 FAQ 之后完整显示。
   - 窗口拖动跨过 700 / 1100 px 时自动重新加载，避免桌面脚本（3D、钉住、生长、视差）的状态残留在窄屏布局里。
+
+## 1007-d
+- Phone/tablet How it works: cards 02–04 reuse the desktop app phones (APP markup + 0929-j CSS, now unscoped); card 01 reuses the desktop REC pill + ripples. Each loops ~9s while visible.
+- Phone: sections read title → image → text (why, scenes interleaved, scenes2, privacy, hardware, finishes); How it works gets a mobile-only "How it works." title.

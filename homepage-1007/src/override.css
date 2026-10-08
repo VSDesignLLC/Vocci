@@ -408,8 +408,8 @@
   .r3-ripple.on+.r3-ripple.on{animation-delay:1.2s}
   @keyframes r3rip{0%{scale:.7;opacity:.9}100%{scale:2.1;opacity:0}}
 }
-/* 0929-j · cells 02–04 turn into the Vocci app when the ring reaches them (dark app UI after Vocci_3Dmodel_demo) */
-@media(min-width:1101px){
+/* 0929-j · cells 02–04 turn into the Vocci app (desktop when the ring reaches them; 1007-d phone/tablet loops) */
+@media all{
   .r3-app{display:none}
   #how.r3ready .r3-app{display:grid;place-items:center;position:absolute;inset:0;z-index:2;pointer-events:none}
   #how.r3ready .pn.pic>img{transition:opacity .6s var(--ease),filter .6s var(--ease),transform .8s var(--ease)}
@@ -707,3 +707,43 @@
 @keyframes hpPulse{50%{opacity:.35}}
 @keyframes hpRip{0%{opacity:1;transform:scale(.6)}100%{opacity:0;transform:scale(1.5)}}
 @media(prefers-reduced-motion:reduce){.hp .s{opacity:1;transform:none;transition:none}}
+
+/* 1007-d · phone/tablet: How it works loops reuse the desktop app screens and ring pill */
+#how .hp{display:none}
+@media(max-width:1100px){
+  #how .r3m{display:grid;place-items:center;position:absolute;inset:0;z-index:2;pointer-events:none}
+  #how .stage .pn.pic.appon>img{opacity:0!important}
+  #how .pn.pic.appon{background:radial-gradient(70% 70% at 50% 50%,#fff 0,#f1f1ef 70%,#e7e7e4 100%)}
+  .r3m-ring{position:absolute;inset:0;pointer-events:none}
+  #how .r3m .r3-ph{position:absolute;left:50%;top:50%;margin:-235px 0 0 -140px;translate:none}
+  .r3-pill{z-index:5;display:flex;align-items:center;gap:8px;height:30px;padding:0 13px;margin-left:0;border-radius:999px;transform:translate(-50%,-100%);white-space:nowrap;
+    background:rgba(20,20,22,.9);color:#f4f4f2;font:600 10.5px/1 var(--font-mono);letter-spacing:.14em;backdrop-filter:blur(10px);box-shadow:0 8px 24px rgba(0,0,0,.18);opacity:0;transition:opacity .4s,background .4s,color .4s,box-shadow .4s}
+  .r3-pill.on{opacity:1}
+  .r3-pill.pop{animation:r3pop .5s cubic-bezier(.2,1.6,.4,1)}
+  @keyframes r3pop{35%{transform:translate(-50%,-100%) scale(1.16)}}
+  .r3-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:r3blink 1s infinite}
+  .r3-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:r3blink 1s infinite}
+  .r3-pill .wv{display:flex;gap:2px;align-items:center;height:12px}
+  .r3-pill .wv i{width:2px;height:10px;border-radius:2px;background:currentColor;opacity:.7;animation:r3wv .9s ease-in-out infinite}
+  .r3-pill .wv i:nth-child(2){animation-delay:.12s;height:6px}.r3-pill .wv i:nth-child(3){animation-delay:.24s}.r3-pill .wv i:nth-child(4){animation-delay:.36s;height:7px}.r3-pill .wv i:nth-child(5){animation-delay:.48s}
+  .r3-pill .bar{display:none;width:46px;height:3px;border-radius:2px;background:rgba(255,255,255,.2);overflow:hidden}
+  .r3-pill .bar i{display:block;height:100%;background:var(--accent);transform-origin:left;transform:scaleX(0)}
+  .r3-pill[data-s="1"] .dot{animation:none;background:#f4f4f2;opacity:.6}
+  .r3-pill[data-s="2"] .wv{display:none}.r3-pill[data-s="2"] .bar{display:block}
+  .r3-pill[data-s="3"]{background:var(--accent);color:#1d1d1f;box-shadow:0 0 28px rgba(244,117,70,.6)}
+  .r3-pill[data-s="3"] .dot{background:#1d1d1f;animation:r3blink 1.4s infinite}
+  .r3-pill[data-s="3"] .wv i{opacity:.8}
+  @keyframes r3blink{50%{opacity:.25}}
+  @keyframes r3wv{50%{transform:scaleY(.35)}}
+  .r3-ripple{z-index:2;border-radius:50%;border:1.5px solid var(--accent);opacity:0}
+  .r3-ripple.on{animation:r3rip 2.4s cubic-bezier(.2,.6,.3,1) infinite}
+  .r3-ripple.on+.r3-ripple.on{animation-delay:1.2s}
+  @keyframes r3rip{0%{scale:.7;opacity:.9}100%{scale:2.1;opacity:0}}
+  .r3m-ring .r3-pill{position:absolute;left:50%;top:20%}
+  .r3m-ring .r3-ripple{position:absolute;left:50%;top:50%;width:46%;aspect-ratio:1;translate:-50% -50%}
+}
+@media(max-width:700px){
+  #how .how-head{padding:28px 16px 18px} #how .how-head h2{margin:0}
+  #scenes .stage>.pn.lazy{padding-bottom:28px}
+}
+@media(min-width:701px){ #how .how-head{display:none} }
