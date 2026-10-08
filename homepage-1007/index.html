@@ -1366,7 +1366,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 .pn .pill{font:500 10px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--hair);border-radius:999px;padding:8px 14px;background:#fff}
 .pn .presslogos.v13.row{display:flex;justify-content:center;gap:28px;margin-top:0;flex-wrap:wrap}.pn .presslogos.v13.row img{height:22px}
 @media(max-width:1100px){.pn{--pad:14px;gap:8px}.pn .half{height:96px}.pn h1,.pn h2{font-size:clamp(17px,2vw,22px)}.pn h3{font-size:15px}.pn p,.pn q{font-size:12.5px}.pn ol.pl{font-size:11.5px}.pn ol.pl li{padding:5px 0;gap:6px}.pn .big{font-size:30px}.pn .btn{height:36px;padding:0 14px;font-size:10.5px}.pn .btns{gap:6px}.wmbig{font-size:9vw}.pn .label{font-size:9.5px}.stage .nav-right{gap:14px;font-size:12px}}
-@media(max-width:700px){.stage .nav{padding:12px;inset:auto!important;width:100%}.stage .nav .navbar{width:100%}.stage{display:flex;flex-direction:column}.stage>.bgimg{position:relative;height:300px;inset:auto}.stage>.ringbig{position:relative;left:auto;top:auto;transform:none;width:60%;margin:24px auto}.vl,.hl,.sqr{display:none}.pn{border-top:1px solid rgba(29,29,31,.12);min-height:0}.pn.pic{height:240px}.pn:empty{display:none}.stage .nav{position:relative;inset:auto;padding:12px 16px;order:-1}}
+@media(max-width:1100px){.stage .nav{padding:12px;inset:auto!important;width:100%}.stage .nav .navbar{width:100%}.stage{display:flex;flex-direction:column}.stage>.bgimg{position:relative;height:300px;inset:auto}.stage>.ringbig{position:relative;left:auto;top:auto;transform:none;width:60%;margin:24px auto}.vl,.hl,.sqr{display:none}.pn{border-top:1px solid rgba(29,29,31,.12);min-height:0}.pn.pic{height:240px}.pn:empty{display:none}.stage .nav{position:relative;inset:auto;padding:12px 16px;order:-1}}
 </style><style id="round-0928">
 /* ===== Round 0928 · applied on top of the V13 Big Grid artifact =====
    1 tokens: brand orange, darker text for readability
@@ -1417,12 +1417,12 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 .gridall #hero{position:sticky;top:0;z-index:1!important}
 .gridall #hero .stage>.bgimg{transition:none}
 .gridall #footer{position:sticky;bottom:0;z-index:0!important}
-@media(min-width:701px){.gridall #scenes2{position:sticky;top:0;z-index:1!important}.gridall #scenes2 .stage>.bgimg{transition:none}.gridall #how{background:#fff!important}}
+@media(min-width:1101px){.gridall #scenes2{position:sticky;top:0;z-index:1!important}.gridall #scenes2 .stage>.bgimg{transition:none}.gridall #how{background:#fff!important}}
 .gridall #faq{position:relative;z-index:2}
 /* 2 · one screen per section */
 .stage{--row:max(272px,50svh)}
 .stage .pn{grid-column:var(--gc);grid-row:var(--gr)}
-@media(min-width:701px){.stage{grid-auto-rows:var(--row)!important}.stage .pn{overflow:hidden;min-height:0}.stage .pn.pic{min-height:0}.proto{flex:1 1 auto;min-height:0}.proto .ap-lines,.proto .ap-summary,.proto .ch-ai{flex:1 1 auto;min-height:0!important;overflow:hidden}.proto .ap-bar,.proto .ap-timer,.proto .ap-ctrl,.proto .ch-user,.proto .ch-input{flex:none}#why .pn:not(.pic)>*:not(.proto),#why-b .pn:not(.pic)>*:not(.proto){flex:none}}
+@media(min-width:1101px){.stage{grid-auto-rows:var(--row)!important}.stage .pn{overflow:hidden;min-height:0}.stage .pn.pic{min-height:0}.proto{flex:1 1 auto;min-height:0}.proto .ap-lines,.proto .ap-summary,.proto .ch-ai{flex:1 1 auto;min-height:0!important;overflow:hidden}.proto .ap-bar,.proto .ap-timer,.proto .ap-ctrl,.proto .ch-user,.proto .ch-input{flex:none}#why .pn:not(.pic)>*:not(.proto),#why-b .pn:not(.pic)>*:not(.proto){flex:none}}
 .stage.foot{--row:max(300px,50svh)}
 
 /* 3 · nav + buttons */
@@ -1483,7 +1483,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 #testimonials .pn:first-of-type h2[hidden]{display:none}
 #community .pn .btns{flex-wrap:nowrap;gap:10px}#community .pn .btn{padding:0 20px}
 /* breather · Longbow "gallery-sticky": section is two screens tall, the stage pins, the picture grows from one grid cell to the full grid */
-@media(min-width:701px){
+@media(min-width:1101px){
   #breather{--row:max(272px,50svh);height:calc(var(--row) * 2 + 110vh)}
   #breather .stage{position:sticky;top:0;background:#fff}
   #breather .stage>.bgimg{left:0;top:0;width:25%;height:50%;transform:none!important;transition:none}
@@ -1533,7 +1533,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 .js #why .stage.in .pn.pic.sharp>img{animation:ringzoom 14s cubic-bezier(.4,0,.2,1) 1.2s forwards}
 @keyframes ringzoom{to{transform:scale(1.45)}}
 /* Longbow-style hover reveal · secondary copy waits for the cursor; photo cells float a glass caption */
-@media (hover:hover) and (min-width:701px){
+@media (hover:hover) and (min-width:1101px){
   .pn.lazy p,.pn.lazy .small,.pn.lazy .offer{opacity:0;transform:translateY(10px);transition:opacity .45s var(--ease),transform .45s var(--ease)}
   .pn.lazy:hover p,.pn.lazy:hover .small,.pn.lazy:hover .offer,.pn.lazy.on p,.pn.lazy.open p{opacity:1;transform:none}
   .pn.lazy::after{content:"";position:absolute;right:var(--pad);bottom:var(--pad);width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.9;transition:opacity .3s,transform .3s}
@@ -1577,7 +1577,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 .marquee__track img{height:22px;width:auto;opacity:.9;filter:grayscale(1)}
 @keyframes marquee{to{transform:translateX(calc(-100% / 3))}}
 /* 6 · photo cells: glass plate rises with clip-path, title then expands */
-@media (hover:hover) and (min-width:701px){
+@media (hover:hover) and (min-width:1101px){
   .pic-cap{left:0;right:0;bottom:0;height:46%;border-radius:0;padding:18px var(--pad);display:flex;align-items:flex-end;background:rgba(255,255,255,.72);opacity:1;transform:none;clip-path:inset(100% 0 0 0);transition:clip-path .55s cubic-bezier(.22,.61,.21,1);font-size:14px}
   .pn.pic:hover .pic-cap{clip-path:inset(0 0 0 0)}
 }
@@ -1598,7 +1598,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 .pn.mid.glassy:hover .label,.pn.mid.glassy:hover .cb{color:var(--ink);text-shadow:0 0 12px rgba(255,255,255,.8)}
 .stage.flat .pn.glassy:hover{background:transparent}
 /* compact cards on short viewports (row < ~420px) so the prototypes never get clipped */
-@media (min-width:701px) and (max-height:840px){
+@media (min-width:1101px) and (max-height:840px){
   #why .pn:not(.pic),#why-b .pn:not(.pic){--pad:22px;gap:6px}
   #why .pn:not(.pic) p,#why-b .pn:not(.pic) p{font-size:12.5px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:0}
   .proto{padding:10px 12px;gap:6px;font-size:12px}.chat{padding:10px 12px}
@@ -1623,7 +1623,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
   #community .b1{left:6%;top:4%}#community .b2{left:60%;top:4%}#community .b3{left:68%;top:15%}
   #hardware .pn .half{height:clamp(120px,18vw,180px)}
 }
-@media(max-width:700px){
+@media(max-width:1100px){
   .stage{--pad:20px}
   .stage .pn{--pad:20px;min-height:0;box-shadow:none;border-top:1px solid rgba(20,20,22,.12)}
   .stage>.bgimg{height:72vw;min-height:260px;top:auto;transform:none!important}
@@ -1903,11 +1903,11 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 #community .qb.on .label .src{color:var(--accent-text)}
 #community .q1{left:19%;top:9%}#community .q2{left:37%;top:25%}#community .q3{left:75.5%;top:4%}
 #community .qb-note{display:block;margin-top:-4px;font-size:10px;color:#6e6e73}
-@media(min-width:701px) and (max-width:1100px){
+@media(min-width:1101px) and (max-width:1100px){
   #community .qb{width:min(300px,40%)}
   #community .q1{left:3%;top:4%}#community .q2{left:auto;right:3%;top:4%}#community .q3{left:3%;top:auto;bottom:5%}
 }
-@media(max-width:700px){
+@media(max-width:1100px){
   #community .qb{position:relative;left:auto;top:auto;grid-column:1/-1;width:auto;margin:10px 16px 0;z-index:4}
   #community .qb:last-of-type{margin-bottom:10px}
 }
@@ -1999,7 +1999,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 #privacy .pn.pv{justify-content:flex-start}
 /* 0929-ab · hero: case cut-out above the grid lines (lines run under the case) */
 #hero .stage>.bgimg.hero-top{z-index:4;pointer-events:none}
-@media(max-width:700px){#hero .stage>.bgimg.hero-top{display:none}}
+@media(max-width:1100px){#hero .stage>.bgimg.hero-top{display:none}}
 
 /* ===== 1007 · no text fade-ins: every piece of copy is visible on first paint (readable by crawlers / AI) ===== */
 .js .pn:not(.pic){opacity:1!important;transform:translateY(28px);transition:transform 1s cubic-bezier(.22,.61,.21,1),background .45s var(--ease);transition-delay:var(--dl,0s),0s}
@@ -2011,14 +2011,14 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 .hero-ch,.bc,.p-scroll .u,.split .w>span{opacity:1!important;filter:none!important;transform:none!important;translate:none!important}
 
 #how .pn.pic.still3d{background:#ecebe7}#how .pn.pic.still3d>img{object-fit:contain;padding:0;top:0;height:100%}
-@media(max-width:700px){#how .pn.pic.still3d{height:auto!important;aspect-ratio:4/5}}
+@media(max-width:1100px){#how .pn.pic.still3d{height:auto!important;aspect-ratio:4/5}}
 
 /* ===== 1007-b ===== */
 /* 1 · grid crossings: white circles (hairline ring so they read on white sections too) */
 .sqr,.rowline i{width:7px!important;height:7px!important;border-radius:50%;background:#fff!important;box-shadow:0 0 0 1px rgba(20,20,22,.32)}
 .sqr{transform:translate(-3px,-3px)!important}.rowline i{top:-4px!important;transform:translateX(-3px)!important}
 /* phones */
-@media(max-width:700px){
+@media(max-width:1100px){
   /* 4 · even rhythm: no tall empty cells */
   .stage .pn:not(.pic){min-height:0!important;height:auto!important;padding:22px 20px 24px}
   .stage .pn .end,.stage .pn .foot{margin-top:14px!important}
@@ -2053,10 +2053,10 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
   #how .how-hint i.on{width:18px;border-radius:3px;background:var(--accent)}
 }
 
-@media(min-width:701px){#how .how-hint{display:none}}
+@media(min-width:1101px){#how .how-hint{display:none}}
 
 /* 1007-c · mobile needs: quote right under the photo; How it works prototypes */
-@media(max-width:700px){ #needs .stage>.pn.pic{order:0} #needs .stage>.pn:not(.pic):not(.compact){order:1} #needs .stage>.pn.compact{order:2} }
+@media(max-width:1100px){ #needs .stage>.pn.pic{order:0} #needs .stage>.pn:not(.pic):not(.compact){order:1} #needs .stage>.pn.compact{order:2} }
 .hp{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;font-size:13px;line-height:1.4;color:#141416}
 .hp .s{opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
 .hp .s.on{opacity:1;transform:none}
@@ -2112,16 +2112,16 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
   .r3m-ring .r3-pill{position:absolute;left:50%;top:20%}
   .r3m-ring .r3-ripple{position:absolute;left:50%;top:50%;width:46%;aspect-ratio:1;translate:-50% -50%}
 }
-@media(max-width:700px){
+@media(max-width:1100px){
   #how .how-head{padding:28px 16px 18px} #how .how-head h2{margin:0}
   #scenes .stage>.pn.lazy{padding-bottom:28px}
 }
-@media(min-width:701px){ #how .how-head{display:none} }
+@media(min-width:1101px){ #how .how-head{display:none} }
 #how .stage>.pn.pic.still3d:not(.appon){background:#fff}
 /* 1007-e · faster nav reveal; phone hamburger; How it works arrows */
 .js .gridall>.nav.in{transition:opacity .2s ease,transform .3s cubic-bezier(.2,.8,.2,1)!important}
 .gridall>.nav .burger,.gridall>.nav .nav-menu{display:none}
-@media(max-width:700px){
+@media(max-width:1100px){
   .gridall>.nav .burger{display:grid;place-content:center;gap:6px;width:44px;height:44px;border:0;background:none;padding:0;cursor:pointer;margin-left:auto}
   .gridall>.nav .burger i{display:block;width:20px;height:1.6px;background:var(--ink);transition:transform .3s}
   .gridall>.nav.menu-open .burger i:first-child{transform:translateY(3.8px) rotate(45deg)}.gridall>.nav.menu-open .burger i:last-child{transform:translateY(-3.8px) rotate(-45deg)}
@@ -2136,8 +2136,24 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 #how .how-hint .hh-b{width:40px;height:40px;border-radius:50%;border:1px solid rgba(20,20,22,.16);background:#fff;display:grid;place-items:center;cursor:pointer;padding:0}
 #how .how-hint .hh-b svg{width:16px;height:16px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 #how .how-hint .hh-b:disabled{opacity:.35;cursor:default}
-@media(max-width:700px){ .gridall>.nav .nav-menu{position:absolute;left:0;right:0;top:100%} }
-@media(max-width:700px){ .gridall>.nav .nav-menu{background:#fff;border:1px solid rgba(20,20,22,.12)} }
+@media(max-width:1100px){ .gridall>.nav .nav-menu{position:absolute;left:0;right:0;top:100%} }
+@media(max-width:1100px){ .gridall>.nav .nav-menu{background:#fff;border:1px solid rgba(20,20,22,.12)} }
+/* 1007-f · tablet (701–1100): same stacked structure as the phone, scaled for the wider screen */
+@media(min-width:700.5px) and (max-width:1100px){
+  .stage>.pn:not(.pic){padding-left:40px!important;padding-right:40px!important}
+  .stage>.pn:not(.pic):has(>h2:first-child){padding-top:56px!important;padding-bottom:28px!important}
+  #hero h1,.gridall section h2{font-size:42px!important;line-height:1.1!important}
+  .gridall section h3{font-size:24px!important}
+  .gridall section .pn p,#hero .pn p{font-size:17px!important;line-height:1.55!important;max-width:620px}
+  .gridall section .label{font-size:12px!important}
+  #how .how-head{padding:56px 40px 24px}
+  #how .stage{grid-template-columns:repeat(4,calc((100vw - 96px)/2))!important;padding:0 40px 24px!important;gap:0 16px!important;scroll-padding:0 40px}
+  #how .stage>.pn:not(.pic){padding:20px 22px 24px!important}
+  #how .stage>.pn:not(.pic) h3{font-size:20px!important}
+  #how .stage>.pn:not(.pic) p{font-size:15px!important}
+  .gridall>.nav{left:24px!important;right:24px!important}
+}
+@media(min-width:700.5px) and (max-width:1100px){ .gridall section .pn li{font-size:16px!important} .gridall section .pn li span{font-size:12px!important} }
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-linen.jpg" alt="" style="object-position:50% 50%;opacity:1"><img class="bgimg hero-top" decoding="async" src="img3/hero-case.webp" alt="" aria-hidden="true" style="object-position:50% 50%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav"><div class="nav-right navbar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
@@ -2195,7 +2211,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 
   /* parallax on backgrounds */
   var bgs=Array.prototype.slice.call(document.querySelectorAll('.stage>.bgimg:not(.blur), .pn.pic.sharp>img')), ticking=false;
-  function parallax(){ ticking=false; if(innerWidth<=700) return; var vh=innerHeight;
+  function parallax(){ ticking=false; if(innerWidth<=1100) return; var vh=innerHeight;
     bgs.forEach(function(img){ if(img.closest('#hero')||img.closest('#breather')) return; var r=img.parentElement.getBoundingClientRect(); if(img.parentElement.classList.contains('sharp')){ if(img.closest('#why')||img.closest('#why-b')) return; var q=((r.top+r.height/2)-vh/2)/(vh+r.height); img.style.translate='0 '+(-q*8).toFixed(2)+'%'; return; } if(r.bottom<0||r.top>vh) return; var p=((r.top+r.height/2)-vh/2)/(vh+r.height); var s=img.closest('#hero')&&!img.closest('.stage').classList.contains('in')?' scale(1.08)':''; img.style.translate='0 '+(-p*8).toFixed(2)+'%'; }); }
   function onScroll(){ if(!ticking){ticking=true;requestAnimationFrame(parallax);} }
   if(!reduce){ addEventListener('scroll',onScroll,{passive:true}); addEventListener('resize',onScroll); setTimeout(parallax,50); }
@@ -2226,13 +2242,13 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
   function scrub(){
     if(hero) hero.style.visibility=scrollY>hero.offsetHeight+20?'hidden':'visible';
     if(faq&&foot) foot.style.visibility=faq.getBoundingClientRect().bottom<innerHeight+40?'visible':'hidden';   // phones too: the sticky footer must not show through sections above it
-    if(innerWidth<=700) return;
+    if(innerWidth<=1100) return;
     if(hero){ var p=Math.min(1,Math.max(0,scrollY/hero.offsetHeight));  if(heroPn&&heroPn.classList.contains('in')){ if(p>0) heroPn.classList.add('driven'); heroPn.style.translate='0 '+(p*140)+'px';heroPn.style.opacity=1-p*1.4;} heroImgs.forEach(function(im){ im.style.filter='brightness('+(1-p*.45)+')'; im.style.scale=String(1+p*.12); }); }
     if(s2&&how){ var hr=how.getBoundingClientRect(), sr=s2.getBoundingClientRect(); s2.style.top=Math.min(0,innerHeight-s2.offsetHeight)+'px'; s2.style.visibility=hr.top<-20?'hidden':'visible'; var p2=Math.min(1,Math.max(0,(sr.bottom-hr.top)/sr.height)); s2Pn.forEach(function(pn){ if(!pn.classList.contains('in')) return; if(p2>0) pn.classList.add('driven'); pn.style.translate='0 '+(p2*140)+'px'; pn.style.opacity=1-p2*1.4; }); if(s2Img){s2Img.style.filter='brightness('+(1-p2*.45)+')';s2Img.style.scale=String(1+p2*.12);} }
     if(faq&&foot){ var fb=faq.getBoundingClientRect().bottom, fh=foot.offsetHeight; foot.style.visibility=fb<innerHeight+40?'visible':'hidden'; var _u=1, q=Math.min(1,Math.max(0,(innerHeight-fb)/fh)); foot.querySelectorAll('.pn').forEach(function(pn,i){ if(q>0&&pn.classList.contains('in')) pn.classList.add('driven'); pn.style.translate='0 '+((1-q)*(-90-i*12))+'px'; pn.style.opacity=.25+q*.75; }); }
   }
   var br=document.getElementById('breather'), brImg=br&&br.querySelector('.bgimg'), brPn=br&&br.querySelector('.pn'), brSt=br&&br.querySelector('.stage');
-  function breathe(){ if(!brImg||innerWidth<=700) return; var r=br.getBoundingClientRect(), travel=br.offsetHeight-brSt.offsetHeight; var p=Math.min(1,Math.max(0,(-r.top+ (innerHeight-brSt.offsetHeight)/2)/travel)); var e=1-Math.pow(1-p,2);
+  function breathe(){ if(!brImg||innerWidth<=1100) return; var r=br.getBoundingClientRect(), travel=br.offsetHeight-brSt.offsetHeight; var p=Math.min(1,Math.max(0,(-r.top+ (innerHeight-brSt.offsetHeight)/2)/travel)); var e=1-Math.pow(1-p,2);
     brImg.style.width=(25+75*e)+'%'; brImg.style.height=(50+50*e)+'%'; if(brPn) brPn.classList.toggle('pending',e<0.92); }
   addEventListener('scroll',function(){scrub();requestAnimationFrame(breathe);},{passive:true}); setTimeout(function(){scrub();breathe();},60); window.__scrub=scrub;
 
@@ -2318,10 +2334,10 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
     Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn.pic'),function(p,k){ p.style.setProperty('--mcol',k+1); });
     Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn:not(.pic)'),function(p,k){ p.style.setProperty('--mcol',k+1); });
     var hst=how.querySelector('.stage'), hint=document.createElement('div'); hint.className='how-hint'; hint.innerHTML='<button class="hh-b prev" aria-label="Previous step" disabled><svg viewBox="0 0 20 20"><path d="M12 4l-6 6 6 6"/></svg></button><span class="hh-d"><i class="on"></i><i></i><i></i><i></i></span><button class="hh-b next" aria-label="Next step"><svg viewBox="0 0 20 20"><path d="M8 4l6 6-6 6"/></svg></button>'; hst.parentNode.insertBefore(hint,hst.nextSibling);
-    var go=function(d){ var w=hst.scrollWidth/4, k=Math.max(0,Math.min(3,Math.round(hst.scrollLeft/w)+d)); hst.scrollTo({left:hst.querySelectorAll(':scope>.pn.pic')[k].offsetLeft-16,behavior:'smooth'}); };
+    var go=function(d){ var w=hst.scrollWidth/4, k=Math.max(0,Math.min(3,Math.round(hst.scrollLeft/w)+d)); hst.scrollTo({left:hst.querySelectorAll(':scope>.pn.pic')[k].offsetLeft-parseFloat(getComputedStyle(hst).paddingLeft),behavior:'smooth'}); };
     hint.querySelector('.prev').addEventListener('click',function(){ go(-1); }); hint.querySelector('.next').addEventListener('click',function(){ go(1); });
     Array.prototype.forEach.call(hint.querySelectorAll('.hh-d i'),function(d,j){ d.addEventListener('click',function(){ go(j-Math.round(hst.scrollLeft/(hst.scrollWidth/4))); }); });
-    hst.addEventListener('scroll',function(){ var w=hst.scrollWidth/4, k=Math.round(hst.scrollLeft/w); hint.querySelector('.prev').disabled=k===0; hint.querySelector('.next').disabled=k===3; Array.prototype.forEach.call(hint.querySelectorAll('.hh-d i'),function(d,j){ d.classList.toggle('on',j===k); }); Array.prototype.forEach.call(hst.querySelectorAll(':scope>.pn:not(.pic)'),function(p,j){ p.classList.toggle('on',j===k); }); },{passive:true}); }
+    hst.addEventListener('scroll',function(){ var w=hst.scrollWidth/4, k=Math.round(hst.scrollLeft/w); hint.querySelector('.prev').disabled=k===0; hint.querySelector('.next').disabled=hst.scrollLeft+hst.clientWidth>=hst.scrollWidth-4; Array.prototype.forEach.call(hint.querySelectorAll('.hh-d i'),function(d,j){ d.classList.toggle('on',j===k); }); Array.prototype.forEach.call(hst.querySelectorAll(':scope>.pn:not(.pic)'),function(p,j){ p.classList.toggle('on',j===k); }); },{passive:true}); }
   if(how&&!how3d){ var txts=Array.prototype.slice.call(how.querySelectorAll('.pn:not(.pic)')), i=0, t=null;
     function show(k){ i=k; txts.forEach(function(x,j){ x.classList.toggle('on',j===k); }); }
     function play(){ stop(); t=setInterval(function(){ show((i+1)%txts.length); },3200); }
@@ -2368,7 +2384,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 })();
 
 /* 1007-d · phone structure: every section reads title → image → its text, so pictures never look like they belong to the neighbour */
-(function(){ if(innerWidth>700) return;
+(function(){ if(innerWidth>1100) return;
   var Q=function(id){ var s=document.getElementById(id); return s?Array.prototype.slice.call(s.querySelectorAll('.stage>*')):[]; };
   var head=function(e){ return !e.classList.contains('pic')&&!e.classList.contains('bgimg')&&e.querySelector('h2'); };
   ['why','scenes2','privacy','hardware'].forEach(function(id){ Q(id).forEach(function(e){ e.style.order=head(e)?0:(e.classList.contains('pic')||e.classList.contains('bgimg'))?1:2; }); });

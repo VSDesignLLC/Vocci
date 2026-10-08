@@ -385,5 +385,8 @@ for _old in (R/'vendor').glob('how3d.*.js'): _old.unlink()
 motion = motion.replace("'vendor/how3d.js'", "'vendor/how3d.%s.js'" % _h)
 s = s.replace('<main class="page gridall"', '<style id="round-0928">\n' + override + '\n</style>' + pre + '<main class="page gridall"', 1)
 s = s.replace('</main>\n</body>', '</main>\n<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" onerror="this.remove()"></script>\n<script>\n' + motion + '\n</script>\n</body>')
+# 1007-f · tablet follows the phone structure: phone rules (≤700) now cover ≤1100; tablet-only tuning uses 700.5px
+s = (s.replace('max-width:700px', 'max-width:1100px').replace('min-width:701px', 'min-width:1101px')
+       .replace('innerWidth<=700', 'innerWidth<=1100').replace('innerWidth>700', 'innerWidth>1100'))
 (R/'index.html').write_text(s)
 print('built', len(s))

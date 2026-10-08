@@ -210,3 +210,7 @@ Awards 四张、Certified 四张：hover 时底图淡入并从 1.08 缩回 1（�
 ## 1007-d
 - Phone/tablet How it works: cards 02–04 reuse the desktop app phones (APP markup + 0929-j CSS, now unscoped); card 01 reuses the desktop REC pill + ripples. Each loops ~9s while visible.
 - Phone: sections read title → image → text (why, scenes interleaved, scenes2, privacy, hardware, finishes); How it works gets a mobile-only "How it works." title.
+
+## 1007-f · tablet
+- Tablet (701–1100) now uses the phone structure: patch.py remaps phone rules `max-width:700px` → 1100 (and JS `innerWidth<=700` → 1100) at build time.
+- Tablet-only tuning lives in `@media(min-width:700.5px) and (max-width:1100px)`: 40px side padding, 42px headings, 17px body, How it works shows 2 cards per view.

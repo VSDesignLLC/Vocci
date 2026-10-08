@@ -768,3 +768,19 @@
 #how .how-hint .hh-b:disabled{opacity:.35;cursor:default}
 @media(max-width:700px){ .gridall>.nav .nav-menu{position:absolute;left:0;right:0;top:100%} }
 @media(max-width:700px){ .gridall>.nav .nav-menu{background:#fff;border:1px solid rgba(20,20,22,.12)} }
+/* 1007-f · tablet (701–1100): same stacked structure as the phone, scaled for the wider screen */
+@media(min-width:700.5px) and (max-width:1100px){
+  .stage>.pn:not(.pic){padding-left:40px!important;padding-right:40px!important}
+  .stage>.pn:not(.pic):has(>h2:first-child){padding-top:56px!important;padding-bottom:28px!important}
+  #hero h1,.gridall section h2{font-size:42px!important;line-height:1.1!important}
+  .gridall section h3{font-size:24px!important}
+  .gridall section .pn p,#hero .pn p{font-size:17px!important;line-height:1.55!important;max-width:620px}
+  .gridall section .label{font-size:12px!important}
+  #how .how-head{padding:56px 40px 24px}
+  #how .stage{grid-template-columns:repeat(4,calc((100vw - 96px)/2))!important;padding:0 40px 24px!important;gap:0 16px!important;scroll-padding:0 40px}
+  #how .stage>.pn:not(.pic){padding:20px 22px 24px!important}
+  #how .stage>.pn:not(.pic) h3{font-size:20px!important}
+  #how .stage>.pn:not(.pic) p{font-size:15px!important}
+  .gridall>.nav{left:24px!important;right:24px!important}
+}
+@media(min-width:700.5px) and (max-width:1100px){ .gridall section .pn li{font-size:16px!important} .gridall section .pn li span{font-size:12px!important} }
