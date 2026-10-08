@@ -287,6 +287,14 @@ def caps(sid, titles):
     t = re.sub(r'(<div class="pn pic(?! sharp)[^"]*"[^>]*><img[^>]*>)', rep, t)
     s = s[:m.start()] + t + s[m.end():]
 # 1007-h · screen 4 hover captions removed
+# 1007-i · screen 4 per mock: title in the lower-left cell, short line right under each heading
+_m = re.search(r'<section id="scenes".*?</section>', s, re.S); _t = _m.group()
+_t = _t.replace('<div class="pn " style="--gc:1/span 1;--gr:1/span 2;', '<div class="pn scn-title" style="--gc:1/span 1;--gr:2/span 1;', 1)
+for _a, _b in [('Cafés, trade-show floors, moving cars.', 'Noisy rooms — clear transcripts anyway'),
+               ('Vocci works inside the AI tools you already use.', 'Your workflow — connect once with MCP'),
+               ('Capture a thought between appointments.', 'Everyday ideas — capture between appointments')]:
+    assert _a in _t; _t = _t.replace('<p class="end">' + _a, '<p class="scn-sub">' + _b, 1)
+s = s[:_m.start()] + _t + s[_m.end():]
 # caps('scenes', ['Noisy rooms — clear transcripts anyway', 'Your workflow — connect once with MCP', 'Everyday ideas — capture between appointments'])
 caps('how', ['01 · Double-click to record', '02 · Transcribed automatically', '03 · Press and hold to send', '04 · AI agent takes over'])
 caps('press', ['Vocci Ring: This Tiny AI Assistant Changed My Workflow', 'Vocci Ring Review: real-world context for your AI tools', 'Creator title placeholder'])

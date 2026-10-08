@@ -790,4 +790,6 @@
 .pn ul.feats svg{width:16px;height:16px;flex:none;fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:700px){ .pn ul.feats{margin-top:14px;gap:9px} }
 @media(max-width:700px){ .stage>.pn:has(>ul.feats){height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;padding-bottom:28px!important} }
-@media(min-width:1101px){ #scenes .stage>.pn:has(>h2){display:flex!important;flex-direction:column;justify-content:flex-end} }
+/* 1007-i · screen 4 per mock */
+#scenes .pn p.scn-sub{margin-top:14px}
+@media(min-width:1101px){ #scenes .stage>.pn.lazy::after{content:"";position:absolute;right:24px;bottom:24px;width:5px;height:5px;border-radius:50%;background:var(--accent)} }
