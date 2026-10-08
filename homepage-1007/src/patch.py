@@ -469,10 +469,10 @@ _t = _t[:_k] + _q(5, 1, 'How long does the battery last?', 'Up to 8 hours of con
 s = s[:_m.start()] + _t + s[_m.end():]
 
 # ---------- 1007-v · new photos: needs (man in suit), scenes2 (team at the whiteboard) ----------
-s = (s.replace('img3/people-suits-blur.jpg" alt="" style="object-position:50% 42%', 'img3/needs-man-blur.jpg" alt="" style="object-position:50% 30%')
-      .replace('src="img3/people-suits.jpg" alt="Two founders talking" style="object-position:50% 42%"', 'src="img3/needs-man.jpg" alt="Founder in a suit wearing the Vocci ring" style="object-position:50% 30%"')
+# 1007-x · needs photo reverted to the original two-person image
+s = (s
       .replace('src="img3/scene-materials.jpg" alt="" style="object-position:50% 50%', 'src="img3/scene-team.jpg" alt="" style="object-position:50% 60%'))
-assert 'needs-man.jpg' in s and 'scene-team.jpg' in s
+assert 'scene-team.jpg' in s
 
 # ---------- 1007-w · press: dots where the card edges meet the grid lines ----------
 _m = re.search(r'<section id="press".*?</section>', s, re.S); _t = _m.group()

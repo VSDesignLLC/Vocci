@@ -864,12 +864,7 @@
 #finishes .fn-boxcell .fn-img{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;opacity:0;transition:opacity .5s var(--ease)}
 #finishes .fn-boxcell .fn-img.on{opacity:1}
 @media(max-width:700px){ #finishes .fn-boxcell{aspect-ratio:1/1;height:auto!important} }
-/* 1007-v · needs: whole portrait, sitting in the middle–right columns on its own light grey */
-@media(min-width:1101px){
-  #needs .stage>.pn.pic{background:#efefef!important}
-  #needs .stage>.pn.pic>img{object-fit:contain!important;object-position:62% 100%!important;transform:none!important;translate:none!important}
-  #needs .stage>.bgimg.blur{display:none}
-}
+
 #press .pdot{display:none} @media(min-width:1101px){ #press .pdot{display:block;z-index:3} }
 @media(min-width:1101px){ #press .stage>.pn{transform:none!important;translate:none!important} }
 #finishes .fn-boxcell{background:transparent!important} #finishes .fn-boxcell .fn-img{mix-blend-mode:multiply}
