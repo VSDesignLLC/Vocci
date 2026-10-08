@@ -880,3 +880,4 @@
   #press .vid .tw-strip{display:none}
   #press .stage>.pn{transform:none!important;translate:none!important}
 }
+@media(max-width:700px){ #finishes .fn-boxcell{display:none!important} }
