@@ -468,6 +468,12 @@ _t = _t[:_k] + _q(5, 1, 'How long does the battery last?', 'Up to 8 hours of con
              + _q(6, 2, 'How do I find my size?', 'Start with the sizing kit: wear a sizer for a day, then pick your size. Every ring is 6.8 mm wide and 2.85 mm thin.') + _t[_k:]
 s = s[:_m.start()] + _t + s[_m.end():]
 
+# ---------- 1007-v · new photos: needs (man in suit), scenes2 (team at the whiteboard) ----------
+s = (s.replace('img3/people-suits-blur.jpg" alt="" style="object-position:50% 42%', 'img3/needs-man-blur.jpg" alt="" style="object-position:50% 30%')
+      .replace('src="img3/people-suits.jpg" alt="Two founders talking" style="object-position:50% 42%"', 'src="img3/needs-man.jpg" alt="Founder in a suit wearing the Vocci ring" style="object-position:50% 30%"')
+      .replace('src="img3/scene-materials.jpg" alt="" style="object-position:50% 50%', 'src="img3/scene-team.jpg" alt="" style="object-position:50% 60%'))
+assert 'needs-man.jpg' in s and 'scene-team.jpg' in s
+
 # ---------- assets: local fonts, override css, motion js ----------
 s = s.replace('<main class="page gridall" data-ui="classic" data-skin="v2">', '<main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928">')
 override = (R/'src/override.css').read_text()
