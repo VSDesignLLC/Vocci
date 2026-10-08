@@ -452,7 +452,7 @@ s = s[:_m.start()] + _t + s[_m.end():]
 # ---------- 1007-t · finishes: lower-left cell shows the ring + case for the selected finish ----------
 _m = re.search(r'<section id="finishes".*?</section>', s, re.S); _t = _m.group()
 _r = re.search(r'<div class="pn fn-spec"( style="[^"]*")>.*?</dl></div>', _t, re.S); assert _r
-_boxes = ''.join('<img loading="lazy" decoding="async" class="fn-img fn-box%s" data-f="%s" src="img3/box-%s.jpg" alt="Vocci ring and charging case in %s">' % (' on' if f == 'lumen' else '', f, f, f.title()) for f in ['lumen', 'midnight', 'dawn', 'lux'])
+_boxes = ''.join('<img loading="lazy" decoding="async" class="fn-img fn-box%s" data-f="%s" src="img3/box-%s.png" alt="Vocci ring and charging case in %s">' % (' on' if f == 'lumen' else '', f, f, f.title()) for f in ['lumen', 'midnight', 'dawn', 'lux'])
 _t = _t[:_r.start()] + '<div class="pn pic contain fn-boxcell"%s>%s</div>' % (_r.group(1), _boxes) + _t[_r.end():]
 s = s[:_m.start()] + _t + s[_m.end():]
 
