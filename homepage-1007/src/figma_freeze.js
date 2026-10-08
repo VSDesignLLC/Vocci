@@ -11,7 +11,7 @@ window.requestAnimationFrame=()=>0; const hi=setTimeout(()=>{},0); for(let i=0;i
 try{window.__lenis&&window.__lenis.destroy()}catch(e){}
 $$('main section,#footer,.gridall>.nav').forEach(s=>s.replaceWith(s.cloneNode(true)));
 const how=document.getElementById('how');
-$$('.pn,.hl,.vl,.sqr,.rowline,.bgimg,.lazy,.orbit,.a-bubble,.reveal').forEach(e=>e.classList.add('in'));
+$$('.stage,.pn,.hl,.vl,.sqr,.rowline,.bgimg,.lazy,.orbit,.a-bubble,.reveal').forEach(e=>e.classList.add('in'));
 $$('#community .qb').forEach((b,i)=>{b.classList.add('shown','said');b.classList.toggle('on',i===0);});
 $$('.r3-ph.a2').forEach(a=>{a.querySelectorAll('.scr').forEach(s=>s.classList.toggle('on',s.classList.contains('s2')));a.querySelectorAll('.rw,.ins').forEach(e=>e.classList.add('in'));a.querySelectorAll('.s2 .tb').forEach((t,i)=>t.classList.toggle('on',i===1));});
 $$('.r3-ph.a3').forEach(a=>{a.classList.remove('holding');const q=a.querySelector('q');if(q)q.textContent=CMD;const h=a.querySelector('.hold');h&&h.classList.remove('on');const s=a.querySelector('.send');if(s){s.classList.add('hot');s.textContent='Sent';}const t=a.querySelector('.think');t&&t.classList.remove('in');a.querySelectorAll('.res').forEach(r=>r.classList.add('in'));});
@@ -29,7 +29,8 @@ $$('*').forEach(e=>{const c=getComputedStyle(e);if(c.transitionDuration!=='0s')e
 $$('.r3-ph').forEach(ph=>{const k=parseFloat(getComputedStyle(ph).scale)||1;ph.style.opacity='1';ph.style.translate='none';ph.style.scale='none';ph.style.zoom=String(k);});
 $$('section,.stage,#footer').forEach(e=>{const cs=getComputedStyle(e); if(cs.position==='sticky'||cs.position==='fixed'){e.style.position='relative';e.style.top='auto';}});
 const ft=document.getElementById('footer'); if(ft){ft.style.position='relative';ft.style.visibility='visible';ft.querySelectorAll('.pn').forEach(p=>{p.style.translate='none';p.style.opacity='1';});}
-$$('[style]').forEach(e=>{ if(e.style.translate&&!e.classList.contains('sqr')) e.style.translate='none'; });
+/* only the scroll parallax writes translate on photos; orbit icons keep their placement */
+$$('img[style],.pn.pic[style],.bgimg[style]').forEach(e=>{ if(e.style.translate) e.style.translate='none'; });
 const nav=document.querySelector('.gridall>.nav'); nav&&nav.classList.remove('away','bar','menu-open');
 $$('[style]').forEach(e=>{ if(e.style.visibility==='hidden') e.style.visibility='visible'; });
 if(nav){ nav.style.position='absolute'; }

@@ -46,11 +46,13 @@ for name, (W, H, hover) in SIZES.items():
     # scroll effects frozen mid-way leave inline filter/scale on images (e.g. the hero dims + zooms as it leaves); inline style serialises as "prop: value;"
     s = re.sub(r'(style="[^"]*?)filter: brightness\([^)]*\);?\s*', r'\1', s)
     s = re.sub(r'(style="[^"]*?)scale: [\d.]+;?\s*', r'\1', s)
+    # every grid's reveal hangs off .stage.in (horizontal lines, junction dots, AI icons, hero settle); mark them all revealed
+    s = re.sub(r'class="stage(?= |")', 'class="stage in', s)
     s = re.sub(r'(<style[^>]*>)(.*?)(</style>)', lambda m: m.group(1) + resolve(m.group(2), W, H, hover) + m.group(3), s, flags=re.S)
     unit = lambda m: '%gpx' % round(float(m.group(1)) * (W if m.group(2) == 'vw' else H) / 100, 2)
     s = re.sub(r'(?<![\w.-])(\d+(?:\.\d+)?)(vw|vh|svh|dvh|lvh)\b', unit, s)
     s = re.sub(r'<meta name="viewport"[^>]*>', '<meta name="viewport" content="width=%d">' % W, s)
-    s = s.replace('</head>', '<style id="figma-frame">html,body{width:%dpx!important;min-width:%dpx;max-width:%dpx;margin:0 auto;overflow-x:hidden}.marquee__track{animation:none!important;transform:none!important}</style></head>' % (W, W, W), 1)
+    s = s.replace('</head>', '<style id="figma-frame">html,body{width:%dpx!important;min-width:%dpx;max-width:%dpx;margin:0 auto;overflow-x:hidden}.marquee__track{animation:none!important;transform:none!important}*,*::before,*::after{transition:none!important;animation-delay:-60s!important;animation-play-state:paused!important}</style></head>' % (W, W, W), 1)
     s = re.sub(r'(?<![\w/.-])((?:img[23]?|vendor)/[A-Za-z0-9._-]+\.(?:jpg|png|webp|ttf|svg))', lambda m: uri(m.group(1)), s)
     s = re.sub(r'<title>.*?</title>', '<title>Vocci Homepage · %s</title>' % name, s, count=1, flags=re.S)
     (R / 'figma' / ('vocci-1007-%s.html' % name)).write_text(s)
