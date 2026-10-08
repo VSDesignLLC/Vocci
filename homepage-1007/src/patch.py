@@ -295,6 +295,11 @@ for _a, _b in [('Cafés, trade-show floors, moving cars.', 'Noisy rooms — clea
                ('Capture a thought between appointments.', 'Everyday ideas — capture between appointments')]:
     assert _a in _t; _t = _t.replace('<p class="end">' + _a, '<p class="scn-sub">' + _b, 1)
 s = s[:_m.start()] + _t + s[_m.end():]
+# 1007-j · screen 5: quote moves from the lower-right cell to the lower-left
+_m = re.search(r'<section id="needs".*?</section>', s, re.S); _t = _m.group()
+assert '<div class="pn " style="--gc:4/span 1;--gr:2/span 1;' in _t
+_t = _t.replace('<div class="pn " style="--gc:4/span 1;--gr:2/span 1;', '<div class="pn " style="--gc:1/span 1;--gr:2/span 1;', 1)
+s = s[:_m.start()] + _t + s[_m.end():]
 # caps('scenes', ['Noisy rooms — clear transcripts anyway', 'Your workflow — connect once with MCP', 'Everyday ideas — capture between appointments'])
 caps('how', ['01 · Double-click to record', '02 · Transcribed automatically', '03 · Press and hold to send', '04 · AI agent takes over'])
 caps('press', ['Vocci Ring: This Tiny AI Assistant Changed My Workflow', 'Vocci Ring Review: real-world context for your AI tools', 'Creator title placeholder'])
