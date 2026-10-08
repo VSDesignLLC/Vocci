@@ -300,6 +300,11 @@ _m = re.search(r'<section id="needs".*?</section>', s, re.S); _t = _m.group()
 assert '<div class="pn " style="--gc:4/span 1;--gr:2/span 1;' in _t
 _t = _t.replace('<div class="pn " style="--gc:4/span 1;--gr:2/span 1;', '<div class="pn " style="--gc:1/span 1;--gr:2/span 1;', 1)
 s = s[:_m.start()] + _t + s[_m.end():]
+# 1007-k · screen 2: drop the "Two things" card; photo spans the full width like screen 3
+_m = re.search(r'<section id="why".*?</section>', s, re.S); _t = _m.group()
+_t, _n = re.subn(r'<div class="pn " style="[^"]*"><h2>Two things,<br>done properly\.</h2></div>', '', _t, count=1); assert _n == 1
+_t = _t.replace('<div class="pn pic sharp" style="--gc:2/span 3;', '<div class="pn pic sharp" style="--gc:1/span 4;', 1)
+s = s[:_m.start()] + _t + s[_m.end():]
 # caps('scenes', ['Noisy rooms — clear transcripts anyway', 'Your workflow — connect once with MCP', 'Everyday ideas — capture between appointments'])
 caps('how', ['01 · Double-click to record', '02 · Transcribed automatically', '03 · Press and hold to send', '04 · AI agent takes over'])
 caps('press', ['Vocci Ring: This Tiny AI Assistant Changed My Workflow', 'Vocci Ring Review: real-world context for your AI tools', 'Creator title placeholder'])

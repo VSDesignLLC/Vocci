@@ -793,3 +793,7 @@
 /* 1007-i · screen 4 per mock */
 #scenes .pn p.scn-sub{margin-top:14px}
 @media(min-width:1101px){ #scenes .stage>.pn.lazy::after{content:"";position:absolute;right:24px;bottom:24px;width:5px;height:5px;border-radius:50%;background:var(--accent)} }
+/* 1007-k · selling points read as small cards (ink text, neutral surface) */
+.pn ul.feats{gap:8px}
+.pn ul.feats li{padding:10px 12px;background:rgba(255,255,255,.62);border:1px solid rgba(20,20,22,.08);border-radius:10px;color:var(--ink);font-size:11.5px}
+.pn ul.feats svg{width:18px;height:18px}
