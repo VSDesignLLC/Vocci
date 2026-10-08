@@ -1693,7 +1693,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 .js .gridall>.nav{opacity:0;transform:translateY(-14px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .js .gridall>.nav.in{opacity:1;transform:none}
 .js .gridall>.nav.in.away{opacity:0;transform:translateY(-110%);pointer-events:none}
-.nav-hot{position:fixed;left:0;right:0;top:0;height:28px;z-index:59}
+.nav-hot{display:none}
 #faq .pn p.end{opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease),transform .4s var(--ease)}#faq .pn.open p.end{opacity:1;transform:none;transition-delay:.1s}
 /* preloader */
 .pre{position:fixed;inset:0;z-index:100;background:#fff;display:grid;place-items:center;transition:opacity .5s var(--ease),visibility .5s}
@@ -2055,6 +2055,29 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 
 @media(min-width:701px){#how .how-hint{display:none}}
 
+/* 1007-c · mobile needs: quote right under the photo; How it works prototypes */
+@media(max-width:700px){ #needs .stage>.pn.pic{order:0} #needs .stage>.pn:not(.pic):not(.compact){order:1} #needs .stage>.pn.compact{order:2} }
+.hp{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;font-size:13px;line-height:1.4;color:#141416}
+.hp .s{opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
+.hp .s.on{opacity:1;transform:none}
+.hp2,.hp3,.hp4{background:#ecebe7}
+.hp-card{width:78%;background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:9px;box-shadow:0 0 0 1px rgba(20,20,22,.08)}
+.hp-h{font-weight:600;font-size:14px;display:flex;justify-content:space-between;align-items:baseline}.hp-h small{font-weight:400;color:#6b6b70;font-size:12px}
+.hp-card p{margin:0}.hp-card p b{color:#D9551F;margin-right:6px;font-weight:600}
+.hp-q{background:#f3f2ee;border-radius:12px;padding:9px 11px}
+.hp-chip{align-self:flex-start;font-size:11px;padding:4px 9px;border-radius:99px;background:rgba(244,117,70,.14);color:#D9551F;font-weight:600}
+.hp-note{font-size:12px;color:#4a4a50;border-top:1px solid rgba(20,20,22,.08);padding-top:8px}
+.hp-mic{display:flex;align-items:center;gap:8px;color:#4a4a50;font-size:12px}.hp-mic i{width:22px;height:22px;border-radius:50%;background:#F47546;animation:hpPulse 1.2s ease-in-out infinite}
+.hp-ring{position:absolute;left:50%;top:46%;width:0;height:0}
+.hp-ring b{position:absolute;left:-46px;top:-46px;width:92px;height:92px;border-radius:50%;border:2px solid #F47546}
+.hp-ring b.on{animation:hpRip 1.6s ease-out infinite}
+.hp-pill{position:absolute;bottom:14%;display:flex;align-items:center;gap:7px;background:rgba(20,20,22,.82);color:#fff;font-size:12px;padding:6px 12px;border-radius:99px}
+.hp-pill em{width:7px;height:7px;border-radius:50%;background:#F47546;animation:hpPulse 1s infinite}
+.hp-tag{position:absolute;top:8%;font-size:11px;color:#D9551F;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+@keyframes hpPulse{50%{opacity:.35}}
+@keyframes hpRip{0%{opacity:1;transform:scale(.6)}100%{opacity:0;transform:scale(1.5)}}
+@media(prefers-reduced-motion:reduce){.hp .s{opacity:1;transform:none;transition:none}}
+
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-linen.jpg" alt="" style="object-position:50% 50%;opacity:1"><img class="bgimg hero-top" decoding="async" src="img3/hero-case.webp" alt="" aria-hidden="true" style="object-position:50% 50%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav"><div class="nav-right navbar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
 <path stroke-width="2.6" d="M58.39 3.66A26.30 26.30 0 0 1 80.61 3.66"/>
@@ -2188,7 +2211,9 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
   var how3d=how&&!reduce&&innerWidth>1100&&matchMedia('(hover:hover)').matches&&(function(){try{return !!document.createElement('canvas').getContext('webgl2');}catch(e){return false;}})();
   if(how3d){ how.classList.add('how3d'); var s3=document.createElement('script'); s3.src='vendor/how3d.86276e0f.js'; s3.onerror=function(){how.classList.remove('how3d');}; document.body.appendChild(s3); }
   /* 1007 · no 3D (phones, tablets, no WebGL2): show stills baked from the desktop 3D sequence instead of the old placeholder photos */
-  if(how&&!how3d){ Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn.pic'),function(p,k){ var im=p.querySelector('img'); if(!im) return; im.src='img3/how-static-'+(k+1)+'.jpg'; im.removeAttribute('srcset'); im.alt=['Vocci ring','Vocci app · meeting notes','Vocci Agent · voice command','Claude via Vocci MCP'][k]||''; p.classList.remove('contain','phone'); p.classList.add('still3d'); });
+  if(how&&!how3d){ Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn.pic'),function(p,k){ var im=p.querySelector('img'); if(!im) return; im.src='img3/how-static-'+(k+1)+'.jpg'; im.removeAttribute('srcset'); im.alt=['Vocci ring','Vocci app · meeting notes','Vocci Agent · voice command','Claude via Vocci MCP'][k]||''; p.classList.remove('contain','phone'); p.classList.add('still3d'); var hp=document.createElement('div'); hp.className='hp hp'+(k+1); hp.setAttribute('aria-hidden','true'); hp.innerHTML=['<div class="hp-ring"><b class="s" data-at="1"></b></div><span class="hp-pill s" data-at="1"><em></em>Recording</span><span class="hp-tag s" data-at="3">Double-tap · captured</span>','<div class="hp-card"><div class="hp-h s" data-at="0">Product Sync <small>32 min</small></div><div class="hp-chip s" data-at="1">Transcribed</div><p class="s" data-at="2"><b>Mia</b> Launch moves to the 14th.</p><p class="s" data-at="3"><b>Ian</b> I’ll send the deck Friday.</p><div class="hp-note s" data-at="4">Notes · 3 decisions · 2 actions</div></div>','<div class="hp-card"><div class="hp-h s" data-at="0">Vocci Agent</div><div class="hp-mic s" data-at="1"><i></i>Holding to talk…</div><p class="hp-q s" data-at="2">“Remind Ian to send the deck tomorrow.”</p><div class="hp-chip s" data-at="3">Sent</div><div class="hp-note s" data-at="4">Reminder set · Tomorrow 9:00</div></div>','<div class="hp-card"><div class="hp-h s" data-at="0">Claude</div><p class="hp-q s" data-at="1">What did we decide about the launch?</p><div class="hp-chip s" data-at="2">Reading Vocci · Product Sync</div><p class="s" data-at="3">Launch moves to the 14th. Ian sends the deck Friday.</p><div class="hp-note s" data-at="4">via Vocci MCP</div></div>'][k]||''; p.appendChild(hp); });
+    /* 1007-c · ~5s looping prototypes, only while visible */
+    (function(){ var T=[0,700,1500,2400,3300]; Array.prototype.forEach.call(how.querySelectorAll('.hp'),function(hp){ var els=hp.querySelectorAll('.s'), tm=[], run=false; function cyc(){ tm.forEach(clearTimeout); tm=[]; Array.prototype.forEach.call(els,function(e){ e.classList.remove('on'); }); T.forEach(function(t,i){ tm.push(setTimeout(function(){ Array.prototype.forEach.call(els,function(e){ if(+e.dataset.at===i) e.classList.add('on'); }); },t+150)); }); tm.push(setTimeout(function(){ if(run) cyc(); },5000)); } new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting&&!run){ run=true; cyc(); } else if(!e.isIntersecting&&run){ run=false; tm.forEach(clearTimeout); } }); },{threshold:.4}).observe(hp); }); })();
     Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn.pic'),function(p,k){ p.style.setProperty('--mcol',k+1); });
     Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn:not(.pic)'),function(p,k){ p.style.setProperty('--mcol',k+1); });
     var hst=how.querySelector('.stage'), hint=document.createElement('div'); hint.className='how-hint'; hint.innerHTML='<i class="on"></i><i></i><i></i><i></i>'; hst.parentNode.insertBefore(hint,hst.nextSibling);
@@ -2221,11 +2246,9 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
     new IntersectionObserver(function(es,o){ if(es[0].isIntersecting){ o.disconnect(); arrive(); } },{threshold:.35}).observe(sec); })();
 
   /* nav · hides while scrolling down, returns on scroll up */
-  (function(){ var last=scrollY, navEl=document.querySelector('.gridall>.nav'); if(!navEl) return; var hot=document.createElement('div'); hot.className='nav-hot'; document.body.appendChild(hot); var hover=false, hideT=null;
-    function place(){ navEl.classList.toggle('bar',scrollY>40); var tucked=scrollY>80&&!hover; navEl.classList.toggle('away',tucked); }
-    function show(){ hover=true; clearTimeout(hideT); place(); }
-    function hide(){ clearTimeout(hideT); hideT=setTimeout(function(){ hover=false; place(); },500); }
-    [hot,navEl].forEach(function(el){ el.addEventListener('mouseenter',show); el.addEventListener('mouseleave',hide); });
+  /* 1007-c · nav: hides on scroll down, reappears immediately on scroll up (no hover zone) */
+  (function(){ var last=scrollY, navEl=document.querySelector('.gridall>.nav'); if(!navEl) return;
+    function place(){ var y=scrollY; navEl.classList.toggle('bar',y>40); if(y<80) navEl.classList.remove('away'); else if(y>last+4) navEl.classList.add('away'); else if(y<last-4) navEl.classList.remove('away'); if(Math.abs(y-last)>4||y<80) last=y; }
     addEventListener('scroll',place,{passive:true}); place(); })();
 
 /* 1007 · text motion removed (content must be readable without JS timing, for crawlers) */
