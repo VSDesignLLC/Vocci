@@ -214,3 +214,8 @@ Awards 四张、Certified 四张：hover 时底图淡入并从 1.08 缩回 1（�
 ## 1007-f · tablet
 - Tablet (701–1100) now uses the phone structure: patch.py remaps phone rules `max-width:700px` → 1100 (and JS `innerWidth<=700` → 1100) at build time.
 - Tablet-only tuning lives in `@media(min-width:700.5px) and (max-width:1100px)`: 40px side padding, 42px headings, 17px body, How it works shows 2 cards per view.
+
+## 1007 · Figma-import static pages
+- `figma/vocci-1007-{desktop-1440,tablet-768,mobile-390}.html`: self-contained (images/fonts inlined), no scripts, every motion at its end state.
+- Built in two steps: run `src/figma_freeze.js` in a browser at each width on the local build (it scrolls through, freezes the end states, swaps sections for clean copies so no script keeps writing, and POSTs the DOM to a local receiver), then `python3 src/figma_static.py <snap-dir>` resolves every @media rule for that width, converts vw/vh/svh to px, pins the page width and inlines assets.
+- Desktop How it works / Every detail use still images (no 3D) so they import as real layers; app screens show their final step and use `zoom` instead of `scale` (importers ignore `scale`).
