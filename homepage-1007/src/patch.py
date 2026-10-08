@@ -456,6 +456,18 @@ _boxes = ''.join('<img loading="lazy" decoding="async" class="fn-img fn-box%s" d
 _t = _t[:_r.start()] + '<div class="pn pic contain fn-boxcell"%s>%s</div>' % (_r.group(1), _boxes) + _t[_r.end():]
 s = s[:_m.start()] + _t + s[_m.end():]
 
+# ---------- 1007-u · FAQ: no buy button, two more questions in the right column ----------
+_m = re.search(r'<section id="faq".*?</section>', s, re.S); _t = _m.group()
+for _a, _b in [('<div class="end"><a class="btn" href="#finishes">Buy now</a></div>', ''), ('Four most asked.', 'Six most asked.')]:
+    assert _a in _t, _a; _t = _t.replace(_a, _b, 1)
+def _q(n, row, q, a):
+    return ('<div class="pn " style="--gc:4/span 1;--gr:%d/span 1;--tc:%d/span 1;--tr:%d/span 1"><span class="qn"><span class="label"><b>%02d</b></span><i>+</i></span>'
+            '<h3>%s</h3><p class="end">%s</p></div>') % (row, 2 - row % 2, 3 + row, n, q, a)
+_k = _t.index('<div class="rowline"')
+_t = _t[:_k] + _q(5, 1, 'How long does the battery last?', 'Up to 8 hours of continuous recording. Thirty minutes in the case gets you back to 80%.') \
+             + _q(6, 2, 'How do I find my size?', 'Start with the sizing kit: wear a sizer for a day, then pick your size. Every ring is 6.8 mm wide and 2.85 mm thin.') + _t[_k:]
+s = s[:_m.start()] + _t + s[_m.end():]
+
 # ---------- assets: local fonts, override css, motion js ----------
 s = s.replace('<main class="page gridall" data-ui="classic" data-skin="v2">', '<main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928">')
 override = (R/'src/override.css').read_text()
