@@ -869,3 +869,14 @@
 @media(min-width:1101px){ #press .stage>.pn{transform:none!important;translate:none!important} }
 #finishes .fn-boxcell{background:transparent!important} #finishes .fn-boxcell .fn-img{mix-blend-mode:multiply}
 /* 1007-y · hero copy: no accent colour */ #hero .pn .emph{color:inherit!important;font-weight:inherit!important}
+/* 1007-z · press on phone/tablet follows the desktop rules: one text block, no orange rules, four videos, no invite card */
+@media(max-width:700px){
+  #press .stage>.pn.invite{display:none!important}
+  #press .intro .tw-no,#press .intro .tw-card h3,#press .tw-join{display:none!important}
+  #press .intro .tw-card{margin:0!important;padding:0 0 8px;background:none!important;border-top:0!important}
+  #press .intro .tw-strip{margin:4px 0 0;padding:0;background:none}
+  #press .vid .tw-card{border-top:1px solid rgba(20,20,22,.16)!important;margin-top:0!important;padding-bottom:20px}
+  #press .vid .tw-th{aspect-ratio:16/9}
+  #press .vid .tw-strip{display:none}
+  #press .stage>.pn{transform:none!important;translate:none!important}
+}
