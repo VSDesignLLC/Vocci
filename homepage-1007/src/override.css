@@ -881,3 +881,4 @@
   #press .stage>.pn{transform:none!important;translate:none!important}
 }
 @media(max-width:700px){ #finishes .fn-boxcell{display:none!important} }
+@media(max-width:700px){ #press .stage>.pn.vid{padding-top:0!important;padding-bottom:0!important;border-top:0!important} }
