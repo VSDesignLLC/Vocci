@@ -474,6 +474,12 @@ s = (s.replace('img3/people-suits-blur.jpg" alt="" style="object-position:50% 42
       .replace('src="img3/scene-materials.jpg" alt="" style="object-position:50% 50%', 'src="img3/scene-team.jpg" alt="" style="object-position:50% 60%'))
 assert 'needs-man.jpg' in s and 'scene-team.jpg' in s
 
+# ---------- 1007-w · press: dots where the card edges meet the grid lines ----------
+_m = re.search(r'<section id="press".*?</section>', s, re.S); _t = _m.group()
+_k = _t.rindex('</div></section>')
+_t = _t[:_k] + ''.join('<i class="sqr pdot" style="left:%s;top:%s"></i>' % (x, y) for y in ('30%', '65%') for x in ('25%', '50%', '75%')) + _t[_k:]
+s = s[:_m.start()] + _t + s[_m.end():]
+
 # ---------- assets: local fonts, override css, motion js ----------
 s = s.replace('<main class="page gridall" data-ui="classic" data-skin="v2">', '<main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928">')
 override = (R/'src/override.css').read_text()
