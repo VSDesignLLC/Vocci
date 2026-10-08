@@ -334,7 +334,7 @@ def glass(sid):
     m = re.search(r"<section id=\"%s\"[^>]*>.*?</section>" % sid, s, re.S); t = m.group(); k = [0]
     def rep(mm):
         k[0] += 1
-        return mm.group(1) + ' glassy' + mm.group(2) + '<i class="gbg" style="background-image:url(img3/glass-%d.jpg)"></i>' % (k[0] + (4 if sid == 'certs' else 0))
+        return mm.group(1) + ' glassy' + mm.group(2) + ('<i class="gbg" style="background-image:url(img3/cert-bg-%d.jpg)"></i>' % k[0] if sid == 'certs' else '<i class="gbg" style="background-image:url(img3/glass-%d.jpg)"></i>' % k[0])
     t = re.sub(r'(<div class="pn mid)("(?: style="[^"]*")?>)', rep, t)
     s = s[:m.start()] + t + s[m.end():]
 glass('awards'); glass('certs')

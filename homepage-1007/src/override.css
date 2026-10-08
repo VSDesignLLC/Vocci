@@ -848,3 +848,5 @@
   #press .vid .tw-strip{display:none}
 }
 @media(min-width:1101px){ #press,#press .stage{height:100svh!important;min-height:0!important} }
+/* 1007-r · awards: no centre line through the press-quote row */
+@media(min-width:1101px){ #awards .stage>.vl[style*="left:50%"]{-webkit-mask:linear-gradient(#000 0 28%,transparent 28% 72%,#000 72%);mask:linear-gradient(#000 0 28%,transparent 28% 72%,#000 72%)} }
