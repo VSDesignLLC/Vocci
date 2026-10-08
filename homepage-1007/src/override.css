@@ -747,3 +747,4 @@
   #scenes .stage>.pn.lazy{padding-bottom:28px}
 }
 @media(min-width:701px){ #how .how-head{display:none} }
+#how .stage>.pn.pic.still3d:not(.appon){background:#fff}
