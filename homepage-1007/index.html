@@ -1402,7 +1402,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 .pn .ui-rec{color:var(--accent-text);font-weight:500}.pn .ui-rec::before{animation:pulse 1.4s ease-in-out infinite}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.6);opacity:.55}}
 .pn .st-ui{border-color:rgba(20,20,22,.2);padding:10px 12px;margin-top:4px}.pn .ui-head{padding-bottom:8px;margin-bottom:8px}.pn .ui-timer{font-size:22px;margin:4px 0 8px}.pn .ui-foot{padding-top:8px}
-#why .pn:not(.pic){gap:8px;--pad:24px}#why .pn p{font-size:13.5px}
+#why .pn:not(.pic){gap:8px}
 .pn .pq p{color:var(--ink)}.pn .pill{color:#5f5f66;border-color:rgba(20,20,22,.18)}
 .pn .presslogos.v13 img{opacity:.9;filter:grayscale(1)}
 .pn .badge,.pn .aw{filter:grayscale(1) contrast(1.05)}.pn .laurel{stroke:var(--ink)}
@@ -1466,14 +1466,14 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 .pn.pic.contain img{object-fit:contain;padding:7%}
 .pn.pic.contain.phone img{padding:4% 24%}
 #hardware .exploded img{padding:2% 3%}
-#hardware .pn .half{height:calc(var(--row) * .5);margin-bottom:6px}#hardware .pn.hasimg{gap:8px}#hardware .pn.hasimg h3{font-size:19px}
+#hardware .pn .half{height:calc(var(--row) * .5);margin-bottom:6px}#hardware .pn.hasimg{gap:8px}
 #how .pn:not(.pic){transition:background .5s}#how .pn:not(.pic).on{background:var(--bg-soft)}
 #how .pn.pic img{transition:transform .8s var(--ease)}#how .pn.pic:hover img{transform:scale(1.04)}
 .pn .ringsm{width:52%;transition:transform .7s var(--ease)}.pn:hover .ringsm{transform:translateY(-6px) rotate(-5deg)}
 #finishes .pn .label{color:var(--accent-text)}
 
 /* who it's for · heading + 7 personas fit one cell */
-#needs .pn.compact{--pad:24px;gap:6px}#needs .pn.compact h2{font-size:clamp(22px,1.9vw,27px)}
+#needs .pn.compact{gap:6px}
 #needs .pn.compact ol.pl{margin-top:2px;font-size:12.5px}#needs .pn.compact ol.pl li{padding:4px 0;gap:8px;min-height:0}#needs .pn.compact ol.pl li .th{width:20px;height:20px}
 /* testimonials · click a quote to bring its owner into the centre */
 .rv-stage img.rv-img{opacity:0;transition:opacity .9s var(--ease),clip-path 1.1s var(--ease-io)}.rv-stage img.rv-img.on{opacity:1}
@@ -1995,7 +1995,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 #finishes .fn-cta .tlink{margin-left:0}
 #finishes .fn-offer{flex-basis:100%;font-size:12px;color:var(--muted)}
 /* 0929-z · privacy promises: description always visible */
-#privacy .pn.pv p{opacity:1;transform:none;margin-top:0;font-size:15px;line-height:1.55;color:var(--muted);max-width:30ch}
+#privacy .pn.pv p{opacity:1;transform:none;margin-top:0;line-height:1.55;color:var(--muted);max-width:30ch}
 #privacy .pn.pv{justify-content:flex-start}
 /* 0929-ab · hero: case cut-out above the grid lines (lines run under the case) */
 #hero .stage>.bgimg.hero-top{z-index:4;pointer-events:none}
@@ -2252,6 +2252,10 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 }
 @media(max-width:1100px){ #finishes .fn-boxcell{display:none!important} }
 @media(max-width:1100px){ #press .stage>.pn.vid{padding-top:0!important;padding-bottom:0!important;border-top:0!important} }
+
+/* 1007-aa · audit: one type scale + one cell padding everywhere */
+@media(max-width:1100px){ #how .how-head h2{font-size:26px} }
+@media(min-width:700.5px) and (max-width:1100px){ #how .how-head h2{font-size:42px!important} }
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav"><div class="nav-right navbar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
