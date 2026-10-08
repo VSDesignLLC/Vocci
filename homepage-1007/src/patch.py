@@ -429,6 +429,15 @@ _k = _t.rindex('</div></section>')
 _t = _t[:_k] + ''.join(_full) + '<div class="rowline" style="grid-row:3"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div>' + _t[_k:]
 s = s[:_a.start()] + _t + s[_a.end():]
 
+# ---------- 1007-p · press: centred two-column composition (Longbow-style), outer columns left empty ----------
+_m = re.search(r'<section id="press".*?</section>', s, re.S); _t = _m.group()
+for _a, _b in [('class="pn tw-col intro" style="--gc:1/span 1;--gr:1/span 2;', 'class="pn tw-col intro" style="--gc:2/span 2;--gr:1/span 1;'),
+               ('class="pn tw-col" style="--gc:2/span 1;--gr:1/span 2;', 'class="pn tw-col vid" style="--gc:2/span 1;--gr:2/span 1;'),
+               ('class="pn tw-col" style="--gc:3/span 1;--gr:1/span 2;', 'class="pn tw-col vid" style="--gc:3/span 1;--gr:2/span 1;'),
+               ('<a class="btn" href="#">Watch all on YouTube</a></span>', '<a class="btn" href="#">Watch all on YouTube</a></span><a class="tw-join" href="#">Made something with Vocci? <u>Become a creator</u> <b>→</b></a>')]:
+    assert _a in _t, _a; _t = _t.replace(_a, _b, 1)
+s = s[:_m.start()] + _t + s[_m.end():]
+
 # ---------- assets: local fonts, override css, motion js ----------
 s = s.replace('<main class="page gridall" data-ui="classic" data-skin="v2">', '<main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928">')
 override = (R/'src/override.css').read_text()
