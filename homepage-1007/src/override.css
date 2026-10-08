@@ -748,3 +748,23 @@
 }
 @media(min-width:701px){ #how .how-head{display:none} }
 #how .stage>.pn.pic.still3d:not(.appon){background:#fff}
+/* 1007-e · faster nav reveal; phone hamburger; How it works arrows */
+.js .gridall>.nav.in{transition:opacity .2s ease,transform .3s cubic-bezier(.2,.8,.2,1)!important}
+.gridall>.nav .burger,.gridall>.nav .nav-menu{display:none}
+@media(max-width:700px){
+  .gridall>.nav .burger{display:grid;place-content:center;gap:6px;width:44px;height:44px;border:0;background:none;padding:0;cursor:pointer;margin-left:auto}
+  .gridall>.nav .burger i{display:block;width:20px;height:1.6px;background:var(--ink);transition:transform .3s}
+  .gridall>.nav.menu-open .burger i:first-child{transform:translateY(3.8px) rotate(45deg)}.gridall>.nav.menu-open .burger i:last-child{transform:translateY(-3.8px) rotate(-45deg)}
+  .gridall>.nav .cart{margin-left:4px}
+  .gridall>.nav .nav-menu{display:flex;flex-direction:column;pointer-events:auto;margin-top:8px;background:rgba(255,255,255,.94);backdrop-filter:blur(26px);border-radius:14px;padding:6px 20px;opacity:0;transform:translateY(-6px);visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s}
+  .gridall>.nav.menu-open .nav-menu{opacity:1;transform:none;visibility:visible}
+  .gridall>.nav .nav-menu a{padding:14px 0;font-size:17px;font-weight:500;color:var(--ink);text-decoration:none;border-bottom:1px solid rgba(20,20,22,.08)}
+  .gridall>.nav .nav-menu a:last-child{border-bottom:0}
+}
+#how .how-hint{align-items:center;gap:18px!important}
+#how .how-hint .hh-d{display:flex;gap:6px;align-items:center}
+#how .how-hint .hh-b{width:40px;height:40px;border-radius:50%;border:1px solid rgba(20,20,22,.16);background:#fff;display:grid;place-items:center;cursor:pointer;padding:0}
+#how .how-hint .hh-b svg{width:16px;height:16px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#how .how-hint .hh-b:disabled{opacity:.35;cursor:default}
+@media(max-width:700px){ .gridall>.nav .nav-menu{position:absolute;left:0;right:0;top:100%} }
+@media(max-width:700px){ .gridall>.nav .nav-menu{background:#fff;border:1px solid rgba(20,20,22,.12)} }

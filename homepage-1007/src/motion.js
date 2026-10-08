@@ -159,8 +159,11 @@
     })();
     Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn.pic'),function(p,k){ p.style.setProperty('--mcol',k+1); });
     Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn:not(.pic)'),function(p,k){ p.style.setProperty('--mcol',k+1); });
-    var hst=how.querySelector('.stage'), hint=document.createElement('div'); hint.className='how-hint'; hint.innerHTML='<i class="on"></i><i></i><i></i><i></i>'; hst.parentNode.insertBefore(hint,hst.nextSibling);
-    hst.addEventListener('scroll',function(){ var w=hst.scrollWidth/4, k=Math.round(hst.scrollLeft/w); Array.prototype.forEach.call(hint.children,function(d,j){ d.classList.toggle('on',j===k); }); Array.prototype.forEach.call(hst.querySelectorAll(':scope>.pn:not(.pic)'),function(p,j){ p.classList.toggle('on',j===k); }); },{passive:true}); }
+    var hst=how.querySelector('.stage'), hint=document.createElement('div'); hint.className='how-hint'; hint.innerHTML='<button class="hh-b prev" aria-label="Previous step" disabled><svg viewBox="0 0 20 20"><path d="M12 4l-6 6 6 6"/></svg></button><span class="hh-d"><i class="on"></i><i></i><i></i><i></i></span><button class="hh-b next" aria-label="Next step"><svg viewBox="0 0 20 20"><path d="M8 4l6 6-6 6"/></svg></button>'; hst.parentNode.insertBefore(hint,hst.nextSibling);
+    var go=function(d){ var w=hst.scrollWidth/4, k=Math.max(0,Math.min(3,Math.round(hst.scrollLeft/w)+d)); hst.scrollTo({left:hst.querySelectorAll(':scope>.pn.pic')[k].offsetLeft-16,behavior:'smooth'}); };
+    hint.querySelector('.prev').addEventListener('click',function(){ go(-1); }); hint.querySelector('.next').addEventListener('click',function(){ go(1); });
+    Array.prototype.forEach.call(hint.querySelectorAll('.hh-d i'),function(d,j){ d.addEventListener('click',function(){ go(j-Math.round(hst.scrollLeft/(hst.scrollWidth/4))); }); });
+    hst.addEventListener('scroll',function(){ var w=hst.scrollWidth/4, k=Math.round(hst.scrollLeft/w); hint.querySelector('.prev').disabled=k===0; hint.querySelector('.next').disabled=k===3; Array.prototype.forEach.call(hint.querySelectorAll('.hh-d i'),function(d,j){ d.classList.toggle('on',j===k); }); Array.prototype.forEach.call(hst.querySelectorAll(':scope>.pn:not(.pic)'),function(p,j){ p.classList.toggle('on',j===k); }); },{passive:true}); }
   if(how&&!how3d){ var txts=Array.prototype.slice.call(how.querySelectorAll('.pn:not(.pic)')), i=0, t=null;
     function show(k){ i=k; txts.forEach(function(x,j){ x.classList.toggle('on',j===k); }); }
     function play(){ stop(); t=setInterval(function(){ show((i+1)%txts.length); },3200); }
@@ -215,4 +218,11 @@
   sc.forEach(function(e){ if(head(e)) e.style.order=0; }); pics.forEach(function(e,i){ e.style.order=2*i+1; }); (txt.length===pics.length?txt:[]).forEach(function(e,i){ e.style.order=2*i+2; });
   Q('finishes').forEach(function(e){ e.style.order=e.classList.contains('fn-stage')?1:e.classList.contains('fn-spec')?2:e.classList.contains('fn-list')?3:0; });
   var how=document.getElementById('how'); if(how&&!how.querySelector('.how-head')){ var h=document.createElement('div'); h.className='how-head'; h.innerHTML='<h2>How it works.</h2>'; how.insertBefore(h,how.firstChild); }
+})();
+
+/* 1007-e · phone nav: hamburger opens the section links */
+(function(){ var nav=document.querySelector('.gridall>.nav'), bar=nav&&nav.querySelector('.navbar'), cart=bar&&bar.querySelector('.cart'); if(!cart) return;
+  var b=document.createElement('button'); b.className='burger'; b.setAttribute('aria-label','Menu'); b.setAttribute('aria-expanded','false'); b.innerHTML='<i></i><i></i>'; bar.insertBefore(b,cart);
+  var m=document.createElement('div'); m.className='nav-menu'; Array.prototype.forEach.call(bar.querySelectorAll('a:not(.wordmark):not(.cart)'),function(a){ var x=document.createElement('a'); x.href=a.getAttribute('href'); x.textContent=a.querySelector('span').textContent; m.appendChild(x); }); nav.appendChild(m);
+  var set=function(on){ nav.classList.toggle('menu-open',on); b.setAttribute('aria-expanded',on); }; b.addEventListener('click',function(){ set(!nav.classList.contains('menu-open')); }); m.addEventListener('click',function(e){ if(e.target.tagName==='A') set(false); }); addEventListener('scroll',function(){ if(nav.classList.contains('away')) set(false); },{passive:true});
 })();
