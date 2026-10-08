@@ -374,6 +374,25 @@ s = s.replace('<span class="wmbig split">VOCCI</span>', '<span class="wmbig spli
 # ---------- 0929-l · testimonials section folded into community ----------
 s = re.sub(r'<section id="testimonials".*?</section>', '', s, count=1, flags=re.S)
 
+# ---------- 1007-g · screens 2/3: icon-led selling points (antian's comments) ----------
+_I = {
+ 'noise': '<path d="M3 10h1.5M6 7v6M9 4.5v11M12 7v6M15 8.5v3M17.5 10H17"/>',
+ 'range': '<circle cx="10" cy="10" r="1.6"/><path d="M6.2 6.2a5.4 5.4 0 000 7.6M13.8 6.2a5.4 5.4 0 010 7.6M3.6 3.6a9 9 0 000 12.8M16.4 3.6a9 9 0 010 12.8"/>',
+ 'clock': '<circle cx="10" cy="10" r="7.2"/><path d="M10 6v4.2l2.8 1.8"/>',
+ 'hold':  '<circle cx="10" cy="10" r="3.2"/><circle cx="10" cy="10" r="7.2"/>',
+ 'apps':  '<rect x="3" y="3" width="5.6" height="5.6" rx="1.4"/><rect x="11.4" y="3" width="5.6" height="5.6" rx="1.4"/><rect x="3" y="11.4" width="5.6" height="5.6" rx="1.4"/><path d="M14.2 11.4v5.6M11.4 14.2h5.6"/>',
+ 'ctx':   '<path d="M4 5.5h12v7.5H9l-3.5 3v-3H4z"/><path d="M7 8.5h6M7 10.8h4"/>',
+}
+def _feats(items):
+    return '<ul class="feats">' + ''.join('<li><svg viewBox="0 0 20 20" aria-hidden="true">%s</svg><span>%s</span></li>' % (_I[k], t) for k, t in items) + '</ul>'
+_a = 'No phone on the table, no app to open.</p>'
+assert _a in s
+s = s.replace(_a, _a + _feats([('noise', 'Clear pickup in noisy rooms'), ('range', '5-meter voice pickup'), ('clock', '8 hours of continuous recording')]), 1)
+_b = '<span class="label">AI context layer · MCP</span><h3>Real-world context for your AI.</h3><p>Connect Vocci to your AI once with MCP. Turn important conversations into clear next steps—without copying and pasting.</p>'
+assert _b in s
+s = s.replace(_b, '<span class="label">Voice to AI</span><h3>Real-world context for your AI.</h3><p>Press and hold the ring, say what you need, and it goes straight to the AI you already use.</p>'
+    + _feats([('hold', 'Press and hold to send'), ('apps', 'Works with ChatGPT, Claude, Gemini and more'), ('ctx', 'Your request carries the conversation’s context')]), 1)
+
 # ---------- assets: local fonts, override css, motion js ----------
 s = s.replace('<main class="page gridall" data-ui="classic" data-skin="v2">', '<main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928">')
 override = (R/'src/override.css').read_text()
