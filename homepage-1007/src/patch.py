@@ -417,6 +417,18 @@ assert _b in s
 s = s.replace(_b, '<span class="label">Voice to AI</span><h3>Real-world context for your AI.</h3><p>Press and hold the ring, say what you need, and it goes straight to the AI you already use.</p>'
     + _feats([('hold', 'Press and hold to send'), ('apps', 'Works with ChatGPT, Claude, Gemini and more'), ('ctx', 'Your request carries the conversation’s context')]), 1)
 
+# ---------- 1007-o · certs merge into awards: awards row · press quote · certificates row ----------
+_c = re.search(r'<section id="certs".*?</section>', s, re.S)
+_cells = re.findall(r'<div class="pn mid glassy" style="--gc:(\d)/span 1;--gr:2/span 1;[^"]*">.*?<span class="label">[^<]*</span></div>', _c.group(), re.S)
+_full = [m.group(0) for m in re.finditer(r'<div class="pn mid glassy" style="--gc:\d/span 1;--gr:2/span 1;[^"]*">.*?<span class="label">[^<]*</span></div>', _c.group(), re.S)]
+assert len(_full) == 4
+_full = [re.sub(r'style="--gc:(\d)/span 1;--gr:2/span 1;[^"]*"', lambda m: 'style="--gc:%s/span 1;--gr:3/span 1;--tc:1/span 1;--tr:1/span 1"' % m.group(1), x, count=1).replace('class="pn mid glassy"', 'class="pn mid glassy cert"', 1) for x in _full]
+s = s[:_c.start()] + s[_c.end():]
+_a = re.search(r'<section id="awards".*?</section>', s, re.S); _t = _a.group()
+_k = _t.rindex('</div></section>')
+_t = _t[:_k] + ''.join(_full) + '<div class="rowline" style="grid-row:3"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div>' + _t[_k:]
+s = s[:_a.start()] + _t + s[_a.end():]
+
 # ---------- assets: local fonts, override css, motion js ----------
 s = s.replace('<main class="page gridall" data-ui="classic" data-skin="v2">', '<main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928">')
 override = (R/'src/override.css').read_text()

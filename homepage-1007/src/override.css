@@ -804,3 +804,28 @@
   #breather .stage>.bgimg{width:100%!important;height:100%!important}
   #breather .stage .pn.pending{opacity:1!important;transform:none!important}
 }
+/* 1007-o · awards + certs in one screen: badges top and bottom, press quote in the middle */
+@media(min-width:1101px){
+  #awards .stage{grid-template-rows:28svh 44svh 28svh!important;height:100svh!important;min-height:0!important}
+  #awards .stage>.pn.mid.glassy{gap:12px}
+  #awards .stage>.pn.cert .wreath{transform:scale(.82)}
+  #awards .stage>.pn.cert .cb{font-size:17px}
+}
+@media(min-width:1101px){
+  #awards .stage>.pn.mid.glassy{display:flex!important;flex-direction:column;align-items:center;justify-content:center!important;padding:20px!important;min-height:0!important;height:auto!important;overflow:hidden}
+  #awards .stage>.pn.mid.glassy>*{margin-top:0!important;margin-bottom:0!important}
+}
+@media(max-width:700px){
+  #awards .stage{flex-direction:row!important;flex-wrap:wrap!important}
+  #awards .stage>.pn.glassy{width:50%!important;flex:0 0 50%!important;min-height:0!important;padding:22px 10px!important}
+  #awards .stage>.pn.quote{width:100%!important;flex:0 0 100%!important}
+  #awards .stage>.pn.glassy .label{font-size:9.5px!important;text-align:center}
+}
+@media(max-width:700px){
+  #awards,#awards .stage{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}
+  #awards .stage>.pn.cert .wreath{transform:scale(.78)}
+  #awards .stage>.pn.cert{gap:2px}
+  #awards .stage>.pn.cert .cb{font-size:15px}
+}
+@media(max-width:700px){ #awards .stage>.pn.glassy{height:auto!important;max-height:none!important;overflow:visible!important} }
+@media(max-width:700px){ #awards .stage>.pn{transform:none!important;translate:none!important} }
