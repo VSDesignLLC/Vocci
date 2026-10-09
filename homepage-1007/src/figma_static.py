@@ -53,6 +53,8 @@ for name, (W, H, hover) in SIZES.items():
     s = re.sub(r'(?<![\w.-])(\d+(?:\.\d+)?)(vw|vh|svh|dvh|lvh)\b', unit, s)
     s = re.sub(r'<meta name="viewport"[^>]*>', '<meta name="viewport" content="width=%d">' % W, s)
     s = s.replace('</head>', '<style id="figma-frame">html,body{width:%dpx!important;min-width:%dpx;max-width:%dpx;margin:0 auto;overflow-x:hidden}.marquee__track{animation:none!important;transform:none!important}*,*::before,*::after{transition:none!important;animation-delay:-60s!important;animation-play-state:paused!important}</style></head>' % (W, W, W), 1)
+    # linked-asset copy (served from figma/, assets one level up) for pages that stack several snapshots
+    (R / 'figma' / ('_%s.linked.html' % name)).write_text(re.sub(r'(?<![\w/.-])((?:img[23]?|vendor)/[A-Za-z0-9._-]+\.(?:jpg|png|webp|ttf|svg))', r'../\1', s))
     s = re.sub(r'(?<![\w/.-])((?:img[23]?|vendor)/[A-Za-z0-9._-]+\.(?:jpg|png|webp|ttf|svg))', lambda m: uri(m.group(1)), s)
     s = re.sub(r'<title>.*?</title>', '<title>Vocci Homepage · %s</title>' % name, s, count=1, flags=re.S)
     (R / 'figma' / ('vocci-1007-%s.html' % name)).write_text(s)

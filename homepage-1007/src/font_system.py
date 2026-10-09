@@ -58,7 +58,7 @@ def board(o):
     return ('<section class="bd"><header><span class="no">方案 %s</span><h2 style="font-family:%s;font-weight:%s">%s</h2><div class="tags"><span>%s</span><span>%s</span><span>全部 SIL OFL 1.1 · 可商用</span></div></header>'
             '<div class="intro"><p>%s</p><p><b>适合：</b>%s</p><p><b>注意：</b>%s</p></div>'
             '<h4>字体 Fonts</h4><div class="fcs">%s</div><h4>网页中的应用 Type scale（桌面 1440）</h4><table><thead><tr><th>角色</th><th>字体</th><th>字号 / 字重 / 行高 / 字距</th><th>示例</th></tr></thead><tbody>%s</tbody></table>'
-            '<h4>组合示例 In context</h4>%s<h4>整页效果 Full page · 桌面 1440</h4><p class="fp">在下方框内滚动查看整个官网；导入 Figma 请使用单独链接 <a href="font-option-%s.html">font-option-%s.html</a>（嵌入的网页不会被导入工具抓取）。</p><iframe class="fpv" src="font-option-%s.html" title="方案 %s 整页" loading="lazy"></iframe></section>') % (o['n'], disp, dweight, o['name'], o['tone'], o['fam'], html.escape(o['about']), html.escape(o['fit']), html.escape(o['risk']), cards, rows, spec, o['n'], o['n'], o['n'], o['n'])
+            '<h4>组合示例 In context</h4>%s<p class="fp">整页效果见本页下方 <a href="#fo-%s">方案 %s · 整页</a>（单独页面：<a href="font-option-%s.html">font-option-%s.html</a>）</p></section>') % (o['n'], disp, dweight, o['name'], o['tone'], o['fam'], html.escape(o['about']), html.escape(o['fit']), html.escape(o['risk']), cards, rows, spec, o['n'], o['n'], o['n'], o['n'])
 
 # ---------- per-option full pages: desktop static snapshot locked to one pairing (each is its own Figma-import URL) ----------
 BASE = (R / 'figma' / 'vocci-1007-desktop-1440.html').read_text()
@@ -113,7 +113,6 @@ table:not(.ov) td{padding:16px 14px;border-bottom:1px solid #e3e3df;vertical-ali
 .mc .mb{margin-top:auto;align-self:flex-start;background:#141416;color:#fff;border-radius:8px;padding:14px 22px;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
 .mc.dark{background:#17181c;border-color:#17181c}.mc.dark h3{color:#ececf1}.mc.dark p{color:#c9c9d2}.mc.dark .ml{color:#F47546}
 .fp{margin:0 0 14px;font-size:13.5px;color:#55555c}.fp a{font-family:'IBM Plex Mono',monospace}
-.fpv{display:block;width:1440px;height:900px;margin:0 -80px -80px;border:0;border-top:1px solid #d6d6d2;background:#fff}
 .cn{padding:64px 80px 96px;background:#fff}.cn p{max-width:900px;color:#3a3a3f}
 """
 ov = ''.join('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (o['n'], o['name'], o['tone'], o['fam'], o['fit']) for o in OPTS)
@@ -125,7 +124,32 @@ cover = ('<section class="cover"><span class="lb">Vocci · Brand type options ·
  '<div><b>特殊字体小范围使用</b><p>Mono 用于标签、编号、参数、模型 / 系统类物料，不用于正文与长段落。</p></div></div>'
  '<table class="ov"><thead><tr><th>#</th><th>组合</th><th>调性</th><th>字体数量</th><th>适合</th></tr></thead><tbody>%s</tbody></table></section>') % ov
 cn = ('<section class="cn"><h4 style="border:0;margin-top:0;padding-top:0">中文配套 Chinese</h4><p>六个方案都建议搭配 <b>思源黑体 / Noto Sans SC</b>（SIL OFL 1.1，可商用）作为中文字体；方案 04 / 06 的中文大标题可搭配 <b>思源宋体 / Noto Serif SC</b>（同为 OFL）。中文字体在本页未做展示。</p></section>')
-page = ('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=1440"><title>Vocci Font Options</title>'
-        '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-        '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?%s"><style>%s</style></head><body><div class="wrap">%s%s%s</div></body></html>') % (fam, CSS, cover, ''.join(board(o) for o in OPTS), cn)
+import re
+def scope(css):  # prefix every selector of the doc stylesheet with .fs so it cannot touch the stacked site pages
+    out = []
+    for rule in css.split('}'):
+        if '{' not in rule: continue
+        sel, body = rule.split('{', 1)
+        sels = [x.strip() for x in sel.split(',') if x.strip()]
+        if sels and sels[0] in ('*', 'html', 'body'):
+            out.append('.fs,.fs *{box-sizing:border-box}' if sels[0] == '*' else ''); continue
+        out.append(','.join('.fs ' + x for x in sels) + '{' + body + '}')
+    return ''.join(out)
+LINKED = (R / 'figma' / '_desktop-1440.linked.html').read_text()
+head = re.search(r'<head>(.*?)</head>', LINKED, re.S).group(1)
+head = re.sub(r'<title>.*?</title>', '<title>Vocci Font Options</title>', head, flags=re.S)
+body = re.search(r'<body[^>]*>(.*)</body>', LINKED, re.S).group(1)
+optcss = ''
+for o in OPTS:
+    k = '.fo-' + o['n']
+    optcss += "%s,%s *{--font-body:%s!important;--font-word:%s!important;--font-display:%s!important;--font-mono:%s!important}" % (k, k, ff(o['sans'], 'sans'), ff(o['sans'], 'sans'), ff(o['sans'], 'sans'), ff(o['mono'], 'mono'))
+    if o['disp']: optcss += "%s .pn h1,%s .pn h2{font-family:%s!important;font-weight:500!important;letter-spacing:-.015em!important}" % (k, k, ff(o['disp'], 'serif'))
+optcss += (".fo{position:relative;width:1440px;overflow:hidden;background:#fff}"
+           ".fo-bar{display:flex;align-items:baseline;gap:20px;padding:40px 80px 32px;background:#141416;color:#fff;font:500 15px/1.4 'IBM Plex Sans',sans-serif}"
+           ".fo-bar span{font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#F47546}.fo-bar b{font-size:28px;font-weight:500;letter-spacing:-.02em}.fo-bar i{font-style:normal;color:#a9a9b2;margin-left:auto}")
+stack = ''.join('<div class="fo-bar" id="fo-%s"><span>方案 %s · 整页</span><b>%s</b><i>桌面 1440 · %s</i></div><div class="fo fo-%s">%s</div>'
+                % (o['n'], o['n'], html.escape(o['name']), o['tone'], o['n'], body) for o in OPTS)
+page = ('<!doctype html><html lang="zh-CN"><head>%s<link rel="stylesheet" href="https://fonts.googleapis.com/css2?%s"><style id="font-system">%s%s</style></head>'
+        '<body><div class="fs">%s%s%s</div>%s</body></html>') % (head, fam, scope(CSS), optcss, cover, ''.join(board(o) for o in OPTS), cn, stack)
+page = re.sub(r'<title>.*?</title>', '', page, flags=re.S).replace('<head>', '<head><title>Vocci Font Options</title>', 1)
 (R / 'figma' / 'font-system.html').write_text(page); print('font-system', len(page))
