@@ -11,8 +11,8 @@ OPTS = [
   '同一家族的 Sans 与 Mono，只算"一套"字体，最容易统一；几何感更强，偏 AI / 科技产品调性。'),
  ('3', 'Manrope + IBM Plex Mono', "'Manrope'", "'Manrope'", "'IBM Plex Mono'",
   '字形更圆润温和，贴近"戴在手上的饰品"这层亲和感；Mono 沿用现有 Plex Mono，改动最小。'),
- ('4', 'Instrument Sans + Instrument Serif（仅大标题）+ DM Mono', "'Instrument Sans'", "'Instrument Sans'", "'DM Mono'",
-  '正文无衬线、大标题用衬线，最有"精品/编辑"气质，适合印刷与视频；代价是三种字体，衬线只能用在大标题。'),
+ ('4', 'DM Sans + Instrument Serif（仅大标题）+ DM Mono', "'DM Sans'", "'DM Sans'", "'DM Mono'",
+  'DM Sans 字面更宽、笔画更实，和 DM Mono 同一家族；大标题用 Instrument Serif，保留"精品/编辑"气质。仍是三种字体，衬线只用在大标题。'),
  ('5', 'Hanken Grotesk + Fragment Mono', "'Hanken Grotesk'", "'Hanken Grotesk'", "'Fragment Mono'",
   '偏瑞士国际主义的 Grotesk，克制、精致，接近高端硬件品牌的感觉；Fragment Mono 线条细，做系统/模型类物料的点缀。'),
 ]
@@ -26,7 +26,7 @@ css += """html[data-f="4"] .pn h1,html[data-f="4"] .pn h2{font-family:'Instrumen
 #ft .x{float:right;border:0;background:none;width:auto;padding:0;margin:0;color:#55555c}
 #ft.min button:not(.x),#ft.min p{display:none}
 """
-fam = 'family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Manrope:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600&family=Fragment+Mono&display=swap'
+fam = 'family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Manrope:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Instrument+Serif&family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600&family=Fragment+Mono&display=swap'
 head = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?%s"><style id="font-trial">%s</style>' % (fam, css))
 btns = ''.join('<button data-k="%s" aria-pressed="false">%s</button>' % (k, n) for k, n, *_ in OPTS)
