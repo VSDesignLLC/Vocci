@@ -152,4 +152,12 @@ stack = ''.join('<div class="fo-bar" id="fo-%s"><span>方案 %s · 整页</span>
 page = ('<!doctype html><html lang="zh-CN"><head>%s<link rel="stylesheet" href="https://fonts.googleapis.com/css2?%s"><style id="font-system">%s%s</style></head>'
         '<body><div class="fs">%s%s%s</div>%s</body></html>') % (head, fam, scope(CSS), optcss, cover, ''.join(board(o) for o in OPTS), cn, stack)
 page = re.sub(r'<title>.*?</title>', '', page, flags=re.S).replace('<head>', '<head><title>Vocci Font Options</title>', 1)
+# Figma importers render server-side: any generic fallback (Helvetica/Arial/system-ui/Georgia) or a missing CJK glyph
+# lands on the server's fonts (Liberation Sans, WenQuanYi). Point every fallback at fonts Figma has.
+SANS_FB, MONO_FB, SERIF_FB = "'Inter','Noto Sans SC',sans-serif", "'IBM Plex Mono','Noto Sans SC',monospace", "'Noto Serif SC','Noto Sans SC',serif"
+for a, b in [("Helvetica,Arial,sans-serif", SANS_FB), ("-apple-system,BlinkMacSystemFont,sans-serif", SANS_FB), ("system-ui,-apple-system,sans-serif", SANS_FB),
+             ("system-ui,sans-serif", SANS_FB), ("ui-monospace,monospace", MONO_FB), ("Georgia,'Times New Roman',serif", SERIF_FB), ("Georgia,serif", SERIF_FB),
+             ("'IBM Plex Mono',monospace", "'IBM Plex Mono','Noto Sans SC',monospace"), ("'IBM Plex Sans',sans-serif", "'IBM Plex Sans','Noto Sans SC',sans-serif")]:
+    page = page.replace(a, b)
+page = page.replace('&display=swap">', '&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500&display=swap">', 1)
 (R / 'figma' / 'font-system.html').write_text(page); print('font-system', len(page))
