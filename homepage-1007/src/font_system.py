@@ -58,7 +58,22 @@ def board(o):
     return ('<section class="bd"><header><span class="no">方案 %s</span><h2 style="font-family:%s;font-weight:%s">%s</h2><div class="tags"><span>%s</span><span>%s</span><span>全部 SIL OFL 1.1 · 可商用</span></div></header>'
             '<div class="intro"><p>%s</p><p><b>适合：</b>%s</p><p><b>注意：</b>%s</p></div>'
             '<h4>字体 Fonts</h4><div class="fcs">%s</div><h4>网页中的应用 Type scale（桌面 1440）</h4><table><thead><tr><th>角色</th><th>字体</th><th>字号 / 字重 / 行高 / 字距</th><th>示例</th></tr></thead><tbody>%s</tbody></table>'
-            '<h4>组合示例 In context</h4>%s</section>') % (o['n'], disp, dweight, o['name'], o['tone'], o['fam'], html.escape(o['about']), html.escape(o['fit']), html.escape(o['risk']), cards, rows, spec)
+            '<h4>组合示例 In context</h4>%s<h4>整页效果 Full page · 桌面 1440</h4><p class="fp">在下方框内滚动查看整个官网；导入 Figma 请使用单独链接 <a href="font-option-%s.html">font-option-%s.html</a>（嵌入的网页不会被导入工具抓取）。</p><iframe class="fpv" src="font-option-%s.html" title="方案 %s 整页" loading="lazy"></iframe></section>') % (o['n'], disp, dweight, o['name'], o['tone'], o['fam'], html.escape(o['about']), html.escape(o['fit']), html.escape(o['risk']), cards, rows, spec, o['n'], o['n'], o['n'], o['n'])
+
+# ---------- per-option full pages: desktop static snapshot locked to one pairing (each is its own Figma-import URL) ----------
+BASE = (R / 'figma' / 'vocci-1007-desktop-1440.html').read_text()
+def gfam(f):
+    q = f.replace(' ', '+')
+    return {'DM Sans': 'DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600', 'Newsreader': 'Newsreader:opsz,wght@6..72,400;6..72,500',
+            'Source Serif 4': 'Source+Serif+4:opsz,wght@8..60,400;8..60,500', 'Fragment Mono': 'Fragment+Mono'}.get(f, q + ':wght@400;500;600')
+for o in OPTS:
+    fams = [o['sans'], o['mono']] + ([o['disp']] if o['disp'] else [])
+    link = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?%s&display=swap">' % '&'.join('family=' + gfam(f) for f in fams)
+    css = ":root,html *{--font-body:%s!important;--font-word:%s!important;--font-display:%s!important;--font-mono:%s!important}" % (ff(o['sans'], 'sans'), ff(o['sans'], 'sans'), ff(o['sans'], 'sans'), ff(o['mono'], 'mono'))
+    if o['disp']: css += ".pn h1,.pn h2{font-family:%s!important;font-weight:500!important;letter-spacing:-.015em!important}" % ff(o['disp'], 'serif')
+    page_o = BASE.replace('</head>', link + '<style id="font-option">' + css + '</style></head>', 1)
+    page_o = page_o.replace('<title>Vocci Homepage · desktop-1440</title>', '<title>Vocci · Font option %s</title>' % o['n'], 1)
+    (R / 'figma' / ('font-option-%s.html' % o['n'])).write_text(page_o)
 fam = 'family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Manrope:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600&family=Fragment+Mono&family=IBM+Plex+Sans:wght@400;500;600&display=swap'
 CSS = """*{box-sizing:border-box}html,body{margin:0;width:1440px;background:#f5f5f3;color:#141416;font:15px/1.6 'IBM Plex Sans',system-ui,sans-serif}
 a{color:inherit}.wrap{width:1440px}
@@ -97,6 +112,8 @@ table:not(.ov) td{padding:16px 14px;border-bottom:1px solid #e3e3df;vertical-ali
 .mc li{font-size:11.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;border:1px solid rgba(20,20,22,.08);border-radius:10px;padding:10px 12px;background:#fafaf8;width:max-content}
 .mc .mb{margin-top:auto;align-self:flex-start;background:#141416;color:#fff;border-radius:8px;padding:14px 22px;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
 .mc.dark{background:#17181c;border-color:#17181c}.mc.dark h3{color:#ececf1}.mc.dark p{color:#c9c9d2}.mc.dark .ml{color:#F47546}
+.fp{margin:0 0 14px;font-size:13.5px;color:#55555c}.fp a{font-family:'IBM Plex Mono',monospace}
+.fpv{display:block;width:1440px;height:900px;margin:0 -80px -80px;border:0;border-top:1px solid #d6d6d2;background:#fff}
 .cn{padding:64px 80px 96px;background:#fff}.cn p{max-width:900px;color:#3a3a3f}
 """
 ov = ''.join('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (o['n'], o['name'], o['tone'], o['fam'], o['fit']) for o in OPTS)
