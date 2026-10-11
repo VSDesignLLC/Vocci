@@ -228,6 +228,39 @@
 /* 1007-e · phone nav: hamburger opens the section links */
 (function(){ var nav=document.querySelector('.gridall>.nav'), bar=nav&&nav.querySelector('.navbar'), cart=bar&&bar.querySelector('.cart'); if(!cart) return;
   var b=document.createElement('button'); b.className='burger'; b.setAttribute('aria-label','Menu'); b.setAttribute('aria-expanded','false'); b.innerHTML='<i></i><i></i>'; bar.insertBefore(b,cart);
-  var m=document.createElement('div'); m.className='nav-menu'; Array.prototype.forEach.call(bar.querySelectorAll('a:not(.wordmark):not(.cart)'),function(a){ var x=document.createElement('a'); x.href=a.getAttribute('href'); x.textContent=a.querySelector('span').textContent; m.appendChild(x); }); nav.appendChild(m);
+  /* 1011 · the phone menu lists the dropdown groups with their links */
+  var m=document.createElement('div'); m.className='nav-menu'; Array.prototype.forEach.call(bar.querySelectorAll('.nd'),function(g){ var h=document.createElement('h6'); h.textContent=g.querySelector('.nd-t span').textContent; m.appendChild(h); Array.prototype.forEach.call(g.querySelectorAll('.nd-m a'),function(a){ var x=document.createElement('a'); x.href=a.getAttribute('href'); x.textContent=a.querySelector('span').textContent; m.appendChild(x); }); }); nav.appendChild(m);
   var set=function(on){ nav.classList.toggle('menu-open',on); b.setAttribute('aria-expanded',on); }; b.addEventListener('click',function(){ set(!nav.classList.contains('menu-open')); }); m.addEventListener('click',function(e){ if(e.target.tagName==='A') set(false); }); addEventListener('scroll',function(){ if(nav.classList.contains('away')) set(false); },{passive:true});
 })();
+
+/* 1011 · nav dropdowns: hover on desktop, tap to open on touch screens */
+(function(){ var groups=Array.prototype.slice.call(document.querySelectorAll('.gridall>.nav .nd')); if(!groups.length) return;
+  var close=function(x){ groups.forEach(function(g){ if(g!==x){ g.classList.remove('open'); g.querySelector('.nd-t').setAttribute('aria-expanded','false'); } }); };
+  groups.forEach(function(g){ var t=g.querySelector('.nd-t'); t.addEventListener('click',function(e){ e.stopPropagation(); var on=!g.classList.contains('open'); close(g); g.classList.toggle('open',on); t.setAttribute('aria-expanded',on); });
+    g.addEventListener('mouseleave',function(){ g.classList.remove('open'); t.setAttribute('aria-expanded','false'); }); });
+  document.addEventListener('click',function(){ close(null); }); addEventListener('keydown',function(e){ if(e.key==='Escape') close(null); });
+})();
+
+/* 1011 · colours: finish tabs + view switch on one full-screen image; finishes cycle while on screen until someone picks one */
+(function(){ var sec=document.getElementById('colors'); if(!sec) return; var st=sec.querySelector('.stage');
+  var fs=Array.prototype.slice.call(sec.querySelectorAll('.fnx-f')), vs=Array.prototype.slice.call(sec.querySelectorAll('.fnx-v')), im=Array.prototype.slice.call(sec.querySelectorAll('.fnx-img'));
+  var f='lumen', v='wear', t=null, held=false, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(){ im.forEach(function(i){ var on=i.dataset.f===f&&i.dataset.v===v; i.classList.toggle('on',on); if(on) i.loading='eager'; });
+    fs.forEach(function(b){ var on=b.dataset.f===f; b.classList.toggle('on',on); b.setAttribute('aria-selected',on); });
+    vs.forEach(function(b){ var on=b.dataset.v===v; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on); }); st.dataset.view=v; }
+  function stop(){ clearInterval(t); t=null; }
+  function play(){ stop(); if(held||reduce) return; t=setInterval(function(){ var k=0; fs.forEach(function(b,i){ if(b.dataset.f===f) k=i; }); f=fs[(k+1)%fs.length].dataset.f; show(); },4500); }
+  fs.forEach(function(b){ b.addEventListener('click',function(){ held=true; stop(); f=b.dataset.f; show(); }); });
+  vs.forEach(function(b){ b.addEventListener('click',function(){ held=true; stop(); v=b.dataset.v; show(); }); });
+  im.forEach(function(i){ if(i.dataset.v==='wear') i.loading='eager'; });
+  new IntersectionObserver(function(es){ es[0].isIntersecting?play():stop(); },{threshold:.4}).observe(sec); show(); })();
+
+/* 1011 · creator cards: arrows step one card at a time */
+(function(){ var sec=document.getElementById('kol'); if(!sec) return; var row=sec.querySelector('.kol-row'), p=sec.querySelector('.kol-b.prev'), n=sec.querySelector('.kol-b.next'); if(!row||!p||!n) return;
+  var step=function(d){ var c=row.querySelector('.kol-card'); row.scrollBy({left:d*(c?c.offsetWidth:row.clientWidth/3),behavior:'smooth'}); };
+  var upd=function(){ p.disabled=row.scrollLeft<4; n.disabled=row.scrollLeft+row.clientWidth>=row.scrollWidth-4; };
+  p.addEventListener('click',function(){ step(-1); }); n.addEventListener('click',function(){ step(1); }); row.addEventListener('scroll',upd,{passive:true}); addEventListener('resize',upd); upd(); })();
+
+/* 1011 · FAQ accordion: one answer open at a time */
+(function(){ var qs=Array.prototype.slice.call(document.querySelectorAll('#faq .fq')); if(!qs.length) return;
+  qs.forEach(function(q){ var b=q.querySelector('.fq-q'); b.addEventListener('click',function(){ var on=!q.classList.contains('open'); qs.forEach(function(x){ x.classList.remove('open'); x.querySelector('.fq-q').setAttribute('aria-expanded','false'); }); q.classList.toggle('open',on); b.setAttribute('aria-expanded',on); }); }); })();

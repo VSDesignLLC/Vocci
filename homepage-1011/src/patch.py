@@ -487,8 +487,9 @@ s = s.replace(_a, '<img class="bgimg" fetchpriority="high" decoding="async" src=
 s = re.sub(r'<img class="bgimg hero-top"[^>]*>', '', s, count=1)
 
 # ---------- 1011 · reorder sections to the 3.0 framework ----------
-ORDER_30 = ['hero', 'how', 'why', 'why-b', 'scenes', 'needs', 'scenes2', 'community', 'finishes', 'breather',
-            'privacy', 'press', 'awards', 'hardware', 'faq']
+exec((R/'src/patch_1011.py').read_text())
+ORDER_30 = ['hero', 'how', 'why', 'scenes', 'why-b', 'needs', 'scenes2', 'community', 'colors', 'breather',
+            'privacy', 'kol', 'awards', 'hardware', 'faq']
 _blocks = {m.group(1): m for m in re.finditer(r'<section id="([\w-]+)"[^>]*>.*?</section>', s, re.S)}
 assert set(ORDER_30) <= set(_blocks), set(ORDER_30) - set(_blocks)
 _first = min(m.start() for k, m in _blocks.items() if k in ORDER_30)
