@@ -112,10 +112,11 @@ _put('why-b', _t)
 _FIN = [('lumen', 'Lumen', 'Mirror silver', '#e9e8e4'), ('midnight', 'Midnight', 'Matte black', '#1c1c1f'), ('dawn', 'Dawn', 'Mirror gold', '#c9a063'),
         ('lux', 'Lux', 'Black & silver', 'linear-gradient(135deg,#d6d7d9,#a9abae)')]
 _VIEWS = [('wear', 'On hand', 'img3/wear-%s.jpg'), ('ring', 'Ring', 'img3/finish-%s.png'), ('case', 'Charging case', 'img3/box-%s.png')]
-_LUXV = {'wear': 'img3/wear-lux-ms.jpg', 'ring': 'img3/finish-lux-ms.png', 'case': 'img3/box-lux-ms.png'}   # Lux re-shot in matte silver (2026-10-12); new names beat browser caches
+_LUXV = {'wear': 'img3/wear-lux-ms.jpg', 'ring': 'img3/finish-lux-ms.png', 'case': 'img3/box-lux-ms.png'}
+_OVR = {('lumen', 'ring'): 'img3/finish-lumen-v2.png', ('lumen', 'case'): 'img3/box-lumen-v2.png'}   # Lumen renders corrected 2026-10-12   # Lux re-shot in matte silver (2026-10-12); new names beat browser caches
 _t = _sec('finishes').group()
 _imgs = ''.join('<img class="fnx-img fnx-%s%s" data-f="%s" data-v="%s" loading="lazy" decoding="async" src="%s" alt="Vocci ring in %s, %s">'
-                % (v, ' on' if (f == 'lumen' and v == 'wear') else '', f, v, _LUXV[v] if f == 'lux' else src % f, name, lab.lower()) for f, name, sub, sw in _FIN for v, lab, src in _VIEWS)
+                % (v, ' on' if (f == 'lumen' and v == 'wear') else '', f, v, _LUXV[v] if f == 'lux' else _OVR.get((f, v), src % f), name, lab.lower()) for f, name, sub, sw in _FIN for v, lab, src in _VIEWS)
 _imgs = ''.join('<img class="fnx-img fnx-wearbg%s" data-f="%s" data-v="wear" loading="lazy" decoding="async" src="%s" alt="" aria-hidden="true">' % (' on' if f == 'lumen' else '', f, _LUXV['wear'] if f == 'lux' else 'img3/wear-%s.jpg' % f) for f, name, sub, sw in _FIN) + _imgs
 _tabs = ''.join('<button class="fnx-f%s" type="button" role="tab" aria-selected="%s" data-f="%s"><i class="fn-sw" style="background:%s"></i><span><b>%s</b>%s</span></button>'
                 % (' on' if f == 'lumen' else '', 'true' if f == 'lumen' else 'false', f, sw, name, sub.replace('&', '&amp;')) for f, name, sub, sw in _FIN)
