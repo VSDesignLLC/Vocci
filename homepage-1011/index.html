@@ -3232,6 +3232,18 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 @media(max-width:1100px){ #kol .kv-slide .kv-txt{overflow:visible!important;flex:1} #kol .kv-slide .kv-txt .tlink{margin-top:auto} #kol .pn.kv-title{padding-bottom:24px!important} }
 @media(max-width:1100px){ #kol .kv-slide .kv-txt{padding-bottom:28px!important} }
 /* 1011-zv · nav stays on screen while scrolling (as on vocci.ai) */ .js .gridall>.nav.nav3.in.away{opacity:1!important;transform:none!important;pointer-events:auto!important}
+/* 1011-zw · phone/tablet privacy: the three promises sit in one row */
+@media(max-width:1100px){
+  #privacy .stage{flex-direction:row!important;flex-wrap:wrap!important}
+  #privacy .stage>*:not(.pv){width:100%!important;flex:0 0 100%!important}
+  #privacy .stage>.pn.pv{width:33.333%!important;flex:0 0 33.333%!important;height:auto!important;min-height:0!important;padding:16px 10px 20px!important;gap:6px!important;order:5;justify-content:flex-start!important;box-shadow:inset 1px 0 0 rgba(20,20,22,.08),inset 0 1px 0 rgba(20,20,22,.08)!important}
+  #privacy .pn.pv .label{display:none}
+  #privacy .pn.pv .ic{width:22px;height:22px}
+  #privacy .pn.pv .pv-badge{width:52px}
+  #privacy .pn.pv h3{font-size:13.5px!important;line-height:1.25;margin:2px 0 0}
+  #privacy .pn.pv p{font-size:11.5px!important;line-height:1.4;margin-top:0!important;max-width:none}
+}
+@media(min-width:700.5px) and (max-width:1100px){ #privacy .stage>.pn.pv{padding:22px 18px 26px!important} #privacy .pn.pv h3{font-size:16px!important} #privacy .pn.pv p{font-size:13px!important} #privacy .pn.pv .pv-badge{width:72px} }
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
