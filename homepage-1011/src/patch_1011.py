@@ -432,3 +432,37 @@ _put('faq', '<section id="faq" data-bgop=".4"><div class="stage flat fq5s">' + _
      '<div class="pn fq5-cats" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:2/span 1" role="tablist" aria-label="FAQ categories">' + _fcats + '</div>'
      '<div class="pn fq5-list" style="--gc:2/span 3;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1"><ol>' + _items + '</ol></div>'
      '<div class="rowline" style="grid-row:2"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div></div></section>')
+
+# ---------- 1011-zi · footer: one full screen, after getspot.com — wordmark + statement on top, link columns below ----------
+_m = re.search(r'<footer id="footer".*?</footer>', s, re.S); _f = _m.group()
+_bg = re.search(r'<img[^>]*class="bgimg blur"[^>]*>', _f).group()
+_wmb = re.search(r'<span class="wmbig split".*?</svg></span></span></span>', _f, re.S).group()
+_form = re.search(r'<form class="end f-sub".*?</form>', _f, re.S).group().replace('class="end f-sub"', 'class="f-sub"')
+_SOC2 = [('Instagram', 'https://www.instagram.com/vocci.ai/', '<rect x="3" y="3" width="14" height="14" rx="4"/><circle cx="10" cy="10" r="3.2"/><circle cx="14.2" cy="5.8" r=".6"/>'),
+         ('YouTube', 'https://www.youtube.com/@vocci-ai', '<rect x="2.5" y="4.5" width="15" height="11" rx="3"/><path d="M8.5 7.6v4.8l4-2.4z"/>'),
+         ('X', 'https://x.com/vocci_ai', '<path d="M4 4l12 12M16 4L4 16"/>'),
+         ('LinkedIn', 'https://www.linkedin.com/company/gygeslabs/', '<rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 9v5M7 6.5v.1M10 14v-3a2 2 0 014 0v3M10 9v5"/>'),
+         ('Facebook', 'https://www.facebook.com/profile.php?id=61583450473364', '<circle cx="10" cy="10" r="7"/><path d="M11 17v-6h2M11 11V8.5A1.5 1.5 0 0112.5 7H14M9 11h4"/>'),
+         ('Discord', 'https://discord.gg/2KZKzdpvN3', '<path d="M5 6c3-1.5 7-1.5 10 0l1.5 7c-1.5 1.2-3 1.8-4 2l-.8-1.5M5 6L3.5 13c1.5 1.2 3 1.8 4 2l.8-1.5M7.5 12.5c1.6.7 3.4.7 5 0"/><circle cx="8" cy="10" r=".7"/><circle cx="12" cy="10" r=".7"/>')]
+def _col(h, links):
+    return '<div class="fg2"><h5>%s</h5><ul>%s</ul></div>' % (h, ''.join('<li><a href="%s">%s</a></li>' % (u, a) for a, u in links))
+_lns = _lines(_sec('hardware').group())
+_foot = ('<footer id="footer" data-bgop="0"><div class="stage foot ft2">' + _bg + _lns +
+  '<div class="pn ft2-mark" style="--gc:1/span 2;--gr:1/span 1;--tc:1/span 2;--tr:1/span 1">' + _wmb + '</div>'
+  '<div class="pn ft2-say" style="--gc:3/span 2;--gr:1/span 1;--tc:1/span 2;--tr:2/span 1"><h2>Real life,<br>carried forward.</h2>' + _form + '</div>'
+  '<div class="pn ft2-c" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 1;--tr:3/span 1">'
+    + _col('Store', [('Shop', 'https://vocci.ai/products/vocci-ring'), ('Membership', 'https://vocci.ai/pages/membership')])
+    + _col('For developers', [('Connect Your AI', 'https://vocci.ai/pages/connect-your-ai'), ('Dev Community', 'https://vocci.ai/pages/developer')]) + '</div>'
+  '<div class="pn ft2-c" style="--gc:2/span 1;--gr:2/span 1;--tc:2/span 1;--tr:3/span 1">'
+    + _col('Company', [('About Us', 'https://vocci.ai/pages/about-us'), ('Contact Us', 'https://support.vocci.ai/hc/en-us/requests/new'), ('Tech', 'https://vocci.ai/pages/tech'),
+                       ('Trust Center', 'https://trust.vocci.ai/'), ('Blog', 'https://vocci.ai/blogs/news')]) + '</div>'
+  '<div class="pn ft2-c" style="--gc:3/span 1;--gr:2/span 1;--tc:1/span 1;--tr:4/span 1">'
+    + _col('Support', [('Support Center', 'https://support.vocci.ai/'), ('Shipping and return', 'https://vocci.ai/policies/shipping-policy'), ('Refund policy', 'https://vocci.ai/policies/refund-policy'),
+                       ('Privacy policy', 'https://vocci.ai/policies/privacy-policy'), ('Terms of service', 'https://vocci.ai/policies/terms-of-service'),
+                       ('Product warranty', 'https://vocci.ai/pages/product-warranty'), ('Cookie policy', 'https://vocci.ai/pages/cookie-policy')]) + '</div>'
+  '<div class="pn ft2-c ft2-last" style="--gc:4/span 1;--gr:2/span 1;--tc:2/span 1;--tr:4/span 1"><div class="fg2"><h5>Follow</h5><ul class="ft2-soc">'
+    + ''.join('<li><a href="%s" aria-label="%s"><svg viewBox="0 0 20 20" aria-hidden="true">%s</svg></a></li>' % (u, n, p) for n, u, p in _SOC2) + '</ul></div>'
+  '<p class="end ft2-legal">Vocci builds AI wearables with a privacy-first design. GDPR compliant, verified by GDPR Local.<br>© 2026, Vocci. All rights reserved.</p></div>'
+  '<div class="rowline" style="grid-row:2"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div>'
+  '</div></footer>')
+s = s[:_m.start()] + _foot + s[_m.end():]
