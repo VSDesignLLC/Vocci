@@ -123,9 +123,10 @@ _put('finishes', '<section id="colors" data-bgop="0"><div class="stage fnx" data
      '<div class="pn pic fnx-stage" style="--gc:1/span 4;--gr:1/span 2;--tc:1/span 2;--tr:1/span 1">' + _imgs + '</div>'
      '<div class="pn fnx-copy" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1"><h2>Looks like you.<br>Works with your AI.</h2>'
      '<p>Choose a finish that feels like your style, with the same AI connection in every ring.</p>'
-     '<div class="end btns"><a class="btn" href="https://vocci.ai/products/vocci-ring">Buy now</a><a class="tlink" href="https://vocci.ai/products/vocci-ring">Get a sizing kit</a></div></div>'
+     '</div>'
      '<div class="pn fnx-ctl" style="--gc:4/span 1;--gr:2/span 1;--tc:1/span 2;--tr:2/span 1"><span class="label">Finish</span><div class="fnx-tabs" role="tablist" aria-label="Finish">' + _tabs + '</div>'
-     '<span class="label">View</span><div class="fnx-views">' + _views + '</div></div>'
+     '<span class="label">View</span><div class="fnx-views">' + _views + '</div>'
+     '<div class="end btns fnx-buy"><a class="btn" href="https://vocci.ai/products/vocci-ring">Buy now</a><a class="tlink" href="https://vocci.ai/products/vocci-ring">Get a sizing kit</a></div></div>'
      '<div class="rowline" style="grid-row:2"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div>'
      '</div></section>')
 
