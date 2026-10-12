@@ -320,3 +320,12 @@
     if(k!==ch){ ch=k; st.dataset.ch=k; tabs.forEach(function(b,i){ b.classList.toggle('on',i===k); b.setAttribute('aria-selected',i===k); }); start(k); } }
   tabs.forEach(function(b,i){ b.addEventListener('click',function(){ var y=sec.getBoundingClientRect().top+scrollY+span()*(i/3+.12); if(window.__lenis) window.__lenis.scrollTo(y); else scrollTo({top:y,behavior:'smooth'}); }); });
   addEventListener('scroll',upd,{passive:true}); addEventListener('resize',upd); upd(); })();
+
+/* 1011-k · screen 6 personas: one open at a time; cycles every 5 s while on screen until someone picks */
+(function(){ var sec=document.getElementById('needs'), items=sec?Array.prototype.slice.call(sec.querySelectorAll('.pz-i')):[]; if(!items.length) return;
+  var k=0, t=null, held=false, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function open(i){ k=i; items.forEach(function(it,j){ it.classList.toggle('on',j===i); it.querySelector('.pz-h').setAttribute('aria-expanded',j===i); }); }
+  function stop(){ clearInterval(t); t=null; } function play(){ stop(); if(held||reduce) return; t=setInterval(function(){ open((k+1)%items.length); },5000); }
+  items.forEach(function(it,i){ var h=it.querySelector('.pz-h'); h.addEventListener('click',function(){ held=true; stop(); open(i); }); h.addEventListener('mouseenter',function(){ stop(); open(i); }); });
+  sec.querySelector('.pz-acc').addEventListener('mouseleave',play);
+  new IntersectionObserver(function(es){ es[0].isIntersecting?play():stop(); },{threshold:.4}).observe(sec); })();
