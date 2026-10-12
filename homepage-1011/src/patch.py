@@ -175,7 +175,7 @@ edit('press', creators)
 def hardware(t):
     t = t.replace('<div class="stage dk"><img class="bgimg" src="img2/p-6_1.jpg" alt="" style="object-position:50% 45%;opacity:1">', '<div class="stage flat">')
     t = t.replace('<div class="pn " style="grid-column:1/span 1;grid-row:1/span 1"><h2>Every detail, considered.</h2>',
-                  '<div class="pn pic contain exploded a-photo" style="grid-column:2/span 2;grid-row:1/span 2"><img src="img3/detail-exploded.png" alt="Exploded view of the Vocci ring"></div><div class="pn " style="grid-column:1/span 1;grid-row:1/span 1"><h2>Every detail, considered.</h2>')
+                  '<div class="pn pic contain exploded a-photo" style="grid-column:2/span 2;grid-row:1/span 2"><img src="img3/detail-exploded-cut.webp" alt="Exploded view of the Vocci ring"></div><div class="pn " style="grid-column:1/span 1;grid-row:1/span 1"><h2>Every detail, considered.</h2>')
     t = t.replace('src="img2/p-10_1.jpg"', 'src="img3/detail-button.jpg"').replace('src="img2/m76.jpg"', 'src="img3/detail-ruler.jpg"').replace('src="img2/ip67-0923.jpg" alt="" style="object-position:50% 55%"', 'src="img3/detail-ip67.jpg" alt="" style="object-position:50% 50%"')
     return t
 edit('hardware', hardware)

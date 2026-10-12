@@ -1992,3 +1992,5 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 #kol .stage.kv>.kv-pic,#kol .stage.kv>.kv-txt{transition:opacity .22s ease}
 #kol .stage.kv.kv-swap>.kv-pic,#kol .stage.kv.kv-swap>.kv-txt{opacity:0!important}
 @media(max-width:700px){ #kol .kv-nav{display:none} }
+/* 1011-zz27 · phone/tablet: the exploded render sits on the grey ground, not on its white backdrop */
+@media(max-width:700px){ #hardware .pn.exploded{background:transparent!important} }   /* the render itself is now a transparent cut-out (img3/detail-exploded-cut.webp) */
