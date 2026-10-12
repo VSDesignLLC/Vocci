@@ -3301,8 +3301,24 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 @media(prefers-reduced-motion:reduce){.cta-fx>*{transition:none!important;animation:none!important}}
 /* 1011-zz11 · screen 3 card: no orange dot (spacing kept as before) */
 #why .rec-card .rec-dot{display:none!important}
+/* 1011-zz17 · intro: ring top view → flies onto the ring in the hero case → the ring opens like an iris */
+.vl-intro{display:none}
+.vl-on .vl-intro{display:block;position:fixed;inset:0;z-index:2147483000;background:#e8e8e5;pointer-events:none;
+  -webkit-mask:radial-gradient(circle at var(--x,50%) var(--y,50%),transparent var(--r,0px),#000 calc(var(--r,0px) + 1px));
+          mask:radial-gradient(circle at var(--x,50%) var(--y,50%),transparent var(--r,0px),#000 calc(var(--r,0px) + 1px))}
+.vl-on body{overflow:hidden}
+.vl-intro .vl-ring{position:fixed;left:0;top:0;width:var(--s,150px);height:var(--s,150px);transform:translate(calc(var(--rx,50vw) - 50%),calc(var(--ry,50vh) - 50%)) rotate(var(--rz,0deg));will-change:transform}
+.vl-ring img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 14px 18px rgba(0,0,0,.12));opacity:var(--io,1)}
+.vl-ring svg{position:absolute;inset:-26%;width:152%;height:152%;transform:rotate(-90deg);opacity:var(--ao,1)}
+.vl-ring circle{fill:none;stroke-width:1.2;vector-effect:non-scaling-stroke}
+.vl-ring .trk{stroke:rgba(20,20,22,.1)}
+.vl-ring .arc{stroke:#F47546;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--p,0));stroke-linecap:round;transition:stroke-dashoffset .35s ease}
+.vl-pct{position:fixed;left:50%;top:calc(50% + 140px);transform:translateX(-50%);font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;color:rgba(20,20,22,.45);opacity:var(--ao,1)}
+.ring-fly{position:fixed;left:0;top:0;z-index:60;pointer-events:none;opacity:0;will-change:transform,opacity;transform-origin:50% 50%}
+.ring-fly img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 18px 22px rgba(0,0,0,.14))}
+@media(prefers-reduced-motion:reduce){.vl-on .vl-intro{display:none}.ring-fly{display:none}}
 
-</style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-pebble.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
+</style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="vl-intro" aria-hidden="true"><div class="vl-ring"><img src="img3/ring-top.webp" alt=""><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg></div><span class="vl-pct">00</span></div><script>document.documentElement.classList.add("vl-on");document.body.appendChild(document.querySelector(".vl-intro"))</script><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-pebble.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
 <path stroke-width="2.6" d="M58.39 3.66A26.30 26.30 0 0 1 80.61 3.66"/>
 <path stroke-width="2.6" d="M60.21 8.45A21.20 21.20 0 0 1 78.79 8.45"/>
@@ -3766,6 +3782,78 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
       fx.style.setProperty('--mx',x+'px'); fx.style.setProperty('--my',y+'px'); fx.style.setProperty('--d',d+'px');
     });
   });
+})();
+
+/* 1011-zz17 · intro + hero→screen-2 ring hand-off */
+(function(){
+  var root=document.documentElement, L=document.querySelector('.vl-intro'), hero=document.getElementById('hero');
+  var bg=hero&&hero.querySelector('.stage>.bgimg'), how=document.getElementById('how');
+  var RING=[898/2000,497/1126,118/2000];   /* the ring inside the case: x, y, outer diameter as a share of the photo width */
+  function ringOnScreen(){
+    if(!bg||!bg.naturalWidth) return {x:innerWidth*.45,y:innerHeight*.45,d:innerWidth*.06};
+    var r=bg.getBoundingClientRect(), iw=bg.naturalWidth, ih=bg.naturalHeight, s=Math.max(r.width/iw,r.height/ih), dw=iw*s, dh=ih*s;
+    var op=getComputedStyle(bg).objectPosition.split(' ').map(parseFloat), ox=(r.width-dw)*(op[0]||50)/100, oy=(r.height-dh)*(isNaN(op[1])?50:op[1])/100;
+    return {x:r.left+ox+RING[0]*dw, y:r.top+oy+RING[1]*dh, d:RING[2]*dw};
+  }
+  var ease=function(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}, out=function(t){return 1-Math.pow(1-t,4)};
+  function done(){ root.classList.remove('vl-on'); if(L) L.remove(); }
+  if(!L||matchMedia('(prefers-reduced-motion: reduce)').matches){ done(); }
+  else{
+    var p=0, shown=0, t0=performance.now(), ready=false, S=Math.min(150,innerWidth*.34);
+    L.style.setProperty('--s',S+'px');
+    var imgs=[bg].concat([].slice.call(document.querySelectorAll('#how img'))).filter(Boolean), n=imgs.length, k=0;
+    imgs.forEach(function(i){ if(i.complete) k++; else { i.addEventListener('load',function(){k++}); i.addEventListener('error',function(){k++}); } });
+    var pct=L.querySelector('.vl-pct');
+    (function load(now){
+      var target=Math.min(1,Math.max(k/n,(now-t0)/2600)); if(now-t0<1100) target=Math.min(target,(now-t0)/1100);
+      shown+= (target-shown)*.12; L.style.setProperty('--p',shown.toFixed(3)); L.style.setProperty('--rz',((now-t0)*.03)+'deg');
+      pct.textContent=String(Math.round(shown*100)).padStart(2,'0');
+      if(shown>.985&&(bg?bg.complete:true)) return open(now);
+      requestAnimationFrame(load);
+    })(t0);
+    function open(start){
+      var a=ringOnScreen(), cx=innerWidth/2, cy=innerHeight/2, rz0=(start-t0)*.03, D1=700, D2=1000, far=Math.hypot(innerWidth,innerHeight);
+      (function step(now){
+        var t=now-start;
+        if(t<D1){ /* glide onto the photo's ring, shrinking to its size */
+          var e=ease(t/D1);
+          L.style.setProperty('--rx',(cx+(a.x-cx)*e)+'px'); L.style.setProperty('--ry',(cy+(a.y-cy)*e)+'px');
+          L.style.setProperty('--s',(S+(a.d-S)*e)+'px'); L.style.setProperty('--rz',(rz0*(1-e))+'deg'); L.style.setProperty('--ao',(1-e*1.6).toFixed(3));
+          L.style.setProperty('--x',a.x+'px'); L.style.setProperty('--y',a.y+'px'); L.style.setProperty('--r',(a.d*.3*e)+'px');
+        } else { /* the ring's opening becomes the reveal */
+          var u=Math.min(1,(t-D1)/D2), o=out(u);
+          L.style.setProperty('--r',(a.d*.3+(far-a.d*.3)*o)+'px'); L.style.setProperty('--io',(1-u*2.2).toFixed(3));
+          if(bg) bg.style.scale=(1.06-.06*o).toFixed(4);
+          if(u>=1){ if(bg) bg.style.scale=''; return done(); }
+        }
+        requestAnimationFrame(step);
+      })(start);
+    }
+    setTimeout(done,9000);   /* never trap the page */
+  }
+
+  /* scroll hand-off: a ring lifts out of the case and settles where screen 2's ring appears */
+  if(!how||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var fly=document.createElement('div'); fly.className='ring-fly'; fly.innerHTML='<img src="img3/ring-top.webp" alt="">'; document.body.appendChild(fly);
+  function tgt(){
+    var st=how.querySelector('.stage')||how, r=st.getBoundingClientRect();
+    if(how.classList.contains('how3d')) return {x:r.left+r.width*.474, y:r.top+r.height*.3, d:r.width*.14, tilt:56};
+    var pic=how.querySelector('.stage>.pn.pic img'), q=pic?pic.getBoundingClientRect():r;
+    return {x:q.left+q.width/2, y:q.top+q.height/2, d:Math.min(q.width,q.height)*.5, tilt:50};
+  }
+  function tick(){
+    var hr=hero.getBoundingClientRect(), wr=how.getBoundingClientRect(), span=Math.max(1,innerHeight);
+    var p=Math.min(1,Math.max(0,1-wr.top/span));            /* 0 when screen 2 starts entering, 1 when it fills the view */
+    var co=p>=1?'':Math.max(0,Math.min(1,(p-.82)/.16)).toFixed(3); how.querySelectorAll('canvas').forEach(function(cv){ cv.style.opacity=co; });
+    if(p<=0||p>=1||root.classList.contains('vl-on')){ fly.style.opacity=0; return; }
+    var a=ringOnScreen(), b=tgt(), e=ease(p);
+    var x=a.x+(b.x-a.x)*e, y=a.y+(b.y-a.y)*e - Math.sin(Math.PI*p)*innerHeight*.08, d=a.d+(b.d-a.d)*e;
+    fly.style.width=fly.style.height=d+'px';
+    fly.style.transform='translate('+(x-d/2)+'px,'+(y-d/2)+'px) perspective(900px) rotateX('+(b.tilt*e)+'deg) rotateZ('+(-28*e)+'deg)';
+    fly.style.opacity=Math.min(1,p*6,(1-p)/.12).toFixed(3);
+  }
+  var q=false; function on(){ if(!q){ q=true; requestAnimationFrame(function(){ q=false; tick(); }); } }
+  addEventListener('scroll',on,{passive:true}); addEventListener('resize',on); tick();
 })();
 
 </script>
