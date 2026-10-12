@@ -1372,3 +1372,4 @@
 #colors .fnx-wear[data-f="dawn"]{object-position:60% 49%}
 #colors .fnx-wear[data-f="midnight"]{object-position:51% 46%}
 #colors .fnx-wear[data-f="lux"]{object-position:52% 50%}
+#breather .stage>.bgimg{transform:scale(1.03)!important}
