@@ -1823,3 +1823,7 @@
 @media(max-width:700px) and (max-height:740px){ #why .pn.rec-pn{padding:12px 16px 12px!important;gap:8px!important} #why .rec-card{padding:12px 14px!important;gap:6px!important} #why .rec-steps{gap:4px} #why .rec-card .btn{height:34px} }
 @media(max-width:700px){ #why .pn.rec-pn{padding:14px 18px!important;gap:10px!important} #why .rec-card{padding:14px 16px!important;gap:7px!important} #why .rec-steps{gap:5px} }
 #colors .fnx-wear[data-f="lux"]{object-position:62% 58%!important}
+/* 1011-zo · ring renders shown at one size (the Lux render's ring footprint, ~48% of its canvas) */
+#colors .fnx-ring[data-f="lumen"]{scale:.76}
+#colors .fnx-ring[data-f="midnight"]{scale:.48}
+#colors .fnx-ring[data-f="dawn"]{scale:.48}
