@@ -355,3 +355,7 @@
   document.addEventListener('click',function(e){ if(!nav.contains(e.target)) show(null); });
   addEventListener('keydown',function(e){ if(e.key==='Escape') show(null); });
   addEventListener('scroll',function(){ if(nav.classList.contains('away')) show(null); },{passive:true}); })();
+
+/* 1011-zb · FAQ grid: one card open at a time */
+(function(){ var cs=Array.prototype.slice.call(document.querySelectorAll('#faq .pn.fq2')); if(!cs.length) return;
+  cs.forEach(function(c){ c.addEventListener('click',function(){ var on=!c.classList.contains('open'); cs.forEach(function(x){ x.classList.remove('open'); x.querySelector('.fq2-h').setAttribute('aria-expanded','false'); }); c.classList.toggle('open',on); c.querySelector('.fq2-h').setAttribute('aria-expanded',on); }); }); })();
