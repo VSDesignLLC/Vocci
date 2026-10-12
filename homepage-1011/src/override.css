@@ -1968,3 +1968,9 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 .btn.ghost:hover,.pn .btn.ghost:hover,#kol .kol-b:hover,.hh-b:hover,#footer .ft2-soc a:hover{border-color:var(--ink)!important;color:var(--ink)!important;background:var(--ghost-bg,transparent)!important}
 .btn.ghost,.pn .btn.ghost{--ghost-bg:rgba(255,255,255,.72);background:rgba(255,255,255,.72)!important;color:var(--ink)!important}
 .btn.ghost .cta-fx{display:none!important}
+/* 1011-zz22 · screen 3 card: orange point icons, a touch more room */
+#why .rec-card .rec-steps{gap:9px!important;margin-top:14px!important}
+#why .rec-card .rec-steps li{gap:14px!important;align-items:flex-start!important}
+#why .rec-card .rec-steps li .ico{flex:0 0 22px;margin-top:.3em;color:#F47546!important;stroke:#F47546!important;opacity:.7;transition:opacity .3s}
+#why .rec-card .rec-steps li .ico *{stroke:#F47546!important}
+#why .rec-card .rec-steps li.on .ico,#why .rec-card .rec-steps li[aria-current] .ico{opacity:1}
