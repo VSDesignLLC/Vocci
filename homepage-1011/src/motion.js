@@ -422,3 +422,17 @@
   st.querySelectorAll('img.fnx-wear').forEach(function(i){ i.addEventListener('load',fit); });
   addEventListener('resize',fit); fit(); setTimeout(fit,600);
 })();
+
+/* 1011-zz10 · CTA ring ripple: origin follows the pointer */
+(function(){
+  document.querySelectorAll('.btn,.n3-buy').forEach(function(b){
+    if(b.querySelector('.cta-fx')) return;
+    var fx=document.createElement('span'); fx.className='cta-fx'; fx.setAttribute('aria-hidden','true');
+    fx.innerHTML='<b></b><i></i><i></i>'; b.appendChild(fx);
+    b.addEventListener('pointerenter',function(e){
+      var r=b.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+      var d=2*Math.hypot(Math.max(x,r.width-x),Math.max(y,r.height-y))+4;
+      fx.style.setProperty('--mx',x+'px'); fx.style.setProperty('--my',y+'px'); fx.style.setProperty('--d',d+'px');
+    });
+  });
+})();
