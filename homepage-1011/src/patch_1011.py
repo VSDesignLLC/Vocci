@@ -428,6 +428,7 @@ _put('faq', '<section id="faq" data-bgop=".4"><div class="stage flat fq5s">' + _
      '<div class="pn fq5-head" style="--gc:1/span 1;--gr:1/span 1;--tc:1/span 2;--tr:1/span 1">'
      '<h2>Questions before you put it on?</h2><p>A few things people ask about recording, care and privacy.</p>'
      '<div class="end fq5-help"><p>Still curious?</p><a class="tlink" href="https://support.vocci.ai/">Support Center</a></div></div>'
+     '<div class="pn pic fq5-pic" style="--gc:2/span 3;--gr:1/span 1;--tc:1/span 2;--tr:2/span 1"><img loading="lazy" decoding="async" src="img3/ring-ridged.jpg" alt="Vocci ring resting on ridged metal" style="object-position:50% 42%"></div>'
      '<div class="pn fq5-cats" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:2/span 1" role="tablist" aria-label="FAQ categories">' + _fcats + '</div>'
      '<div class="pn fq5-list" style="--gc:2/span 3;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1"><ol>' + _items + '</ol></div>'
      '<div class="rowline" style="grid-row:2"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div></div></section>')
