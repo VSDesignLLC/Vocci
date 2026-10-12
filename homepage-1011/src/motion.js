@@ -373,3 +373,7 @@
   function pick(r){ if(r.classList.contains('on')) return; rows.forEach(function(x){ var on=x===r; x.classList.toggle('on',on); x.setAttribute('aria-pressed',on); });
     if(box){ var n=box.cloneNode(false); n.innerHTML='<b></b> '; n.firstChild.textContent=r.dataset.q.replace(/&amp;/g,'&'); n.appendChild(document.createTextNode(r.dataset.a)); box.parentNode.replaceChild(n,box); box=n; } }
   rows.forEach(function(r){ r.addEventListener('click',function(){ pick(r); }); r.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); pick(r); } }); if(hov) r.addEventListener('mouseenter',function(){ pick(r); }); }); })();
+
+/* 1011-ze · FAQ bars: one answer open at a time */
+(function(){ var it=Array.prototype.slice.call(document.querySelectorAll('#faq .fq5-i')); if(!it.length) return;
+  it.forEach(function(i){ i.querySelector('.fq5-h').addEventListener('click',function(){ var on=!i.classList.contains('open'); it.forEach(function(x){ x.classList.remove('open'); x.querySelector('.fq5-h').setAttribute('aria-expanded','false'); }); i.classList.toggle('open',on); i.querySelector('.fq5-h').setAttribute('aria-expanded',on); }); }); })();
