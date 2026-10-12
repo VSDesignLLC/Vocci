@@ -1339,3 +1339,22 @@
 }
 #needs .pn.pz-pic>img{padding:0;object-position:55% 50%}
 @media(max-width:700px){ #needs .pn.pz-title{order:0!important} #needs .pn.pz-pic{order:1!important} #needs .pn.pz-list{order:2!important} }
+/* 1011-l · screen 6 also carries the community: owners' words float over the scene, invite under the title */
+#needs .pn.pz-title{justify-content:flex-start}
+#needs .pz-join{display:flex;flex-direction:column;gap:14px}
+#needs .pz-join p{font-size:14px;line-height:1.5;color:#45454b;margin:0}
+#needs .pz-join .btns{display:flex;gap:10px;flex-wrap:wrap}
+#needs .pz-qb{position:absolute;z-index:3;margin:0;display:flex;gap:10px;align-items:flex-start;max-width:270px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(20,20,22,.06);opacity:0;transform:translateY(10px) scale(.96);transition:opacity .6s var(--ease) var(--d),transform .7s var(--ease) var(--d)}
+#needs .stage.in .pz-qb,#needs.qb-in .pz-qb{opacity:1;transform:none}
+#needs .pz-qb i{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#2a2c33;color:#fff;font:600 12px/1 var(--font-mono);font-style:normal}
+#needs .pz-qb q{display:block;font-size:13.5px;line-height:1.4;color:var(--ink);quotes:"“" "”"}
+#needs .pz-qb span{display:block;margin-top:6px;font:500 11px/1 var(--font-mono);color:var(--muted)}
+#needs .pz-qb span b{color:var(--accent-text);font-weight:500}
+#needs .pz-qb.on{border-color:rgba(244,117,70,.45)}#needs .pz-qb.on i{background:var(--accent)}
+@media(min-width:1101px) and (max-height:880px){ #needs .pz-join p{font-size:13px} }
+@media(max-width:700px){
+  #needs .pz-qb{max-width:62%;padding:9px 11px;gap:8px}#needs .pz-qb q{font-size:12px}#needs .pz-qb i{width:22px;height:22px;font-size:10px}
+  #needs .pz-qb:nth-of-type(1){left:2%!important;top:2%!important}#needs .pz-qb:nth-of-type(2){left:auto!important;right:2%;top:30%!important}#needs .pz-qb:nth-of-type(3){left:4%!important;top:auto!important;bottom:3%}
+  #needs .pz-join{margin-top:14px}
+}
+@media(max-width:700px){ #needs .pz-qb{left:4%!important;right:auto!important;top:auto!important;bottom:4%!important;max-width:80%;transition-delay:0s!important} #needs .stage.in .pz-qb:not(.on),#needs.qb-in .pz-qb:not(.on){opacity:0;transform:translateY(8px)} }
