@@ -416,3 +416,18 @@ _put('faq', '<section id="faq" data-bgop=".4"><div class="stage flat fq4s">' + _
      '<a class="tlink end" href="https://support.vocci.ai/">Support Center</a></div>'
      '<div class="pn fq4-ans" style="--gc:1/span 1;--gr:2/span 1" aria-live="polite"><p><b>' + _q0 + '</b> ' + _a0 + '</p></div>'
      '<div class="pn fq4-list" style="--gc:2/span 3;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1"><ol>' + _rows + '</ol></div></div></section>')
+
+# ---------- 1011-ze · FAQ after sangar.framer.website: headline left, frosted question bars floating over the grid (right half) ----------
+_items = ''
+_k = 0
+for cat, qs in FAQ:
+    for q, a in qs:
+        _items += ('<li class="fq5-i"><button class="fq5-h" type="button" aria-expanded="false"><span class="fq5-q">%s</span><i class="fq5-b" aria-hidden="true"></i></button>'
+                   '<div class="fq5-a"><div><p>%s</p></div></div></li>') % (q, a)
+        _k += 1
+_put('faq', '<section id="faq" data-bgop=".4"><div class="stage flat fq5s">' + _lines(_sec('hardware').group()) +
+     '<div class="pn fq5-head" style="--gc:1/span 2;--gr:1/span 1;--tc:1/span 2;--tr:1/span 1"><span class="fq5-tag"><i></i>FAQ</span>'
+     '<h2>Questions before<br>you put it on?</h2><p>A few things people ask about recording, care and privacy.</p></div>'
+     '<div class="pn fq5-foot" style="--gc:1/span 2;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1"><div class="end"><p>Still curious?</p><a class="tlink" href="https://support.vocci.ai/">Support Center</a></div></div>'
+     '<div class="pn fq5-list" style="--gc:3/span 2;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1"><ol>' + _items + '</ol></div>'
+     '<div class="rowline" style="grid-row:2"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div></div></section>')
