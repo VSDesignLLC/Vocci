@@ -113,7 +113,7 @@ _FIN = [('lumen', 'Lumen', 'Mirror silver', '#e9e8e4'), ('midnight', 'Midnight',
         ('lux', 'Lux', 'Black & silver', 'linear-gradient(135deg,#d6d7d9,#a9abae)')]
 _VIEWS = [('wear', 'On hand', 'img3/wear-%s.jpg'), ('ring', 'Ring', 'img3/finish-%s.png'), ('case', 'Charging case', 'img3/box-%s.png')]
 _LUXV = {'wear': 'img3/wear-lux-v3.jpg', 'ring': 'img3/finish-lux-ms.png', 'case': 'img3/box-lux-ms.png'}
-_OVR = {('lumen', 'wear'): 'img3/wear-lumen-v3.jpg', ('midnight', 'wear'): 'img3/wear-midnight-v3.jpg', ('dawn', 'wear'): 'img3/wear-dawn-v3.jpg', ('lumen', 'ring'): 'img3/finish-lumen-v2.png', ('lumen', 'case'): 'img3/box-lumen-v2.png'}   # Lumen renders corrected 2026-10-12   # Lux re-shot in matte silver (2026-10-12); new names beat browser caches
+_OVR = {('midnight', 'case'): 'img3/box-midnight-v2.png', ('lumen', 'wear'): 'img3/wear-lumen-v3.jpg', ('midnight', 'wear'): 'img3/wear-midnight-v3.jpg', ('dawn', 'wear'): 'img3/wear-dawn-v3.jpg', ('lumen', 'ring'): 'img3/finish-lumen-v2.png', ('lumen', 'case'): 'img3/box-lumen-v2.png'}   # Lumen renders corrected 2026-10-12   # Lux re-shot in matte silver (2026-10-12); new names beat browser caches
 _t = _sec('finishes').group()
 _imgs = ''.join('<img class="fnx-img fnx-%s%s" data-f="%s" data-v="%s" loading="lazy" decoding="async" src="%s" alt="Vocci ring in %s, %s">'
                 % (v, ' on' if (f == 'lumen' and v == 'wear') else '', f, v, _LUXV[v] if f == 'lux' else _OVR.get((f, v), src % f), name, lab.lower()) for f, name, sub, sw in _FIN for v, lab, src in _VIEWS)
