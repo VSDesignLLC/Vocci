@@ -351,7 +351,7 @@ _wm = re.search(r'<a class="wordmark".*?</a>', _n.group(), re.S).group()
 _cart = re.search(r'<a class="cart".*?</a>', _n.group(), re.S).group()
 _CHEV = '<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>'
 _TABS = [('Shop', 'https://vocci.ai/products/vocci-ring', [('Vocci Ring', '', 'https://vocci.ai/products/vocci-ring'), ('Membership', '', 'https://vocci.ai/pages/membership')]),
-         ('Tech', 'https://vocci.ai/pages/tech', [('Inside the ring', '', '#hardware'), ('Specs', '', 'https://vocci.ai/pages/tech'), ('Battery &amp; charging', '', '#hardware'), ('Privacy &amp; security', '', '#privacy')]),
+         ('Tech', 'https://vocci.ai/pages/tech', [('Inside the ring', '', '#hardware'), ('Specs', '', 'https://vocci.ai/pages/tech'), ('Charging', '', '#hardware'), ('Privacy', '', '#privacy')]),
          ('About Us', 'https://vocci.ai/pages/about-us', [('Our story', '', 'https://vocci.ai/pages/about-us'), ('Blog', '', 'https://vocci.ai/blogs/news'),
                                                          ('Trust Center', '', 'https://trust.vocci.ai/'), ('Contact Us', '', 'https://support.vocci.ai/hc/en-us/requests/new')]),
          ('Dev Community', 'https://vocci.ai/pages/developer', [('MCP docs', '', 'https://vocci.ai/pages/developer'), ('API reference', '', 'https://vocci.ai/pages/developer'), ('Examples', '', 'https://vocci.ai/pages/developer'), ('Discord', '', 'https://discord.gg/2KZKzdpvN3')]),
@@ -360,8 +360,8 @@ _tabs = ''
 _groups = ''
 for i, (name, href, kids) in enumerate(_TABS):
     if kids:
-        _tabs += ('<div class="n3-dd"><a class="n3-t" href="%s" aria-haspopup="true"><span>%s</span></a><div class="n3-sub">%s</div></div>'
-                  % (href, name, ''.join('<a href="%s">%s</a>' % (u, a) for a, d, u in kids)))
+        _tabs += '<a class="n3-t" href="%s" data-g="%d" aria-haspopup="true" aria-expanded="false"><span>%s</span></a>' % (href, i, name)
+        _groups += '<div class="n3-g" data-g="%d">%s</div>' % (i, ''.join('<a href="%s"><b>%s</b></a>' % (u, a) for a, d, u in kids))
     else:
         _tabs += '<a class="n3-t" href="%s"><span>%s</span></a>' % (href, name)
 _mob = ''.join(('<a class="n3-m1" href="%s">%s</a>' % (h, n)) if not k else ('<div class="n3-mg"><span class="n3-mh">%s</span>%s</div>' % (n, ''.join('<a href="%s">%s</a>' % (u, a) for a, d, u in k))) for n, h, k in _TABS)
