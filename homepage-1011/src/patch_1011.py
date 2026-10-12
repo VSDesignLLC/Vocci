@@ -400,3 +400,19 @@ _put('faq', '<section id="faq" data-bgop=".4"><div class="stage flat fq3s">' + _
      '<div class="pn fq3-head" style="--gc:1/span 1;--gr:1/span 2;--tc:1/span 2;--tr:1/span 1"><h2>FAQ</h2><div class="fq3-cats" role="tablist">' + _cats + '</div>'
      '<div class="end fq3-help"><p>Still have questions?</p><a class="tlink" href="https://support.vocci.ai/">Support Center</a></div></div>'
      '<div class="pn fq3-body" style="--gc:2/span 3;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1">' + _lists + '</div></div></section>')
+
+# ---------- 1011-zd · FAQ after doconomy.com partners: big-type question rows (right), the chosen answer (left), all inside the 4×2 grid ----------
+_rows = ''
+_k = 0
+for ci, (cat, qs) in enumerate(FAQ):
+    for q, a in qs:
+        _rows += ('<li class="fq4-r%s" tabindex="0" role="button" aria-pressed="%s" data-q="%s" data-a="%s"><b>%02d</b><span class="fq4-q">%s</span><em>%s</em>'
+                  '<p class="fq4-ma">%s</p></li>') % (' on' if _k == 0 else '', 'true' if _k == 0 else 'false', q.replace('"', '&quot;'), a.replace('"', '&quot;'), _k + 1, q, cat, a)
+        _k += 1
+_q0, _a0 = FAQ[0][1][0]
+_put('faq', '<section id="faq" data-bgop=".4"><div class="stage flat fq4s">' + _lines(_sec('hardware').group(), drop=('50%', '75%')) +
+     '<div class="pn fq4-intro" style="--gc:1/span 1;--gr:1/span 1;--tc:1/span 2;--tr:1/span 1"><span class="fq4-pill">FAQ</span>'
+     '<p>Everything people ask before and after they put Vocci on—recording, hardware care, privacy. Pick a question to read the answer.</p>'
+     '<a class="tlink end" href="https://support.vocci.ai/">Support Center</a></div>'
+     '<div class="pn fq4-ans" style="--gc:1/span 1;--gr:2/span 1" aria-live="polite"><p><b>' + _q0 + '</b> ' + _a0 + '</p></div>'
+     '<div class="pn fq4-list" style="--gc:2/span 3;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1"><ol>' + _rows + '</ol></div></div></section>')
