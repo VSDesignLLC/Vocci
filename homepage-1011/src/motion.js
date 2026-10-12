@@ -264,3 +264,12 @@
 /* 1011 · FAQ accordion: one answer open at a time */
 (function(){ var qs=Array.prototype.slice.call(document.querySelectorAll('#faq .fq')); if(!qs.length) return;
   qs.forEach(function(q){ var b=q.querySelector('.fq-q'); b.addEventListener('click',function(){ var on=!q.classList.contains('open'); qs.forEach(function(x){ x.classList.remove('open'); x.querySelector('.fq-q').setAttribute('aria-expanded','false'); }); q.classList.toggle('open',on); b.setAttribute('aria-expanded',on); }); }); })();
+
+/* 1011-b · screen 3: record → highlight → stop, looping while on screen (drives the sound rings, the band diagram and the step list) */
+(function(){ var sec=document.getElementById('why'), st=sec&&sec.querySelector('.stage.rec3'); if(!st) return;
+  var rows=Array.prototype.slice.call(st.querySelectorAll('.rec-steps li')), dur=[3200,2600,2200,900], s=0, t=null;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ st.dataset.s='0'; rows[0].classList.add('on'); return; }
+  function set(k){ s=k; st.dataset.s=k; rows.forEach(function(r,i){ r.classList.remove('on'); if(i===k){ void r.offsetWidth; r.classList.add('on'); } });
+    var b=st.querySelector('.rec-band .fg'); if(b){ b.style.animation='none'; void b.getBoundingClientRect(); b.style.animation=''; }
+    t=setTimeout(function(){ set((s+1)%4); },dur[k]); }
+  new IntersectionObserver(function(es){ if(es[0].isIntersecting){ if(!t) set(0); } else { clearTimeout(t); t=null; } },{threshold:.35}).observe(st); })();
