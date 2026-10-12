@@ -325,3 +325,22 @@ _put('kol', '<section id="kol" data-bgop=".4"><div class="stage flat kv">' + _li
      '<div class="end btns"><a class="btn" href="https://www.youtube.com/@vocci-ai">Watch all on YouTube</a><a class="tlink" href="#">Become a creator</a></div></div>'
      + _cells +
      '<div class="rowline" style="grid-row:2"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div></div></section>')
+
+# ---------- 1011-u · nav: compact centred bar (menu · wordmark · shop), one panel drops from it (after db-longbow) ----------
+_n = re.search(r'<nav class="nav">.*?</nav>', s, re.S); assert _n
+_wm = re.search(r'<a class="wordmark".*?</a>', _n.group(), re.S).group()
+_cart = re.search(r'<a class="cart".*?</a>', _n.group(), re.S).group().replace('href="#colors"', 'href="https://vocci.ai/cart"').replace('aria-label="Store"', 'aria-label="Cart"')
+_LINKS = [('How it works', '#how'), ('Vocci AI', '#scenes'), ('Connect your AI', 'https://vocci.ai/pages/connect-your-ai'), ('Tech', 'https://vocci.ai/pages/tech'),
+          ('Trust Center', 'https://trust.vocci.ai/'), ('About us', 'https://vocci.ai/pages/about-us')]
+_nav = ('<nav class="nav nav2"><div class="navbar nb2">'
+        '<button class="nb-menu" type="button" aria-expanded="false" aria-controls="nb-panel" aria-label="Menu"><i></i><i></i></button>'
+        + _wm +
+        '<div class="nb-r"><a class="nb-shop" href="https://vocci.ai/products/vocci-ring">Shop <b>+</b></a>' + _cart + '</div></div>'
+        '<div class="nb-panel" id="nb-panel"><div class="nb-in">'
+        '<div class="nb-cards"><a class="nb-card" href="#colors"><span class="nb-img"><img src="img3/finish-lumen.png" alt="" loading="lazy" decoding="async"></span><b>Vocci Ring</b><em>Four finishes</em></a>'
+        '<i class="nb-vl" aria-hidden="true"></i>'
+        '<a class="nb-card" href="https://vocci.ai/pages/membership"><span class="nb-img dark"><img src="img3/ai-review.jpg" alt="" loading="lazy" decoding="async"></span><b>Vocci AI Pro</b><em>Membership</em></a></div>'
+        '<div class="nb-links">' + ''.join('<a href="%s"><span>%s</span><span>%s</span></a>' % (u, a, a) for a, u in _LINKS) + '</div>'
+        '<div class="nb-foot"><a href="mailto:support@vocci.ai">support@vocci.ai</a><span><a href="https://discord.gg/2KZKzdpvN3">Discord</a><a href="#">Reddit</a></span></div>'
+        '</div></div></nav>')
+s = s[:_n.start()] + _nav + s[_n.end():]
