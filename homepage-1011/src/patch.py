@@ -508,6 +508,10 @@ _h = hashlib.md5((R/'vendor/how3d.js').read_bytes()).hexdigest()[:8]           #
 for _old in (R/'vendor').glob('how3d.*.js'): _old.unlink()
 (R/('vendor/how3d.%s.js' % _h)).write_bytes((R/'vendor/how3d.js').read_bytes())
 motion = motion.replace("'vendor/how3d.js'", "'vendor/how3d.%s.js'" % _h)
+_f = (R/'src/fly3d.js').read_bytes(); _hf = hashlib.md5(_f).hexdigest()[:8]   # 1011-zz18 · 3D fly-in, hashed the same way
+for _old in (R/'vendor').glob('fly3d.*.js'): _old.unlink()
+(R/('vendor/fly3d.%s.js' % _hf)).write_bytes(_f)
+motion = motion.replace("'vendor/fly3d.js'", "'vendor/fly3d.%s.js'" % _hf)
 s = s.replace('<main class="page gridall"', '<style id="round-0928">\n' + override + '\n</style>' + pre + '<main class="page gridall"', 1)
 s = s.replace('</main>\n</body>', '</main>\n<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" onerror="this.remove()"></script>\n<script>\n' + motion + '\n</script>\n</body>')
 # 1007-f · tablet follows the phone structure: phone rules (≤700) now cover ≤1100; tablet-only tuning uses 700.5px
