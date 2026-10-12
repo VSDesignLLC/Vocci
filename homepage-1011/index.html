@@ -3217,6 +3217,20 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
   #how .how-hint{background:#e8e8e5;margin:0;padding:8px 0 32px!important}
   #how .how-hint .hh-b{background:#fff;border-color:rgba(20,20,22,.14)}
 }
+/* 1011-zu · creator carousel (phone + tablet) */
+@media(max-width:1100px){
+  #kol .stage.kv>.vl,#kol .stage.kv>.hl,#kol .stage.kv>.sqr,#kol .stage.kv>.rowline{display:none!important}
+  #kol .kv-scroll{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 20px 8px;scroll-padding:0 20px}
+  #kol .kv-scroll::-webkit-scrollbar{display:none}
+  #kol .kv-slide{flex:0 0 82%;scroll-snap-align:start;display:flex;flex-direction:column;border-radius:12px;overflow:hidden;background:#f4f4f2}
+  #kol .kv-slide .pn{height:auto!important;min-height:0!important;width:auto!important;box-shadow:none!important;border:0}
+  #kol .kv-slide .pn.kv-pic{aspect-ratio:4/5;border-radius:0}
+  #kol .kv-slide .kv-txt{padding:16px 18px 20px!important;gap:8px;background:transparent}
+  #kol .kv-hint{display:flex!important;justify-content:center;padding:12px 0 32px!important;background:transparent}
+}
+@media(min-width:700.5px) and (max-width:1100px){ #kol .kv-slide{flex-basis:calc((100% - 52px)/2)} #kol .kv-slide .pn.kv-pic{aspect-ratio:4/3} #kol .kv-scroll{padding:0 40px 8px;scroll-padding:0 40px} }
+@media(max-width:1100px){ #kol .kv-slide .kv-txt{overflow:visible!important;flex:1} #kol .kv-slide .kv-txt .tlink{margin-top:auto} #kol .pn.kv-title{padding-bottom:24px!important} }
+@media(max-width:1100px){ #kol .kv-slide .kv-txt{padding-bottom:28px!important} }
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
@@ -3637,6 +3651,21 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
   function set(){ nav.classList.toggle('show-buy', up && !heroVis); }
   var hero=document.getElementById('hero'), nx=hero&&hero.nextElementSibling; function vis(){ if(!hb) return false; var r=hb.getBoundingClientRect(); if(!(r.bottom>0&&r.top<innerHeight&&r.width>0)) return false; return !nx||nx.getBoundingClientRect().top>r.top; }   /* the hero is pinned under the page: its button counts only until the next section covers it */
   addEventListener('scroll',function(){ var y=scrollY; heroVis=vis(); if(Math.abs(y-last)>4){ up=y<last; last=y; } set(); },{passive:true}); addEventListener('resize',function(){ heroVis=vis(); set(); }); heroVis=vis(); set(); })();
+
+/* 1011-zu · creator videos: a swipeable carousel on phones and tablets (each video + its card is one slide) */
+(function(){ if(innerWidth>1100) return; var sec=document.getElementById('kol'), st=sec&&sec.querySelector('.stage.kv'); if(!st) return;
+  var pics=Array.prototype.slice.call(st.querySelectorAll('.kv-pic')), txts=Array.prototype.slice.call(st.querySelectorAll('.kv-txt')); if(!pics.length) return;
+  var sc=document.createElement('div'); sc.className='kv-scroll';
+  pics.forEach(function(p,i){ var sl=document.createElement('div'); sl.className='kv-slide'; sl.appendChild(p); if(txts[i]) sl.appendChild(txts[i]); sc.appendChild(sl); });
+  st.appendChild(sc);
+  var hint=document.createElement('div'); hint.className='how-hint kv-hint'; hint.innerHTML='<button class="hh-b prev" aria-label="Previous video" disabled><svg viewBox="0 0 20 20"><path d="M12 4l-6 6 6 6"/></svg></button><span class="hh-d">'+pics.map(function(_,i){return '<i'+(i?'':' class="on"')+'></i>';}).join('')+'</span><button class="hh-b next" aria-label="Next video"><svg viewBox="0 0 20 20"><path d="M8 4l6 6-6 6"/></svg></button>';
+  st.appendChild(hint);
+  var slides=Array.prototype.slice.call(sc.children), dots=Array.prototype.slice.call(hint.querySelectorAll('.hh-d i'));
+  function idx(){ var w=slides[0].offsetWidth+12; return Math.round(sc.scrollLeft/w); }
+  function go(k){ k=Math.max(0,Math.min(slides.length-1,k)); sc.scrollTo({left:slides[k].offsetLeft-sc.offsetLeft-parseFloat(getComputedStyle(sc).paddingLeft),behavior:'smooth'}); }
+  hint.querySelector('.prev').addEventListener('click',function(){ go(idx()-1); }); hint.querySelector('.next').addEventListener('click',function(){ go(idx()+1); });
+  dots.forEach(function(d,j){ d.addEventListener('click',function(){ go(j); }); });
+  sc.addEventListener('scroll',function(){ var k=idx(); dots.forEach(function(d,j){ d.classList.toggle('on',j===k); }); hint.querySelector('.prev').disabled=k===0; hint.querySelector('.next').disabled=k>=slides.length-1; },{passive:true}); })();
 
 </script>
 </body></html>
