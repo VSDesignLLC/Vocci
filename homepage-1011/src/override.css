@@ -1847,3 +1847,17 @@
   #how .how-hint{background:#e8e8e5;margin:0;padding:8px 0 32px!important}
   #how .how-hint .hh-b{background:#fff;border-color:rgba(20,20,22,.14)}
 }
+/* 1011-zu · creator carousel (phone + tablet) */
+@media(max-width:700px){
+  #kol .stage.kv>.vl,#kol .stage.kv>.hl,#kol .stage.kv>.sqr,#kol .stage.kv>.rowline{display:none!important}
+  #kol .kv-scroll{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 20px 8px;scroll-padding:0 20px}
+  #kol .kv-scroll::-webkit-scrollbar{display:none}
+  #kol .kv-slide{flex:0 0 82%;scroll-snap-align:start;display:flex;flex-direction:column;border-radius:12px;overflow:hidden;background:#f4f4f2}
+  #kol .kv-slide .pn{height:auto!important;min-height:0!important;width:auto!important;box-shadow:none!important;border:0}
+  #kol .kv-slide .pn.kv-pic{aspect-ratio:4/5;border-radius:0}
+  #kol .kv-slide .kv-txt{padding:16px 18px 20px!important;gap:8px;background:transparent}
+  #kol .kv-hint{display:flex!important;justify-content:center;padding:12px 0 32px!important;background:transparent}
+}
+@media(min-width:700.5px) and (max-width:1100px){ #kol .kv-slide{flex-basis:calc((100% - 52px)/2)} #kol .kv-slide .pn.kv-pic{aspect-ratio:4/3} #kol .kv-scroll{padding:0 40px 8px;scroll-padding:0 40px} }
+@media(max-width:700px){ #kol .kv-slide .kv-txt{overflow:visible!important;flex:1} #kol .kv-slide .kv-txt .tlink{margin-top:auto} #kol .pn.kv-title{padding-bottom:24px!important} }
+@media(max-width:1100px){ #kol .kv-slide .kv-txt{padding-bottom:28px!important} }

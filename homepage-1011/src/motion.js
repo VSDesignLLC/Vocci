@@ -390,3 +390,18 @@
   function set(){ nav.classList.toggle('show-buy', up && !heroVis); }
   var hero=document.getElementById('hero'), nx=hero&&hero.nextElementSibling; function vis(){ if(!hb) return false; var r=hb.getBoundingClientRect(); if(!(r.bottom>0&&r.top<innerHeight&&r.width>0)) return false; return !nx||nx.getBoundingClientRect().top>r.top; }   /* the hero is pinned under the page: its button counts only until the next section covers it */
   addEventListener('scroll',function(){ var y=scrollY; heroVis=vis(); if(Math.abs(y-last)>4){ up=y<last; last=y; } set(); },{passive:true}); addEventListener('resize',function(){ heroVis=vis(); set(); }); heroVis=vis(); set(); })();
+
+/* 1011-zu · creator videos: a swipeable carousel on phones and tablets (each video + its card is one slide) */
+(function(){ if(innerWidth>1100) return; var sec=document.getElementById('kol'), st=sec&&sec.querySelector('.stage.kv'); if(!st) return;
+  var pics=Array.prototype.slice.call(st.querySelectorAll('.kv-pic')), txts=Array.prototype.slice.call(st.querySelectorAll('.kv-txt')); if(!pics.length) return;
+  var sc=document.createElement('div'); sc.className='kv-scroll';
+  pics.forEach(function(p,i){ var sl=document.createElement('div'); sl.className='kv-slide'; sl.appendChild(p); if(txts[i]) sl.appendChild(txts[i]); sc.appendChild(sl); });
+  st.appendChild(sc);
+  var hint=document.createElement('div'); hint.className='how-hint kv-hint'; hint.innerHTML='<button class="hh-b prev" aria-label="Previous video" disabled><svg viewBox="0 0 20 20"><path d="M12 4l-6 6 6 6"/></svg></button><span class="hh-d">'+pics.map(function(_,i){return '<i'+(i?'':' class="on"')+'></i>';}).join('')+'</span><button class="hh-b next" aria-label="Next video"><svg viewBox="0 0 20 20"><path d="M8 4l6 6-6 6"/></svg></button>';
+  st.appendChild(hint);
+  var slides=Array.prototype.slice.call(sc.children), dots=Array.prototype.slice.call(hint.querySelectorAll('.hh-d i'));
+  function idx(){ var w=slides[0].offsetWidth+12; return Math.round(sc.scrollLeft/w); }
+  function go(k){ k=Math.max(0,Math.min(slides.length-1,k)); sc.scrollTo({left:slides[k].offsetLeft-sc.offsetLeft-parseFloat(getComputedStyle(sc).paddingLeft),behavior:'smooth'}); }
+  hint.querySelector('.prev').addEventListener('click',function(){ go(idx()-1); }); hint.querySelector('.next').addEventListener('click',function(){ go(idx()+1); });
+  dots.forEach(function(d,j){ d.addEventListener('click',function(){ go(j); }); });
+  sc.addEventListener('scroll',function(){ var k=idx(); dots.forEach(function(d,j){ d.classList.toggle('on',j===k); }); hint.querySelector('.prev').disabled=k===0; hint.querySelector('.next').disabled=k>=slides.length-1; },{passive:true}); })();
