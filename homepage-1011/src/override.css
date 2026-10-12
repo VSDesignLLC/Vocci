@@ -1307,3 +1307,4 @@
   #how .stage>.hs1{grid-column:1!important}#how .stage>.hs2{grid-column:2!important}#how .stage>.hs3{grid-column:3!important}
 }
 @media(min-width:700.5px) and (max-width:1100px){ #how .stage{grid-template-columns:repeat(3,calc((100vw - 96px)/2))!important} }
+/* 1011-j · no spec captions on the 3D ring cell */ #how .r3-bp span,#how .r3-bp .k,#how .r3-bp .s,#how .r3-bp .s2{display:none!important}
