@@ -1726,3 +1726,8 @@
 #faq .fq5-c.on::after{content:"";position:absolute;right:calc(var(--pad) * -1 - 1px);top:50%;width:var(--pad);height:1px;background:var(--ink)}
 #faq .fq5-head h2{margin-top:0}
 @media(max-width:700px){ #faq .fq5-c.on::after{display:none} }
+/* 1011-zh · FAQ: no connector; a photo fills the top row */
+#faq .fq5-c.on::after{display:none!important}
+#faq .pn.pic.fq5-pic{background:#1a1a1c}
+#faq .pn.pic.fq5-pic img{object-fit:cover}
+@media(max-width:700px){ #faq .pn.pic.fq5-pic{order:1;aspect-ratio:16/10;height:auto!important} #faq .pn.fq5-cats{order:2} #faq .pn.fq5-list{order:3} }
