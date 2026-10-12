@@ -141,7 +141,7 @@ _put('breather', _t)
 
 # #9 · privacy: certificates sit with the promise, Trust Center
 _m = _sec('privacy'); _t = _m.group()
-_CERT = [('img2/cert-gdpr.png', 'GDPR', 'Verified by GDPR Local')]   # vocci.ai: GDPR is the only certification so far
+_CERT = [('img3/gdpr-local.png', 'GDPR', 'Verified by GDPR Local · ID PB7U836')]   # vocci.ai: GDPR is the only certification so far
 _t = _t.replace('<div class="end"><a class="btn" href="#">Trust Center</a></div>',
                 '<ul class="pv-certs end">' + ''.join('<li><img loading="lazy" decoding="async" src="%s" alt=""><span><b>%s</b>%s</span></li>' % c for c in _CERT) + '</ul>'
                 '<div><a class="btn" href="https://trust.vocci.ai/">Trust Center</a></div>')

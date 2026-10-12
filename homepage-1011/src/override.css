@@ -1374,3 +1374,7 @@
 #colors .fnx-wear[data-f="lux"]{object-position:52% 50%}
 #breather .stage>.bgimg{transform:scale(1.03)!important}
 #privacy .pv-certs{grid-template-columns:1fr}
+/* 1011-q · the GDPR Local badge itself */
+#privacy .pv-certs li{gap:14px}
+#privacy .pv-certs img{width:76px!important;height:auto!important;filter:none!important;background:#fff;border-radius:10px;padding:6px}
+#privacy .pv-certs b{font-size:15px}
