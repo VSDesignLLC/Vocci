@@ -214,3 +214,41 @@ _put('why', '<section id="why" data-bgop="0"><div class="stage rec3" data-s="0">
      ''.join('<li class="%s">%s<span>%s</span></li>' % (k, ic, tx) for k, ic, tx in _rows) + '</ul></div>'
      '<dl class="params end"><div><dt>8 h</dt><dd>Continuous recording</dd></div><div><dt>5 m</dt><dd>Voice pickup</dd></div>'
      '<div><dt>AI</dt><dd>Noise reduction</dd></div><div><dt>100+</dt><dd>Languages</dd></div></dl></div>' + _rl + '</div></section>')
+
+# ---------- 1011-d · screens 3–5 become one pinned chapter: Record → Ask → Connect ----------
+_t = _sec('why').group()
+_ICO = {
+ 'hold': '<svg class="pill1 hold" viewBox="0 0 24 12" aria-hidden="true"><rect x=".75" y=".75" width="22.5" height="10.5" rx="5.25"/><rect class="d1" x="4" y="3.6" width="16" height="4.8" rx="2.4"/></svg>',
+ 'voice': '<svg class="ico" viewBox="0 0 24 12" aria-hidden="true"><path d="M3 6h1M7 3.5v5M11 1.5v9M15 3v6M19 4.5v3M22 6h0"/></svg>',
+ 'done': '<svg class="ico" viewBox="0 0 24 12" aria-hidden="true"><rect x=".75" y=".75" width="22.5" height="10.5" rx="5.25"/><path d="M8 6.2l2.6 2.4L16 3.6"/></svg>',
+ 'mcp': '<svg class="ico" viewBox="0 0 24 12" aria-hidden="true"><circle cx="5" cy="6" r="3.2"/><circle cx="19" cy="6" r="3.2"/><path d="M8.2 6h7.6"/></svg>',
+ 'apps': '<svg class="ico" viewBox="0 0 24 12" aria-hidden="true"><rect x="2" y="2" width="8" height="8" rx="2"/><rect x="14" y="2" width="8" height="8" rx="4"/></svg>',
+ 'ctx': '<svg class="ico" viewBox="0 0 24 12" aria-hidden="true"><path d="M3 3h12M3 6h18M3 9h9"/></svg>'}
+def _card(k, inner, title, rows, extra=''):
+    return ('<div class="rec-card" data-ch="%d">%s<h3><i class="rec-dot" aria-hidden="true"></i>%s</h3><ul class="rec-steps">%s</ul>%s</div>'
+            % (k, inner, title, ''.join('<li>%s<span>%s</span></li>' % (ic, tx) for ic, tx in rows), extra))
+_c0 = re.search(r'<div class="rec-card">(.*?)<h3>', _t, re.S).group(1)   # the band diagram
+_rows0 = re.findall(r'<li class="s\d">(<svg.*?</svg>)<span>(.*?)</span></li>', _t)
+_cards = (_card(0, _c0, 'The most elegant way to capture conversations and ideas.', _rows0)
+          + _card(1, _c0.replace('class="rec-band"', 'class="rec-band hold"'), 'Agents on your fingertip.',
+                  [(_ICO['hold'], 'Press and hold the button.'), (_ICO['voice'], 'Say what you need—a follow-up, a summary, a task.'), (_ICO['done'], 'Vocci AI gets it done. Review it in the app when needed.')])
+          + _card(2, '', 'Integrate real-world context into your AI workflow.',
+                  [(_ICO['mcp'], 'Connect once with MCP.'), (_ICO['apps'], 'Works with Claude, ChatGPT, Gemini and more.'), (_ICO['ctx'], 'Your conversations become context—no copying and pasting.')],
+                  '<div class="btns"><a class="btn" href="https://vocci.ai/pages/connect-your-ai">Connect your AI</a><a class="tlink" href="#">Join a webinar</a></div>'))
+_rail = ('<div class="ch-rail" role="tablist">' + ''.join('<button type="button" data-k="%d"%s><b>0%d</b>%s</button>' % (i, ' class="on"' if i == 0 else '', i + 1, n) for i, n in enumerate(['Record', 'Ask', 'Connect']))
+         + '<i class="ch-bar" aria-hidden="true"><i></i></i></div>')
+_params = re.search(r'<dl class="params end">.*?</dl>', _t, re.S).group().replace('params end', 'params')
+_pn = re.search(r'<div class="pn rec-pn".*?</dl></div>', _t, re.S).group()
+_t = _t.replace(_pn, '<div class="pn rec-pn" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:2/span 1">' + _rail + '<div class="rec-cards">' + _cards + '</div></div>'
+                '<div class="pn rec-params" style="--gc:4/span 1;--gr:2/span 1;--tc:2/span 1;--tr:2/span 1">' + _params + '</div>')
+# overlays for Ask (voice → agent) and Connect (AI apps around the ring)
+_AIS = [('claude', 'Claude'), ('chatgpt', 'ChatGPT'), ('gemini', 'Gemini'), ('copilot', 'Copilot'), ('compass', 'Perplexity'), ('cube', 'Cursor')]
+_ov = ('<div class="ov-ask" aria-hidden="true"><div class="ask-q"><span class="ask-mic"><i></i><i></i><i></i><i></i></span><span class="ask-tx"></span></div>'
+       '<div class="ask-a"><b>Vocci AI</b><span class="ask-st">Drafting a follow-up in Slack…</span><span class="ask-ok">Sent to #launch · Review in app</span></div></div>'
+       '<div class="ov-orb" aria-hidden="true"><svg class="orb-ln"></svg>' + ''.join('<span class="oa"><img src="img3/ai-%s.png" alt="%s" loading="lazy" decoding="async"></span>' % a for a in _AIS) + '</div>')
+_t = _t.replace('<span class="rec-waves"', _ov + '<span class="rec-waves"', 1)
+_t = _t.replace('<section id="why" data-bgop="0">', '<section id="why" class="chapter" data-bgop="0"><span id="scenes" class="ch-anchor" style="top:40%"></span><span id="why-b" class="ch-anchor" style="top:73%"></span>', 1)
+_t = _t.replace('<div class="stage rec3" data-s="0">', '<div class="stage rec3" data-s="0" data-ch="0" data-v="0">', 1)
+_put('why', _t)
+for _x in ('scenes', 'why-b'):
+    _m = re.search(r'<section id="%s"[^>]*>.*?</section>' % _x, s, re.S); s = s[:_m.start()] + s[_m.end():]
