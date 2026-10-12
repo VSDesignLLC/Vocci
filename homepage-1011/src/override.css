@@ -1822,3 +1822,4 @@
 @media(max-width:700px) and (max-height:740px){ #why .pn.rec-stage{height:38%!important} #why .pn.rec-pn{height:62%!important} #why .rec-card .rec-p{font-size:12.5px;line-height:1.4} }
 @media(max-width:700px) and (max-height:740px){ #why .pn.rec-pn{padding:12px 16px 12px!important;gap:8px!important} #why .rec-card{padding:12px 14px!important;gap:6px!important} #why .rec-steps{gap:4px} #why .rec-card .btn{height:34px} }
 @media(max-width:700px){ #why .pn.rec-pn{padding:14px 18px!important;gap:10px!important} #why .rec-card{padding:14px 16px!important;gap:7px!important} #why .rec-steps{gap:5px} }
+#colors .fnx-wear[data-f="lux"]{object-position:62% 58%!important}

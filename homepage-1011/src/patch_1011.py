@@ -110,7 +110,7 @@ _put('why-b', _t)
 
 # #7 · colours: one full-screen image, finish tabs + view switch (on hand / ring / charging case)
 _FIN = [('lumen', 'Lumen', 'Mirror silver', '#e9e8e4'), ('midnight', 'Midnight', 'Matte black', '#1c1c1f'), ('dawn', 'Dawn', 'Mirror gold', '#c9a063'),
-        ('lux', 'Lux', 'Black & silver', 'linear-gradient(135deg,#1c1c1f 55%,#cfcfd2 55%)')]
+        ('lux', 'Lux', 'Black & silver', 'linear-gradient(135deg,#d6d7d9,#a9abae)')]
 _VIEWS = [('wear', 'On hand', 'img3/wear-%s.jpg'), ('ring', 'Ring', 'img3/finish-%s.png'), ('case', 'Charging case', 'img3/box-%s.png')]
 _t = _sec('finishes').group()
 _imgs = ''.join('<img class="fnx-img fnx-%s%s" data-f="%s" data-v="%s" loading="lazy" decoding="async" src="%s" alt="Vocci ring in %s, %s">'
