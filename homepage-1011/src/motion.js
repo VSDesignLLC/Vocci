@@ -383,3 +383,8 @@
   cs.forEach(function(b){ b.addEventListener('click',function(){ cs.forEach(function(x){ var on=x===b; x.classList.toggle('on',on); x.setAttribute('aria-pressed',on); });
     it.forEach(function(i){ i.hidden=i.dataset.c!==b.dataset.c; i.classList.remove('open'); i.querySelector('.fq5-h').setAttribute('aria-expanded','false'); });
     ol.classList.remove('swap'); void ol.offsetWidth; ol.classList.add('swap'); }); }); })();
+
+/* 1011-zs · nav Buy now only after the hero Buy now leaves the screen */
+(function(){ var nav=document.querySelector('.gridall>.nav.nav3'), hb=document.querySelector('#hero .btn'); if(!nav) return;
+  if(!hb){ nav.classList.add('show-buy'); return; }
+  new IntersectionObserver(function(es){ nav.classList.toggle('show-buy',!es[0].isIntersecting); },{threshold:0}).observe(hb); })();
