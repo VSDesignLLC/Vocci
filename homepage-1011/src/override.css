@@ -1405,3 +1405,4 @@
 /* 1011-t · PR quote card on a liquid-silver ground */
 #awards .pn.mid.quote{background:linear-gradient(rgba(240,240,238,.38),rgba(240,240,238,.38)),url(img3/quote-liquid.jpg) center/cover no-repeat!important}
 #awards .pn.mid.quote .pill{background:rgba(255,255,255,.85)}
+#hardware .pn.hasimg img.half[src*="case-dome"]{object-fit:cover!important;width:100%;filter:none!important}
