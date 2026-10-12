@@ -1758,3 +1758,9 @@
   #footer .ft2-c{padding-top:20px!important;padding-bottom:24px!important}
   #footer .ft2-last{grid-column:1/-1}
 }
+/* 1011-zj · footer bottom: vocci.ai's policy links + © */
+#footer .ft2-legal{display:flex;flex-direction:column;gap:10px}
+#footer .ft2-legal ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 14px}
+#footer .ft2-legal a{font:400 12px/1.3 var(--font-mono);color:#55555c;text-decoration:none}
+#footer .ft2-legal a:hover{color:var(--ink)}
+#footer .ft2-legal p{margin:0;font:400 12px/1 var(--font-mono);color:#6a6a70}
