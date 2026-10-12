@@ -552,3 +552,12 @@ _rep('hardware', [('<h2>Maximize capability density.</h2><p>Explore the engineer
                    '<span class="label">Sizing</span><h3>Find your fit.</h3><p>Available in US sizes 6–15, with a sizing kit to help you choose.</p>'),
                   ('<span class="label">Charging</span><h3>A quick recharge. Back to your day.</h3><p><span class="cu" data-to="30">30</span> min to <span class="cu" data-to="80">80</span>%. The case holds <span class="cu" data-to="3">3</span> full charges, over USB-C.</p>',
                    '<span class="label">Charging</span><h3>Back to 80% in 30 minutes.</h3><p>The charging case provides up to three additional full charges.</p>')])
+
+# ---------- 1011-zp · privacy: the GDPR Local badge sits in the "GDPR compliant" card ----------
+_t = _sec('privacy').group()
+_t = re.sub(r'<ul class="pv-certs end">.*?</ul>', '', _t, count=1, flags=re.S)
+_a = '<svg class="ic" viewBox="0 0 28 28"><circle cx="14" cy="14" r="9"/><path d="M7.6 7.6l12.8 12.8"/></svg><h3>GDPR compliant</h3><p class="end">Verified by GDPR Local.</p>'
+assert _a in _t
+_t = _t.replace(_a, '<img class="pv-badge" src="img3/gdpr-local.svg" alt="GDPR Local verified badge, ID PB7U836" loading="lazy" decoding="async"><h3>GDPR compliant</h3><p class="end">Verified by GDPR Local · ID PB7U836.</p>', 1)
+_t = _t.replace('<div><a class="btn" href="https://trust.vocci.ai/">Trust Center</a></div>', '<div class="end"><a class="btn" href="https://trust.vocci.ai/">Trust Center</a></div>', 1)
+_put('privacy', _t)
