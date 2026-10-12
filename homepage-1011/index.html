@@ -3351,6 +3351,17 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 #why .rec-card .rec-steps li.on svg{opacity:1}
 #why .rec-card .rec-steps li svg *{stroke:#F47546!important}
 #why .rec-card .rec-steps li svg [fill]:not([fill="none"]),#why .rec-card .rec-steps li svg .d1,#why .rec-card .rec-steps li svg .d2{fill:#F47546!important}
+/* 1011-zz26 · creators: prev/next arrows above "Watch all on YouTube" (same secondary style as the nav icons) */
+#kol .kv-nav{display:flex;gap:8px;margin:0 0 20px}
+#kol .kv-arw{width:40px;height:40px;display:grid;place-items:center;padding:0;border:1px solid rgba(20,20,22,.18);border-radius:7px;background:transparent;cursor:pointer;transition:border-color .3s ease,opacity .3s}
+#kol .kv-arw:hover:not(:disabled){border-color:var(--ink)}
+#kol .kv-arw:disabled{opacity:.35;cursor:default}
+#kol .kv-arw svg{width:18px;height:18px;fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+#kol .kv-arw.prev svg{transform:scaleX(-1)}
+#kol .kv-title .kv-nav+.btns{margin-top:0!important}
+#kol .stage.kv>.kv-pic,#kol .stage.kv>.kv-txt{transition:opacity .22s ease}
+#kol .stage.kv.kv-swap>.kv-pic,#kol .stage.kv.kv-swap>.kv-txt{opacity:0!important}
+@media(max-width:1100px){ #kol .kv-nav{display:none} }
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="vl-intro" aria-hidden="true"><div class="vl-ring"><img src="img3/ring-top.webp" alt=""><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg></div><span class="vl-pct">00</span></div><script>document.documentElement.classList.add("vl-on");document.body.appendChild(document.querySelector(".vl-intro"))</script><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-v2.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
@@ -3868,6 +3879,28 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   }
 
   window.__vocciHeroRing=ringOnScreen;   /* vendor/how3d.js flies the real ring from here into screen 2 */
+})();
+
+/* 1011-zz26 · creators (desktop): prev/next arrows page through the videos three at a time when there are more than three */
+(function(){
+  var sec=document.getElementById('kol'), st=sec&&sec.querySelector('.stage.kv'), ttl=st&&st.querySelector('.kv-title'); if(!ttl) return;
+  var pics=[].slice.call(st.querySelectorAll(':scope>.kv-pic')), txts=[].slice.call(st.querySelectorAll(':scope>.kv-txt')), n=Math.min(pics.length,txts.length), s=0, busy=false;
+  var arr='<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>';
+  var nav=document.createElement('div'); nav.className='kv-nav';
+  nav.innerHTML='<button class="kv-arw prev" type="button" aria-label="Previous videos">'+arr+'</button><button class="kv-arw next" type="button" aria-label="Next videos">'+arr+'</button>';
+  var btns=ttl.querySelector('.btns'); ttl.insertBefore(nav, btns);
+  var prev=nav.querySelector('.prev'), next=nav.querySelector('.next');
+  function lay(){
+    for(var i=0;i<n;i++){ var k=(i-s+n)%n, show=k<3;
+      [pics[i],txts[i]].forEach(function(el){ el.style.display=show?'':'none'; if(show) el.style.setProperty('--gc',(k+2)+'/span 1'); }); }
+    var off=n<=3; prev.disabled=next.disabled=off; nav.classList.toggle('off',off);
+  }
+  function go(d){
+    if(busy||n<=3||innerWidth<=1100) return; busy=true; st.classList.add('kv-swap');
+    setTimeout(function(){ s=(s+d+n)%n; lay(); st.classList.remove('kv-swap'); busy=false; },220);
+  }
+  prev.addEventListener('click',function(){go(-1)}); next.addEventListener('click',function(){go(1)});
+  if(innerWidth>1100) lay(); else { prev.disabled=next.disabled=n<=3; nav.classList.toggle('off',n<=3); }
 })();
 
 </script>

@@ -1981,3 +1981,14 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 #why .rec-card .rec-steps li.on svg{opacity:1}
 #why .rec-card .rec-steps li svg *{stroke:#F47546!important}
 #why .rec-card .rec-steps li svg [fill]:not([fill="none"]),#why .rec-card .rec-steps li svg .d1,#why .rec-card .rec-steps li svg .d2{fill:#F47546!important}
+/* 1011-zz26 · creators: prev/next arrows above "Watch all on YouTube" (same secondary style as the nav icons) */
+#kol .kv-nav{display:flex;gap:8px;margin:0 0 20px}
+#kol .kv-arw{width:40px;height:40px;display:grid;place-items:center;padding:0;border:1px solid rgba(20,20,22,.18);border-radius:7px;background:transparent;cursor:pointer;transition:border-color .3s ease,opacity .3s}
+#kol .kv-arw:hover:not(:disabled){border-color:var(--ink)}
+#kol .kv-arw:disabled{opacity:.35;cursor:default}
+#kol .kv-arw svg{width:18px;height:18px;fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+#kol .kv-arw.prev svg{transform:scaleX(-1)}
+#kol .kv-title .kv-nav+.btns{margin-top:0!important}
+#kol .stage.kv>.kv-pic,#kol .stage.kv>.kv-txt{transition:opacity .22s ease}
+#kol .stage.kv.kv-swap>.kv-pic,#kol .stage.kv.kv-swap>.kv-txt{opacity:0!important}
+@media(max-width:700px){ #kol .kv-nav{display:none} }

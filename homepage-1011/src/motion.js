@@ -488,3 +488,25 @@
 
   window.__vocciHeroRing=ringOnScreen;   /* vendor/how3d.js flies the real ring from here into screen 2 */
 })();
+
+/* 1011-zz26 · creators (desktop): prev/next arrows page through the videos three at a time when there are more than three */
+(function(){
+  var sec=document.getElementById('kol'), st=sec&&sec.querySelector('.stage.kv'), ttl=st&&st.querySelector('.kv-title'); if(!ttl) return;
+  var pics=[].slice.call(st.querySelectorAll(':scope>.kv-pic')), txts=[].slice.call(st.querySelectorAll(':scope>.kv-txt')), n=Math.min(pics.length,txts.length), s=0, busy=false;
+  var arr='<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>';
+  var nav=document.createElement('div'); nav.className='kv-nav';
+  nav.innerHTML='<button class="kv-arw prev" type="button" aria-label="Previous videos">'+arr+'</button><button class="kv-arw next" type="button" aria-label="Next videos">'+arr+'</button>';
+  var btns=ttl.querySelector('.btns'); ttl.insertBefore(nav, btns);
+  var prev=nav.querySelector('.prev'), next=nav.querySelector('.next');
+  function lay(){
+    for(var i=0;i<n;i++){ var k=(i-s+n)%n, show=k<3;
+      [pics[i],txts[i]].forEach(function(el){ el.style.display=show?'':'none'; if(show) el.style.setProperty('--gc',(k+2)+'/span 1'); }); }
+    var off=n<=3; prev.disabled=next.disabled=off; nav.classList.toggle('off',off);
+  }
+  function go(d){
+    if(busy||n<=3||innerWidth<=1100) return; busy=true; st.classList.add('kv-swap');
+    setTimeout(function(){ s=(s+d+n)%n; lay(); st.classList.remove('kv-swap'); busy=false; },220);
+  }
+  prev.addEventListener('click',function(){go(-1)}); next.addEventListener('click',function(){go(1)});
+  if(innerWidth>1100) lay(); else { prev.disabled=next.disabled=n<=3; nav.classList.toggle('off',n<=3); }
+})();
