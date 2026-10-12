@@ -1365,3 +1365,10 @@
 #colors .fnx-wearbg{inset:-4%;width:108%;height:108%;object-fit:cover;filter:blur(36px) saturate(1.05);transform:scale(1.04)}
 #colors .fnx-wear{inset:0;width:100%;height:100%;object-fit:contain;object-position:50% 50%}
 @media(min-width:1101px){ #colors .fnx-wear{max-height:1120px} }
+/* 1011-o · on-hand photos fill the whole screen again, cropped around the ring */
+#colors .fnx-wearbg{display:none}
+#colors .fnx-wear{object-fit:cover!important;max-height:none!important}
+#colors .fnx-wear[data-f="lumen"]{object-position:55% 49%}
+#colors .fnx-wear[data-f="dawn"]{object-position:60% 49%}
+#colors .fnx-wear[data-f="midnight"]{object-position:51% 46%}
+#colors .fnx-wear[data-f="lux"]{object-position:52% 50%}
