@@ -1530,3 +1530,7 @@
 .gridall>.nav.nav3 .n3-sub a{display:block!important;height:auto!important;overflow:visible!important;padding:10px 14px;border-radius:6px;font:500 14px/1.2 var(--font-body);color:var(--ink)!important;text-align:center;white-space:nowrap;text-decoration:none;transition:background .2s,color .2s}
 .gridall>.nav.nav3 .n3-sub a:hover{background:rgba(20,20,22,.05);color:var(--accent-text)!important}
 @media(max-width:700px){ .n3-dd{display:none} }
+/* 1011-z · sub-menu reads as secondary: smaller, lighter, tighter than the tabs */
+.n3-g b{font:400 13.5px/1.2 var(--font-body)!important;letter-spacing:0;color:#55555c}
+.n3-g a:hover b{color:var(--ink)}
+.n3-g{gap:0 28px!important;padding:12px 0 14px!important}
