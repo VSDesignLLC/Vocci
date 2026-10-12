@@ -1861,3 +1861,4 @@
 @media(min-width:700.5px) and (max-width:1100px){ #kol .kv-slide{flex-basis:calc((100% - 52px)/2)} #kol .kv-slide .pn.kv-pic{aspect-ratio:4/3} #kol .kv-scroll{padding:0 40px 8px;scroll-padding:0 40px} }
 @media(max-width:700px){ #kol .kv-slide .kv-txt{overflow:visible!important;flex:1} #kol .kv-slide .kv-txt .tlink{margin-top:auto} #kol .pn.kv-title{padding-bottom:24px!important} }
 @media(max-width:1100px){ #kol .kv-slide .kv-txt{padding-bottom:28px!important} }
+/* 1011-zv · nav stays on screen while scrolling (as on vocci.ai) */ .js .gridall>.nav.nav3.in.away{opacity:1!important;transform:none!important;pointer-events:auto!important}
