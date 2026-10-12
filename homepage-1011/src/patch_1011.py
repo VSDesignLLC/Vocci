@@ -242,10 +242,11 @@ _pn = re.search(r'<div class="pn rec-pn".*?</dl></div>', _t, re.S).group()
 _t = _t.replace(_pn, '<div class="pn rec-pn" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:2/span 1">' + _rail + '<div class="rec-cards">' + _cards + '</div></div>'
                 '<div class="pn rec-params" style="--gc:4/span 1;--gr:2/span 1;--tc:2/span 1;--tr:2/span 1">' + _params + '</div>')
 # overlays for Ask (voice → agent) and Connect (AI apps around the ring)
-_AIS = [('claude', 'Claude'), ('chatgpt', 'ChatGPT'), ('gemini', 'Gemini'), ('copilot', 'Copilot'), ('compass', 'Perplexity'), ('cube', 'Cursor')]
+_AIS = [('claude', 'Claude'), ('gemini', 'Gemini'), ('sparkle', 'AI app'), ('compass', 'Perplexity'), ('copilot', 'Copilot'), ('cube', 'Cursor'), ('chatgpt', 'ChatGPT')]
 _ov = ('<div class="ov-ask" aria-hidden="true"><div class="ask-q"><span class="ask-mic"><i></i><i></i><i></i><i></i></span><span class="ask-tx"></span></div>'
        '<div class="ask-a"><b>Vocci AI</b><span class="ask-st">Drafting a follow-up in Slack…</span><span class="ask-ok">Sent to #launch · Review in app</span></div></div>'
-       '<div class="ov-orb" aria-hidden="true"><svg class="orb-ln"></svg>' + ''.join('<span class="oa"><img src="img3/ai-%s.png" alt="%s" loading="lazy" decoding="async"></span>' % a for a in _AIS) + '</div>')
+       '<div class="ov-orb" aria-hidden="true"><i class="gd gd1"></i><i class="gd gd2"></i><i class="gd gd3"></i><div class="orb-spin">'
+       + ''.join('<span class="oa" style="--a:%ddeg"><span class="oa-in"><img src="img3/ai-%s.png" alt="%s" decoding="async"></span></span>' % (i * 360 // len(_AIS), a, n) for i, (a, n) in enumerate(_AIS)) + '</div></div>')
 _t = _t.replace('<span class="rec-waves"', _ov + '<span class="rec-waves"', 1)
 _t = _t.replace('<section id="why" data-bgop="0">', '<section id="why" class="chapter" data-bgop="0"><span id="scenes" class="ch-anchor" style="top:40%"></span><span id="why-b" class="ch-anchor" style="top:73%"></span>', 1)
 _t = _t.replace('<div class="stage rec3" data-s="0">', '<div class="stage rec3" data-s="0" data-ch="0" data-v="0">', 1)
