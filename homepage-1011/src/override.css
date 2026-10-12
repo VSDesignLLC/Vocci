@@ -1383,3 +1383,22 @@
 #colors .fnx-buy .tlink{margin-left:0}
 #colors .pn.fnx-ctl{justify-content:flex-start}
 #privacy .pv-certs img{background:none!important;padding:0!important;border-radius:0!important;width:84px!important}
+/* 1011-s · In their words, 1007 screen-4 layout */
+#kol .stage.kv .pn{justify-content:flex-start}
+#kol .pn.kv-pic{display:block;overflow:hidden;background:#141416}
+#kol .pn.kv-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+#kol .pn.kv-pic:hover img{transform:scale(1.04)}
+#kol .pn.kv-pic .vc-play{background:rgba(20,20,22,.32)}
+#kol .pn.kv-pic:hover .vc-play{background:var(--accent)}
+#kol .kv-txt{gap:10px}
+#kol .kv-txt .label b{color:var(--accent-text);font-weight:500}
+#kol .kv-txt h3{margin:4px 0 0}
+#kol .kv-txt p{color:var(--muted);font-size:14px}
+#kol .kv-txt .tlink,#kol .kv-title .tlink{margin-left:0;align-self:flex-start}
+#kol .kv-title{gap:14px}
+#kol .kv-title .btns{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}
+@media(max-width:700px){
+  #kol .stage.kv .pn{height:auto!important;min-height:0!important}
+  #kol .pn.kv-pic{aspect-ratio:4/5}
+  #kol .kv-title{order:0}
+}
