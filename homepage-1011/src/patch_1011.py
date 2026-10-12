@@ -115,10 +115,11 @@ _VIEWS = [('wear', 'On hand', 'img3/wear-%s.jpg'), ('ring', 'Ring', 'img3/finish
 _t = _sec('finishes').group()
 _imgs = ''.join('<img class="fnx-img fnx-%s%s" data-f="%s" data-v="%s" loading="lazy" decoding="async" src="%s" alt="Vocci ring in %s, %s">'
                 % (v, ' on' if (f == 'lumen' and v == 'wear') else '', f, v, src % f, name, lab.lower()) for f, name, sub, sw in _FIN for v, lab, src in _VIEWS)
+_imgs = ''.join('<img class="fnx-img fnx-wearbg%s" data-f="%s" data-v="wear" loading="lazy" decoding="async" src="img3/wear-%s.jpg" alt="" aria-hidden="true">' % (' on' if f == 'lumen' else '', f, f) for f, name, sub, sw in _FIN) + _imgs
 _tabs = ''.join('<button class="fnx-f%s" type="button" role="tab" aria-selected="%s" data-f="%s"><i class="fn-sw" style="background:%s"></i><span><b>%s</b>%s</span></button>'
                 % (' on' if f == 'lumen' else '', 'true' if f == 'lumen' else 'false', f, sw, name, sub.replace('&', '&amp;')) for f, name, sub, sw in _FIN)
 _views = ''.join('<button class="fnx-v%s" type="button" aria-pressed="%s" data-v="%s">%s</button>' % (' on' if v == 'wear' else '', 'true' if v == 'wear' else 'false', v, lab) for v, lab, src in _VIEWS)
-_put('finishes', '<section id="colors" data-bgop="0"><div class="stage fnx" data-view="wear">' + _lines(_t) +
+_put('finishes', '<section id="colors" data-bgop="0"><div class="stage fnx" data-view="wear">' + _lines(_t) + '<i class="vl" style="left:50%"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i>' +
      '<div class="pn pic fnx-stage" style="--gc:1/span 4;--gr:1/span 2;--tc:1/span 2;--tr:1/span 1">' + _imgs + '</div>'
      '<div class="pn fnx-copy" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1"><h2>Looks like you.<br>Works with your AI.</h2>'
      '<p>Choose a finish that feels like your style, with the same AI connection in every ring.</p>'
