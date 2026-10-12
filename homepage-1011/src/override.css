@@ -1764,3 +1764,4 @@
 #footer .ft2-legal a{font:400 12px/1.3 var(--font-mono);color:#55555c;text-decoration:none}
 #footer .ft2-legal a:hover{color:var(--ink)}
 #footer .ft2-legal p{margin:0;font:400 12px/1 var(--font-mono);color:#6a6a70}
+/* 1011-zk · footer wordmark sits in front of the grid lines */ #footer .pn.ft2-mark{position:relative;z-index:5;overflow:visible} #footer .ft2-mark .wmbig,#footer .ft2-mark .wmbig .w{overflow:visible}
