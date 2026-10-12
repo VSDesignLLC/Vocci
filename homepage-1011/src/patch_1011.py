@@ -568,3 +568,15 @@ _a = '<div class="pn aw-title" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;
 assert _a in _t
 _t = _t.replace(_a, '<div class="pn mid quote" style="--gc:2/span 2;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1"><h2 class="aw-h">What the press noticed.</h2>', 1)
 _put('awards', _t)
+
+# 1011-zz4 · drop buttons/links that the 3.0 copy doesn't call for
+for _sid, _pats in [('why', [r'<a class="tlink" href="#">Join a webinar</a>']),
+                    ('needs', [r'<a class="tlink" href="#">Read on (?:Reddit|Discord)</a>', r'<a class="tlink" href="#">Watch the review</a>']),
+                    ('privacy', [r'<div class="end"><a class="btn" href="https://trust\.vocci\.ai/">Trust Center</a></div>']),
+                    ('awards', [r'<a class="tlink pq-src" href="#">Read the article</a>']),
+                    ('faq', [r'<div class="end fq5-help"><p>Still curious\?</p><a class="tlink" href="https://support\.vocci\.ai/">Support Center</a></div>'])]:
+    _t = _sec(_sid).group()
+    for _p in _pats:
+        _t, _n = re.subn(_p, '', _t)
+        assert _n, (_sid, _p)
+    _put(_sid, _t)
