@@ -125,7 +125,7 @@ def how(t):
 edit('how', how)
 
 # ---------- 8 breather ----------
-edit('breather', lambda t: swap_bg(t, 'img3/shower.webp', '55% 42%'))
+edit('breather', lambda t: swap_bg(t, 'img3/pool.webp', '50% 55%'))
 
 # ---------- 9 privacy (positions follow the 0928 comp: 01 col1·r2, 02 col3·r2, 03 col4·r1) ----------
 def privacy(t):
