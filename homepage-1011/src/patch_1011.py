@@ -324,7 +324,7 @@ for i, (who, img, pos, title, sub) in enumerate(_V):
 _put('kol', '<section id="kol" data-bgop=".4"><div class="stage flat kv">' + _lines(_sec('hardware').group()) +
      '<div class="pn kv-title" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:1/span 1"><h2>In their words.</h2>'
      '<p>Creators wore the ring for weeks and filmed it on their own channels—no script, no edit from us.</p>'
-     '<div class="end btns"><a class="btn" href="https://www.youtube.com/@vocci-ai">Watch all on YouTube</a><a class="tlink" href="#">Become a creator</a></div></div>'
+     '<div class="end btns"><a class="btn" href="https://www.youtube.com/@vocci-ai">Watch all on YouTube</a></div></div>'
      + _cells +
      '<div class="rowline" style="grid-row:2"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div></div></section>')
 
