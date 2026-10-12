@@ -377,3 +377,9 @@
 /* 1011-ze · FAQ bars: one answer open at a time */
 (function(){ var it=Array.prototype.slice.call(document.querySelectorAll('#faq .fq5-i')); if(!it.length) return;
   it.forEach(function(i){ i.querySelector('.fq5-h').addEventListener('click',function(){ var on=!i.classList.contains('open'); it.forEach(function(x){ x.classList.remove('open'); x.querySelector('.fq5-h').setAttribute('aria-expanded','false'); }); i.classList.toggle('open',on); i.querySelector('.fq5-h').setAttribute('aria-expanded',on); }); }); })();
+
+/* 1011-zf · FAQ categories filter the bars */
+(function(){ var sec=document.getElementById('faq'), cs=sec?Array.prototype.slice.call(sec.querySelectorAll('.fq5-c')):[]; if(!cs.length) return; var it=Array.prototype.slice.call(sec.querySelectorAll('.fq5-i')), ol=sec.querySelector('.fq5-list ol');
+  cs.forEach(function(b){ b.addEventListener('click',function(){ cs.forEach(function(x){ var on=x===b; x.classList.toggle('on',on); x.setAttribute('aria-pressed',on); });
+    it.forEach(function(i){ i.hidden=i.dataset.c!==b.dataset.c; i.classList.remove('open'); i.querySelector('.fq5-h').setAttribute('aria-expanded','false'); });
+    ol.classList.remove('swap'); void ol.offsetWidth; ol.classList.add('swap'); }); }); })();
