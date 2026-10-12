@@ -283,8 +283,15 @@ _acc = ''.join('<li class="pz-i%s"><button class="pz-h" type="button" aria-expan
                '<div class="pz-b"><div><q>%s</q><span class="pz-src">%s</span><a class="tlink" href="#">%s</a></div></div></li>'
                % (' on' if i == 0 else '', 'true' if i == 0 else 'false', i + 1, who, sc, q, src, cta) for i, (who, sc, q, src, cta) in enumerate(_P))
 _put('needs', '<section id="needs" data-bgop="0"><div class="stage pz">' + _lines(_t) +
-     '<div class="pn pic pz-pic" style="--gc:2/span 3;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1"><img src="img3/team-top.webp" alt="A team meeting around a table, seen from above" decoding="async"></div>'
-     '<div class="pn pz-title" style="--gc:1/span 1;--gr:1/span 1;--tc:1/span 2;--tr:1/span 1"><h2>Make room for the work that matters.</h2></div>'
+     '<div class="pn pic pz-pic" style="--gc:2/span 3;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1"><img src="img3/team-top.webp" alt="A team meeting around a table, seen from above" decoding="async">'
+     + ''.join('<figure class="pz-qb" style="left:%s;top:%s;--d:%s"><i>%s</i><figcaption><q>%s</q><span><b>%s</b> %s</span></figcaption></figure>' % b for b in [
+        ('30%', '6%', '.2s', 'D', 'I am always wearing it which makes it super easy to click &amp; record.', 'Discord', 'davad0716'),
+        ('60%', '1%', '.8s', 'K', 'Styling gets comments from many in my office. They say it looks very cool!', 'Reddit', 'u/kuped'),
+        ('62%', '74%', '1.4s', 'Z', 'I’m extremely impressed by the battery life.', 'Reddit', 'zeroskills21')]) + '</div>'
+     '<div class="pn pz-title" style="--gc:1/span 1;--gr:1/span 1;--tc:1/span 2;--tr:1/span 1"><h2>Make room for the work that matters.</h2>'
+     '<div class="end pz-join"><p>Real words from owners. Join them—talk face-to-face with the founding team, and receive a special gift.</p>'
+     '<div class="btns"><a class="btn" href="https://discord.gg/2KZKzdpvN3">Discord</a><a class="btn ghost" href="#">Reddit</a></div></div></div>'
      '<div class="pn pz-list" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1"><ol class="pz-acc">' + _acc + '</ol></div>'
      '<div class="rowline" style="grid-row:2"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div></div></section>')
-_m = re.search(r'<section id="scenes2"[^>]*>.*?</section>', s, re.S); s = s[:_m.start()] + s[_m.end():]
+for _x in ('scenes2', 'community'):
+    _m = re.search(r'<section id="%s"[^>]*>.*?</section>' % _x, s, re.S); s = s[:_m.start()] + s[_m.end():]

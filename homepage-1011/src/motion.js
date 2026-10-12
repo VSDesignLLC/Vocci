@@ -329,3 +329,7 @@
   items.forEach(function(it,i){ var h=it.querySelector('.pz-h'); h.addEventListener('click',function(){ held=true; stop(); open(i); }); h.addEventListener('mouseenter',function(){ stop(); open(i); }); });
   sec.querySelector('.pz-acc').addEventListener('mouseleave',play);
   new IntersectionObserver(function(es){ es[0].isIntersecting?play():stop(); },{threshold:.4}).observe(sec); })();
+
+/* 1011-l · screen 6 owner bubbles take turns in focus while on screen */
+(function(){ var sec=document.getElementById('needs'), qb=sec?Array.prototype.slice.call(sec.querySelectorAll('.pz-qb')):[]; if(!qb.length) return; var k=0, t=null;
+  new IntersectionObserver(function(es){ if(es[0].isIntersecting){ sec.classList.add('qb-in'); if(!t){ qb[0].classList.add('on'); t=setInterval(function(){ qb[k].classList.remove('on'); k=(k+1)%qb.length; qb[k].classList.add('on'); },3400); } } else { clearInterval(t); t=null; } },{threshold:.35}).observe(sec); })();
