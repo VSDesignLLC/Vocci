@@ -308,3 +308,20 @@ for _a, _b in [('<h2>Your data is yours.<br>We protect it that way.</h2>', '<h2>
 _put('privacy', _t)
 _sub('Recordings are encrypted on the ring with permission-based access, never used to train AI models, and you choose what syncs and which context is shared.',
      'Recordings are end-to-end encrypted, Vocci is GDPR compliant (verified by GDPR Local), and you choose what syncs and which context is shared.')
+
+# ---------- 1011-s · In their words: 1007 screen-4 layout (pictures on top, their cards below, title bottom-left) ----------
+_V = [('YouTube · Product manager', 'img2/creator-01.jpg', '50% 45%', 'Vocci Ring: This Tiny AI Assistant Changed My Workflow', 'A week of meetings, captured without opening a laptop.'),
+      ('YouTube · Creator', 'img2/v09.jpg', '50% 40%', 'Vocci Ring Review: real-world context for your AI tools', 'How the ring feeds conversations into Claude and ChatGPT.'),
+      ('YouTube · Founder', 'img2/v18.jpg', '50% 40%', 'Vocci + Claude: my meeting workflow', 'From a client call to a follow-up, start to finish.')]
+_cells = ''
+for i, (who, img, pos, title, sub) in enumerate(_V):
+    c = i + 2
+    _cells += ('<a class="pn pic kv-pic" href="#" style="--gc:%d/span 1;--gr:1/span 1;--tc:%d/span 1;--tr:%d/span 1"><img loading="lazy" decoding="async" src="%s" alt="" style="object-position:%s"><i class="vc-play" aria-hidden="true"></i></a>'
+               '<div class="pn kv-txt" style="--gc:%d/span 1;--gr:2/span 1;--tc:%d/span 1;--tr:%d/span 1"><span class="label"><b>%02d</b> · %s</span><h3>%s</h3><p>%s</p><a class="tlink end" href="#">Watch review</a></div>'
+               % (c, 1 + i % 2, 2 + 2 * (i // 2), img, pos, c, 1 + i % 2, 3 + 2 * (i // 2), i + 1, who, title, sub))
+_put('kol', '<section id="kol" data-bgop=".4"><div class="stage flat kv">' + _lines(_sec('hardware').group()) +
+     '<div class="pn kv-title" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:1/span 1"><h2>In their words.</h2>'
+     '<p>Creators wore the ring for weeks and filmed it on their own channels—no script, no edit from us.</p>'
+     '<div class="end btns"><a class="btn" href="https://www.youtube.com/@vocci-ai">Watch all on YouTube</a><a class="tlink" href="#">Become a creator</a></div></div>'
+     + _cells +
+     '<div class="rowline" style="grid-row:2"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div></div></section>')
