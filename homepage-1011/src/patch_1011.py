@@ -208,8 +208,7 @@ _rows = [('s0', _PILL2, 'Double-click to record.'), ('s1', _PILL1, 'Click once d
 _put('why', '<section id="why" data-bgop="0"><div class="stage rec3" data-s="0">' + _lines(_t) +
      '<div class="pn pic rec-stage" style="--gc:1/span 4;--gr:1/span 2;--tc:1/span 2;--tr:1/span 1"><div class="rec-fig">'
      '<img src="img3/rec-hand.png" alt="A hand wearing the Vocci ring, thumb on the button" decoding="async">'
-     '<span class="rec-waves" aria-hidden="true"><svg viewBox="0 0 200 200"><circle class="rp rp1" cx="100" cy="100" r="62"/><circle class="rp rp2" cx="100" cy="100" r="62"/>'
-     '<circle class="dt dt1" cx="100" cy="100" r="62"/><circle class="dt dt2" cx="100" cy="100" r="96"/><circle class="fl" cx="100" cy="100" r="62"/></svg></span></div></div>'
+     '<span class="rec-waves" aria-hidden="true"><canvas></canvas></span></div></div>'
      '<div class="pn rec-pn" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:2/span 1"><div class="rec-card">' + _BAND +
      '<h3><i class="rec-dot" aria-hidden="true"></i>Recording with elegance</h3><ul class="rec-steps">' +
      ''.join('<li class="%s">%s<span>%s</span></li>' % (k, ic, tx) for k, ic, tx in _rows) + '</ul></div>'
