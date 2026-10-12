@@ -580,3 +580,8 @@ for _sid, _pats in [('why', [r'<a class="tlink" href="#">Join a webinar</a>']),
         _t, _n = re.subn(_p, '', _t)
         assert _n, (_sid, _p)
     _put(_sid, _t)
+
+# 1011-zz17 · intro loader lives at the top of the hero so it paints before anything else
+_t = _sec('hero').group()
+_t = _t.replace('<div class="stage ">', '<div class="vl-intro" aria-hidden="true"><div class="vl-ring"><img src="img3/ring-top.webp" alt=""><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg></div><span class="vl-pct">00</span></div><script>document.documentElement.classList.add("vl-on");document.body.appendChild(document.querySelector(".vl-intro"))</script><div class="stage ">', 1)
+_put('hero', _t)

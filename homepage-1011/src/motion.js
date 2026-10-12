@@ -436,3 +436,75 @@
     });
   });
 })();
+
+/* 1011-zz17 · intro + hero→screen-2 ring hand-off */
+(function(){
+  var root=document.documentElement, L=document.querySelector('.vl-intro'), hero=document.getElementById('hero');
+  var bg=hero&&hero.querySelector('.stage>.bgimg'), how=document.getElementById('how');
+  var RING=[898/2000,497/1126,118/2000];   /* the ring inside the case: x, y, outer diameter as a share of the photo width */
+  function ringOnScreen(){
+    if(!bg||!bg.naturalWidth) return {x:innerWidth*.45,y:innerHeight*.45,d:innerWidth*.06};
+    var r=bg.getBoundingClientRect(), iw=bg.naturalWidth, ih=bg.naturalHeight, s=Math.max(r.width/iw,r.height/ih), dw=iw*s, dh=ih*s;
+    var op=getComputedStyle(bg).objectPosition.split(' ').map(parseFloat), ox=(r.width-dw)*(op[0]||50)/100, oy=(r.height-dh)*(isNaN(op[1])?50:op[1])/100;
+    return {x:r.left+ox+RING[0]*dw, y:r.top+oy+RING[1]*dh, d:RING[2]*dw};
+  }
+  var ease=function(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}, out=function(t){return 1-Math.pow(1-t,4)};
+  function done(){ root.classList.remove('vl-on'); if(L) L.remove(); }
+  if(!L||matchMedia('(prefers-reduced-motion: reduce)').matches){ done(); }
+  else{
+    var p=0, shown=0, t0=performance.now(), ready=false, S=Math.min(150,innerWidth*.34);
+    L.style.setProperty('--s',S+'px');
+    var imgs=[bg].concat([].slice.call(document.querySelectorAll('#how img'))).filter(Boolean), n=imgs.length, k=0;
+    imgs.forEach(function(i){ if(i.complete) k++; else { i.addEventListener('load',function(){k++}); i.addEventListener('error',function(){k++}); } });
+    var pct=L.querySelector('.vl-pct');
+    (function load(now){
+      var target=Math.min(1,Math.max(k/n,(now-t0)/2600)); if(now-t0<1100) target=Math.min(target,(now-t0)/1100);
+      shown+= (target-shown)*.12; L.style.setProperty('--p',shown.toFixed(3)); L.style.setProperty('--rz',((now-t0)*.03)+'deg');
+      pct.textContent=String(Math.round(shown*100)).padStart(2,'0');
+      if(shown>.985&&(bg?bg.complete:true)) return open(now);
+      requestAnimationFrame(load);
+    })(t0);
+    function open(start){
+      var a=ringOnScreen(), cx=innerWidth/2, cy=innerHeight/2, rz0=(start-t0)*.03, D1=700, D2=1000, far=Math.hypot(innerWidth,innerHeight);
+      (function step(now){
+        var t=now-start;
+        if(t<D1){ /* glide onto the photo's ring, shrinking to its size */
+          var e=ease(t/D1);
+          L.style.setProperty('--rx',(cx+(a.x-cx)*e)+'px'); L.style.setProperty('--ry',(cy+(a.y-cy)*e)+'px');
+          L.style.setProperty('--s',(S+(a.d-S)*e)+'px'); L.style.setProperty('--rz',(rz0*(1-e))+'deg'); L.style.setProperty('--ao',(1-e*1.6).toFixed(3));
+          L.style.setProperty('--x',a.x+'px'); L.style.setProperty('--y',a.y+'px'); L.style.setProperty('--r',(a.d*.3*e)+'px');
+        } else { /* the ring's opening becomes the reveal */
+          var u=Math.min(1,(t-D1)/D2), o=out(u);
+          L.style.setProperty('--r',(a.d*.3+(far-a.d*.3)*o)+'px'); L.style.setProperty('--io',(1-u*2.2).toFixed(3));
+          if(bg) bg.style.scale=(1.06-.06*o).toFixed(4);
+          if(u>=1){ if(bg) bg.style.scale=''; return done(); }
+        }
+        requestAnimationFrame(step);
+      })(start);
+    }
+    setTimeout(done,9000);   /* never trap the page */
+  }
+
+  /* scroll hand-off: a ring lifts out of the case and settles where screen 2's ring appears */
+  if(!how||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var fly=document.createElement('div'); fly.className='ring-fly'; fly.innerHTML='<img src="img3/ring-top.webp" alt="">'; document.body.appendChild(fly);
+  function tgt(){
+    var st=how.querySelector('.stage')||how, r=st.getBoundingClientRect();
+    if(how.classList.contains('how3d')) return {x:r.left+r.width*.474, y:r.top+r.height*.3, d:r.width*.14, tilt:56};
+    var pic=how.querySelector('.stage>.pn.pic img'), q=pic?pic.getBoundingClientRect():r;
+    return {x:q.left+q.width/2, y:q.top+q.height/2, d:Math.min(q.width,q.height)*.5, tilt:50};
+  }
+  function tick(){
+    var hr=hero.getBoundingClientRect(), wr=how.getBoundingClientRect(), span=Math.max(1,innerHeight);
+    var p=Math.min(1,Math.max(0,1-wr.top/span));            /* 0 when screen 2 starts entering, 1 when it fills the view */
+    var co=p>=1?'':Math.max(0,Math.min(1,(p-.82)/.16)).toFixed(3); how.querySelectorAll('canvas').forEach(function(cv){ cv.style.opacity=co; });
+    if(p<=0||p>=1||root.classList.contains('vl-on')){ fly.style.opacity=0; return; }
+    var a=ringOnScreen(), b=tgt(), e=ease(p);
+    var x=a.x+(b.x-a.x)*e, y=a.y+(b.y-a.y)*e - Math.sin(Math.PI*p)*innerHeight*.08, d=a.d+(b.d-a.d)*e;
+    fly.style.width=fly.style.height=d+'px';
+    fly.style.transform='translate('+(x-d/2)+'px,'+(y-d/2)+'px) perspective(900px) rotateX('+(b.tilt*e)+'deg) rotateZ('+(-28*e)+'deg)';
+    fly.style.opacity=Math.min(1,p*6,(1-p)/.12).toFixed(3);
+  }
+  var q=false; function on(){ if(!q){ q=true; requestAnimationFrame(function(){ q=false; tick(); }); } }
+  addEventListener('scroll',on,{passive:true}); addEventListener('resize',on); tick();
+})();
