@@ -387,7 +387,7 @@
 /* 1011-zs · nav Buy now: collapses while scrolling down, expands when scrolling back up; never while the hero's own Buy now is on screen (all breakpoints) */
 (function(){ var nav=document.querySelector('.gridall>.nav.nav3'), hb=document.querySelector('#hero .btn'); if(!nav) return;
   var heroVis=true, up=false, last=scrollY;
-  function set(){ nav.classList.toggle('show-buy', up && !heroVis); }
+  function set(){ nav.classList.toggle('show-buy', !heroVis);   /* 1011-zv: nav always visible (vocci.ai), so no direction rule */ }
   var hero=document.getElementById('hero'), nx=hero&&hero.nextElementSibling; function vis(){ if(!hb) return false; var r=hb.getBoundingClientRect(); if(!(r.bottom>0&&r.top<innerHeight&&r.width>0)) return false; return !nx||nx.getBoundingClientRect().top>r.top; }   /* the hero is pinned under the page: its button counts only until the next section covers it */
   addEventListener('scroll',function(){ var y=scrollY; heroVis=vis(); if(Math.abs(y-last)>4){ up=y<last; last=y; } set(); },{passive:true}); addEventListener('resize',function(){ heroVis=vis(); set(); }); heroVis=vis(); set(); })();
 
