@@ -366,3 +366,10 @@
   cats.forEach(function(b){ b.addEventListener('click',function(){ cats.forEach(function(x){ var on=x===b; x.classList.toggle('on',on); x.setAttribute('aria-pressed',on); }); lists.forEach(function(l){ l.classList.toggle('on',l.dataset.c===b.dataset.c); }); }); });
   lists.forEach(function(l){ var items=Array.prototype.slice.call(l.querySelectorAll('.fq3-i'));
     items.forEach(function(it){ it.querySelector('.fq3-h').addEventListener('click',function(){ var on=!it.classList.contains('open'); items.forEach(function(x){ x.classList.remove('open'); x.querySelector('.fq3-h').setAttribute('aria-expanded','false'); }); it.classList.toggle('open',on); it.querySelector('.fq3-h').setAttribute('aria-expanded',on); }); }); }); })();
+
+/* 1011-zd · FAQ rows: hover (desktop) or tap picks a question; its answer shows in the left cell */
+(function(){ var sec=document.getElementById('faq'), rows=sec?Array.prototype.slice.call(sec.querySelectorAll('.fq4-r')):[]; if(!rows.length) return;
+  var box=sec.querySelector('.fq4-ans p'), hov=matchMedia('(hover:hover)').matches;
+  function pick(r){ if(r.classList.contains('on')) return; rows.forEach(function(x){ var on=x===r; x.classList.toggle('on',on); x.setAttribute('aria-pressed',on); });
+    if(box){ var n=box.cloneNode(false); n.innerHTML='<b></b> '; n.firstChild.textContent=r.dataset.q.replace(/&amp;/g,'&'); n.appendChild(document.createTextNode(r.dataset.a)); box.parentNode.replaceChild(n,box); box=n; } }
+  rows.forEach(function(r){ r.addEventListener('click',function(){ pick(r); }); r.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); pick(r); } }); if(hov) r.addEventListener('mouseenter',function(){ pick(r); }); }); })();
