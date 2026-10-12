@@ -1828,3 +1828,7 @@
 #colors .fnx-ring[data-f="midnight"]{scale:.48}
 #colors .fnx-ring[data-f="dawn"]{scale:.48}
 #privacy .pv-badge{width:96px;height:auto;display:block;margin:2px 0 4px}
+/* 1011-zq · charging-case renders at the Lux size (case + ring span ~79% of the canvas) */
+#colors .fnx-case[data-f="lumen"]{scale:.92}
+#colors .fnx-case[data-f="midnight"]{scale:.8}
+#colors .fnx-case[data-f="dawn"]{scale:.81}
