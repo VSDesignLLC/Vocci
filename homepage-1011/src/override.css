@@ -1378,3 +1378,7 @@
 #privacy .pv-certs li{gap:14px}
 #privacy .pv-certs img{width:76px!important;height:auto!important;filter:none!important;background:#fff;border-radius:10px;padding:6px}
 #privacy .pv-certs b{font-size:15px}
+/* 1011-r · colours: buy buttons sit with the finish picker */
+#colors .fnx-buy{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:auto}
+#colors .fnx-buy .tlink{margin-left:0}
+#colors .pn.fnx-ctl{justify-content:flex-start}
