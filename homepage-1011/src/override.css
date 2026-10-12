@@ -1382,3 +1382,4 @@
 #colors .fnx-buy{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:auto}
 #colors .fnx-buy .tlink{margin-left:0}
 #colors .pn.fnx-ctl{justify-content:flex-start}
+#privacy .pv-certs img{background:none!important;padding:0!important;border-radius:0!important;width:84px!important}
