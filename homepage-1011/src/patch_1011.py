@@ -561,3 +561,10 @@ assert _a in _t
 _t = _t.replace(_a, '<img class="pv-badge" src="img3/gdpr-local.svg" alt="GDPR Local verified badge, ID PB7U836" loading="lazy" decoding="async"><h3>GDPR compliant</h3><p class="end">Verified by GDPR Local · ID PB7U836.</p>', 1)
 _t = _t.replace('<div><a class="btn" href="https://trust.vocci.ai/">Trust Center</a></div>', '<div class="end"><a class="btn" href="https://trust.vocci.ai/">Trust Center</a></div>', 1)
 _put('privacy', _t)
+
+# ---------- 1011-zr · press title sits centred in the quote card ----------
+_t = _sec('awards').group()
+_a = '<div class="pn aw-title" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1"><h2>What the press noticed.</h2></div><div class="pn mid quote" style="--gc:2/span 2;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1">'
+assert _a in _t
+_t = _t.replace(_a, '<div class="pn mid quote" style="--gc:2/span 2;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1"><h2 class="aw-h">What the press noticed.</h2>', 1)
+_put('awards', _t)

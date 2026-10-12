@@ -1832,3 +1832,4 @@
 #colors .fnx-case[data-f="lumen"]{scale:.92}
 #colors .fnx-case[data-f="midnight"]{scale:.8}
 #colors .fnx-case[data-f="dawn"]{scale:.81}
+#awards .pn.mid.quote .aw-h{margin:0 0 6px;text-align:center;font-size:clamp(20px,1.7vw,26px);line-height:1.15;letter-spacing:-.02em;font-weight:600;color:var(--ink)} @media(max-width:700px){ #awards .pn.mid.quote .aw-h{font-size:20px} }
