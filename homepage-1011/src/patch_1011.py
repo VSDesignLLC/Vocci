@@ -388,3 +388,15 @@ _put('faq', '<section id="faq" data-bgop=".4"><div class="stage flat fq2s">' + _
      '<div class="end btns"><a class="btn" href="https://support.vocci.ai/">Support Center</a><a class="tlink" href="https://support.vocci.ai/">All questions</a></div></div>'
      + _cells +
      '<div class="rowline" style="grid-row:2"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div></div></section>')
+
+# ---------- 1011-zc · FAQ: every vocci.ai question on the page — categories on the left, that category's accordion on the right ----------
+exec((R/'src/faq_vocci.py').read_text())
+_cats = ''.join('<button class="fq3-c%s" type="button" data-c="%d" aria-pressed="%s"><b>%02d</b><span>%s</span><em>%d</em></button>' % (' on' if i == 0 else '', i, 'true' if i == 0 else 'false', i + 1, c, len(qs)) for i, (c, qs) in enumerate(FAQ))
+_lists = ''.join('<div class="fq3-list%s" data-c="%d"><span class="label fq3-cap">%s</span><ol>%s</ol></div>' % (' on' if i == 0 else '', i, c,
+                 ''.join('<li class="fq3-i%s"><button class="fq3-h" type="button" aria-expanded="%s"><b>%02d</b><span>%s</span><i aria-hidden="true"></i></button><div class="fq3-a"><div><p>%s</p></div></div></li>'
+                         % (' open' if (i == 0 and j == 0) else '', 'true' if (i == 0 and j == 0) else 'false', j + 1, q, a) for j, (q, a) in enumerate(qs)))
+                 for i, (c, qs) in enumerate(FAQ))
+_put('faq', '<section id="faq" data-bgop=".4"><div class="stage flat fq3s">' + _lines(_sec('hardware').group(), drop=('50%', '75%')) +
+     '<div class="pn fq3-head" style="--gc:1/span 1;--gr:1/span 2;--tc:1/span 2;--tr:1/span 1"><h2>FAQ</h2><div class="fq3-cats" role="tablist">' + _cats + '</div>'
+     '<div class="end fq3-help"><p>Still have questions?</p><a class="tlink" href="https://support.vocci.ai/">Support Center</a></div></div>'
+     '<div class="pn fq3-body" style="--gc:2/span 3;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1">' + _lists + '</div></div></section>')

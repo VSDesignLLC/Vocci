@@ -359,3 +359,10 @@
 /* 1011-zb · FAQ grid: one card open at a time */
 (function(){ var cs=Array.prototype.slice.call(document.querySelectorAll('#faq .pn.fq2')); if(!cs.length) return;
   cs.forEach(function(c){ c.addEventListener('click',function(){ var on=!c.classList.contains('open'); cs.forEach(function(x){ x.classList.remove('open'); x.querySelector('.fq2-h').setAttribute('aria-expanded','false'); }); c.classList.toggle('open',on); c.querySelector('.fq2-h').setAttribute('aria-expanded',on); }); }); })();
+
+/* 1011-zc · FAQ: pick a category, one answer open at a time within it */
+(function(){ var sec=document.getElementById('faq'), cats=sec?Array.prototype.slice.call(sec.querySelectorAll('.fq3-c')):[]; if(!cats.length) return;
+  var lists=Array.prototype.slice.call(sec.querySelectorAll('.fq3-list'));
+  cats.forEach(function(b){ b.addEventListener('click',function(){ cats.forEach(function(x){ var on=x===b; x.classList.toggle('on',on); x.setAttribute('aria-pressed',on); }); lists.forEach(function(l){ l.classList.toggle('on',l.dataset.c===b.dataset.c); }); }); });
+  lists.forEach(function(l){ var items=Array.prototype.slice.call(l.querySelectorAll('.fq3-i'));
+    items.forEach(function(it){ it.querySelector('.fq3-h').addEventListener('click',function(){ var on=!it.classList.contains('open'); items.forEach(function(x){ x.classList.remove('open'); x.querySelector('.fq3-h').setAttribute('aria-expanded','false'); }); it.classList.toggle('open',on); it.querySelector('.fq3-h').setAttribute('aria-expanded',on); }); }); }); })();
