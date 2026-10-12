@@ -1271,3 +1271,21 @@
 #why .ov-orb .gd2{-webkit-mask:radial-gradient(circle closest-side,transparent 63%,#000 calc(63% + 1px));mask:radial-gradient(circle closest-side,transparent 63%,#000 calc(63% + 1px))}
 #why .ov-orb .gd2::after{inset:18%}
 #why .ov-orb .gd3{-webkit-mask:radial-gradient(circle closest-side,transparent 43%,#000 calc(43% + 1px));mask:radial-gradient(circle closest-side,transparent 43%,#000 calc(43% + 1px))}
+/* 1011-g · chapter card: numbers live in the Record card; content centred in its cell; one spacing scale (8 / 12 / 16 / 20 / 24) */
+#why .pn.rec-pn{--pad:24px;justify-content:center!important;gap:16px!important;padding:var(--pad)!important}
+#why .ch-rail{padding-bottom:10px}
+#why .ch-rail button:focus{outline:none}#why .ch-rail button:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:4px}
+#why .rec-card{padding:20px!important;gap:12px!important}
+#why .rec-card h3{margin:0 0 4px}
+#why .rec-steps{gap:10px}
+#why .rec-card .params{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px;margin:8px 0 0!important;padding-top:16px;border-top:1px solid rgba(20,20,22,.08)}
+#why .rec-card .params div{border:0;padding:0}
+#why .rec-card .params dt{font:600 20px/1 var(--font-body);letter-spacing:-.02em;color:var(--ink)}
+#why .rec-card .params dd{margin:4px 0 0;font-size:12px;line-height:1.3;color:var(--muted)}
+#why .rec-card .btns{margin-top:4px!important}
+@media(min-width:1101px) and (max-height:880px){ #why .pn.rec-pn{--pad:20px;gap:12px!important} #why .rec-card{padding:16px!important;gap:10px!important} #why .rec-card .params{padding-top:12px;gap:8px 16px} #why .rec-card .params dt{font-size:18px} }
+@media(max-width:700px){ #why .pn.rec-pn{justify-content:flex-start!important;padding:16px 20px 20px!important;gap:12px!important} #why .rec-card{padding:16px!important;gap:8px!important} #why .rec-card .params{grid-template-columns:repeat(4,auto);justify-content:space-between;padding-top:10px;margin-top:4px!important} #why .rec-card .params dt{font-size:16px} #why .rec-card .params dd{font-size:10.5px} }
+#why .rec-card[data-ch="0"] .rec-band{display:none}
+#why .rec-cards{align-items:stretch}#why .rec-cards>.rec-card{align-self:stretch;height:auto}
+@media(min-width:1101px) and (max-height:880px){ #why .rec-card h3{font-size:16px} #why .rec-steps{gap:6px} #why .rec-steps li{font-size:12.5px;line-height:1.35} #why .rec-card .params{gap:6px 16px;margin-top:4px!important;padding-top:10px} #why .rec-card .params dt{font-size:16px} #why .rec-card .params dd{font-size:11px;margin-top:2px} #why .rec-card .btn{height:38px} }
+@media(max-width:700px){ #why .pn.rec-pn{justify-content:center!important;padding:16px 20px!important} }

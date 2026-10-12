@@ -229,7 +229,8 @@ def _card(k, inner, title, rows, extra=''):
             % (k, inner, title, ''.join('<li>%s<span>%s</span></li>' % (ic, tx) for ic, tx in rows), extra))
 _c0 = re.search(r'<div class="rec-card">(.*?)<h3>', _t, re.S).group(1)   # the band diagram
 _rows0 = re.findall(r'<li class="s\d">(<svg.*?</svg>)<span>(.*?)</span></li>', _t)
-_cards = (_card(0, _c0, 'The most elegant way to capture conversations and ideas.', _rows0)
+_params = re.search(r'<dl class="params end">.*?</dl>', _t, re.S).group().replace('params end', 'params')
+_cards = (_card(0, _c0, 'The most elegant way to capture conversations and ideas.', _rows0, _params)
           + _card(1, _c0.replace('class="rec-band"', 'class="rec-band hold"'), 'Agents on your fingertip.',
                   [(_ICO['hold'], 'Press and hold the button.'), (_ICO['voice'], 'Say what you need—a follow-up, a summary, a task.'), (_ICO['done'], 'Vocci AI gets it done. Review it in the app when needed.')])
           + _card(2, '', 'Integrate real-world context into your AI workflow.',
@@ -239,8 +240,7 @@ _rail = ('<div class="ch-rail" role="tablist">' + ''.join('<button type="button"
          + '<i class="ch-bar" aria-hidden="true"><i></i></i></div>')
 _params = re.search(r'<dl class="params end">.*?</dl>', _t, re.S).group().replace('params end', 'params')
 _pn = re.search(r'<div class="pn rec-pn".*?</dl></div>', _t, re.S).group()
-_t = _t.replace(_pn, '<div class="pn rec-pn" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:2/span 1">' + _rail + '<div class="rec-cards">' + _cards + '</div></div>'
-                '<div class="pn rec-params" style="--gc:4/span 1;--gr:2/span 1;--tc:2/span 1;--tr:2/span 1">' + _params + '</div>')
+_t = _t.replace(_pn, '<div class="pn rec-pn" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:2/span 1">' + _rail + '<div class="rec-cards">' + _cards + '</div></div>')
 # overlays for Ask (voice → agent) and Connect (AI apps around the ring)
 _AIS = [('claude', 'Claude'), ('gemini', 'Gemini'), ('sparkle', 'AI app'), ('compass', 'Perplexity'), ('copilot', 'Copilot'), ('cube', 'Cursor'), ('chatgpt', 'ChatGPT')]
 _ov = ('<div class="ov-ask" aria-hidden="true"><div class="ask-q"><span class="ask-mic"><i></i><i></i><i></i><i></i></span><span class="ask-tx"></span></div>'
