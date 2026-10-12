@@ -1290,3 +1290,20 @@
 @media(min-width:1101px) and (max-height:880px){ #why .rec-card h3{font-size:16px} #why .rec-steps{gap:6px} #why .rec-steps li{font-size:12.5px;line-height:1.35} #why .rec-card .params{gap:6px 16px;margin-top:4px!important;padding-top:10px} #why .rec-card .params dt{font-size:16px} #why .rec-card .params dd{font-size:11px;margin-top:2px} #why .rec-card .btn{height:38px} }
 @media(max-width:700px){ #why .pn.rec-pn{justify-content:center!important;padding:16px 20px!important} }
 /* 1011-h · text links without underline */ .pn .tlink{border-bottom:0!important;padding-bottom:0;text-decoration:none}
+/* 1011-i · screen 2 in three steps: 01 spans two columns (ring + transcript), the empty twin keeps the 3D ring's second stop */
+#how .pn.how-cont{visibility:hidden;pointer-events:none;z-index:0;background:none!important}
+#how .pn.how-s1{z-index:1}
+#how .stage>.vl[style*="left:25%"]{-webkit-mask:linear-gradient(#000 0 50%,transparent 50%);mask:linear-gradient(#000 0 50%,transparent 50%)}
+#how .stage>.sqr[style*="left:25%;top:calc(100% - 1px)"]{display:none}
+#how .rowline i[style*="left:25%"]{display:none}
+#how .pn.how-s1 p{max-width:36em}
+/* the merged step stays lit while the ring sits on its second stop */
+#how .stage.stepping:has(.how-cont.act) .pn.how-s1>*{opacity:1!important}
+#how .stage.stepping:has(.how-cont.act) .pn.how-s1 .label b{color:var(--accent-text)}
+#how .stage:has(.how-cont.on) .pn.how-s1{background:var(--bg-soft)}
+@media(max-width:700px){
+  #how .stage{grid-template-columns:repeat(3,82vw)!important}
+  #how .stage>.h-skip{display:none!important}
+  #how .stage>.hs1{grid-column:1!important}#how .stage>.hs2{grid-column:2!important}#how .stage>.hs3{grid-column:3!important}
+}
+@media(min-width:700.5px) and (max-width:1100px){ #how .stage{grid-template-columns:repeat(3,calc((100vw - 96px)/2))!important} }
