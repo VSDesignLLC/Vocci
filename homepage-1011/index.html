@@ -3835,14 +3835,14 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
     imgs.forEach(function(i){ if(i.complete) k++; else { i.addEventListener('load',function(){k++}); i.addEventListener('error',function(){k++}); } });
     var pct=L.querySelector('.vl-pct');
     (function load(now){
-      var target=Math.min(1,Math.max(k/n,(now-t0)/2600)); if(now-t0<1100) target=Math.min(target,(now-t0)/1100);
-      shown+= (target-shown)*.12; L.style.setProperty('--p',shown.toFixed(3)); L.style.setProperty('--rz',((now-t0)*.03)+'deg');
+      var target=Math.min(1,Math.max(k/n,(now-t0)/1300)); if(now-t0<800) target=Math.min(target,(now-t0)/800);
+      shown+= (target-shown)*.22; L.style.setProperty('--p',shown.toFixed(3)); L.style.setProperty('--rz',((now-t0)*.03)+'deg');
       pct.textContent=String(Math.round(shown*100)).padStart(2,'0');
       if(shown>.985&&(bg?bg.complete:true)) return open(now);
       requestAnimationFrame(load);
     })(t0);
     function open(start){
-      var a=ringOnScreen(), cx=innerWidth/2, cy=innerHeight/2, rz0=(start-t0)*.03, D1=700, D2=1000, far=Math.hypot(innerWidth,innerHeight);
+      var a=ringOnScreen(), cx=innerWidth/2, cy=innerHeight/2, rz0=(start-t0)*.03, D1=520, D2=760, far=Math.hypot(innerWidth,innerHeight);
       (function step(now){
         var t=now-start;
         if(t<D1){ /* glide onto the photo's ring, shrinking to its size */
