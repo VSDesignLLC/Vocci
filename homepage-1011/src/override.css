@@ -1239,3 +1239,26 @@
 #why .stage:not([data-ch="0"]) .pn.rec-params{opacity:0!important;transition:opacity .6s var(--ease)!important}
 #why .ov-orb .oa img{width:38px;height:38px}
 @media(max-width:700px){ #why .ov-ask{left:calc(75cqh - 54cqw + 5cqw);right:auto;width:90cqw;top:12cqh} #why .ask-q{font-size:13px;border-radius:18px} }
+/* 1011-e · Connect: glass discs centred on the ring, AI apps ride the middle disc (no screen-space maths, so it stays on the ring at any scale) */
+#why .ov-orb{--R:17cqh}
+#why .ov-orb .gd{position:absolute;left:0;top:0;border-radius:50%;transform:translate(-50%,-50%) scale(.85);border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.14);backdrop-filter:blur(1.5px);-webkit-backdrop-filter:blur(1.5px);transition:transform 1s var(--ease)}
+#why .ov-orb .gd1{width:21cqh;height:21cqh;background:rgba(255,255,255,.06)}
+#why .ov-orb .gd2{width:calc(var(--R) * 2 + 10cqh);height:calc(var(--R) * 2 + 10cqh)}
+#why .ov-orb .gd3{width:calc(var(--R) * 2 + 30cqh);height:calc(var(--R) * 2 + 30cqh);background:rgba(255,255,255,.1)}
+#why .stage[data-ch="2"] .ov-orb .gd{transform:translate(-50%,-50%) scale(1)}
+#why .stage[data-ch="2"] .ov-orb .gd2{transition-delay:.1s}#why .stage[data-ch="2"] .ov-orb .gd3{transition-delay:.2s}
+#why .orb-spin{position:absolute;left:0;top:0;width:0;height:0;animation:orbspin 48s linear infinite}
+#why .ov-orb .oa{position:absolute;left:0;top:0;width:0;height:0;margin:0;border-radius:0;background:none;transform:rotate(var(--a)) translateY(calc(var(--R) * -1 - 5cqh)) rotate(calc(var(--a) * -1))}
+#why .ov-orb .oa-in{position:absolute;left:-28px;top:-28px;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:orbspin 48s linear infinite reverse;opacity:0;transform:scale(.6);transition:opacity .5s,transform .6s var(--ease)}
+#why .stage[data-ch="2"] .ov-orb .oa-in{opacity:1;transform:none}
+#why .ov-orb .oa-in img{position:static!important;inset:auto!important;width:30px!important;height:30px!important;object-fit:contain!important;transform:none!important;filter:none!important}
+@keyframes orbspin{to{rotate:360deg}}
+@media(prefers-reduced-motion:reduce){ #why .orb-spin,#why .ov-orb .oa-in{animation:none} }
+@media(max-width:700px){ #why .ov-orb .oa-in{left:-20px;top:-20px;width:40px;height:40px} #why .ov-orb .oa-in img{width:22px!important;height:22px!important} }
+#why .ov-orb .oa-in img{width:44px!important;height:44px!important} @media(max-width:700px){ #why .ov-orb .oa-in img{width:32px!important;height:32px!important} }
+@media(min-width:1101px){ #awards .stage>.pn.mid.glassy{gap:6px!important;padding:12px!important} }
+.gridall>.nav .nd:last-of-type .nd-m{left:auto;right:-20px}
+@media(min-width:1101px) and (max-height:880px){ #why .rec-card .rec-band{display:none} #why .rec-card{gap:8px} }
+@media(min-width:1101px) and (max-height:720px){ #why .ch-rail{padding-bottom:6px} #why .rec-steps li{font-size:12.5px} #why .rec-card h3{font-size:16px} }
+@media(min-width:1101px) and (max-height:880px){ #why .pn.rec-pn{--pad:20px;gap:10px} #why .rec-card{padding:14px 16px} #why .rec-card .btns{margin-top:0} }
+@media(max-width:700px) and (max-height:740px){ #why .pn.rec-stage{height:46%!important} #why .pn.rec-pn{height:54%!important;padding:14px 16px 16px!important;gap:10px} #why .pn.rec-params{top:calc(46% - 56px)} #why .rec-card{padding:12px 14px;gap:8px} #why .rec-steps li{font-size:12px} #why .rec-card .btn{height:38px} }
