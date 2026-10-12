@@ -371,3 +371,20 @@ _nav = ('<nav class="nav nav3"><div class="navbar n3-bar">' + _wm + '<div class=
         '<button class="n3-burger" type="button" aria-expanded="false" aria-label="Menu"><i></i><i></i></button></div></div>'
         '<div class="n3-drop"><div class="n3-in">' + _groups + '<div class="n3-mob">' + _mob + '</div></div></div></nav>')
 s = s[:_n.start()] + _nav + s[_n.end():]
+
+# ---------- 1011-zb · FAQ back to the six-cell grid: answer under the question, big toggle, the open card turns dark ----------
+_t = _sec('faq').group()
+_qs = re.findall(r'<span class="fq-t">(.*?)</span>.*?<p>(.*?)</p>', _t, re.S); assert len(_qs) == 6, len(_qs)
+_cells = ''
+for i, (q, a) in enumerate(_qs):
+    col, row = 2 + i // 2, 1 + i % 2
+    _cells += ('<div class="pn fq2%s" style="--gc:%d/span 1;--gr:%d/span 1;--tc:%d/span 1;--tr:%d/span 1">'
+               '<button class="fq2-h" type="button" aria-expanded="%s"><span class="label"><b>%02d</b></span><h3>%s</h3><i class="fq2-b" aria-hidden="true"></i></button>'
+               '<div class="fq2-a"><div><p>%s</p></div></div><span class="fq2-n" aria-hidden="true">%02d</span></div>'
+               % (' open' if i == 0 else '', col, row, 1 + i % 2, 2 + i, 'true' if i == 0 else 'false', i + 1, q, a, i + 1))
+_put('faq', '<section id="faq" data-bgop=".4"><div class="stage flat fq2s">' + _lines(_sec('hardware').group()) +
+     '<div class="pn fq2-head" style="--gc:1/span 1;--gr:1/span 1;--tc:1/span 2;--tr:1/span 1"><h2>FAQ</h2><p>Six questions we hear most.</p></div>'
+     '<div class="pn fq2-help" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:8/span 1"><h3>Still have questions?</h3><p>Guides, shipping, returns and a team that answers.</p>'
+     '<div class="end btns"><a class="btn" href="https://support.vocci.ai/">Support Center</a><a class="tlink" href="https://support.vocci.ai/">All questions</a></div></div>'
+     + _cells +
+     '<div class="rowline" style="grid-row:2"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div></div></section>')
