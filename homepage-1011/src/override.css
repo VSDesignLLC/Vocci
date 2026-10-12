@@ -1797,7 +1797,7 @@
 /* 1011-zz · 3.0 copy: layout follow-ups */
 /* 2 · four text columns again: overview + three steps */
 #how .stage>.vl[style*="left:25%"]{-webkit-mask:none!important;mask:none!important}
-#how .stage>.sqr[style*="left:25%;top:calc(100% - 1px)"],#how .rowline i[style*="left:25%"]{display:block!important}
+@media(min-width:1101px){ #how .stage>.sqr[style*="left:25%;top:calc(100% - 1px)"],#how .rowline i[style*="left:25%"]{display:block!important} }
 #how .how-ov .label{color:var(--muted)}
 #how .how-ov h3{font-size:clamp(20px,1.6vw,24px)}
 #how .stage.stepping:has(.how-st.act) .pn.how-ov>*{opacity:.3}
@@ -1838,3 +1838,12 @@
 .gridall>.nav.nav3.show-buy .n3-buy{max-width:140px;padding:0 16px!important;opacity:1;pointer-events:auto}
 .gridall>.nav.nav3:not(.show-buy) .n3-r{gap:8px}
 @media(max-width:700px){ .gridall #how{position:relative;z-index:2;background:#e8e8e5!important} #how .how-head{background:#e8e8e5;position:relative;z-index:2} }
+
+/* 1011-zt · phone/tablet screen 2: one grey ground, even spacing, no stray grid marks */
+@media(max-width:700px){
+  #how .stage>.vl,#how .stage>.hl,#how .stage>.sqr,#how .stage>.rowline{display:none!important}
+  #how .how-head{padding:32px 20px 20px!important}
+  #how .stage{background:#e8e8e5!important;padding-bottom:16px!important}
+  #how .how-hint{background:#e8e8e5;margin:0;padding:8px 0 32px!important}
+  #how .how-hint .hh-b{background:#fff;border-color:rgba(20,20,22,.14)}
+}

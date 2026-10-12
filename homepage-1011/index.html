@@ -3167,7 +3167,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 /* 1011-zz · 3.0 copy: layout follow-ups */
 /* 2 · four text columns again: overview + three steps */
 #how .stage>.vl[style*="left:25%"]{-webkit-mask:none!important;mask:none!important}
-#how .stage>.sqr[style*="left:25%;top:calc(100% - 1px)"],#how .rowline i[style*="left:25%"]{display:block!important}
+@media(min-width:1101px){ #how .stage>.sqr[style*="left:25%;top:calc(100% - 1px)"],#how .rowline i[style*="left:25%"]{display:block!important} }
 #how .how-ov .label{color:var(--muted)}
 #how .how-ov h3{font-size:clamp(20px,1.6vw,24px)}
 #how .stage.stepping:has(.how-st.act) .pn.how-ov>*{opacity:.3}
@@ -3208,6 +3208,15 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 .gridall>.nav.nav3.show-buy .n3-buy{max-width:140px;padding:0 16px!important;opacity:1;pointer-events:auto}
 .gridall>.nav.nav3:not(.show-buy) .n3-r{gap:8px}
 @media(max-width:1100px){ .gridall #how{position:relative;z-index:2;background:#e8e8e5!important} #how .how-head{background:#e8e8e5;position:relative;z-index:2} }
+
+/* 1011-zt · phone/tablet screen 2: one grey ground, even spacing, no stray grid marks */
+@media(max-width:1100px){
+  #how .stage>.vl,#how .stage>.hl,#how .stage>.sqr,#how .stage>.rowline{display:none!important}
+  #how .how-head{padding:32px 20px 20px!important}
+  #how .stage{background:#e8e8e5!important;padding-bottom:16px!important}
+  #how .how-hint{background:#e8e8e5;margin:0;padding:8px 0 32px!important}
+  #how .how-hint .hh-b{background:#fff;border-color:rgba(20,20,22,.14)}
+}
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
