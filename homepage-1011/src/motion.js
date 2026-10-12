@@ -426,7 +426,7 @@
 
 /* 1011-zz10 · CTA ring ripple: origin follows the pointer */
 (function(){
-  document.querySelectorAll('.btn,.n3-buy').forEach(function(b){
+  document.querySelectorAll('.btn:not(.ghost),.n3-buy').forEach(function(b){
     if(b.querySelector('.cta-fx')) return;
     var fx=document.createElement('span'); fx.className='cta-fx'; fx.setAttribute('aria-hidden','true');
     fx.innerHTML='<b></b><i></i><i></i>'; b.appendChild(fx);

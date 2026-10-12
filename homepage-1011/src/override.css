@@ -1963,3 +1963,8 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 #needs .pz-i.on .pz-h b{top:calc(14px + .65em)}
 #needs .pz-h span,#needs .pz-i.on .pz-h em{display:inline}
 #needs .pz-h em{margin-left:.35em}
+/* 1011-zz21 · every secondary (outlined) button hovers like the nav's account icon: the hairline border darkens to ink, nothing else */
+.btn.ghost,#kol .kol-b,.hh-b,#footer .ft2-soc a{border:1px solid rgba(20,20,22,.18)!important;transition:border-color .3s ease,color .3s ease!important}
+.btn.ghost:hover,.pn .btn.ghost:hover,#kol .kol-b:hover,.hh-b:hover,#footer .ft2-soc a:hover{border-color:var(--ink)!important;color:var(--ink)!important;background:var(--ghost-bg,transparent)!important}
+.btn.ghost,.pn .btn.ghost{--ghost-bg:rgba(255,255,255,.72);background:rgba(255,255,255,.72)!important;color:var(--ink)!important}
+.btn.ghost .cta-fx{display:none!important}
