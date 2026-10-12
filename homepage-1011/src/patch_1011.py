@@ -141,7 +141,7 @@ _put('breather', _t)
 
 # #9 · privacy: certificates sit with the promise, Trust Center
 _m = _sec('privacy'); _t = _m.group()
-_CERT = [('img2/cert-iso.png', 'ISO 27001', 'Information security'), ('img2/cert-iso.png', 'ISO 27701', 'Privacy management'), ('img2/cert-soc2.png', 'SOC 2', 'Type II'), ('img2/cert-gdpr.png', 'GDPR', 'Compliant')]
+_CERT = [('img2/cert-gdpr.png', 'GDPR', 'Verified by GDPR Local')]   # vocci.ai: GDPR is the only certification so far
 _t = _t.replace('<div class="end"><a class="btn" href="#">Trust Center</a></div>',
                 '<ul class="pv-certs end">' + ''.join('<li><img loading="lazy" decoding="async" src="%s" alt=""><span><b>%s</b>%s</span></li>' % c for c in _CERT) + '</ul>'
                 '<div><a class="btn" href="https://trust.vocci.ai/">Trust Center</a></div>')
@@ -296,3 +296,14 @@ _put('needs', '<section id="needs" data-bgop="0"><div class="stage pz">' + _line
      '<div class="rowline" style="grid-row:2"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div></div></section>')
 for _x in ('scenes2', 'community'):
     _m = re.search(r'<section id="%s"[^>]*>.*?</section>' % _x, s, re.S); s = s[:_m.start()] + s[_m.end():]
+
+# ---------- 1011-p · privacy: copy follows vocci.ai (one certification: GDPR, verified) ----------
+_t = _sec('privacy').group()
+for _a, _b in [('<h2>Your data is yours.<br>We protect it that way.</h2>', '<h2>Your data is fully yours.</h2><p>End-to-end encrypted. GDPR compliant. Always under your control.</p>'),
+               ('<h3>Encrypted on the device</h3><p class="end">Recordings are encrypted on the ring, with permission-based access.</p>', '<h3>End-to-end encrypted</h3><p class="end">Your recordings are encrypted from the ring to the app.</p>'),
+               ('<h3>Never used to train AI</h3><p class="end">Your conversations are not used to train AI models.</p>', '<h3>GDPR compliant</h3><p class="end">Verified by GDPR Local.</p>'),
+               ('<h3>Local storage option</h3><p class="end">You control sync, and choose which context is shared.</p>', '<h3>Always under your control</h3><p class="end">You choose what syncs and which context is shared.</p>')]:
+    assert _a in _t, _a[:40]; _t = _t.replace(_a, _b, 1)
+_put('privacy', _t)
+_sub('Recordings are encrypted on the ring with permission-based access, never used to train AI models, and you choose what syncs and which context is shared.',
+     'Recordings are end-to-end encrypted, Vocci is GDPR compliant (verified by GDPR Local), and you choose what syncs and which context is shared.')
