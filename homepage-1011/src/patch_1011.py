@@ -195,3 +195,23 @@ _acc = ''.join('<div class="fq%s"><button class="fq-q" type="button" aria-expand
 _put('faq', '<section id="faq" data-bgop=".4"><div class="stage flat">' + _lines(_t, drop=('50%', '75%')) +
      '<div class="pn faq-head" style="--gc:1/span 1;--gr:1/span 2;--tc:1/span 2;--tr:1/span 1"><h2>FAQ</h2><p>The questions we hear most.</p><a class="tlink end" href="https://support.vocci.ai/">All questions</a></div>'
      '<div class="pn faq-acc" style="--gc:2/span 3;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1">' + _acc + '</div></div></section>')
+
+# ---------- 1011-b · screen 3: hand + ring on a grey ground, sound rings, how-to-record card ----------
+_t = _sec('why').group()
+_rl = re.search(r'<div class="rowline".*?</div>', _t).group()
+_PILL2 = '<svg class="pill2" viewBox="0 0 24 12" aria-hidden="true"><rect x=".75" y=".75" width="22.5" height="10.5" rx="5.25"/><circle class="d1" cx="8.6" cy="6" r="2.4"/><circle class="d2" cx="15.4" cy="6" r="2.4"/></svg>'
+_PILL1 = '<svg class="pill1" viewBox="0 0 24 12" aria-hidden="true"><rect x=".75" y=".75" width="22.5" height="10.5" rx="5.25"/><rect class="d1" x="6" y="3.6" width="12" height="4.8" rx="2.4"/></svg>'
+_BAND = ('<svg class="rec-band" viewBox="0 0 220 66" aria-hidden="true"><g class="led"><path d="M110 4v7M100 7l3 5M120 7l-3 5"/></g>'
+         '<rect class="bd" x="6" y="16" width="208" height="30" rx="9"/><path class="hi" d="M14 31h192"/><rect class="bt" x="98" y="21" width="24" height="20" rx="6"/>'
+         '<g class="fg"><path d="M100 66V47a10 10 0 0120 0v19"/><path class="nl" d="M104.5 49a5.5 5.5 0 0111 0v4h-11z"/></g></svg>')
+_rows = [('s0', _PILL2, 'Double-click to record.'), ('s1', _PILL1, 'Click once during recording to highlight a moment.'), ('s2', _PILL2, 'Double-click to stop recording.')]
+_put('why', '<section id="why" data-bgop="0"><div class="stage rec3" data-s="0">' + _lines(_t) +
+     '<div class="pn pic rec-stage" style="--gc:1/span 4;--gr:1/span 2;--tc:1/span 2;--tr:1/span 1"><div class="rec-fig">'
+     '<img src="img3/rec-hand.png" alt="A hand wearing the Vocci ring, thumb on the button" decoding="async">'
+     '<span class="rec-waves" aria-hidden="true"><svg viewBox="0 0 200 200"><circle class="rp rp1" cx="100" cy="100" r="62"/><circle class="rp rp2" cx="100" cy="100" r="62"/>'
+     '<circle class="dt dt1" cx="100" cy="100" r="62"/><circle class="dt dt2" cx="100" cy="100" r="96"/><circle class="fl" cx="100" cy="100" r="62"/></svg></span></div></div>'
+     '<div class="pn rec-pn" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:2/span 1"><div class="rec-card">' + _BAND +
+     '<h3><i class="rec-dot" aria-hidden="true"></i>Recording with elegance</h3><ul class="rec-steps">' +
+     ''.join('<li class="%s">%s<span>%s</span></li>' % (k, ic, tx) for k, ic, tx in _rows) + '</ul></div>'
+     '<dl class="params end"><div><dt>8 h</dt><dd>Continuous recording</dd></div><div><dt>5 m</dt><dd>Voice pickup</dd></div>'
+     '<div><dt>AI</dt><dd>Noise reduction</dd></div><div><dt>100+</dt><dd>Languages</dd></div></dl></div>' + _rl + '</div></section>')
