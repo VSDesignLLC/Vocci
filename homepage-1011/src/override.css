@@ -1405,7 +1405,7 @@
 /* 1011-t · PR quote card on a liquid-silver ground */
 #awards .pn.mid.quote{background:linear-gradient(rgba(240,240,238,.38),rgba(240,240,238,.38)),url(img3/quote-liquid.jpg) center/cover no-repeat!important}
 #awards .pn.mid.quote .pill{background:rgba(255,255,255,.85)}
-#hardware .pn.hasimg img.half[src*="case-dome"]{object-fit:cover!important;width:100%;filter:none!important}
+#hardware .pn.hasimg img.half[src*="case-dome"]{object-fit:cover!important;filter:none!important}
 
 /* 1011-u · nav after db-longbow: a compact centred bar; the menu panel grows out of it */
 .gridall>.nav.nav2{left:0!important;right:0!important;margin:0 auto;width:min(680px,calc(100% - 32px));display:block;pointer-events:auto;border-radius:10px;background:rgba(250,250,248,.72);backdrop-filter:blur(26px) saturate(1.2);-webkit-backdrop-filter:blur(26px) saturate(1.2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.6);transition:background .4s,opacity .8s var(--ease),transform .8s var(--ease)}
