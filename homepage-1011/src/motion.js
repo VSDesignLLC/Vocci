@@ -226,7 +226,7 @@
 })();
 
 /* 1007-e · phone nav: hamburger opens the section links */
-(function(){ var nav=document.querySelector('.gridall>.nav'), bar=nav&&nav.querySelector('.navbar'), cart=bar&&bar.querySelector('.cart'); if(!cart) return;
+(function(){ var nav=document.querySelector('.gridall>.nav'), bar=nav&&nav.querySelector('.navbar'), cart=bar&&bar.querySelector('.cart'); if(!cart||nav.classList.contains('nav2')) return;
   var b=document.createElement('button'); b.className='burger'; b.setAttribute('aria-label','Menu'); b.setAttribute('aria-expanded','false'); b.innerHTML='<i></i><i></i>'; bar.insertBefore(b,cart);
   /* 1011 · the phone menu lists the dropdown groups with their links */
   var m=document.createElement('div'); m.className='nav-menu'; Array.prototype.forEach.call(bar.querySelectorAll('.nd'),function(g){ var h=document.createElement('h6'); h.textContent=g.querySelector('.nd-t span').textContent; m.appendChild(h); Array.prototype.forEach.call(g.querySelectorAll('.nd-m a'),function(a){ var x=document.createElement('a'); x.href=a.getAttribute('href'); x.textContent=a.querySelector('span').textContent; m.appendChild(x); }); }); nav.appendChild(m);
@@ -333,3 +333,12 @@
 /* 1011-l · screen 6 owner bubbles take turns in focus while on screen */
 (function(){ var sec=document.getElementById('needs'), qb=sec?Array.prototype.slice.call(sec.querySelectorAll('.pz-qb')):[]; if(!qb.length) return; var k=0, t=null;
   new IntersectionObserver(function(es){ if(es[0].isIntersecting){ sec.classList.add('qb-in'); if(!t){ qb[0].classList.add('on'); t=setInterval(function(){ qb[k].classList.remove('on'); k=(k+1)%qb.length; qb[k].classList.add('on'); },3400); } } else { clearInterval(t); t=null; } },{threshold:.35}).observe(sec); })();
+
+/* 1011-u · nav panel: the menu button grows the panel out of the bar */
+(function(){ var nav=document.querySelector('.gridall>.nav.nav2'), b=nav&&nav.querySelector('.nb-menu'); if(!b) return;
+  var set=function(on){ nav.classList.toggle('open',on); b.setAttribute('aria-expanded',on); b.setAttribute('aria-label',on?'Close menu':'Menu'); };
+  b.addEventListener('click',function(e){ e.stopPropagation(); set(!nav.classList.contains('open')); });
+  nav.querySelector('.nb-panel').addEventListener('click',function(e){ if(e.target.closest('a')) set(false); });
+  document.addEventListener('click',function(e){ if(!nav.contains(e.target)) set(false); });
+  addEventListener('keydown',function(e){ if(e.key==='Escape') set(false); });
+  addEventListener('scroll',function(){ if(nav.classList.contains('away')) set(false); },{passive:true}); })();
