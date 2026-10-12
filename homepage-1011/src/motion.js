@@ -117,7 +117,8 @@
   var how=document.getElementById('how');
   /* desktop: the 3D ring (vendor/how3d.js) drives the steps from scroll instead of the timer */
   var how3d=how&&!reduce&&innerWidth>1100&&matchMedia('(hover:hover)').matches&&(function(){try{return !!document.createElement('canvas').getContext('webgl2');}catch(e){return false;}})();
-  if(how3d){ how.classList.add('how3d'); var s3=document.createElement('script'); s3.src='vendor/how3d.js'; s3.onerror=function(){how.classList.remove('how3d');}; document.body.appendChild(s3); }
+  if(how3d){ how.classList.add('how3d'); var s3=document.createElement('script'); s3.src='vendor/how3d.js'; s3.onerror=function(){how.classList.remove('how3d');}; document.body.appendChild(s3);
+    var s4=document.createElement('script'); s4.type='module'; s4.src='vendor/fly3d.js'; document.body.appendChild(s4); }
   /* 1007 · no 3D (phones, tablets, no WebGL2): show stills baked from the desktop 3D sequence instead of the old placeholder photos */
   if(how&&!how3d){ Array.prototype.forEach.call(how.querySelectorAll('.stage>.pn.pic'),function(p,k){ var im=p.querySelector('img'); if(!im) return; im.loading='eager'; im.src=k===0?'img3/how-ring.webp':'img3/how-static-'+(k+1)+'.jpg'; im.removeAttribute('srcset'); im.alt=['Vocci ring','Vocci app · meeting notes','Vocci Agent · voice command','Claude via Vocci MCP'][k]||''; p.classList.remove('contain','phone'); p.classList.add('still3d'); });
     /* 1007-d · ~5s loops built from the desktop app screens + ring pill (same markup/CSS as vendor/how3d.js) */
@@ -485,26 +486,5 @@
     setTimeout(done,9000);   /* never trap the page */
   }
 
-  /* scroll hand-off: a ring lifts out of the case and settles where screen 2's ring appears */
-  if(!how||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var fly=document.createElement('div'); fly.className='ring-fly'; fly.innerHTML='<img src="img3/ring-top.webp" alt="">'; document.body.appendChild(fly);
-  function tgt(){
-    var st=how.querySelector('.stage')||how, r=st.getBoundingClientRect();
-    if(how.classList.contains('how3d')) return {x:r.left+r.width*.474, y:r.top+r.height*.3, d:r.width*.14, tilt:56};
-    var pic=how.querySelector('.stage>.pn.pic img'), q=pic?pic.getBoundingClientRect():r;
-    return {x:q.left+q.width/2, y:q.top+q.height/2, d:Math.min(q.width,q.height)*.5, tilt:50};
-  }
-  function tick(){
-    var hr=hero.getBoundingClientRect(), wr=how.getBoundingClientRect(), span=Math.max(1,innerHeight);
-    var p=Math.min(1,Math.max(0,1-wr.top/span));            /* 0 when screen 2 starts entering, 1 when it fills the view */
-    var co=p>=1?'':Math.max(0,Math.min(1,(p-.82)/.16)).toFixed(3); how.querySelectorAll('canvas').forEach(function(cv){ cv.style.opacity=co; });
-    if(p<=0||p>=1||root.classList.contains('vl-on')){ fly.style.opacity=0; return; }
-    var a=ringOnScreen(), b=tgt(), e=ease(p);
-    var x=a.x+(b.x-a.x)*e, y=a.y+(b.y-a.y)*e - Math.sin(Math.PI*p)*innerHeight*.08, d=a.d+(b.d-a.d)*e;
-    fly.style.width=fly.style.height=d+'px';
-    fly.style.transform='translate('+(x-d/2)+'px,'+(y-d/2)+'px) perspective(900px) rotateX('+(b.tilt*e)+'deg) rotateZ('+(-28*e)+'deg)';
-    fly.style.opacity=Math.min(1,p*6,(1-p)/.12).toFixed(3);
-  }
-  var q=false; function on(){ if(!q){ q=true; requestAnimationFrame(function(){ q=false; tick(); }); } }
-  addEventListener('scroll',on,{passive:true}); addEventListener('resize',on); tick();
+  window.__vocciHeroRing=ringOnScreen;   /* vendor/how3d.js flies the real ring from here into screen 2 */
 })();
