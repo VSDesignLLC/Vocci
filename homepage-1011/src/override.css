@@ -1765,3 +1765,31 @@
 #footer .ft2-legal a:hover{color:var(--ink)}
 #footer .ft2-legal p{margin:0;font:400 12px/1 var(--font-mono);color:#6a6a70}
 /* 1011-zk · footer wordmark sits in front of the grid lines */ #footer .pn.ft2-mark{position:relative;z-index:5;overflow:visible} #footer .ft2-mark .wmbig,#footer .ft2-mark .wmbig .w{overflow:visible}
+/* 1011-zl · phone legibility: nothing under 11px outside the app mock-ups */
+@media(max-width:700px){
+  #why .rec-card .params dd{font-size:11.5px!important}
+  #awards .stage>.pn.glassy .label{font-size:11px!important;line-height:1.35}
+  #awards .pill{font-size:11px!important}
+}
+@media(max-width:700px){ #needs .pz-qb:nth-of-type(n){top:auto!important;bottom:4%!important;left:4%!important;right:auto!important;height:auto} }
+@media(max-width:700px){ #faq .fq5-head{padding-bottom:28px!important} #faq .fq5-help{margin-top:16px} }
+/* 1011-zm · phone footer: two columns of links, breathing room */
+@media(max-width:700px){
+  #footer .stage.foot.ft2{display:grid!important;grid-template-columns:1fr 1fr;grid-auto-rows:auto!important}
+  #footer .ft2>.bgimg{grid-column:1/-1;grid-row:1/-1}
+  #footer .ft2 .pn{grid-row:auto!important}
+  #footer .pn.ft2-mark,#footer .pn.ft2-say,#footer .pn.ft2-last{grid-column:1/-1!important}
+  #footer .pn.ft2-mark{padding-top:84px!important;padding-bottom:12px!important}
+  #footer .pn.ft2-say{padding-bottom:32px!important;gap:20px}
+  #footer .ft2-c{grid-column:auto!important;gap:24px}
+  #footer .fg2 a{font-size:16px}
+  #footer .ft2-last{padding-bottom:32px!important}
+}
+@media(max-width:700px){ #footer .pn.ft2-last{grid-column:auto!important} #footer .ft2-soc{gap:8px!important} #footer .ft2-soc a{width:36px;height:36px} #footer .ft2-legal{margin-top:20px} }
+/* 1011-zn · tablet: landscape crops so stacked sections stay short */
+@media(min-width:700.5px) and (max-width:1100px){
+  #kol .pn.kv-pic{aspect-ratio:16/9}
+  #colors .fnx-stage{aspect-ratio:4/3!important}
+  #needs .pn.pz-pic{aspect-ratio:16/10!important}
+}
+#awards .pill{font-size:11px!important}
