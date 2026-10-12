@@ -1262,3 +1262,12 @@
 @media(min-width:1101px) and (max-height:720px){ #why .ch-rail{padding-bottom:6px} #why .rec-steps li{font-size:12.5px} #why .rec-card h3{font-size:16px} }
 @media(min-width:1101px) and (max-height:880px){ #why .pn.rec-pn{--pad:20px;gap:10px} #why .rec-card{padding:14px 16px} #why .rec-card .btns{margin-top:0} }
 @media(max-width:700px) and (max-height:740px){ #why .pn.rec-stage{height:46%!important} #why .pn.rec-pn{height:54%!important;padding:14px 16px 16px!important;gap:10px} #why .pn.rec-params{top:calc(46% - 56px)} #why .rec-card{padding:12px 14px;gap:8px} #why .rec-steps li{font-size:12px} #why .rec-card .btn{height:38px} }
+/* 1011-f · keep the ring clear: the discs become rings with an open centre */
+#why .ov-orb .gd1{display:none}
+#why .ov-orb .gd2{-webkit-mask:radial-gradient(circle closest-side,transparent 56%,#000 calc(56% + 1px));mask:radial-gradient(circle closest-side,transparent 56%,#000 calc(56% + 1px))}
+#why .ov-orb .gd3{-webkit-mask:radial-gradient(circle closest-side,transparent 38%,#000 calc(38% + 1px));mask:radial-gradient(circle closest-side,transparent 38%,#000 calc(38% + 1px))}
+#why .ov-orb .gd2::after{content:"";position:absolute;inset:22%;border-radius:50%;border:1px solid rgba(255,255,255,.75)}
+#why .ov-orb .gd2::after{inset:21%}
+#why .ov-orb .gd2{-webkit-mask:radial-gradient(circle closest-side,transparent 63%,#000 calc(63% + 1px));mask:radial-gradient(circle closest-side,transparent 63%,#000 calc(63% + 1px))}
+#why .ov-orb .gd2::after{inset:18%}
+#why .ov-orb .gd3{-webkit-mask:radial-gradient(circle closest-side,transparent 43%,#000 calc(43% + 1px));mask:radial-gradient(circle closest-side,transparent 43%,#000 calc(43% + 1px))}
