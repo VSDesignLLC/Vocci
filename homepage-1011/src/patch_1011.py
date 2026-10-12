@@ -271,3 +271,20 @@ for _a, _b in [('01 · Double-click to record', '01 · Double-click to record'),
                ('03 · Press and hold to ask', '02 · Press and hold to ask'), ('04 · Your AI apps', '03 · Your AI apps')]:
     _t = _t.replace(_a, _b, 1)
 _put('how', _t)
+
+# ---------- 1011-k · screen 6 = old 6 + 7: who it's for (3.0 order) + their scene + their words, one screen ----------
+_t = _sec('needs').group()
+_P = [('Founders &amp; CXOs', 'Trade shows', 'Trade-show plans, supplier quotes, client briefs—I need those passing thoughts to become tasks I’ll actually follow up on.', 'Founder · Reddit', 'Read on Reddit'),
+      ('Sales &amp; BD', 'Client meetings', 'I can look my client in the eye instead of typing. The follow-up email is drafted before I reach the car.', 'Account executive · Discord', 'Read on Discord'),
+      ('Engineers', 'AI workflow', 'Our stand-ups go straight into Claude. I ask what we decided instead of digging through notes.', 'Engineer · Reddit', 'Read on Reddit'),
+      ('Researchers', 'Idea capture', 'Interviews, reading notes, hallway questions—everything lands in one place my AI can actually search.', 'Researcher · Discord', 'Read on Discord'),
+      ('Content creators', 'YouTube reviews', 'This tiny AI assistant changed my workflow.', 'Product manager · YouTube', 'Watch the review')]
+_acc = ''.join('<li class="pz-i%s"><button class="pz-h" type="button" aria-expanded="%s"><b>%02d</b><span>%s</span><em>· %s</em></button>'
+               '<div class="pz-b"><div><q>%s</q><span class="pz-src">%s</span><a class="tlink" href="#">%s</a></div></div></li>'
+               % (' on' if i == 0 else '', 'true' if i == 0 else 'false', i + 1, who, sc, q, src, cta) for i, (who, sc, q, src, cta) in enumerate(_P))
+_put('needs', '<section id="needs" data-bgop="0"><div class="stage pz">' + _lines(_t) +
+     '<div class="pn pic pz-pic" style="--gc:2/span 3;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1"><img src="img3/team-top.webp" alt="A team meeting around a table, seen from above" decoding="async"></div>'
+     '<div class="pn pz-title" style="--gc:1/span 1;--gr:1/span 1;--tc:1/span 2;--tr:1/span 1"><h2>Make room for the work that matters.</h2></div>'
+     '<div class="pn pz-list" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1"><ol class="pz-acc">' + _acc + '</ol></div>'
+     '<div class="rowline" style="grid-row:2"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div></div></section>')
+_m = re.search(r'<section id="scenes2"[^>]*>.*?</section>', s, re.S); s = s[:_m.start()] + s[_m.end():]
