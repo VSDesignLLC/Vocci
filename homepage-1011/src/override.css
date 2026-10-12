@@ -1148,3 +1148,10 @@
 #why .pn.rec-pn{gap:12px}
 #why .params{gap:10px 16px}#why .params dt{font-size:20px}#why .params dd{margin-top:3px}
 @media(max-width:700px){ #why .params{margin-bottom:16px} }
+/* 1011-c · sound rings → live audio ring (canvas) */
+#why .rec-waves{width:62cqh;height:62cqh}
+#why .rec-waves canvas{display:block;width:100%;height:100%}
+/* 1011-c · the hand sits in front of the grid lines (breaks out of the frame); sound ring behind the hand */
+#why .pn.rec-stage{z-index:5;overflow:visible}
+#why .rec-fig img{z-index:2}
+#why .rec-waves{z-index:1}
