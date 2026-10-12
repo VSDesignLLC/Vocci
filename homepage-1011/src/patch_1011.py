@@ -253,3 +253,21 @@ _t = _t.replace('<div class="stage rec3" data-s="0">', '<div class="stage rec3" 
 _put('why', _t)
 for _x in ('scenes', 'why-b'):
     _m = re.search(r'<section id="%s"[^>]*>.*?</section>' % _x, s, re.S); s = s[:_m.start()] + s[_m.end():]
+
+# ---------- 1011-i · screen 2: four steps → the 3.0 three (record+transcribe spans two columns; 3D walk unchanged) ----------
+_t = _sec('how').group()
+_tx = re.findall(r'<div class="pn lazy "[^>]*>.*?</p></div>', _t, re.S); assert len(_tx) == 4, len(_tx)
+_new = ['<div class="pn lazy how-s1 hs1" style="--gc:1/span 2;--gr:2/span 1;--tc:1/span 2;--tr:2/span 1"><span class="label"><b>01</b></span><h3>Double-click to record</h3>'
+        '<p class="end">Double-click to start or stop. It uploads in the background and comes back as a transcript and summary.</p></div>',
+        '<div class="pn lazy how-cont h-skip" aria-hidden="true" style="--gc:2/span 1;--gr:2/span 1"></div>',
+        '<div class="pn lazy hs2" style="--gc:3/span 1;--gr:2/span 1;--tc:1/span 1;--tr:4/span 1"><span class="label"><b>02</b></span><h3>Press and hold to ask</h3>'
+        '<p class="end">Say what you need. Vocci AI takes on the task with your conversation as context.</p></div>',
+        '<div class="pn lazy hs3" style="--gc:4/span 1;--gr:2/span 1;--tc:2/span 1;--tr:4/span 1"><span class="label"><b>03</b></span><h3>Connect your AI apps</h3>'
+        '<p class="end">Claude, ChatGPT, Slack and more—Vocci fits into the workflow you already have.</p></div>']
+for _a, _b in zip(_tx, _new): _t = _t.replace(_a, _b, 1)
+_pics = re.findall(r'<div class="pn pic[^"]*"', _t); assert len(_pics) == 4
+for _a, _c in zip(_pics, ['h-skip', 'hs1', 'hs2', 'hs3']): _t = _t.replace(_a, _a[:-1] + ' ' + _c + '"', 1)
+for _a, _b in [('01 · Double-click to record', '01 · Double-click to record'), ('02 · Ready for AI', '01 · Transcribed in the background'),
+               ('03 · Press and hold to ask', '02 · Press and hold to ask'), ('04 · Your AI apps', '03 · Your AI apps')]:
+    _t = _t.replace(_a, _b, 1)
+_put('how', _t)
