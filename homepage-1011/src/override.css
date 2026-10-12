@@ -1718,3 +1718,11 @@
 #faq .fq5-a p{max-width:none!important;margin:8px 66px 4px 0}
 @media(min-width:1101px) and (max-height:880px){ #faq .fq5-a p{margin-right:58px} }
 @media(max-width:700px){ #faq .pn.fq5-cats{flex-direction:row;flex-wrap:wrap;gap:8px;padding-top:0!important} #faq .fq5-c{width:auto;min-height:44px;padding:0 14px;font-size:13.5px} #faq .fq5-help{margin-top:8px} }
+/* 1011-zg · FAQ: categories and their questions share the bottom row and start on the same line */
+#faq .pn.fq5-cats,#faq .pn.fq5-list{justify-content:flex-start!important;padding-top:var(--pad)!important}
+#faq .pn.fq5-list{overflow:auto}
+#faq .fq5-c{min-height:56px}
+#faq .fq5-c.on{position:relative}
+#faq .fq5-c.on::after{content:"";position:absolute;right:calc(var(--pad) * -1 - 1px);top:50%;width:var(--pad);height:1px;background:var(--ink)}
+#faq .fq5-head h2{margin-top:0}
+@media(max-width:700px){ #faq .fq5-c.on::after{display:none} }
