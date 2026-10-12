@@ -1976,3 +1976,8 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 #why .rec-card .rec-steps li.on .ico,#why .rec-card .rec-steps li[aria-current] .ico{opacity:1}
 /* 1011-zz23 · needs list cell uses the same 28px cell padding as every other screen (desktop) */
 @media(min-width:1101px){ #needs .stage>.pn.pz-list{padding:28px 28px 32px!important} }
+/* 1011-zz25 · the long-press pill icon follows the same orange as the other point icons */
+#why .rec-card .rec-steps li svg{flex:0 0 22px;margin-top:.3em;color:#F47546!important;opacity:.7;transition:opacity .3s}
+#why .rec-card .rec-steps li.on svg{opacity:1}
+#why .rec-card .rec-steps li svg *{stroke:#F47546!important}
+#why .rec-card .rec-steps li svg [fill]:not([fill="none"]),#why .rec-card .rec-steps li svg .d1,#why .rec-card .rec-steps li svg .d2{fill:#F47546!important}
