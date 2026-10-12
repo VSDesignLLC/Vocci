@@ -3265,9 +3265,9 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 /* 1011-zz3 · phone/tablet privacy: grey ground so the white grid lines read */
 @media(max-width:1100px){ #privacy,#privacy .stage{background:#e8e8e5!important} #privacy .stage>.pn:not(.pic){background:transparent!important} }
 /* 1011-zz5 · FAQ category tabs always in one row */
-#faq .fq5-cats{flex-wrap:nowrap!important;display:flex!important;gap:8px!important}
-#faq .fq5-c{flex:1 1 0!important;min-width:0!important}
 @media(max-width:1100px){
+  #faq .fq5-cats{flex-wrap:nowrap!important;flex-direction:row!important;display:flex!important;gap:8px!important}
+  #faq .fq5-c{flex:1 1 0!important;min-width:0!important}
   #faq .fq5-c{padding:10px 10px!important;font-size:12.5px!important;line-height:1.25!important;justify-content:space-between;text-align:left;white-space:normal!important;gap:6px!important}
   #faq .fq5-c span{white-space:normal!important}
 }
@@ -3277,6 +3277,10 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #footer .stage.ft2{background:transparent!important}
   #footer .stage.ft2>img.bgimg.blur{grid-area:auto!important;display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;z-index:0}
   #footer .ft2 .pn{position:relative;z-index:1;background:rgba(246,246,245,.42)!important;-webkit-backdrop-filter:blur(26px) saturate(1.15);backdrop-filter:blur(26px) saturate(1.15)}
+}
+@media(min-width:1101px){
+  #faq .fq5-cats{justify-content:flex-start!important;gap:8px!important}
+  #faq .fq5-c{flex:0 0 auto!important;height:auto!important;min-height:0!important;padding:14px 20px!important;font-size:14px!important}
 }
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
