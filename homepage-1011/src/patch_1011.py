@@ -350,14 +350,8 @@ _n = re.search(r'<nav class="nav nav2">.*?</div></div></nav>', s, re.S); assert 
 _wm = re.search(r'<a class="wordmark".*?</a>', _n.group(), re.S).group()
 _cart = re.search(r'<a class="cart".*?</a>', _n.group(), re.S).group()
 _CHEV = '<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>'
-_TABS = [('Shop', 'https://vocci.ai/products/vocci-ring', None),
-         ('How it works', '#how', None),
-         ('Connect your AI', None, [('Connect your AI', 'Claude, ChatGPT, Gemini and more, through MCP', 'https://vocci.ai/pages/connect-your-ai'),
-                                    ('Dev Community', 'Build on Vocci', 'https://vocci.ai/pages/developer'),
-                                    ('Webinar', 'Live walkthroughs with the team', '#why-b')]),
-         ('Tech', 'https://vocci.ai/pages/tech', None),
-         ('Company', None, [('About us', 'The team behind Vocci', 'https://vocci.ai/pages/about-us'), ('Trust Center', 'Privacy and security', 'https://trust.vocci.ai/'),
-                            ('Blog', 'News and stories', 'https://vocci.ai/blogs/news'), ('Support', 'Guides, shipping, returns', 'https://support.vocci.ai/')])]
+_TABS = [('Shop', 'https://vocci.ai/products/vocci-ring', None), ('Tech', 'https://vocci.ai/pages/tech', None), ('About Us', 'https://vocci.ai/pages/about-us', None),
+         ('Dev Community', 'https://vocci.ai/pages/developer', None), ('Connect Your AI', 'https://vocci.ai/pages/connect-your-ai', None)]   # same tabs as vocci.ai, no drop-downs
 _tabs = ''
 _groups = ''
 for i, (name, href, kids) in enumerate(_TABS):
@@ -369,6 +363,7 @@ for i, (name, href, kids) in enumerate(_TABS):
 _mob = ''.join(('<a class="n3-m1" href="%s">%s</a>' % (h, n)) if not k else ('<div class="n3-mg"><span class="n3-mh">%s</span>%s</div>' % (n, ''.join('<a href="%s">%s</a>' % (u, a) for a, d, u in k))) for n, h, k in _TABS)
 _nav = ('<nav class="nav nav3"><div class="navbar n3-bar">' + _wm + '<div class="n3-tabs">' + _tabs + '</div>'
         '<div class="n3-r"><a class="n3-buy" href="https://vocci.ai/products/vocci-ring">Buy now</a>' + _cart +
+        '<a class="n3-acct" href="https://my.vocci.ai/sign-in" aria-label="Log in"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="7" r="3.2"/><path d="M3.8 17c.9-3.2 3.3-4.8 6.2-4.8s5.3 1.6 6.2 4.8"/></svg></a>' +
         '<button class="n3-burger" type="button" aria-expanded="false" aria-label="Menu"><i></i><i></i></button></div></div>'
         '<div class="n3-drop"><div class="n3-in">' + _groups + '<div class="n3-mob">' + _mob + '</div></div></div></nav>')
 s = s[:_n.start()] + _nav + s[_n.end():]
