@@ -483,7 +483,7 @@ s = s[:_m.start()] + _t + s[_m.end():]
 # ---------- 1007-y · hero: new desk photo (ring + case), no separate case layer ----------
 _a = '<img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-linen.jpg" alt="" style="object-position:50% 50%;opacity:1">'
 assert _a in s
-s = s.replace(_a, '<img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-pebble.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1">', 1)
+s = s.replace(_a, '<img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-v2.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1">', 1)
 s = re.sub(r'<img class="bgimg hero-top"[^>]*>', '', s, count=1)
 
 # ---------- 1011 · reorder sections to the 3.0 framework ----------

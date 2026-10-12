@@ -442,7 +442,7 @@
 (function(){
   var root=document.documentElement, L=document.querySelector('.vl-intro'), hero=document.getElementById('hero');
   var bg=hero&&hero.querySelector('.stage>.bgimg'), how=document.getElementById('how');
-  var RING=[898/2000,497/1126,118/2000];   /* the ring inside the case: x, y, outer diameter as a share of the photo width */
+  var RING=[755/1672,410/941,87/1672];   /* the ring inside the case: x, y, outer diameter as a share of the photo width */
   function ringOnScreen(){
     if(!bg||!bg.naturalWidth) return {x:innerWidth*.45,y:innerHeight*.45,d:innerWidth*.06};
     var r=bg.getBoundingClientRect(), iw=bg.naturalWidth, ih=bg.naturalHeight, s=Math.max(r.width/iw,r.height/ih), dw=iw*s, dh=ih*s;
