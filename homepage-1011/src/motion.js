@@ -222,7 +222,7 @@
   var sc=Q('scenes'), pics=sc.filter(function(e){ return e.classList.contains('pic'); }), txt=sc.filter(function(e){ return !e.classList.contains('pic')&&!head(e)&&e.classList.contains('pn'); });
   sc.forEach(function(e){ if(head(e)) e.style.order=0; }); pics.forEach(function(e,i){ e.style.order=2*i+1; }); (txt.length===pics.length?txt:[]).forEach(function(e,i){ e.style.order=2*i+2; });
   Q('finishes').forEach(function(e){ e.style.order=e.classList.contains('fn-stage')?1:e.classList.contains('fn-spec')?2:e.classList.contains('fn-list')?3:0; });
-  var how=document.getElementById('how'); if(how&&!how.querySelector('.how-head')){ var h=document.createElement('div'); h.className='how-head'; h.innerHTML='<h2>How it works.</h2>'; how.insertBefore(h,how.firstChild); }
+  var how=document.getElementById('how'); if(how&&!how.querySelector('.how-head')){ var h=document.createElement('div'); h.className='how-head'; var ov=how.querySelector('.how-ov'); h.innerHTML=ov?'<h2>'+ov.querySelector('h3').textContent+'</h2><p>'+ov.querySelector('p').textContent+'</p>':'<h2>How it works.</h2>'; how.insertBefore(h,how.firstChild); }
 })();
 
 /* 1007-e · phone nav: hamburger opens the section links */
@@ -246,7 +246,7 @@
   var fs=Array.prototype.slice.call(sec.querySelectorAll('.fnx-f')), vs=Array.prototype.slice.call(sec.querySelectorAll('.fnx-v')), im=Array.prototype.slice.call(sec.querySelectorAll('.fnx-img'));
   var f='lumen', v='wear', t=null, held=false, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   function show(){ im.forEach(function(i){ var on=i.dataset.f===f&&i.dataset.v===v; i.classList.toggle('on',on); if(on) i.loading='eager'; });
-    fs.forEach(function(b){ var on=b.dataset.f===f; b.classList.toggle('on',on); b.setAttribute('aria-selected',on); });
+    fs.forEach(function(b){ var on=b.dataset.f===f; b.classList.toggle('on',on); b.setAttribute('aria-selected',on); }); var dsc=sec.querySelector('.fnx-desc'), cur=sec.querySelector('.fnx-f[data-f="'+f+'"]'); if(dsc&&cur&&cur.dataset.desc){ dsc.innerHTML='<b></b> '; dsc.firstChild.textContent=cur.querySelector('b').textContent; dsc.appendChild(document.createTextNode(cur.dataset.desc)); }
     vs.forEach(function(b){ var on=b.dataset.v===v; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on); }); st.dataset.view=v; }
   function stop(){ clearInterval(t); t=null; }
   function play(){ stop(); if(held||reduce) return; t=setInterval(function(){ var k=0; fs.forEach(function(b,i){ if(b.dataset.f===f) k=i; }); f=fs[(k+1)%fs.length].dataset.f; show(); },4500); }

@@ -1793,3 +1793,32 @@
   #needs .pn.pz-pic{aspect-ratio:16/10!important}
 }
 #awards .pill{font-size:11px!important}
+
+/* 1011-zz · 3.0 copy: layout follow-ups */
+/* 2 · four text columns again: overview + three steps */
+#how .stage>.vl[style*="left:25%"]{-webkit-mask:none!important;mask:none!important}
+#how .stage>.sqr[style*="left:25%;top:calc(100% - 1px)"],#how .rowline i[style*="left:25%"]{display:block!important}
+#how .how-ov .label{color:var(--muted)}
+#how .how-ov h3{font-size:clamp(20px,1.6vw,24px)}
+#how .stage.stepping:has(.how-st.act) .pn.how-ov>*{opacity:.3}
+@media(max-width:700px){ #how .how-head p{margin:10px 0 0;font-size:15px;line-height:1.55;color:#45454b;max-width:40ch} }
+/* 3–5 · card body line */
+#why .rec-card .rec-p{margin:0;font-size:14px;line-height:1.5;color:#55555c}
+@media(min-width:1101px) and (max-height:880px){ #why .rec-card .rec-p{font-size:13px;line-height:1.45} }
+@media(max-width:700px){ #why .rec-card .rec-p{font-size:13px} }
+/* 6 · persona descriptions */
+#needs .pz-b .pz-d{margin:0;font-size:14.5px;line-height:1.5;color:var(--ink);max-width:none}
+/* 7 · finish description follows the picked finish */
+#colors .fnx-desc{animation:fq4in .45s var(--ease)}
+#colors .fnx-desc b{font-weight:600;color:var(--ink)}
+/* 11 · press title */
+#awards .pn.aw-title{justify-content:center;background:transparent}
+#awards .aw-title h2{margin:0}
+@media(max-width:700px){ #awards .stage>.pn.aw-title{width:100%!important;flex:0 0 100%!important;padding:28px var(--pad) 8px!important;height:auto!important} }
+#why .rec-card .rec-band{display:none!important}
+#why .rec-card .btns{flex-wrap:nowrap;gap:14px} #why .rec-card .btn{height:38px;padding:0 16px;font-size:13.5px!important;white-space:nowrap} #why .rec-card .btns .tlink{font-size:13.5px!important;white-space:nowrap} #why .rec-steps{gap:8px}
+#why .pn.rec-pn{gap:12px!important} #why .rec-card{padding:18px!important;gap:10px!important}
+@media(min-width:1101px) and (max-height:880px){ #why .pn.rec-pn{--pad:18px;gap:10px!important} #why .rec-card{padding:14px 16px!important;gap:8px!important} #why .rec-steps{gap:5px} #why .rec-steps li{font-size:12px} #why .ch-rail{padding-bottom:4px} }
+@media(max-width:700px) and (max-height:740px){ #why .pn.rec-stage{height:38%!important} #why .pn.rec-pn{height:62%!important} #why .rec-card .rec-p{font-size:12.5px;line-height:1.4} }
+@media(max-width:700px) and (max-height:740px){ #why .pn.rec-pn{padding:12px 16px 12px!important;gap:8px!important} #why .rec-card{padding:12px 14px!important;gap:6px!important} #why .rec-steps{gap:4px} #why .rec-card .btn{height:34px} }
+@media(max-width:700px){ #why .pn.rec-pn{padding:14px 18px!important;gap:10px!important} #why .rec-card{padding:14px 16px!important;gap:7px!important} #why .rec-steps{gap:5px} }

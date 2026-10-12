@@ -466,3 +466,87 @@ _foot = ('<footer id="footer" data-bgop="0"><div class="stage foot ft2">' + _bg 
   '<div class="rowline" style="grid-row:2"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div>'
   '</div></footer>')
 s = s[:_m.start()] + _foot + s[_m.end():]
+
+# ---------- 1011-zz · copy from "VOCCI Homepage｜Homepage 框架 3.0" (embedded sheet, 2026-10-12) ----------
+def _rep(sid, pairs):
+    t = _sec(sid).group()
+    for a, b in pairs:
+        assert a in t, (sid, a[:60]); t = t.replace(a, b, 1)
+    _put(sid, t)
+# 1 hero
+_rep('hero', [('<h1>Your real life.<br>Context for your AI.</h1>', '<h1>Capture conversations naturally.<br>Move ideas forward.</h1>'),
+              ('<p>The AI wearable built to close the loop between your <em class="emph">real life</em> and your <em class="emph">AI tool</em>.</p>', '')])
+# 2 workflow: overview column + three steps (the 3D walk keeps its four stops)
+_rep('how', [('<div class="pn lazy how-s1 hs1" style="--gc:1/span 2;--gr:2/span 1;--tc:1/span 2;--tr:2/span 1"><span class="label"><b>01</b></span><h3>Double-click to record</h3><p class="end">Double-click to start or stop. It uploads in the background and comes back as a transcript and summary.</p></div>',
+              '<div class="pn lazy how-ov h-skip" style="--gc:1/span 1;--gr:2/span 1"><span class="label">Overview</span><h3>From conversation to AI workflow.</h3><p class="end">Vocci is an AI note-taking ring that captures conversations and ideas, turns recordings into transcripts and summaries, and gives your AI tools the context to help with what comes next.</p></div>'),
+             ('<div class="pn lazy how-cont h-skip" aria-hidden="true" style="--gc:2/span 1;--gr:2/span 1"></div>',
+              '<div class="pn lazy how-st hs1" style="--gc:2/span 1;--gr:2/span 1;--tc:1/span 2;--tr:2/span 1"><span class="label"><b>01</b></span><h3>Start recording in a moment.</h3><p class="end">Double-click to start or stop recording—whether it’s a meeting, a conversation, or an idea worth keeping.</p></div>'),
+             ('<h3>Press and hold to ask</h3><p class="end">Say what you need. Vocci AI takes on the task with your conversation as context.</p>',
+              '<h3>Get AI help on demand.</h3><p class="end">Press and hold the ring to ask Vocci AI a question or hand off a task, without reaching for your phone.</p>'),
+             ('<h3>Connect your AI apps</h3><p class="end">Claude, ChatGPT, Slack and more—Vocci fits into the workflow you already have.</p>',
+              '<h3>Turn notes into next steps.</h3><p class="end">Have Vocci AI draft an email or plan from what was said—or connect the AI tools you already use to those same notes.</p>'),
+             ('01 · Double-click to record', 'Vocci Ring'), ('01 · Transcribed in the background', '01 · Start recording'),
+             ('02 · Press and hold to ask', '02 · AI help on demand'), ('03 · Your AI apps', '03 · Next steps')])
+# 3–5 chapter cards: title, a line of body, three icon points
+_I = lambda d: '<svg class="ico" viewBox="0 0 24 12" aria-hidden="true">%s</svg>' % d
+_BAT, _MIC, _NOISE = _I('<rect x="1.5" y="2" width="18" height="8" rx="2"/><path d="M21.5 4.5v3M4.5 4.5v3M7.5 4.5v3M10.5 4.5v3"/>'), _I('<path d="M4 6h0M8 4v4M12 2v8M16 4v4M20 6h0"/>'), _I('<path d="M2 6c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/>')
+_w = _sec('why').group()
+_c0 = re.search(r'<div class="rec-card" data-ch="0">.*?</dl></div>', _w, re.S).group()
+_c0n = re.sub(r'<ul class="rec-steps">.*?</dl>', '<ul class="rec-steps">' + ''.join('<li>%s<span>%s</span></li>' % (i, x) for i, x in [(_BAT, 'Up to 8 hours of continuous recording'), (_MIC, 'Voice pickup from up to 5 meters away'), (_NOISE, 'Noise reduction for clearer recordings in everyday environments')]) + '</ul>', _c0, flags=re.S)
+_c0n = _c0n.replace('The most elegant way to capture conversations and ideas.</h3>', 'Stay in the conversation. Keep the details.</h3><p class="rec-p">From a passing idea to a long conversation, Vocci Ring lets you record what matters while staying focused on the moment.</p>')
+_rep('why', [(_c0, _c0n),
+             ('Agents on your fingertip.</h3>', 'A direct line to your AI.</h3><p class="rec-p">Ask Vocci AI what was decided, or have it draft a follow-up while the details are fresh.</p>'),
+             ('<span>Press and hold the button.</span>', '<span>Send a voice request with one long press</span>'),
+             ('<span>Say what you need—a follow-up, a summary, a task.</span>', '<span>Background sync—no app to open</span>'),
+             ('<span>Vocci AI gets it done. Review it in the app when needed.</span>', '<span>Connect 500+ apps to tackle different tasks</span>'),
+             ('Integrate real-world context into your AI workflow.</h3>', 'Ground your AI workflow in what was said.</h3><p class="rec-p">Connect Vocci to the AI tools you already use and let them read your meeting notes directly.</p>'),
+             ('<span>Connect once with MCP.</span>', '<span>Your AI can search related conversations across meetings</span>'),
+             ('<span>Works with Claude, ChatGPT, Gemini and more.</span>', '<span>Give your AI the context behind your next task</span>'),
+             ('<span>Your conversations become context—no copying and pasting.</span>', '<span>Works with ChatGPT, Claude, Gemini Spark, and more</span>')])
+# 6 who it's for
+_PZ = [('Founders &amp; CXOs', 'Founders &amp; executives', 'Trade-show plans, supplier quotes, client briefs—I need those passing thoughts to become tasks I’ll actually follow up on.', 'Keep track of who you met, what you discussed, and what to follow up on.'),
+       (None, None, 'I can look my client in the eye instead of typing. The follow-up email is drafted before I reach the car.', 'Capture client priorities and commitments so your follow-up gets the details right.'),
+       (None, None, 'Our stand-ups go straight into Claude. I ask what we decided instead of digging through notes.', 'Let your coding assistant reference decisions and requirements from team discussions.'),
+       (None, None, 'Interviews, reading notes, hallway questions—everything lands in one place my AI can actually search.', 'Capture a thought as it comes, then return to it when you’re ready to explore further.'),
+       (None, None, 'This tiny AI assistant changed my workflow.', 'Watch creators share their firsthand experience with Vocci Ring.')]
+_pairs = [('<h2>Make room for the work that matters.</h2>', '<h2>Where Vocci fits into your day.</h2>')]
+for a, b, q, d in _PZ:
+    if a: _pairs.append(('<span>%s</span>' % a, '<span>%s</span>' % b))
+    _pairs.append(('<q>%s</q>' % q, '<p class="pz-d">%s</p>' % d))
+_rep('needs', _pairs)
+# 7 colours
+_DESC = {'lumen': ('Mirror-polished silver', 'Mirror-polished silver that catches the light as you move. Crisp and contemporary.'),
+         'midnight': ('Deep matte black', 'Deep matte black that keeps a low profile and pairs easily with almost anything.'),
+         'dawn': ('Polished gold', 'Warm, polished gold with a confident presence that stands out in everyday wear.'),
+         'lux': ('Matte silver', 'Cool matte silver with a soft, muted sheen—a quieter alternative to polished metal.')}
+_cp = [('<h2>Looks like you.<br>Works with your AI.</h2><p>Choose a finish that feels like your style, with the same AI connection in every ring.</p>',
+        '<h2>Four finishes, each with its own character.</h2><p class="fnx-desc"><b>Lumen</b> ' + _DESC['lumen'][1] + '</p>')]
+for f, (sub, desc) in _DESC.items():
+    _t = _sec('colors').group()
+    m = re.search(r'<button class="fnx-f[^"]*" type="button" role="tab" aria-selected="\w+" data-f="%s">.*?</button>' % f, _t, re.S).group()
+    _cp.append((m, re.sub(r'(<b>\w+</b>)[^<]*</span>', r'\1%s</span>' % sub, m).replace('data-f="%s">' % f, 'data-f="%s" data-desc="%s">' % (f, desc))))
+_rep('colors', _cp)
+# 8 reliability
+_CLOCK = '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l2.6 1.6"/></svg>'
+_rep('breather', [('<h2>Wear it for the moments you don’t plan.</h2><p>Made to stay on through the day—hand-washing, rain and all.</p>',
+                   '<h2>Made to stay on—even in the shower.</h2><p>From the first conversation of the day to the quiet moments after, Vocci Ring is designed to feel natural on your hand.</p>'),
+                  ('<span>IP67 water resistant</span></li>', '<span>IP67 water resistance</span></li>'),
+                  ('<span>Hypoallergenic titanium, inside and out</span></li>', '<span>Hypoallergenic titanium</span></li>'),
+                  ('<span>Just 3–5 grams</span></li>', '<span>3–5 g, depending on size</span></li><li>' + _CLOCK + '<span>Up to 2 days of regular use</span></li>')])
+# 9 privacy
+_rep('privacy', [('<h2>Your data is fully yours.</h2><p>End-to-end encrypted. GDPR compliant. Always under your control.</p>',
+                  '<h2>Your data, handled with care.</h2><p>Vocci follows applicable data-protection requirements and safeguards your recordings with encryption and access controls. Your content is not used to train shared AI models.</p>')])
+# 10 creators
+_rep('kol', [('<h2>In their words.</h2>', '<h2>Watch creators get hands-on with Vocci Ring.</h2>')])
+# 11 press: the section gets its title
+_rep('awards', [('<div class="pn mid quote" style="--gc:2/span 2;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1">',
+                 '<div class="pn aw-title" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1"><h2>What the press noticed.</h2></div><div class="pn mid quote" style="--gc:2/span 2;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1">')])
+# 12 hardware
+_rep('hardware', [('<h2>Maximize capability density.</h2><p>Explore the engineering that brings recording, storage and connectivity into a ring.</p>',
+                   '<h2>A closer look at Vocci Ring.</h2><p><span class="cu" data-to="6.8" data-dec="1">6.8</span> mm wide. <span class="cu" data-to="2.85" data-dec="2">2.85</span> mm thick. Made to wear, not just to use.</p>'),
+                  ('<span class="label">Haptics</span><h3>Feel it start. Stay in the moment.</h3><p>Double-press to start recording. Two vibrations let you know it’s begun.</p>',
+                   '<span class="label">Recording feedback</span><h3>Know when it starts.</h3><p>A gentle vibration and subtle light confirm that recording has begun.</p>'),
+                  ('<span class="label">3–5 g</span><h3>Light on your hand.</h3><p>Titanium inside and out. <span class="cu" data-to="6.8" data-dec="1">6.8</span> mm wide, <span class="cu" data-to="2.85" data-dec="2">2.85</span> mm thin.</p>',
+                   '<span class="label">Sizing</span><h3>Find your fit.</h3><p>Available in US sizes 6–15, with a sizing kit to help you choose.</p>'),
+                  ('<span class="label">Charging</span><h3>A quick recharge. Back to your day.</h3><p><span class="cu" data-to="30">30</span> min to <span class="cu" data-to="80">80</span>%. The case holds <span class="cu" data-to="3">3</span> full charges, over USB-C.</p>',
+                   '<span class="label">Charging</span><h3>Back to 80% in 30 minutes.</h3><p>The charging case provides up to three additional full charges.</p>')])
