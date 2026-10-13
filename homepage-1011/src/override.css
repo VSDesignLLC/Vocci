@@ -1994,3 +1994,11 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 @media(max-width:700px){ #kol .kv-nav{display:none} }
 /* 1011-zz27 · phone/tablet: the exploded render sits on the grey ground, not on its white backdrop */
 @media(max-width:700px){ #hardware .pn.exploded{background:transparent!important} }   /* the render itself is now a transparent cut-out (img3/detail-exploded-cut.webp) */
+/* 1011-zz28 · creators carousel controls (phone/tablet) — they reused screen 2's markup but its styles were scoped to #how */
+#kol .kv-hint{align-items:center;gap:18px!important}
+#kol .kv-hint .hh-d{display:flex;gap:6px;align-items:center}
+#kol .kv-hint .hh-d i{width:6px;height:6px;border-radius:50%;background:rgba(20,20,22,.2);transition:background .3s,width .3s}
+#kol .kv-hint .hh-d i.on{width:18px;border-radius:3px;background:var(--accent)}
+#kol .kv-hint .hh-b{width:40px;height:40px;border-radius:50%;background:transparent;display:grid;place-items:center;cursor:pointer;padding:0}
+#kol .kv-hint .hh-b svg{width:16px;height:16px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#kol .kv-hint .hh-b:disabled{opacity:.35;cursor:default}
