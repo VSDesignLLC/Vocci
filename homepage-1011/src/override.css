@@ -2410,3 +2410,6 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   .gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])) .wordmark{opacity:0;max-width:0;margin:0!important;padding:0!important}
   .gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])) .n3-tabs{display:none!important}
 }
+/* 1011-zz75 · step-3 Claude mock: no desktop window dots on a phone screen */
+.r3-ph.a4 .ex>i{display:none!important}
+.r3-ph.a4 .ex{gap:0!important}
