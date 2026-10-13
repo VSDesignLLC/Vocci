@@ -2100,3 +2100,14 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 /* 1011-zz44 · needs: owner-quote bubbles show only in the default (first) view */
 #needs .pn.pz-pic .pz-qb{transition:opacity .35s ease,translate .35s ease}
 #needs .pn.pz-pic.qb-off .pz-qb{opacity:0!important;translate:0 8px;pointer-events:none}
+/* 1011-zz45 · footer: the O of the big wordmark is the ring — the first time the footer arrives it spins in and sends out two orange pulses */
+#footer .ring-o{transform-box:fill-box;transform-origin:50% 50%}
+#footer .ring-o .ro-img{transform-box:fill-box;transform-origin:50% 50%;opacity:0;transform:rotate(-200deg) scale(.55)}
+#footer .ring-o .ro-pulse{transform-box:fill-box;transform-origin:50% 50%;opacity:0;fill:none}
+#footer .ft2-mark.o-go .ring-o .ro-img{animation:roIn 1.5s cubic-bezier(.2,.75,.15,1) .15s forwards}
+#footer .ft2-mark.o-go .ring-o .ro-pulse{animation:roPulse 1.4s cubic-bezier(.2,.7,.2,1) 1.05s 1 both}
+#footer .ft2-mark.o-go .ring-o .ro-p2{animation-delay:1.3s}
+#footer .ft2-mark.o-done .ring-o .ro-img{opacity:1;transform:none}
+@keyframes roIn{0%{opacity:0;transform:rotate(-200deg) scale(.55)}55%{opacity:1}82%{transform:rotate(8deg) scale(1.04)}100%{opacity:1;transform:rotate(0) scale(1)}}
+@keyframes roPulse{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.9)}}
+@media(prefers-reduced-motion:reduce){#footer .ring-o .ro-img{opacity:1!important;transform:none!important;animation:none!important}#footer .ring-o .ro-pulse{display:none}}
