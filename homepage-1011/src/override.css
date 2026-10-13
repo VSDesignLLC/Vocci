@@ -2034,3 +2034,17 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 }
 #needs .pz-d{font-size:14px!important}   /* last 14.5px body copy → 14px */
 @media(min-width:700.5px) and (max-width:1100px){ #needs .pz-d{font-size:15px!important} }
+/* 1011-zz32 · privacy, simplified: copy + button | image | badge */
+#privacy .pn.pv-copy{display:flex;flex-direction:column;justify-content:flex-start}
+#privacy .pn.pv-copy .end{margin-top:auto}
+#privacy .pn.pv-cert{display:grid;place-items:center}
+#privacy .pn.pv-cert img{width:clamp(120px,9vw,150px);height:auto}
+@media(max-width:700px){
+  #privacy .stage{flex-direction:column!important}
+  #privacy .stage>.pn.pv-copy{order:1;height:auto!important;min-height:0!important}
+  #privacy .stage>.pn.pv-copy .end{margin-top:24px}
+  #privacy .stage>.pn{flex:0 0 auto!important}
+  #privacy .stage>.pn.pic{order:2;height:auto!important;aspect-ratio:4/3;min-height:0!important}
+  #privacy .stage>.pn.pv-cert{order:3;height:auto!important;min-height:0!important;padding:28px 20px!important}
+  #privacy .pn.pv-cert img{width:96px}
+}
