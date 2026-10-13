@@ -2091,3 +2091,5 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 /* 1011-zz41 · needs list starts at the top of its cell, like the title cell above (desktop) */
 @media(min-width:1101px){ #needs .stage>.pn.pz-list{justify-content:flex-start!important} }
 @media(min-width:1101px){ #needs .pz-i:first-child .pz-h{padding-top:0!important} #needs .pz-i.on:first-child .pz-h b{top:.65em} }
+/* 1011-zz42 · awards: badges only, no laurel branches */
+#awards .wreath .laurel{display:none!important}
