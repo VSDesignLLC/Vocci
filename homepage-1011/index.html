@@ -3513,6 +3513,58 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 /* 1011-zz63 · phone/tablet grid dots where the edge / centre lines meet the horizontal lines (same 5px white dot as desktop) */
 .m-dot{position:absolute;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%;background:#fff;z-index:7;pointer-events:none}
 @media(min-width:1101px){ .m-dot{display:none} }
+/* 1011-zz64 · phone only (≤700px; not remapped to tablet): every screen is one screen tall, the picture flexes to absorb the difference,
+   and the desktop's pinned moments come back — hero pinned under the page, screen 2 pinned while its three steps flip, footer revealed from under FAQ */
+@media (max-width:700.4px){
+  #hero,#needs,#colors,#breather,#privacy,#kol,#awards,#hardware,#faq,#footer{height:100svh!important;min-height:0!important;overflow:hidden}
+  #hero>.stage,#needs>.stage,#colors>.stage,#breather>.stage,#privacy>.stage,#kol>.stage,#awards>.stage,#hardware>.stage,#faq>.stage{height:100svh!important;min-height:0!important;display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important}
+  #hero>.stage>*,#needs>.stage>.pn,#colors>.stage>.pn,#breather>.stage>.pn,#privacy>.stage>.pn,#kol>.stage>*,#awards>.stage>.pn,#hardware>.stage>*,#faq>.stage>.pn{flex:0 0 auto}
+  /* the picture of each screen takes whatever height is left */
+  #hero>.stage>img.bgimg{flex:1 1 0!important;height:auto!important;min-height:0!important}
+  #needs>.stage>.pn.pz-pic,#colors>.stage>.pn.fnx-stage,#privacy>.stage>.pn.pic,#faq>.stage>.pn.fq5-pic,#hardware>.stage>.pn.exploded{flex:1 1 0!important;height:auto!important;min-height:0!important;aspect-ratio:auto!important}
+  #breather>.stage>.pn{flex:1 1 0!important;height:auto!important;min-height:0!important}
+  #awards>.stage>.pn.mid.glassy{flex:1 1 0!important;height:auto!important;min-height:0!important}
+  #awards>.stage{flex-direction:row!important;flex-wrap:wrap!important;align-content:stretch}
+  #awards>.stage>.pn.mid.glassy{flex:0 0 50%!important;width:50%!important;height:calc((100svh - 230px)/2)!important}
+  #awards>.stage>.pn.mid.quote{flex:0 0 100%!important;width:100%!important;height:230px!important}
+  #kol>.stage>.kv-scroll{flex:1 1 0!important;min-height:0!important;align-items:stretch}
+  #kol .kv-slide{height:auto!important;max-height:100%}
+  #kol .kv-slide>.kv-pic{flex:1 1 0!important;min-height:0!important;height:auto!important}
+  #kol .kv-hint{padding:8px 0 16px!important}
+  /* hardware: the three spec cards become one swipeable row */
+  #hardware .m-hrow{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 20px 20px;scrollbar-width:none;flex:0 0 auto}
+  #hardware .m-hrow::-webkit-scrollbar{display:none}
+  #hardware .m-hrow>.pn{flex:0 0 78%!important;width:78%!important;height:auto!important;min-height:0!important;scroll-snap-align:start;border-radius:12px;background:#f3f3f1!important;padding:14px 16px 18px!important}
+  #hardware .m-hrow>.pn img.half{height:96px!important;object-fit:cover;border-radius:8px}
+  /* footer: compact enough for one screen, then pinned underneath so FAQ slides away from it */
+  #footer{position:sticky!important;bottom:0;z-index:0}
+  #faq{position:relative;z-index:2}
+  #footer .ft2 .pn{padding-top:14px!important;padding-bottom:14px!important}
+  #footer .ft2-mark{padding-top:70px!important}
+  #footer .ft2-say h2{font-size:26px!important;margin-bottom:12px!important}
+  #footer .fg2 a,#footer .ft2-c a{font-size:14px!important;line-height:1.35!important}
+  #footer .ft2-c h4,#footer .ft2-c .label{margin-bottom:6px!important}
+  /* screen 2 pinned: the section is three screens long, its content stays put while the steps flip */
+  #how.m-pin-on{height:300svh!important}
+  #how .m-pin{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;overflow:hidden}
+  #how .m-pin>.stage{flex:1 1 0;min-height:0}
+}
+/* 1011-zz65 · phone: FAQ keeps to one screen — the product picture yields its space to the questions, which scroll inside the screen when answers open; footer a touch tighter */
+@media (max-width:700.4px){
+  #faq>.stage>.pn.fq5-pic{display:none!important}
+  #faq>.stage>.pn.fq5-list{flex:1 1 0!important;min-height:0!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  #footer .ft2-mark{padding-top:58px!important}
+  #footer .ft2 .pn{padding-top:12px!important;padding-bottom:12px!important}
+  #footer .ft2-legal p,#footer .ft2-legal a,#footer .f-copy{line-height:1.5!important}
+}
+@media (max-width:700.4px){ #footer .ft2-mark{padding-top:48px!important} #footer .ft2-say{padding-bottom:6px!important} }
+/* 1011-zz66 · tablet: hardware card photos run flush to the card's top and side edges (no empty band above them) */
+@media(min-width:700.5px) and (max-width:1100px){
+  #hardware .stage>.pn.hasimg{padding-top:0!important}
+  #hardware .stage>.pn.hasimg>img.half{margin:0 -40px 14px!important;width:calc(100% + 80px)!important;max-width:none}
+}
+@media(max-width:700.4px){ #hardware .m-hrow>.pn{padding-top:0!important;overflow:hidden} #hardware .m-hrow>.pn>img.half{margin:0 -16px 10px!important;width:calc(100% + 32px)!important;max-width:none;border-radius:0!important} }
+@media (max-width:700.4px){ #footer .ft2-say{padding-top:4px!important} #footer .ft2-mark{padding-top:44px!important} }
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="vl-intro" aria-hidden="true"><div class="vl-ring"><img src="img3/ring-top.webp" alt=""><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg></div><span class="vl-pct">00</span></div><script>(function(){var seen=false;try{seen=sessionStorage.getItem("vocci-intro")==="1"}catch(e){}var L=document.querySelector(".vl-intro");if(seen){L&&L.remove();return}document.documentElement.classList.add("vl-on");document.body.appendChild(L)})()</script><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-v2.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
@@ -4183,8 +4235,12 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
       var ys={0:1}, st=sec.querySelector('.stage'), mids=[];
       /* layout offsets, not on-screen rects: cells may still be mid slide-in */
       function off(el){ var x=0,y=0; for(var e=el;e&&e!==sec;e=e.offsetParent){ x+=e.offsetLeft; y+=e.offsetTop; } return {x:x,y:y}; }
-      if(st) [].forEach.call(st.querySelectorAll(':scope>.pn'),function(c){ if(!c.offsetHeight||getComputedStyle(c).display==='none') return;
-        var o=off(c), y=Math.round(o.y); if(y>2&&y<sb.height-2) ys[y]=1;
+      /* only where a horizontal grid line is actually drawn: a visible top border spanning the full width */
+      function hasLine(c){ var cs=getComputedStyle(c), w=parseFloat(cs.borderTopWidth)||0, col=cs.borderTopColor, a=col.match(/rgba?\(([^)]+)\)/);
+        var alpha=a?(a[1].split(',')[3]===undefined?1:parseFloat(a[1].split(',')[3])):0; return w>=1&&alpha>0.05; }
+      var pinned=sec.classList.contains('m-pin-on')||sec.id==='why';
+      if(st&&!pinned) [].forEach.call(st.querySelectorAll(':scope>.pn'),function(c){ if(!c.offsetHeight||getComputedStyle(c).display==='none') return;
+        var o=off(c), y=Math.round(o.y); if(y>2&&y<sb.height-2&&hasLine(c)&&c.offsetWidth>=sb.width*.9) ys[y]=1;
         if(c.classList.contains('col-l')){ var x=Math.round(o.x+c.offsetWidth); mids.push([x,y],[x,Math.round(o.y+c.offsetHeight)]); } });
       var add=function(x,y){ var d=document.createElement('i'); d.className='m-dot'; d.style.left=x+'px'; d.style.top=y+'px'; sec.appendChild(d); };
       Object.keys(ys).forEach(function(y){ add(inset,+y); add(sb.width-inset,+y); });
@@ -4193,6 +4249,25 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   }
   var t=null; function later(){ clearTimeout(t); t=setTimeout(build,250); }
   addEventListener('resize',later); addEventListener('load',function(){ setTimeout(build,1500); }); setTimeout(build,2500);
+})();
+
+/* 1011-zz64 · phone (<700.5px): pinned screen 2 — scrolling through it flips the three steps like the desktop 3D walk;
+   hardware cards wrapped into one swipe row */
+(function(){
+  if(innerWidth>=700.5) return;
+  var hw=document.querySelector('#hardware .stage');
+  if(hw && !hw.querySelector('.m-hrow')){ var cards=[].filter.call(hw.querySelectorAll(':scope>.pn.hasimg'),function(c){ return true; });
+    if(cards.length){ var row=document.createElement('div'); row.className='m-hrow'; cards[0].parentNode.insertBefore(row,cards[0]); cards.forEach(function(c){ row.appendChild(c); }); } }
+  var how=document.getElementById('how'); if(!how) return;
+  var st=how.querySelector(':scope>.stage'); if(!st) return;
+  var pin=document.createElement('div'); pin.className='m-pin';
+  [].slice.call(how.children).forEach(function(c){ pin.appendChild(c); }); how.appendChild(pin); how.classList.add('m-pin-on');
+  var step=-1;
+  function leftOf(i){ var pics=[].filter.call(st.querySelectorAll(':scope>.pn.pic'),function(p){ return p.offsetWidth>0; }); if(!pics.length) return i*st.clientWidth; var k=Math.min(i,pics.length-1); return pics[k].offsetLeft-pics[0].offsetLeft; }
+  function tick(){ var r=how.getBoundingClientRect(), span=how.offsetHeight-innerHeight; if(span<=0) return;
+    var p=Math.min(1,Math.max(0,-r.top/span)), s=Math.min(2,Math.floor(p*3));
+    if(s!==step){ step=s; st.scrollTo({left:leftOf(s),behavior:'smooth'}); } }
+  addEventListener('scroll',tick,{passive:true}); tick();
 })();
 
 </script>
