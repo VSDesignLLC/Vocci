@@ -2057,3 +2057,15 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #privacy .stage>.pn.pv-card .end{margin-top:0!important}
   #privacy .pn.pv-card img{width:88px}
 }
+/* 1011-zz34 · privacy: one glass card bottom-left over the full-bleed image */
+#privacy .stage>.pn.pic{z-index:0}
+#privacy .stage>.pn.pv-card{z-index:2;display:flex;flex-direction:column;align-items:stretch;background:rgba(246,246,245,.62)!important;-webkit-backdrop-filter:blur(26px) saturate(1.15);backdrop-filter:blur(26px) saturate(1.15)}
+#privacy .pn.pv-card h2{margin-bottom:12px}
+#privacy .pn.pv-card .pv-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+#privacy .pn.pv-card .pv-foot img{width:clamp(64px,5vw,84px);height:auto}
+@media(max-width:700px){
+  #privacy .stage>.pn.pic{order:1!important}
+  #privacy .stage>.pn.pv-card{order:2!important;height:auto!important;min-height:0!important;flex-direction:column!important;align-items:stretch!important;padding:24px 20px 28px!important;background:#f3f3f1!important}
+  #privacy .pn.pv-card .pv-foot{margin-top:24px}
+  #privacy .pn.pv-card .pv-foot img{width:72px}
+}
