@@ -3640,6 +3640,136 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 }
 @media (max-width:700.4px){ #how .m-pin>.stage{padding-left:20px!important;padding-right:20px!important} }
 
+/* 1011-zz73 · tablet (700.5–1100px) gets the phone layout system too: one screen per section (content wins over clipping),
+   pinned screen 2, half/half awards, swipe rows, unified spacing — then tablet-sized spacing on top */
+@media (min-width:700.5px) and (max-width:1100px){
+
+  #hero,#needs,#colors,#breather,#privacy,#kol,#awards,#hardware,#faq,#footer{height:100svh!important;min-height:0!important;overflow:hidden}
+  #hero>.stage,#needs>.stage,#colors>.stage,#breather>.stage,#privacy>.stage,#kol>.stage,#awards>.stage,#hardware>.stage,#faq>.stage{height:100svh!important;min-height:0!important;display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important}
+  #hero>.stage>*,#needs>.stage>.pn,#colors>.stage>.pn,#breather>.stage>.pn,#privacy>.stage>.pn,#kol>.stage>*,#awards>.stage>.pn,#hardware>.stage>*,#faq>.stage>.pn{flex:0 0 auto}
+  /* the picture of each screen takes whatever height is left */
+  #hero>.stage>img.bgimg{flex:1 1 0!important;height:auto!important;min-height:0!important}
+  #needs>.stage>.pn.pz-pic,#colors>.stage>.pn.fnx-stage,#privacy>.stage>.pn.pic,#faq>.stage>.pn.fq5-pic,#hardware>.stage>.pn.exploded{flex:1 1 0!important;height:auto!important;min-height:0!important;aspect-ratio:auto!important}
+  #breather>.stage>.pn{flex:1 1 0!important;height:auto!important;min-height:0!important}
+  #awards>.stage>.pn.mid.glassy{flex:1 1 0!important;height:auto!important;min-height:0!important}
+  #awards>.stage{flex-direction:row!important;flex-wrap:wrap!important;align-content:stretch}
+  #awards>.stage>.pn.mid.glassy{flex:0 0 50%!important;width:50%!important;height:calc((100svh - 230px)/2)!important}
+  #awards>.stage>.pn.mid.quote{flex:0 0 100%!important;width:100%!important;height:230px!important}
+  #kol>.stage>.kv-scroll{flex:1 1 0!important;min-height:0!important;align-items:stretch}
+  #kol .kv-slide{height:auto!important;max-height:100%}
+  #kol .kv-slide>.kv-pic{flex:1 1 0!important;min-height:0!important;height:auto!important}
+  #kol .kv-hint{padding:8px 0 16px!important}
+  /* hardware: the three spec cards become one swipeable row */
+  #hardware .m-hrow{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 20px 20px;scrollbar-width:none;flex:0 0 auto}
+  #hardware .m-hrow::-webkit-scrollbar{display:none}
+  #hardware .m-hrow>.pn{flex:0 0 78%!important;width:78%!important;height:auto!important;min-height:0!important;scroll-snap-align:start;border-radius:12px;background:#f3f3f1!important;padding:14px 16px 18px!important}
+  #hardware .m-hrow>.pn img.half{height:96px!important;object-fit:cover;border-radius:8px}
+  /* footer: compact enough for one screen, then pinned underneath so FAQ slides away from it */
+  #footer{position:sticky!important;bottom:0;z-index:0}
+  #faq{position:relative;z-index:2}
+  #footer .ft2 .pn{padding-top:14px!important;padding-bottom:14px!important}
+  #footer .ft2-mark{padding-top:70px!important}
+  #footer .ft2-say h2{font-size:26px!important;margin-bottom:12px!important}
+  #footer .fg2 a,#footer .ft2-c a{font-size:14px!important;line-height:1.35!important}
+  #footer .ft2-c h4,#footer .ft2-c .label{margin-bottom:6px!important}
+  /* screen 2 pinned: the section is three screens long, its content stays put while the steps flip */
+  #how.m-pin-on{height:300svh!important}
+  #how .m-pin{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;overflow:hidden}
+  #how .m-pin>.stage{flex:1 1 0;min-height:0}
+
+
+  #faq>.stage>.pn.fq5-pic{display:none!important}
+  #faq>.stage>.pn.fq5-list{flex:1 1 0!important;min-height:0!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  #footer .ft2-mark{padding-top:58px!important}
+  #footer .ft2 .pn{padding-top:12px!important;padding-bottom:12px!important}
+  #footer .ft2-legal p,#footer .ft2-legal a,#footer .f-copy{line-height:1.5!important}
+
+ #footer .ft2-mark{padding-top:48px!important} #footer .ft2-say{padding-bottom:6px!important} 
+ #footer .ft2-say{padding-top:4px!important} #footer .ft2-mark{padding-top:44px!important} 
+
+  #hero,#needs,#colors,#breather,#privacy,#kol,#awards,#hardware,#faq,#footer{height:auto!important;min-height:100svh!important;overflow:visible!important}
+  #hero>.stage,#needs>.stage,#colors>.stage,#breather>.stage,#privacy>.stage,#kol>.stage,#awards>.stage,#hardware>.stage,#faq>.stage{height:auto!important;min-height:100svh!important}
+  /* text & card cells: natural height */
+  #needs>.stage>.pn:not(.pic),#colors>.stage>.pn:not(.pic),#privacy>.stage>.pn:not(.pic),#hardware>.stage>.pn:not(.pic),#faq>.stage>.pn:not(.pic),#hero>.stage>.pn,#breather>.stage>.pn:not(.pic){flex:0 0 auto!important;height:auto!important}
+  /* pictures absorb the slack, but keep a sensible floor */
+  #hero>.stage>img.bgimg{flex:1 1 auto!important;min-height:34svh!important}
+  #breather>.stage>.bgimg{flex:1 1 auto!important;height:auto!important;min-height:30svh!important;aspect-ratio:auto!important;object-fit:cover}
+  #needs>.stage>.pn.pz-pic,#colors>.stage>.pn.fnx-stage,#privacy>.stage>.pn.pic,#hardware>.stage>.pn.exploded{flex:1 1 auto!important;min-height:30svh!important}
+  #awards>.stage>.pn.mid.glassy{height:auto!important;min-height:calc((100svh - 230px)/2)!important}
+  #kol .kv-slide>.kv-txt{flex:0 0 auto!important}
+  #kol .kv-slide>.kv-pic{min-height:28svh!important}
+  #kol .kv-slide{max-height:none!important}
+  /* pinned screen 2: pictures flex, step cards keep their full height */
+  #how .m-pin>.stage{grid-template-rows:minmax(0,1fr) auto!important;height:auto!important}
+  #how .m-pin>.stage>.pn.pic{height:auto!important;min-height:0!important;aspect-ratio:auto!important}
+  #how .m-pin>.stage>.pn:not(.pic){height:auto!important;min-height:0!important}
+  #why .rec-pn{overflow:visible!important}
+
+ #kol .kv-slide>.kv-txt{height:auto!important;min-height:0!important;overflow:visible!important} #kol .kv-slide{overflow:visible!important} 
+
+  #awards{height:100svh!important;min-height:0!important}
+  #awards>.stage{height:100svh!important;min-height:0!important;display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-rows:1fr 1fr 2fr!important;flex-wrap:nowrap!important}
+  #awards>.stage>.pn.mid.glassy{grid-column:auto!important;grid-row:auto!important;width:auto!important;height:auto!important;min-height:0!important;flex:none!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:10px!important;padding:12px!important}
+  #awards>.stage>.pn.mid.glassy .wreath{margin:0!important}
+  #awards>.stage>.pn.mid.glassy .wreath img{max-height:9svh;width:auto}
+  #awards>.stage>.pn.mid.quote{grid-column:1 / -1!important;grid-row:3!important;width:auto!important;height:auto!important;min-height:0!important;flex:none!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
+
+ #awards>.stage>.pn.mid.glassy:nth-of-type(-n+2),#awards>.stage>.pn.mid.glassy.r1{padding-top:64px!important} 
+
+  #footer>.stage{height:auto!important;min-height:100svh!important;grid-template-rows:auto!important;grid-auto-rows:auto!important;overflow:hidden}
+  #footer>.stage>.pn{height:auto!important;min-height:0!important;overflow:visible!important}
+  #footer .ft2-last{padding-bottom:28px!important}
+
+
+  #hero>.stage>.pn,#colors>.stage>.pn:not(.pic),#breather>.stage>.pn:not(.pic),#privacy>.stage>.pn:not(.pic),#kol>.stage>.pn.kv-title,#hardware>.stage>.pn:not(.pic):not(.hasimg),#faq>.stage>.pn.fq5-head{padding:24px 20px 28px!important}
+  #faq>.stage>.pn.fq5-cats,#faq>.stage>.pn.fq5-list{padding-left:20px!important;padding-right:20px!important}
+  #footer>.stage>.pn{padding:20px 20px 20px!important}
+  #footer>.stage>.pn.ft2-mark{padding-top:76px!important}
+  .gridall section .pn h2,.gridall footer .pn h2,#how .how-head h2{margin:0 0 14px!important}
+  .gridall section .pn h2+p,.gridall footer .pn h2+p,#how .how-head h2+p{margin-top:0!important}
+  .gridall section .pn p+.btns,.gridall section .pn p+.end,.gridall section .pn p+div>.btns,#privacy .pn.pv-card .pv-foot,#needs .pz-join .btns{margin-top:24px!important}
+  #privacy .pn.pv-card .pv-foot{gap:20px!important}
+  #how .how-head{padding:24px 20px 16px!important}
+
+
+  #hero>.stage>.pn,#colors .fnx-copy,#breather>.stage>.pn:not(.pic),#privacy .pv-card,#kol .kv-title,#hardware>.stage>.pn:not(.pic):not(.hasimg),#faq .fq5-head,#needs .pz-title{row-gap:0!important;gap:0!important;justify-content:flex-start!important}
+  #hero>.stage>.pn h1{margin:0!important}
+  #hero>.stage>.pn .btns{margin-top:24px!important}
+  #needs .pz-title .pz-join{margin-top:0!important}
+  #needs .pz-join p{margin:0!important}
+  #breather .feats{margin-top:24px!important}
+  #kol .kv-title .kv-nav{margin:24px 0 0!important}
+  #kol .kv-title .kv-nav.off{display:none!important}
+  #kol .kv-title p+.kv-nav+.btns,#kol .kv-title .btns{margin-top:24px!important}
+  #hardware>.stage>.pn:not(.pic):not(.hasimg) .end{margin-top:24px!important}
+  #privacy .pn.pv-card .pv-foot{margin-top:24px!important}
+
+ #privacy>.stage>.pn.pv-card>.pv-foot{margin-top:24px!important} 
+ #footer{position:relative!important;bottom:auto!important} 
+
+  #hardware .m-hrow{scroll-padding-inline:20px;padding-left:20px!important;padding-right:20px!important}
+  #hardware .m-hrow::after{content:"";flex:0 0 8px}
+  #kol .kv-scroll,#how .m-pin>.stage{scroll-padding-inline:20px!important}
+
+ #how .m-pin>.stage{padding-left:20px!important;padding-right:20px!important} 
+}
+@media (min-width:700.5px) and (max-width:1100px){
+  #hero>.stage>.pn,#colors>.stage>.pn:not(.pic),#breather>.stage>.pn:not(.pic),#privacy>.stage>.pn:not(.pic),#kol>.stage>.pn.kv-title,#hardware>.stage>.pn:not(.pic):not(.hasimg),#faq>.stage>.pn.fq5-head{padding:36px 40px 40px!important}
+  #faq>.stage>.pn.fq5-cats,#faq>.stage>.pn.fq5-list,#needs .pz-title,#needs .pz-list{padding-left:40px!important;padding-right:40px!important}
+  #needs .pz-title{padding-top:36px!important}
+  #footer>.stage>.pn{padding:28px 40px!important}
+  #footer>.stage>.pn.ft2-mark{padding-top:96px!important}
+  .gridall section .pn h2,.gridall footer .pn h2,#how .how-head h2{margin:0 0 16px!important}
+  .gridall section .pn p+.btns,.gridall section .pn p+.end,#privacy>.stage>.pn.pv-card>.pv-foot,#needs .pz-join .btns,#hero>.stage>.pn .btns,#breather .feats,#kol .kv-title .btns,#hardware>.stage>.pn:not(.pic):not(.hasimg) .end{margin-top:28px!important}
+  #how .how-head{padding:36px 40px 20px!important}
+  #how .m-pin>.stage,#hardware .m-hrow{padding-left:40px!important;padding-right:40px!important;scroll-padding-inline:40px!important}
+  #kol .kv-scroll{scroll-padding-inline:40px!important}
+  #hardware .m-hrow>.pn{flex:0 0 46%!important;width:46%!important}
+  #hardware .m-hrow>.pn>img.half{margin:0 -16px 12px!important;height:140px!important}
+  #awards>.stage>.pn.mid.glassy:nth-of-type(-n+2),#awards>.stage>.pn.mid.glassy.r1{padding-top:80px!important}
+  #awards>.stage>.pn.mid.glassy .wreath img{max-height:8svh}
+}
+
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="vl-intro" aria-hidden="true"><div class="vl-ring"><img src="img3/ring-top.webp" alt=""><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg></div><span class="vl-pct">00</span></div><script>(function(){var seen=false;try{seen=sessionStorage.getItem("vocci-intro")==="1"}catch(e){}var L=document.querySelector(".vl-intro");if(seen){L&&L.remove();return}document.documentElement.classList.add("vl-on");document.body.appendChild(L)})()</script><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-v2.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
 <path stroke-width="2.6" d="M58.39 3.66A26.30 26.30 0 0 1 80.61 3.66"/>
@@ -4328,7 +4458,7 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 /* 1011-zz64 · phone (<700.5px): pinned screen 2 — scrolling through it flips the three steps like the desktop 3D walk;
    hardware cards wrapped into one swipe row */
 (function(){
-  if(innerWidth>=700.5) return;
+  if(innerWidth>1100) return;   /* phone + tablet */
   var hw=document.querySelector('#hardware .stage');
   if(hw && !hw.querySelector('.m-hrow')){ var cards=[].filter.call(hw.querySelectorAll(':scope>.pn.hasimg'),function(c){ return true; });
     if(cards.length){ var row=document.createElement('div'); row.className='m-hrow'; cards[0].parentNode.insertBefore(row,cards[0]); cards.forEach(function(c){ row.appendChild(c); }); } }
