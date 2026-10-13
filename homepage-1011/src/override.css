@@ -2014,6 +2014,23 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 }
 @media(min-width:700.5px) and (max-width:1100px){
   #faq .fq5-head h2{font-size:42px!important;line-height:1.1!important}
-  #faq .fq5-head p,#needs .pz-join p{font-size:17px!important}
+  #faq .fq5-head p,#needs .pz-join p{font-size:15px!important}
 }
 @media(min-width:700.5px) and (max-width:1100px){ .gridall #awards h2.aw-h{font-size:28px!important;line-height:1.15!important} }   /* the press line sits inside the quote card, a step below section titles — as on desktop and phone */
+/* 1011-zz31 · follow-ups from the consistency pass */
+/* 1 · tablet body copy 17 → 15px */
+@media(min-width:700.5px) and (max-width:1100px){ .gridall section .pn p,#hero .pn p{font-size:15px!important} }
+/* 4 · FAQ answers 14px like the rest of the body copy (15px on tablet, as all body copy there) */
+#faq .fq5-a p{font-size:14px!important;line-height:1.6!important}
+@media(min-width:700.5px) and (max-width:1100px){ #faq .fq5-a p{font-size:15px!important} }
+/* 2 · screen 3–5 card titles step up to the other cards' title weight */
+#why .rec-card h3{font-size:18px!important;font-weight:600!important;letter-spacing:-.01em}
+@media(min-width:700.5px) and (max-width:1100px){ #why .rec-card h3{font-size:24px!important} }
+/* 3 · phone/tablet: bigger hit areas, same look */
+@media(max-width:700px){
+  #why .ch-rail button{padding-top:13px!important;margin-top:-13px!important}
+  #colors .fnx-v{padding-top:11px!important;padding-bottom:11px!important}
+  .tlink{padding-top:9px!important;padding-bottom:9px!important;margin-top:-9px!important;margin-bottom:-9px!important}
+}
+#needs .pz-d{font-size:14px!important}   /* last 14.5px body copy → 14px */
+@media(min-width:700.5px) and (max-width:1100px){ #needs .pz-d{font-size:15px!important} }
