@@ -2117,3 +2117,5 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 /* 1011-zz48 · footer: the particle ring replaces the blurred photo layer — big, low, half showing, always moving */
 #footer .ft-dots{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 #footer .ft2 .pn{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:rgba(246,246,245,.28)!important}
+/* 1011-zz49 · footer glass back, lighter than before (blur 10px instead of 26px, thinner tint) so the particle ring still reads through it */
+#footer .ft2 .pn{-webkit-backdrop-filter:blur(3px) saturate(1.1)!important;backdrop-filter:blur(3px) saturate(1.1)!important;background:rgba(246,246,245,.32)!important}
