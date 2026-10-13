@@ -2086,3 +2086,5 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 }
 /* 1011-zz39 · tablet: privacy card and screen-2 header share the 40px side margin of every other screen */
 @media(min-width:700.5px) and (max-width:1100px){ #privacy .stage>.pn.pv-card{padding-left:40px!important;padding-right:40px!important} #how .how-head{padding-left:40px!important;padding-right:40px!important} }
+/* 1011-zz40 · creators: arrows + "Watch all on YouTube" sit at the bottom of the cell, button baseline level with the "Watch review" links */
+#kol .kv-title .kv-nav{margin-top:auto!important}
