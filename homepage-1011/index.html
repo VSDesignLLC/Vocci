@@ -4141,7 +4141,7 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   function hook(){
     var paths=sec.querySelectorAll('svg.hw-lines .lead path'); if(!paths.length) return false;
     var dp=sec.querySelector('svg.hw-lines g.dim:not(.dim2) path');
-    if(dp){ thick(dp); new MutationObserver(function(){ thick(dp); }).observe(dp.parentNode,{attributes:true,subtree:true,attributeFilter:['d','class']}); }
+    /* 1011-zz59 · 2.85 mm callout removed at the client's request (thick() kept for reference, not called) */
     var mo=new MutationObserver(function(ms){ ms.forEach(function(m){ route(m.target); }); });
     paths.forEach(function(p){ route(p); mo.observe(p,{attributes:true,attributeFilter:['d']}); });
     return true;
