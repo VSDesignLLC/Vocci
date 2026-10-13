@@ -520,3 +520,51 @@
   function check(){ var se=document.scrollingElement||document.documentElement; if(se.scrollTop+innerHeight>=se.scrollHeight-innerHeight*.45){ m.classList.add('o-go'); setTimeout(function(){ m.classList.add('o-done'); },2800); removeEventListener('scroll',check); return true; } }
   if(!check()) addEventListener('scroll',check,{passive:true});
 })();
+
+/* 1011-zz48 · footer particle ring (on the old photo layer). ~4k dots sample the VOCCI "O" — ring band with the top gap and its two
+   small arcs — centred low so roughly the top half shows. They gather into the ring when the footer is first revealed, then keep
+   moving: the ring turns slowly, every dot drifts along the band and breathes, and the cursor parts them. Runs only while visible. */
+(function(){
+  var st=document.querySelector('#footer .stage.ft2'); if(!st) return;
+  var cv=document.createElement('canvas'); cv.className='ft-dots'; cv.setAttribute('aria-hidden','true');
+  var bg=st.querySelector(':scope>img.bgimg'); st.insertBefore(cv, bg?bg.nextSibling:st.firstChild);
+  var cx=cv.getContext('2d'), DPR=Math.min(devicePixelRatio||1,1.5), W=0,H=0,R=0,OX=0,OY=0, P=[], N=0, born=0, on=false, raf=0, mx=-1e4, my=-1e4, last=0;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, D2R=Math.PI/180;
+  function g(){ var u=0,v=0; while(!u)u=Math.random(); while(!v)v=Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+  function pick(){   /* angle (from 12 o'clock), radius in R units, band half-width */
+    var r=Math.random();
+    if(r<.84){ var gap=33*D2R; return {a:gap+Math.random()*(2*Math.PI-2*gap), r:1+g()*.075, arc:0}; }
+    if(r<.93) return {a:(Math.random()*2-1)*25*D2R, r:1.096+g()*.018, arc:1};
+    return {a:(Math.random()*2-1)*26*D2R, r:.883+g()*.018, arc:2};
+  }
+  function build(){
+    var b=st.getBoundingClientRect(); W=b.width; H=b.height; cv.width=W*DPR; cv.height=H*DPR; cx.setTransform(DPR,0,0,DPR,0,0);
+    R=Math.min(W*.3,H*.5); OX=W*.5; OY=H*.78; N=Math.round(Math.min(6000,Math.max(2200,W*H/190)));
+    P=[]; for(var i=0;i<N;i++){ var t=pick(); P.push({a:t.a, r:t.r, arc:t.arc, sx:Math.random()*W, sy:Math.random()*H, d:Math.random()*1000,
+      w:(t.arc?0:(Math.random()*2-1)*.05), s:Math.random()<.25?2:1.4, o:Math.random()<.035, ph:Math.random()*6.28, ox:0, oy:0, vx:0, vy:0}); }
+  }
+  function ease(t){ return 1-Math.pow(1-t,3); }
+  function frame(now){
+    raf=0; if(!on){ last=0; return; }
+    if(!born) born=now; var t=now-born, spin=reduce?0:t*.000045;    /* the whole ring turns ~1 rev / 2.3 min */
+    cx.clearRect(0,0,W,H);
+    for(var i=0;i<N;i++){ var p=P[i], k=reduce?1:Math.min(1,Math.max(0,(t-p.d)/1900)), e=ease(k);
+      var a=p.a+spin+(p.arc?0:t*p.w*.0004), br=p.r*R*(1+Math.sin(t*.0009+p.ph)*.012);     /* drift along the band + breathing */
+      var tx=OX+Math.sin(a)*br, ty=OY-Math.cos(a)*br;
+      var x=p.sx+(tx-p.sx)*e, y=p.sy+(ty-p.sy)*e;
+      var dx=x-mx, dy=y-my, dd=dx*dx+dy*dy;
+      if(dd<12000){ var f=(1-dd/12000)*16/Math.sqrt(dd+1); p.vx+=dx*f*.06; p.vy+=dy*f*.06; }
+      p.vx*=.88; p.vy*=.88; p.ox=(p.ox+p.vx)*.94; p.oy=(p.oy+p.vy)*.94;
+      cx.fillStyle=p.o?'rgba(244,117,70,.9)':'rgba(20,20,22,'+(.3+.5*e*(.65+.35*Math.sin(t*.002+p.ph)))+')';
+      cx.fillRect(x+p.ox, y+p.oy, p.s, p.s);
+    }
+    raf=requestAnimationFrame(frame);
+  }
+  function near(){ var se=document.scrollingElement||document.documentElement; return se.scrollTop+innerHeight>=se.scrollHeight-innerHeight*1.4; }
+  function tick(){ var v=near(); if(v&&!on){ on=true; if(!P.length) build(); if(!raf) raf=requestAnimationFrame(frame); } else if(!v&&on){ on=false; } }
+  addEventListener('scroll',tick,{passive:true});
+  addEventListener('resize',function(){ if(P.length){ var keep=born; build(); born=keep; } tick(); });
+  st.addEventListener('pointermove',function(e){ var r=cv.getBoundingClientRect(); mx=e.clientX-r.left; my=e.clientY-r.top; });
+  st.addEventListener('pointerleave',function(){ mx=my=-1e4; });
+  tick();
+})();
