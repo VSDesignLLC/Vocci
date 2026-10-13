@@ -2088,3 +2088,6 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 @media(min-width:700.5px) and (max-width:1100px){ #privacy .stage>.pn.pv-card{padding-left:40px!important;padding-right:40px!important} #how .how-head{padding-left:40px!important;padding-right:40px!important} }
 /* 1011-zz40 · creators: arrows + "Watch all on YouTube" sit at the bottom of the cell, button baseline level with the "Watch review" links */
 #kol .kv-title .kv-nav{margin-top:auto!important}
+/* 1011-zz41 · needs list starts at the top of its cell, like the title cell above (desktop) */
+@media(min-width:1101px){ #needs .stage>.pn.pz-list{justify-content:flex-start!important} }
+@media(min-width:1101px){ #needs .pz-i:first-child .pz-h{padding-top:0!important} #needs .pz-i.on:first-child .pz-h b{top:.65em} }
