@@ -691,3 +691,11 @@
     cells.forEach(function(c){ ro.observe(c); c.querySelectorAll('.r3m .r3-ph').forEach(fit); }); }
   hook();
 })();
+
+/* 1011-zz79 · phone/tablet: the Ask overlay lives in the full-width stage cell (not in the wider, offset hand image) so it can sit at the content edge */
+(function(){
+  var o=document.querySelector('#why .rec-fig .ov-ask'), cell=document.querySelector('#why .rec-stage'); if(!o||!cell) return;
+  var home=o.parentNode, next=o.nextSibling;
+  function place(){ if(innerWidth<=1100){ if(o.parentNode!==cell) cell.appendChild(o); } else if(o.parentNode!==home){ home.insertBefore(o,next); } }
+  place(); addEventListener('resize',place);
+})();

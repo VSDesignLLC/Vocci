@@ -2432,3 +2432,9 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 /* 1011-zz78 · pinned screen 2: its header sits below the floating nav pill */
 @media (max-width:700.4px){ #how .how-head{padding-top:80px!important} }
 @media (min-width:700.5px) and (max-width:1100px){ #how .how-head{padding-top:96px!important} }
+/* 1011-zz79 · phone/tablet Ask overlay: the voice bar hugs its text (no full-width black strip) and sits clear of the nav pill */
+@media (max-width:1100px){
+  #why .ov-ask{left:20px!important;right:auto!important;width:auto!important;max-width:min(72%,340px)!important;top:76px!important;align-items:flex-start}
+  #why .ask-q{width:fit-content;max-width:100%;padding:10px 14px!important;min-height:40px;font-size:13px!important}
+}
+@media (min-width:700.5px) and (max-width:1100px){ #why .ov-ask{left:40px!important;top:96px!important} }
