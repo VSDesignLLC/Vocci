@@ -513,3 +513,10 @@
   prev.addEventListener('click',function(){go(-1)}); next.addEventListener('click',function(){go(1)});
   if(innerWidth>1100) lay(); else { prev.disabled=next.disabled=n<=3; nav.classList.toggle('off',n<=3); }
 })();
+
+/* 1011-zz45 · footer ring-O plays once, the first time the footer comes into view */
+(function(){ var m=document.querySelector('#footer .ft2-mark'); if(!m||!m.querySelector('.ring-o')) return;
+  /* the footer is sticky underneath the page, so "in view" means the page has scrolled to within ~half a screen of its end */
+  function check(){ var se=document.scrollingElement||document.documentElement; if(se.scrollTop+innerHeight>=se.scrollHeight-innerHeight*.45){ m.classList.add('o-go'); setTimeout(function(){ m.classList.add('o-done'); },2800); removeEventListener('scroll',check); return true; } }
+  if(!check()) addEventListener('scroll',check,{passive:true});
+})();

@@ -633,3 +633,13 @@ _SC = [('founders', 'Founders and executives around a meeting table, seen from a
        ('creator', 'A creator filming a Vocci Ring review, seen from above')]
 _t = _t.replace(_old, ''.join('<img class="pz-scene%s" data-k="%d" src="img3/scene-%s.webp" alt="%s" decoding="async"%s>' % (' on' if i == 0 else '', i, n, a, '' if i == 0 else ' loading="lazy"') for i, (n, a) in enumerate(_SC)), 1)
 _put('needs', _t)
+
+# 1011-zz45 · footer wordmark: the O is the ring itself (top view); it plays once when the footer first arrives
+_fm = re.search(r'<footer id="footer".*?</footer>', s, re.S); _t = _fm.group()
+_o = ('<path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>\n<path stroke-width="2.6" d="M58.39 3.66A26.30 26.30 0 0 1 80.61 3.66"/>\n'
+      '<path stroke-width="2.6" d="M60.21 8.45A21.20 21.20 0 0 1 78.79 8.45"/>')
+assert _o in _t, 'footer O'
+_t = _t.replace(_o, '<g class="ring-o"><circle class="ro-pulse" cx="69.5" cy="27.5" r="27" stroke="#F47546" stroke-width="1.2"/>'
+                '<circle class="ro-pulse ro-p2" cx="69.5" cy="27.5" r="27" stroke="#F47546" stroke-width="1"/>'
+                '<image class="ro-img" href="img3/ring-top.webp" x="41.5" y="-0.5" width="56" height="56" preserveAspectRatio="xMidYMid meet"/></g>', 1)
+s = s[:_fm.start()] + _t + s[_fm.end():]
