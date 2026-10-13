@@ -593,10 +593,26 @@
       (lift?'L'+(ax-side*14).toFixed(1)+' '+hy.toFixed(1)+'L'+(ax-side*14).toFixed(1)+' '+ay.toFixed(1):'')+'L'+ax.toFixed(1)+' '+ay.toFixed(1);
     path.__mine=nd; path.setAttribute('d',nd);
   }
+  /* 1011-zz57 · 2.85 mm thickness callout beside the 6.8 mm width dimension (same style). Built from the width line the 3D layer draws:
+     a bracket perpendicular to it, scaled 2.85/6.8 of the width line's on-screen length, so it tracks the ring as it moves. */
+  var NS='http://www.w3.org/2000/svg', d2=null;
+  function thick(dimPath){
+    var svg=dimPath.ownerSVGElement, g=dimPath.parentNode;
+    if(!d2){ d2=document.createElementNS(NS,'g'); d2.setAttribute('class','dim dim2'); d2.innerHTML='<path/><text text-anchor="start">2.85 mm</text>'; svg.appendChild(d2); }
+    d2.classList.toggle('in',g.classList.contains('in'));
+    var n=(dimPath.getAttribute('d')||'').match(/-?\d+(?:\.\d+)?/g); if(!n||n.length<7) return;   /* M x0 y V y M x0 y0 L x1 y1 … */
+    var x0=+n[3], y0=+n[4], x1=+n[5], y1=+n[6], ux=x1-x0, uy=y1-y0, len=Math.hypot(ux,uy)||1; ux/=len; uy/=len;
+    var nx=uy, ny=-ux; if(ny>0){ nx=-nx; ny=-ny; }                                   /* normal pointing up, toward the ring */
+    var L=len*2.85/6.8, bx=x1+ux*26, by=y1+uy*26, tx=bx+nx*L, ty=by+ny*L, k=6;       /* bracket starts just past the width line's end */
+    var f=function(v){ return v.toFixed(1); };
+    d2.firstChild.setAttribute('d','M'+f(bx-ux*k)+' '+f(by-uy*k)+'L'+f(bx+ux*k)+' '+f(by+uy*k)+'M'+f(bx)+' '+f(by)+'L'+f(tx)+' '+f(ty)+'M'+f(tx-ux*k)+' '+f(ty-uy*k)+'L'+f(tx+ux*k)+' '+f(ty+uy*k));
+    var t=d2.lastChild; t.setAttribute('x',f((bx+tx)/2+ux*12)); t.setAttribute('y',f((by+ty)/2+4));
+  }
   function hook(){
     var paths=sec.querySelectorAll('svg.hw-lines .lead path'); if(!paths.length) return false;
+    var dp=sec.querySelector('svg.hw-lines g.dim:not(.dim2) path');
+    if(dp){ thick(dp); new MutationObserver(function(){ thick(dp); }).observe(dp.parentNode,{attributes:true,subtree:true,attributeFilter:['d','class']}); }
     var mo=new MutationObserver(function(ms){ ms.forEach(function(m){ route(m.target); }); });
-    if(paths[3]) paths[3].__lift=64;   /* leaders follow the cards' order: title, recording feedback, sizing, charging */
     paths.forEach(function(p){ route(p); mo.observe(p,{attributes:true,attributeFilter:['d']}); });
     return true;
   }

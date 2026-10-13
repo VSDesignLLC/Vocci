@@ -643,3 +643,11 @@ _t = _t.replace(_o, '<g class="ring-o"><circle class="ro-pulse" cx="69.5" cy="27
                 '<circle class="ro-pulse ro-p2" cx="69.5" cy="27.5" r="27" stroke="#F47546" stroke-width="1"/>'
                 '<image class="ro-img" href="img3/ring-top.webp" x="41.5" y="-0.5" width="56" height="56" preserveAspectRatio="xMidYMid meet"/></g>', 1)
 s = s[:_fm.start()] + _t + s[_fm.end():]
+
+# 1011-zz56 · hardware: Sizing and Charging swap sides, so each leader runs the short way (contacts sit left of centre, the 6.8 mm mark right)
+_t = _sec('hardware').group()
+_a = '<div class="pn lazy hasimg" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 1;--tr:2/span 1"'
+_b = '<div class="pn lazy hasimg" style="--gc:4/span 1;--gr:2/span 1;--tc:2/span 1;--tr:2/span 1"'
+assert _a in _t and _b in _t
+_t = _t.replace(_a, '@@A@@', 1).replace(_b, _a, 1).replace('@@A@@', _b, 1)
+_put('hardware', _t)
