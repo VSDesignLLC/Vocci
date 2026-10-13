@@ -2195,3 +2195,26 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 }
 @media(max-width:700.4px){ #hardware .m-hrow>.pn{padding-top:0!important;overflow:hidden} #hardware .m-hrow>.pn>img.half{margin:0 -16px 10px!important;width:calc(100% + 32px)!important;max-width:none;border-radius:0!important} }
 @media (max-width:700.4px){ #footer .ft2-say{padding-top:4px!important} #footer .ft2-mark{padding-top:44px!important} }
+/* 1011-zz67 · phone: never cut a component. Screens aim for one screen tall, but content always wins: the section grows past
+   100svh instead of clipping, the picture is the only thing that shrinks (down to a floor), text/cards never shrink. */
+@media (max-width:700.4px){
+  #hero,#needs,#colors,#breather,#privacy,#kol,#awards,#hardware,#faq,#footer{height:auto!important;min-height:100svh!important;overflow:visible!important}
+  #hero>.stage,#needs>.stage,#colors>.stage,#breather>.stage,#privacy>.stage,#kol>.stage,#awards>.stage,#hardware>.stage,#faq>.stage{height:auto!important;min-height:100svh!important}
+  /* text & card cells: natural height */
+  #needs>.stage>.pn:not(.pic),#colors>.stage>.pn:not(.pic),#privacy>.stage>.pn:not(.pic),#hardware>.stage>.pn:not(.pic),#faq>.stage>.pn:not(.pic),#hero>.stage>.pn,#breather>.stage>.pn:not(.pic){flex:0 0 auto!important;height:auto!important}
+  /* pictures absorb the slack, but keep a sensible floor */
+  #hero>.stage>img.bgimg{flex:1 1 auto!important;min-height:34svh!important}
+  #breather>.stage>.bgimg{flex:1 1 auto!important;height:auto!important;min-height:30svh!important;aspect-ratio:auto!important;object-fit:cover}
+  #needs>.stage>.pn.pz-pic,#colors>.stage>.pn.fnx-stage,#privacy>.stage>.pn.pic,#hardware>.stage>.pn.exploded{flex:1 1 auto!important;min-height:30svh!important}
+  #awards>.stage>.pn.mid.glassy{height:auto!important;min-height:calc((100svh - 230px)/2)!important}
+  #kol .kv-slide>.kv-txt{flex:0 0 auto!important}
+  #kol .kv-slide>.kv-pic{min-height:28svh!important}
+  #kol .kv-slide{max-height:none!important}
+  /* pinned screen 2: pictures flex, step cards keep their full height */
+  #how .m-pin>.stage{grid-template-rows:minmax(0,1fr) auto!important;height:auto!important}
+  #how .m-pin>.stage>.pn.pic{height:auto!important;min-height:0!important;aspect-ratio:auto!important}
+  #how .m-pin>.stage>.pn:not(.pic){height:auto!important;min-height:0!important}
+  #why .rec-pn{overflow:visible!important}
+}
+@media (max-width:700.4px){ #kol .kv-slide>.kv-txt{height:auto!important;min-height:0!important;overflow:visible!important} #kol .kv-slide{overflow:visible!important} }
+@media(min-width:700.5px) and (max-width:1100px){ #kol .kv-slide>.kv-txt{height:auto!important;min-height:0!important;overflow:visible!important;flex:0 0 auto!important} #kol .kv-slide{overflow:visible!important;height:auto!important} }
