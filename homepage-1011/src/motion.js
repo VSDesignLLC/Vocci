@@ -679,3 +679,15 @@
 
 /* 1011-zz68 · phone awards: tag the first-row cells so they clear the fixed nav */
 (function(){ var c=document.querySelectorAll('#awards .stage>.pn.mid.glassy'); if(c[0]) c[0].classList.add('r1'); if(c[1]) c[1].classList.add('r1'); })();
+
+/* 1011-zz78 · screen-2 phone mocks re-fit whenever their picture cell changes size (the pinned layout resizes cells after load),
+   so the whole phone is always visible with a little air around it */
+(function(){
+  var how=document.getElementById('how'); if(!how||!window.ResizeObserver) return;
+  function fit(ph){ var c=ph.parentNode&&ph.parentNode.parentNode; if(!c||!c.clientHeight) return;
+    ph.style.setProperty('--appk',Math.min(c.clientWidth/310,(c.clientHeight-24)/470).toFixed(3)); }
+  var ro=new ResizeObserver(function(es){ es.forEach(function(e){ e.target.querySelectorAll('.r3m .r3-ph').forEach(fit); }); });
+  function hook(){ var cells=how.querySelectorAll('.stage>.pn.pic'); if(!cells.length||!how.querySelector('.r3m .r3-ph')) return setTimeout(hook,400);
+    cells.forEach(function(c){ ro.observe(c); c.querySelectorAll('.r3m .r3-ph').forEach(fit); }); }
+  hook();
+})();
