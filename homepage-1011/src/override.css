@@ -2140,3 +2140,6 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #awards .stage>.pn.col-l,#footer .stage>.pn.col-l{box-shadow:inset -1px 0 0 rgba(255,255,255,.6)!important}
 }
 @media(min-width:700.5px) and (max-width:1100px){ .gridall section[id]::after,.gridall footer#footer::after{left:16px;right:16px} }
+/* 1011-zz63 · phone/tablet grid dots where the edge / centre lines meet the horizontal lines (same 5px white dot as desktop) */
+.m-dot{position:absolute;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%;background:#fff;z-index:7;pointer-events:none}
+@media(min-width:1101px){ .m-dot{display:none} }
