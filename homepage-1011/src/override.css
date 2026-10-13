@@ -2134,3 +2134,9 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 @media(max-width:700px){
   .gridall section[id]::after,.gridall footer#footer::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;border-left:1px solid rgba(255,255,255,.35);border-right:1px solid rgba(255,255,255,.35)}
 }
+/* 1011-zz62 · phone/tablet edge lines: stronger (60%) and inset from the screen edge (8px phone, 16px tablet); the two-up centre line matches */
+@media(max-width:700px){
+  .gridall section[id]::after,.gridall footer#footer::after{left:8px;right:8px;border-left-color:rgba(255,255,255,.6);border-right-color:rgba(255,255,255,.6)}
+  #awards .stage>.pn.col-l,#footer .stage>.pn.col-l{box-shadow:inset -1px 0 0 rgba(255,255,255,.6)!important}
+}
+@media(min-width:700.5px) and (max-width:1100px){ .gridall section[id]::after,.gridall footer#footer::after{left:16px;right:16px} }
