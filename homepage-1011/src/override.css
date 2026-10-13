@@ -2119,3 +2119,7 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 #footer .ft2 .pn{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:rgba(246,246,245,.28)!important}
 /* 1011-zz49 · footer glass back, lighter than before (blur 10px instead of 26px, thinner tint) so the particle ring still reads through it */
 #footer .ft2 .pn{-webkit-backdrop-filter:blur(3px) saturate(1.1)!important;backdrop-filter:blur(3px) saturate(1.1)!important;background:rgba(246,246,245,.32)!important}
+/* 1011-zz50 · footer ring-O: no spin-in — the ring is simply there; only the two staggered orange pulses play */
+#footer .ring-o .ro-img,#footer .ft2-mark.o-go .ring-o .ro-img{opacity:1!important;transform:none!important;animation:none!important}
+#footer .ft2-mark.o-go .ring-o .ro-pulse{animation-delay:.2s}
+#footer .ft2-mark.o-go .ring-o .ro-p2{animation-delay:.5s}
