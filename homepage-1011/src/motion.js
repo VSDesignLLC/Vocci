@@ -661,7 +661,7 @@
 /* 1011-zz64 · phone (<700.5px): pinned screen 2 — scrolling through it flips the three steps like the desktop 3D walk;
    hardware cards wrapped into one swipe row */
 (function(){
-  if(innerWidth>=700.5) return;
+  if(innerWidth>1100) return;   /* phone + tablet */
   var hw=document.querySelector('#hardware .stage');
   if(hw && !hw.querySelector('.m-hrow')){ var cards=[].filter.call(hw.querySelectorAll(':scope>.pn.hasimg'),function(c){ return true; });
     if(cards.length){ var row=document.createElement('div'); row.className='m-hrow'; cards[0].parentNode.insertBefore(row,cards[0]); cards.forEach(function(c){ row.appendChild(c); }); } }
