@@ -327,7 +327,7 @@
   var k=0, t=null, held=false, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var scenes=Array.prototype.slice.call(sec.querySelectorAll('.pz-scene'));   /* 1011-zz43 · the scene follows the open persona */
   scenes.forEach(function(im){ im.loading='eager'; });
-  function open(i){ k=i; items.forEach(function(it,j){ it.classList.toggle('on',j===i); it.querySelector('.pz-h').setAttribute('aria-expanded',j===i); }); scenes.forEach(function(im,j){ im.classList.toggle('on',j===i); }); }
+  function open(i){ k=i; items.forEach(function(it,j){ it.classList.toggle('on',j===i); it.querySelector('.pz-h').setAttribute('aria-expanded',j===i); }); scenes.forEach(function(im,j){ im.classList.toggle('on',j===i); }); if(scenes[0]) scenes[0].parentNode.classList.toggle('qb-off',i!==0); }   /* owner quotes belong to the default view only */
   function stop(){ clearInterval(t); t=null; } function play(){ stop(); if(held||reduce) return; t=setInterval(function(){ open((k+1)%items.length); },5000); }
   items.forEach(function(it,i){ var h=it.querySelector('.pz-h'); h.addEventListener('click',function(){ held=true; stop(); open(i); }); h.addEventListener('mouseenter',function(){ stop(); open(i); }); });
   sec.querySelector('.pz-acc').addEventListener('mouseleave',play);
