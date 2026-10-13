@@ -293,7 +293,7 @@ function initHW(sec) {
   const ORANGE = new THREE.Color(0xF47546);
   const cards = [...stage.querySelectorAll(':scope>.pn:not(.exploded)')];               // title, button, ruler, ip67
   cards.forEach(c => c.querySelectorAll('img').forEach(i => { i.loading = 'eager'; }));   // they open mid-scroll; don't let them open empty
-  const TARGET = ['part_liner', 'part_02', null, 'part_11'];   // titanium inner band · button · (6.8 mm dimension) · end seal
+  const TARGET = ['part_liner', 'part_02', null, 'part_03'];   // titanium inner band · button · (6.8 mm dimension) · charging contacts
   const EXPLODE = { part_shell: .42, part_11: .62, part_12: -.62, part_liner: -.28 };
 
   const glc = document.createElement('canvas'); glc.className = 'hw-gl'; stage.appendChild(glc);   // whole grid: the parts break out of the centre cell
