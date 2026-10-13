@@ -3598,6 +3598,47 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #awards>.stage>.pn.mid.quote{grid-column:1 / -1!important;grid-row:3!important;width:auto!important;height:auto!important;min-height:0!important;flex:none!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
 }
 @media (max-width:700.4px){ #awards>.stage>.pn.mid.glassy:nth-of-type(-n+2),#awards>.stage>.pn.mid.glassy.r1{padding-top:64px!important} }
+/* 1011-zz69 · phone footer: rows size to their content (nothing clipped at the bottom) */
+@media (max-width:700.4px){
+  #footer>.stage{height:auto!important;min-height:100svh!important;grid-template-rows:auto!important;grid-auto-rows:auto!important;overflow:hidden}
+  #footer>.stage>.pn{height:auto!important;min-height:0!important;overflow:visible!important}
+  #footer .ft2-last{padding-bottom:28px!important}
+}
+/* 1011-zz70 · phone spacing system: text cells 24 top / 28 bottom / 20 sides; title→body 14; body→button 24 */
+@media (max-width:700.4px){
+  #hero>.stage>.pn,#colors>.stage>.pn:not(.pic),#breather>.stage>.pn:not(.pic),#privacy>.stage>.pn:not(.pic),#kol>.stage>.pn.kv-title,#hardware>.stage>.pn:not(.pic):not(.hasimg),#faq>.stage>.pn.fq5-head{padding:24px 20px 28px!important}
+  #faq>.stage>.pn.fq5-cats,#faq>.stage>.pn.fq5-list{padding-left:20px!important;padding-right:20px!important}
+  #footer>.stage>.pn{padding:20px 20px 20px!important}
+  #footer>.stage>.pn.ft2-mark{padding-top:76px!important}
+  .gridall section .pn h2,.gridall footer .pn h2,#how .how-head h2{margin:0 0 14px!important}
+  .gridall section .pn h2+p,.gridall footer .pn h2+p,#how .how-head h2+p{margin-top:0!important}
+  .gridall section .pn p+.btns,.gridall section .pn p+.end,.gridall section .pn p+div>.btns,#privacy .pn.pv-card .pv-foot,#needs .pz-join .btns{margin-top:24px!important}
+  #privacy .pn.pv-card .pv-foot{gap:20px!important}
+  #how .how-head{padding:24px 20px 16px!important}
+}
+/* 1011-zz71 · phone: title cells use explicit spacing only (no flex gap stacking on top of margins) */
+@media (max-width:700.4px){
+  #hero>.stage>.pn,#colors .fnx-copy,#breather>.stage>.pn:not(.pic),#privacy .pv-card,#kol .kv-title,#hardware>.stage>.pn:not(.pic):not(.hasimg),#faq .fq5-head,#needs .pz-title{row-gap:0!important;gap:0!important;justify-content:flex-start!important}
+  #hero>.stage>.pn h1{margin:0!important}
+  #hero>.stage>.pn .btns{margin-top:24px!important}
+  #needs .pz-title .pz-join{margin-top:0!important}
+  #needs .pz-join p{margin:0!important}
+  #breather .feats{margin-top:24px!important}
+  #kol .kv-title .kv-nav{margin:24px 0 0!important}
+  #kol .kv-title .kv-nav.off{display:none!important}
+  #kol .kv-title p+.kv-nav+.btns,#kol .kv-title .btns{margin-top:24px!important}
+  #hardware>.stage>.pn:not(.pic):not(.hasimg) .end{margin-top:24px!important}
+  #privacy .pn.pv-card .pv-foot{margin-top:24px!important}
+}
+@media (max-width:700.4px){ #privacy>.stage>.pn.pv-card>.pv-foot{margin-top:24px!important} }
+@media (max-width:700.4px){ #footer{position:relative!important;bottom:auto!important} }   /* taller than one screen on phone: scroll it normally so its last line is reachable */
+/* 1011-zz72 · phone/tablet swipe rows: cards snap to the 20px content edge (inside the grid edge line), never to the screen edge */
+@media (max-width:700.4px){
+  #hardware .m-hrow{scroll-padding-inline:20px;padding-left:20px!important;padding-right:20px!important}
+  #hardware .m-hrow::after{content:"";flex:0 0 8px}
+  #kol .kv-scroll,#how .m-pin>.stage{scroll-padding-inline:20px!important}
+}
+@media (max-width:700.4px){ #how .m-pin>.stage{padding-left:20px!important;padding-right:20px!important} }
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="vl-intro" aria-hidden="true"><div class="vl-ring"><img src="img3/ring-top.webp" alt=""><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg></div><span class="vl-pct">00</span></div><script>(function(){var seen=false;try{seen=sessionStorage.getItem("vocci-intro")==="1"}catch(e){}var L=document.querySelector(".vl-intro");if(seen){L&&L.remove();return}document.documentElement.classList.add("vl-on");document.body.appendChild(L)})()</script><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-v2.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
