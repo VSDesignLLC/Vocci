@@ -450,8 +450,9 @@
     return {x:r.left+ox+RING[0]*dw, y:r.top+oy+RING[1]*dh, d:RING[2]*dw};
   }
   var ease=function(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}, out=function(t){return 1-Math.pow(1-t,4)};
-  function done(){ root.classList.remove('vl-on'); if(L) L.remove(); }
-  if(!L||matchMedia('(prefers-reduced-motion: reduce)').matches){ done(); }
+  function done(){ if(root.classList.contains('vl-on')){ try{ localStorage.setItem('vocci-intro','1'); }catch(e){} }   /* the intro plays once per browser */
+    root.classList.remove('vl-on'); if(L&&L.parentNode) L.remove(); }
+  if(!L||!L.parentNode||!root.classList.contains('vl-on')||matchMedia('(prefers-reduced-motion: reduce)').matches){ done(); }
   else{
     var p=0, shown=0, t0=performance.now(), ready=false, S=Math.min(150,innerWidth*.34);
     L.style.setProperty('--s',S+'px');
