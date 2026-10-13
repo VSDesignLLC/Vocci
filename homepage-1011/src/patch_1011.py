@@ -113,7 +113,7 @@ _FIN = [('lumen', 'Lumen', 'Mirror silver', '#e9e8e4'), ('midnight', 'Midnight',
         ('lux', 'Lux', 'Black & silver', 'linear-gradient(135deg,#d6d7d9,#a9abae)')]
 _VIEWS = [('wear', 'On hand', 'img3/wear-%s.jpg'), ('ring', 'Ring', 'img3/finish-%s.png'), ('case', 'Charging case', 'img3/box-%s.png')]
 _LUXV = {'wear': 'img3/wear-lux-v3.jpg', 'ring': 'img3/finish-lux-ms.png', 'case': 'img3/box-lux-ms.png'}
-_OVR = {('midnight', 'case'): 'img3/box-midnight-v2.png', ('lumen', 'wear'): 'img3/wear-lumen-v3.jpg', ('midnight', 'wear'): 'img3/wear-midnight-v3.jpg', ('dawn', 'wear'): 'img3/wear-dawn-v3.jpg', ('lumen', 'ring'): 'img3/finish-lumen-v2.png', ('lumen', 'case'): 'img3/box-lumen-v2.png'}   # Lumen renders corrected 2026-10-12   # Lux re-shot in matte silver (2026-10-12); new names beat browser caches
+_OVR = {('midnight', 'case'): 'img3/box-midnight-v2.png', ('lumen', 'wear'): 'img3/wear-lumen-v3.jpg', ('midnight', 'wear'): 'img3/wear-midnight-v4.jpg', ('dawn', 'wear'): 'img3/wear-dawn-v3.jpg', ('lumen', 'ring'): 'img3/finish-lumen-v2.png', ('lumen', 'case'): 'img3/box-lumen-v2.png'}   # Lumen renders corrected 2026-10-12   # Lux re-shot in matte silver (2026-10-12); new names beat browser caches
 _t = _sec('finishes').group()
 _imgs = ''.join('<img class="fnx-img fnx-%s%s" data-f="%s" data-v="%s" loading="lazy" decoding="async" src="%s" alt="Vocci ring in %s, %s">'
                 % (v, ' on' if (f == 'lumen' and v == 'wear') else '', f, v, _LUXV[v] if f == 'lux' else _OVR.get((f, v), src % f), name, lab.lower()) for f, name, sub, sw in _FIN for v, lab, src in _VIEWS)
@@ -211,7 +211,7 @@ _BAND = ('<svg class="rec-band" viewBox="0 0 220 66" aria-hidden="true"><g class
 _rows = [('s0', _PILL2, 'Double-click to record.'), ('s1', _PILL1, 'Click once during recording to highlight a moment.'), ('s2', _PILL2, 'Double-click to stop recording.')]
 _put('why', '<section id="why" data-bgop="0"><div class="stage rec3" data-s="0">' + _lines(_t) +
      '<div class="pn pic rec-stage" style="--gc:1/span 4;--gr:1/span 2;--tc:1/span 2;--tr:1/span 1"><div class="rec-fig">'
-     '<img src="img3/rec-hand.png" alt="A hand wearing the Vocci ring, thumb on the button" decoding="async">'
+     '<img src="img3/rec-hand.webp" alt="A hand wearing the Vocci ring, thumb on the button" decoding="async">'
      '<span class="rec-waves" aria-hidden="true"><canvas></canvas></span></div></div>'
      '<div class="pn rec-pn" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:2/span 1"><div class="rec-card">' + _BAND +
      '<h3><i class="rec-dot" aria-hidden="true"></i>Recording with elegance</h3><ul class="rec-steps">' +
@@ -430,7 +430,7 @@ _put('faq', '<section id="faq" data-bgop=".4"><div class="stage flat fq5s">' + _
      '<div class="pn fq5-head" style="--gc:1/span 1;--gr:1/span 1;--tc:1/span 2;--tr:1/span 1">'
      '<h2>Questions before you put it on?</h2><p>A few things people ask about recording, care and privacy.</p>'
      '<div class="end fq5-help"><p>Still curious?</p><a class="tlink" href="https://support.vocci.ai/">Support Center</a></div></div>'
-     '<div class="pn pic fq5-pic" style="--gc:2/span 3;--gr:1/span 1;--tc:1/span 2;--tr:2/span 1"><img loading="lazy" decoding="async" src="img3/ring-ridged.jpg" alt="Vocci ring resting on ridged metal" style="object-position:50% 54%"></div>'
+     '<div class="pn pic fq5-pic" style="--gc:2/span 3;--gr:1/span 1;--tc:1/span 2;--tr:2/span 1"><img loading="lazy" decoding="async" src="img3/ring-ridged-2k.jpg" alt="Vocci ring resting on ridged metal" style="object-position:50% 54%"></div>'
      '<div class="pn fq5-cats" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:2/span 1" role="tablist" aria-label="FAQ categories">' + _fcats + '</div>'
      '<div class="pn fq5-list" style="--gc:2/span 3;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1"><ol>' + _items + '</ol></div>'
      '<div class="rowline" style="grid-row:2"><i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i></div></div></section>')
@@ -618,3 +618,8 @@ _t = _t.replace(_m.group(0), '<div class="pn pv-card" style="--gc:1/span 1;--gr:
 _t = _t.replace('<div class="pn pic sharp" style="--gc:2/span 3;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1">', '<div class="pn pic sharp" style="--gc:1/span 4;--gr:1/span 2;--tc:1/span 2;--tr:1/span 1">', 1)
 assert 'pv-copy' not in _t and '--gc:1/span 4' in _t
 _put('privacy', _t)
+
+# 1011-zz39 · creator video tiles get an accessible name
+_t = _sec('kol').group()
+_t = re.sub(r'<a class="pn pic kv-pic"', '<a aria-label="Watch the review on YouTube" class="pn pic kv-pic"', _t)
+_put('kol', _t)

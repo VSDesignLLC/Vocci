@@ -2084,3 +2084,5 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   .gridall>.nav.nav3.show-buy:not(:hover):not(:focus-within) .n3-r{margin-left:auto}
   .gridall>.nav.nav3.show-buy:not(:hover):not(:focus-within) .n3-drop{display:none!important}
 }
+/* 1011-zz39 · tablet: privacy card and screen-2 header share the 40px side margin of every other screen */
+@media(min-width:700.5px) and (max-width:1100px){ #privacy .stage>.pn.pv-card{padding-left:40px!important;padding-right:40px!important} #how .how-head{padding-left:40px!important;padding-right:40px!important} }
