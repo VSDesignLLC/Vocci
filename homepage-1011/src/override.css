@@ -2482,3 +2482,6 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #hardware .m-hrow>.pn{padding:0 24px 28px!important}
   #hardware .m-hrow>.pn>img.half{margin:0 -24px 18px!important;width:calc(100% + 48px)!important}
 }
+/* 1011-zz85 · screen 3 hand: anchored to the bottom edge at every window shape (any letterboxing goes above the hand, never below the wrist) */
+#why .rec-fig{bottom:0!important}
+#why .rec-fig img{object-position:50% 100%!important}
