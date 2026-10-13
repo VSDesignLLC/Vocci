@@ -4113,13 +4113,16 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
     var d=path.getAttribute('d')||''; if(path.__mine===d) return;
     var n=d.match(/-?\d+(?:\.\d+)?/g); if(!n||n.length<6) return;
     var bx=+n[0], by=+n[1], ax=+n[4], ay=+n[5], side=ax>bx?1:-1, dy=Math.abs(ay-by);
-    var ex=bx+side*dy, lim=ax-side*24; if(side>0?ex>lim:ex<lim) ex=lim;
-    var nd='M'+bx.toFixed(1)+' '+by.toFixed(1)+'L'+ex.toFixed(1)+' '+ay.toFixed(1)+'L'+ax.toFixed(1)+' '+ay.toFixed(1);
+    var lift=path.__lift||0, hy=ay-lift;                      /* 1011-zz55 · Charging runs its horizontal higher, clear of Sizing */
+    var ex=bx+side*Math.abs(hy-by), lim=ax-side*(lift?36:24); if(side>0?ex>lim:ex<lim) ex=lim;
+    var nd='M'+bx.toFixed(1)+' '+by.toFixed(1)+'L'+ex.toFixed(1)+' '+hy.toFixed(1)+
+      (lift?'L'+(ax-side*14).toFixed(1)+' '+hy.toFixed(1)+'L'+(ax-side*14).toFixed(1)+' '+ay.toFixed(1):'')+'L'+ax.toFixed(1)+' '+ay.toFixed(1);
     path.__mine=nd; path.setAttribute('d',nd);
   }
   function hook(){
     var paths=sec.querySelectorAll('svg.hw-lines .lead path'); if(!paths.length) return false;
     var mo=new MutationObserver(function(ms){ ms.forEach(function(m){ route(m.target); }); });
+    if(paths[3]) paths[3].__lift=64;   /* leaders follow the cards' order: title, recording feedback, sizing, charging */
     paths.forEach(function(p){ route(p); mo.observe(p,{attributes:true,attributeFilter:['d']}); });
     return true;
   }
