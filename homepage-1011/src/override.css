@@ -2048,3 +2048,12 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #privacy .stage>.pn.pv-cert{order:3;height:auto!important;min-height:0!important;padding:28px 20px!important}
   #privacy .pn.pv-cert img{width:96px}
 }
+/* 1011-zz33 · privacy: one bottom-left card holds the badge and the Trust Center button */
+#privacy .pn.pv-card{display:flex;flex-direction:column;align-items:flex-start}
+#privacy .pn.pv-card img{width:clamp(96px,7.5vw,128px);height:auto}
+#privacy .pn.pv-card .end{margin-top:auto}
+@media(max-width:700px){
+  #privacy .stage>.pn.pv-card{order:3;height:auto!important;min-height:0!important;flex-direction:row!important;align-items:center!important;justify-content:space-between;gap:20px;padding:24px 20px 28px!important}
+  #privacy .stage>.pn.pv-card .end{margin-top:0!important}
+  #privacy .pn.pv-card img{width:88px}
+}
