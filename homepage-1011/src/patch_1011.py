@@ -597,3 +597,14 @@ _t = _t.replace(_old.group(0), '<div class="pn pv-copy" style="--gc:1/span 1;--g
 _t = _t.replace('<div class="pn pic sharp" style="--gc:2/span 2;--gr:1/span 2;--tc:2/span 1;--tr:1/span 1">', '<div class="pn pic sharp" style="--gc:2/span 2;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1">', 1)
 assert 'pv-cert' in _t and 'class="pn pv"' not in _t
 _put('privacy', _t)
+
+# 1011-zz33 · privacy: title + body on top, one card bottom-left (badge + Trust Center), image across the rest
+_t = _sec('privacy').group()
+_m = re.search(r'<div class="pn pv-copy" style="[^"]*">(<h2>.*?</p>)<div class="end"><a class="btn" href="https://trust\.vocci\.ai/">Trust Center</a></div></div><div class="pn pv-cert" style="[^"]*">(<img[^>]*>)</div>', _t, re.S)
+assert _m
+_t = _t.replace(_m.group(0), '<div class="pn pv-copy" style="--gc:1/span 1;--gr:1/span 1;--tc:1/span 2;--tr:1/span 1">' + _m.group(1) + '</div>'
+                '<div class="pn pv-card" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1">' + _m.group(2)
+                + '<div class="end"><a class="btn" href="https://trust.vocci.ai/">Trust Center</a></div></div>', 1)
+_t = _t.replace('<div class="pn pic sharp" style="--gc:2/span 2;--gr:1/span 2;', '<div class="pn pic sharp" style="--gc:2/span 3;--gr:1/span 2;', 1)
+assert 'pv-card' in _t and '--gc:2/span 3' in _t
+_put('privacy', _t)
