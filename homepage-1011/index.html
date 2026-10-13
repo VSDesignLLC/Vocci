@@ -3808,6 +3808,18 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #why .ask-q{width:fit-content;max-width:100%;padding:10px 14px!important;min-height:40px;font-size:13px!important}
 }
 @media (min-width:700.5px) and (max-width:1100px){ #why .ov-ask{left:40px!important;top:96px!important} }
+/* 1011-zz80 · landscape tablets (short screens): reliability cards two-up, hero picture a little shorter */
+@media (min-width:700.5px) and (max-width:1100px) and (orientation:landscape){
+  #breather .feats{display:grid!important;grid-template-columns:1fr 1fr;gap:10px!important}
+  #breather .feats>*{margin:0!important}
+  #hero>.stage>img.bgimg{min-height:24svh!important}
+}
+/* 1011-zz80 · phone/tablet footer links: bigger tap targets, same look */
+@media (max-width:1100px){ #footer .fg2 a,#footer .ft2-c a:not(.ft2-legal a){display:inline-block;padding:6px 0;margin:-6px 0} }
+/* 1011-zz81 · phone/tablet nav aligns to the grid edge lines (8px phone, 16px tablet), full bar and compact pill alike */
+@media (max-width:700.4px){ .gridall>.nav.nav3{left:8px!important;right:8px!important;width:auto!important;top:8px!important} .gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])){left:auto!important;right:8px!important} }
+@media (min-width:700.5px) and (max-width:1100px){ .gridall>.nav.nav3{left:16px!important;right:16px!important;width:auto!important;top:16px!important} .gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])){left:auto!important;right:16px!important} }
+@media (max-width:1100px){ .gridall>.nav.nav3 .n3-bar{width:100%!important} .gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])) .n3-bar{width:auto!important} }
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="vl-intro" aria-hidden="true"><div class="vl-ring"><img src="img3/ring-top.webp" alt=""><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg></div><span class="vl-pct">00</span></div><script>(function(){var seen=false;try{seen=sessionStorage.getItem("vocci-intro")==="1"}catch(e){}var L=document.querySelector(".vl-intro");if(seen){L&&L.remove();return}document.documentElement.classList.add("vl-on");document.body.appendChild(L)})()</script><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-v2.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
@@ -4472,7 +4484,7 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   function build(){
     document.querySelectorAll('.m-dot').forEach(function(d){ d.remove(); });
     if(innerWidth>1100) return;
-    var inset=innerWidth<=1100?8:16;
+    var probe=document.querySelector('.gridall section[id]'), inset=probe?parseFloat(getComputedStyle(probe,'::after').left)||8:8;   /* match the edge lines exactly */
     document.querySelectorAll('.gridall section[id], .gridall footer#footer').forEach(function(sec){
       var sb=sec.getBoundingClientRect(); if(!sb.height) return;
       var ys={0:1}, st=sec.querySelector('.stage'), mids=[];

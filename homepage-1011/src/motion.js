@@ -636,7 +636,7 @@
   function build(){
     document.querySelectorAll('.m-dot').forEach(function(d){ d.remove(); });
     if(innerWidth>1100) return;
-    var inset=innerWidth<=700?8:16;
+    var probe=document.querySelector('.gridall section[id]'), inset=probe?parseFloat(getComputedStyle(probe,'::after').left)||8:8;   /* match the edge lines exactly */
     document.querySelectorAll('.gridall section[id], .gridall footer#footer').forEach(function(sec){
       var sb=sec.getBoundingClientRect(); if(!sb.height) return;
       var ys={0:1}, st=sec.querySelector('.stage'), mids=[];
