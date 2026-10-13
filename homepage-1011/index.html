@@ -3769,6 +3769,17 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #awards>.stage>.pn.mid.glassy:nth-of-type(-n+2),#awards>.stage>.pn.mid.glassy.r1{padding-top:80px!important}
   #awards>.stage>.pn.mid.glassy .wreath img{max-height:8svh}
 }
+/* 1011-zz74 · phone/tablet: once past the hero, the nav pulls in to a small pill on the right — Buy now + menu only — so it stops covering content;
+   opening the menu brings the full bar back */
+@media (max-width:1100px){
+  .gridall>.nav.nav3{transition:width .45s cubic-bezier(.22,.61,.21,1),left .45s cubic-bezier(.22,.61,.21,1),opacity .2s!important}
+  .gridall>.nav.nav3 .n3-bar{transition:width .45s cubic-bezier(.22,.61,.21,1),padding .45s,background .4s!important}
+  .gridall>.nav.nav3 .wordmark{transition:opacity .25s,max-width .45s cubic-bezier(.22,.61,.21,1);max-width:120px;overflow:hidden}
+  .gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])){left:auto!important;right:12px!important;width:auto!important}
+  .gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])) .n3-bar{width:auto!important;padding-left:6px!important;gap:6px}
+  .gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])) .wordmark{opacity:0;max-width:0;margin:0!important;padding:0!important}
+  .gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])) .n3-tabs{display:none!important}
+}
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="vl-intro" aria-hidden="true"><div class="vl-ring"><img src="img3/ring-top.webp" alt=""><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg></div><span class="vl-pct">00</span></div><script>(function(){var seen=false;try{seen=sessionStorage.getItem("vocci-intro")==="1"}catch(e){}var L=document.querySelector(".vl-intro");if(seen){L&&L.remove();return}document.documentElement.classList.add("vl-on");document.body.appendChild(L)})()</script><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-v2.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
