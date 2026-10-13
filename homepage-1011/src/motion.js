@@ -676,3 +676,6 @@
     if(s!==step){ step=s; st.scrollTo({left:leftOf(s),behavior:'smooth'}); } }
   addEventListener('scroll',tick,{passive:true}); tick();
 })();
+
+/* 1011-zz68 · phone awards: tag the first-row cells so they clear the fixed nav */
+(function(){ var c=document.querySelectorAll('#awards .stage>.pn.mid.glassy'); if(c[0]) c[0].classList.add('r1'); if(c[1]) c[1].classList.add('r1'); })();
