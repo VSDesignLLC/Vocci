@@ -2438,3 +2438,15 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #why .ask-q{width:fit-content;max-width:100%;padding:10px 14px!important;min-height:40px;font-size:13px!important}
 }
 @media (min-width:700.5px) and (max-width:1100px){ #why .ov-ask{left:40px!important;top:96px!important} }
+/* 1011-zz80 · landscape tablets (short screens): reliability cards two-up, hero picture a little shorter */
+@media (min-width:700.5px) and (max-width:1100px) and (orientation:landscape){
+  #breather .feats{display:grid!important;grid-template-columns:1fr 1fr;gap:10px!important}
+  #breather .feats>*{margin:0!important}
+  #hero>.stage>img.bgimg{min-height:24svh!important}
+}
+/* 1011-zz80 · phone/tablet footer links: bigger tap targets, same look */
+@media (max-width:1100px){ #footer .fg2 a,#footer .ft2-c a:not(.ft2-legal a){display:inline-block;padding:6px 0;margin:-6px 0} }
+/* 1011-zz81 · phone/tablet nav aligns to the grid edge lines (8px phone, 16px tablet), full bar and compact pill alike */
+@media (max-width:700.4px){ .gridall>.nav.nav3{left:8px!important;right:8px!important;width:auto!important;top:8px!important} .gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])){left:auto!important;right:8px!important} }
+@media (min-width:700.5px) and (max-width:1100px){ .gridall>.nav.nav3{left:16px!important;right:16px!important;width:auto!important;top:16px!important} .gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])){left:auto!important;right:16px!important} }
+@media (max-width:1100px){ .gridall>.nav.nav3 .n3-bar{width:100%!important} .gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])) .n3-bar{width:auto!important} }
