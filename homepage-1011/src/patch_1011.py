@@ -585,3 +585,15 @@ for _sid, _pats in [('why', [r'<a class="tlink" href="#">Join a webinar</a>']),
 _t = _sec('hero').group()
 _t = _t.replace('<div class="stage ">', '<div class="vl-intro" aria-hidden="true"><div class="vl-ring"><img src="img3/ring-top.webp" alt=""><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg></div><span class="vl-pct">00</span></div><script>document.documentElement.classList.add("vl-on");document.body.appendChild(document.querySelector(".vl-intro"))</script><div class="stage ">', 1)
 _put('hero', _t)
+
+# 1011-zz32 · privacy, simplified to the 3.0 sheet: title + body + Trust Center button | static image | the certification badge
+_t = _sec('privacy').group()
+_t = re.sub(r'<div class="pn pv".*?</div>(?=<div class="pn pv"|<div class="rowline")', '', _t, flags=re.S)
+_old = re.search(r'<div class="pn " style="--gc:1/span 1;--gr:1/span 1;--tc:1/span 1;--tr:1/span 1">(<h2>Your data, handled with care\.</h2><p>.*?</p>)</div>', _t, re.S)
+assert _old
+_t = _t.replace(_old.group(0), '<div class="pn pv-copy" style="--gc:1/span 1;--gr:1/span 2;--tc:1/span 2;--tr:1/span 1">' + _old.group(1)
+                + '<div class="end"><a class="btn" href="https://trust.vocci.ai/">Trust Center</a></div></div>'
+                + '<div class="pn pv-cert" style="--gc:4/span 1;--gr:1/span 2;--tc:1/span 2;--tr:3/span 1"><img src="img3/gdpr-local.svg" alt="GDPR Local verified badge, ID PB7U836" loading="lazy" decoding="async"></div>', 1)
+_t = _t.replace('<div class="pn pic sharp" style="--gc:2/span 2;--gr:1/span 2;--tc:2/span 1;--tr:1/span 1">', '<div class="pn pic sharp" style="--gc:2/span 2;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1">', 1)
+assert 'pv-cert' in _t and 'class="pn pv"' not in _t
+_put('privacy', _t)
