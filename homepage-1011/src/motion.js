@@ -629,3 +629,27 @@
     [].forEach.call(st.querySelectorAll(':scope>.pn'),function(c){ var r=c.getBoundingClientRect(); c.classList.toggle('col-l', innerWidth<=1100 && r.width>0 && r.width<b.width*.75 && r.left-b.left<4); }); }); }
   addEventListener('resize',run); addEventListener('load',run); setTimeout(run,1200);
 })();
+
+/* 1011-zz63 · phone/tablet: place grid dots at every crossing of the inset edge lines (and the two-up centre line) with the section's
+   horizontal lines — its top edge and each cell's top edge. Rebuilt on resize. */
+(function(){
+  function build(){
+    document.querySelectorAll('.m-dot').forEach(function(d){ d.remove(); });
+    if(innerWidth>1100) return;
+    var inset=innerWidth<=700?8:16;
+    document.querySelectorAll('.gridall section[id], .gridall footer#footer').forEach(function(sec){
+      var sb=sec.getBoundingClientRect(); if(!sb.height) return;
+      var ys={0:1}, st=sec.querySelector('.stage'), mids=[];
+      /* layout offsets, not on-screen rects: cells may still be mid slide-in */
+      function off(el){ var x=0,y=0; for(var e=el;e&&e!==sec;e=e.offsetParent){ x+=e.offsetLeft; y+=e.offsetTop; } return {x:x,y:y}; }
+      if(st) [].forEach.call(st.querySelectorAll(':scope>.pn'),function(c){ if(!c.offsetHeight||getComputedStyle(c).display==='none') return;
+        var o=off(c), y=Math.round(o.y); if(y>2&&y<sb.height-2) ys[y]=1;
+        if(c.classList.contains('col-l')){ var x=Math.round(o.x+c.offsetWidth); mids.push([x,y],[x,Math.round(o.y+c.offsetHeight)]); } });
+      var add=function(x,y){ var d=document.createElement('i'); d.className='m-dot'; d.style.left=x+'px'; d.style.top=y+'px'; sec.appendChild(d); };
+      Object.keys(ys).forEach(function(y){ add(inset,+y); add(sb.width-inset,+y); });
+      mids.forEach(function(p){ if(p[1]>2&&p[1]<sb.height-2) add(p[0],p[1]); });
+    });
+  }
+  var t=null; function later(){ clearTimeout(t); t=setTimeout(build,250); }
+  addEventListener('resize',later); addEventListener('load',function(){ setTimeout(build,1500); }); setTimeout(build,2500);
+})();
