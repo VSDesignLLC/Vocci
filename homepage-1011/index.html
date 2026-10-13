@@ -4069,9 +4069,17 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
     P=[]; for(var i=0;i<N;i++){ var t=pick(); P.push({a:t.a, r:t.r, arc:t.arc, sx:Math.random()*W, sy:Math.random()*H, d:Math.random()*1000,
       w:(t.arc?0:(Math.random()*2-1)*.05), s:Math.random()<.25?2:1.4, o:Math.random()<.035, ph:Math.random()*6.28, ox:0, oy:0, vx:0, vy:0}); }
   }
+  /* 1011-zz53 · a coarse mask of where the footer's text sits; dots inside it are drawn faint so copy stays clean */
+  var MK=null, MC=0, CELL=8;
+  function mask(){ MC=Math.ceil(W/CELL); var rows=Math.ceil(H/CELL); MK=new Uint8Array(MC*rows); var b=cv.getBoundingClientRect(), pad=14;
+    st.querySelectorAll('h1,h2,h3,p,a,span.label,input,label,button,.f-copy,.ft2-legal,svg.wm').forEach(function(el){ if(el.closest('.ring-o')) return;
+      var rs=el.getClientRects(); for(var q=0;q<rs.length;q++){ var r=rs[q]; if(!r.width) continue;
+        var x0=Math.max(0,(r.left-b.left-pad)/CELL|0), x1=Math.min(MC-1,(r.right-b.left+pad)/CELL|0), y0=Math.max(0,(r.top-b.top-pad)/CELL|0), y1=Math.min(rows-1,(r.bottom-b.top+pad)/CELL|0);
+        for(var yy=y0;yy<=y1;yy++) for(var xx=x0;xx<=x1;xx++) MK[yy*MC+xx]=1; } }); }
   function ease(t){ return 1-Math.pow(1-t,3); }
   function frame(now){
     raf=0; if(!on){ last=0; return; }
+    if(!MK) mask();
     if(!born) born=now; var t=now-born, spin=reduce?0:t*.000045;    /* the whole ring turns ~1 rev / 2.3 min */
     cx.clearRect(0,0,W,H);
     for(var i=0;i<N;i++){ var p=P[i], k=reduce?1:Math.min(1,Math.max(0,(t-p.d)/1900)), e=ease(k);
@@ -4081,18 +4089,41 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
       var dx=x-mx, dy=y-my, dd=dx*dx+dy*dy;
       if(dd<12000){ var f=(1-dd/12000)*16/Math.sqrt(dd+1); p.vx+=dx*f*.06; p.vy+=dy*f*.06; }
       p.vx*=.88; p.vy*=.88; p.ox=(p.ox+p.vx)*.94; p.oy=(p.oy+p.vy)*.94;
-      cx.fillStyle=p.o?'rgba(244,117,70,.9)':'rgba(20,20,22,'+(.3+.5*e*(.65+.35*Math.sin(t*.002+p.ph)))+')';
-      cx.fillRect(x+p.ox, y+p.oy, p.s, p.s);
+      var px=x+p.ox, py=y+p.oy, m=(px>=0&&py>=0&&px<W&&py<H&&MK[((py/CELL)|0)*MC+((px/CELL)|0)])?.18:1;
+      cx.fillStyle=p.o?'rgba(244,117,70,'+(.9*m)+')':'rgba(20,20,22,'+((.3+.5*e*(.65+.35*Math.sin(t*.002+p.ph)))*m)+')';
+      cx.fillRect(px, py, p.s, p.s);
     }
     raf=requestAnimationFrame(frame);
   }
   function near(){ var se=document.scrollingElement||document.documentElement; return se.scrollTop+innerHeight>=se.scrollHeight-innerHeight*1.4; }
   function tick(){ var v=near(); if(v&&!on){ on=true; if(!P.length) build(); if(!raf) raf=requestAnimationFrame(frame); } else if(!v&&on){ on=false; } }
   addEventListener('scroll',tick,{passive:true});
-  addEventListener('resize',function(){ if(P.length){ var keep=born; build(); born=keep; } tick(); });
+  addEventListener('resize',function(){ if(P.length){ var keep=born; build(); born=keep; MK=null; } tick(); });
   st.addEventListener('pointermove',function(e){ var r=cv.getBoundingClientRect(); mx=e.clientX-r.left; my=e.clientY-r.top; });
   st.addEventListener('pointerleave',function(){ mx=my=-1e4; });
   tick();
+})();
+
+/* 1011-zz53 · hardware exploded view: tidier leader lines. vendor/how3d.js redraws each leader every frame as a long free-angle slant;
+   we re-route it (same endpoints) as a short 45° slant from the part, then a straight horizontal run into the card — blueprint style,
+   every leader at the same angle, so they no longer cross. Applied as soon as the 3D layer writes the path. */
+(function(){
+  var sec=document.getElementById('hardware'); if(!sec) return;
+  function route(path){
+    var d=path.getAttribute('d')||''; if(path.__mine===d) return;
+    var n=d.match(/-?\d+(?:\.\d+)?/g); if(!n||n.length<6) return;
+    var bx=+n[0], by=+n[1], ax=+n[4], ay=+n[5], side=ax>bx?1:-1, dy=Math.abs(ay-by);
+    var ex=bx+side*dy, lim=ax-side*24; if(side>0?ex>lim:ex<lim) ex=lim;
+    var nd='M'+bx.toFixed(1)+' '+by.toFixed(1)+'L'+ex.toFixed(1)+' '+ay.toFixed(1)+'L'+ax.toFixed(1)+' '+ay.toFixed(1);
+    path.__mine=nd; path.setAttribute('d',nd);
+  }
+  function hook(){
+    var paths=sec.querySelectorAll('svg.hw-lines .lead path'); if(!paths.length) return false;
+    var mo=new MutationObserver(function(ms){ ms.forEach(function(m){ route(m.target); }); });
+    paths.forEach(function(p){ route(p); mo.observe(p,{attributes:true,attributeFilter:['d']}); });
+    return true;
+  }
+  (function wait(){ if(!hook()) setTimeout(wait,400); })();
 })();
 
 </script>
