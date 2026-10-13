@@ -623,3 +623,13 @@ _put('privacy', _t)
 _t = _sec('kol').group()
 _t = re.sub(r'<a class="pn pic kv-pic"', '<a aria-label="Watch the review on YouTube" class="pn pic kv-pic"', _t)
 _put('kol', _t)
+
+# 1011-zz43 · needs: one overhead scene per persona, swapped with the open list item
+_t = _sec('needs').group()
+_old = '<img src="img3/team-top.webp" alt="A team meeting around a table, seen from above" decoding="async">'
+assert _old in _t
+_SC = [('founders', 'Founders and executives around a meeting table, seen from above'), ('sales', 'A client meeting closing with a handshake, seen from above'),
+       ('eng', 'Engineers pair-programming with AI tools, seen from above'), ('research', 'A researcher capturing an idea among open books, seen from above'),
+       ('creator', 'A creator filming a Vocci Ring review, seen from above')]
+_t = _t.replace(_old, ''.join('<img class="pz-scene%s" data-k="%d" src="img3/scene-%s.webp" alt="%s" decoding="async"%s>' % (' on' if i == 0 else '', i, n, a, '' if i == 0 else ' loading="lazy"') for i, (n, a) in enumerate(_SC)), 1)
+_put('needs', _t)

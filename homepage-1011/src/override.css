@@ -2093,3 +2093,7 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 @media(min-width:1101px){ #needs .pz-i:first-child .pz-h{padding-top:0!important} #needs .pz-i.on:first-child .pz-h b{top:.65em} }
 /* 1011-zz42 · awards: badges only, no laurel branches */
 #awards .wreath .laurel{display:none!important}
+/* 1011-zz43 · needs: five persona scenes on one white ground, cross-fading with the list */
+#needs .pn.pz-pic{background:#fff!important}
+#needs .pn.pz-pic>img.pz-scene{opacity:0;transition:opacity .6s ease,scale .9s cubic-bezier(.2,.7,.2,1);scale:1.02}
+#needs .pn.pz-pic>img.pz-scene.on{opacity:1;scale:1}
