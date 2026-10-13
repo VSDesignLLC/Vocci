@@ -2069,3 +2069,5 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #privacy .pn.pv-card .pv-foot{margin-top:24px}
   #privacy .pn.pv-card .pv-foot img{width:72px}
 }
+/* 1011-zz35 · privacy card: badge sits above the button, left-aligned */
+#privacy .pn.pv-card .pv-foot{flex-direction:column-reverse!important;align-items:flex-start!important;justify-content:flex-end!important;gap:24px!important}
