@@ -2450,3 +2450,14 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 @media (max-width:700.4px){ .gridall>.nav.nav3{left:8px!important;right:8px!important;width:auto!important;top:8px!important} .gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])){left:auto!important;right:8px!important} }
 @media (min-width:700.5px) and (max-width:1100px){ .gridall>.nav.nav3{left:16px!important;right:16px!important;width:auto!important;top:16px!important} .gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])){left:auto!important;right:16px!important} }
 @media (max-width:1100px){ .gridall>.nav.nav3 .n3-bar{width:100%!important} .gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])) .n3-bar{width:auto!important} }
+/* 1011-zz82 · phone/tablet creator cards: one photo ratio for every card (text area takes the rest), rounded corners clip the photo again */
+@media (max-width:1100px){
+  #kol .kv-slide{border-radius:16px!important;overflow:hidden!important;height:auto!important;display:flex!important;flex-direction:column!important}
+  #kol .kv-slide>.kv-pic{flex:0 0 auto!important;height:auto!important;min-height:0!important;aspect-ratio:16/10!important;border-radius:0!important}
+  #kol .kv-slide>.kv-pic img{width:100%;height:100%;object-fit:cover}
+  #kol .kv-slide>.kv-txt{flex:1 1 auto!important;height:auto!important;border-radius:0!important;overflow:visible!important}
+  #kol .kv-slide>.kv-txt .tlink,#kol .kv-slide>.kv-txt .end{margin-top:auto!important}
+}
+@media (max-width:700.4px){ #kol .kv-slide>.kv-pic{aspect-ratio:4/3!important} }
+@media (max-width:1100px){ #kol .kv-slide>.kv-txt{padding-bottom:28px!important} }
+@media (max-width:1100px){ #kol .kv-slide>.kv-txt .tlink{margin-bottom:0!important} }
