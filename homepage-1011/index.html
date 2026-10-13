@@ -3588,6 +3588,16 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 }
 @media (max-width:700.4px){ #kol .kv-slide>.kv-txt{height:auto!important;min-height:0!important;overflow:visible!important} #kol .kv-slide{overflow:visible!important} }
 @media(min-width:700.5px) and (max-width:1100px){ #kol .kv-slide>.kv-txt{height:auto!important;min-height:0!important;overflow:visible!important;flex:0 0 auto!important} #kol .kv-slide{overflow:visible!important;height:auto!important} }
+/* 1011-zz68 · phone awards: one screen, split half/half — the four awards (2×2) on top, the press card below; badges centred in their cells */
+@media (max-width:700.4px){
+  #awards{height:100svh!important;min-height:0!important}
+  #awards>.stage{height:100svh!important;min-height:0!important;display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-rows:1fr 1fr 2fr!important;flex-wrap:nowrap!important}
+  #awards>.stage>.pn.mid.glassy{grid-column:auto!important;grid-row:auto!important;width:auto!important;height:auto!important;min-height:0!important;flex:none!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:10px!important;padding:12px!important}
+  #awards>.stage>.pn.mid.glassy .wreath{margin:0!important}
+  #awards>.stage>.pn.mid.glassy .wreath img{max-height:9svh;width:auto}
+  #awards>.stage>.pn.mid.quote{grid-column:1 / -1!important;grid-row:3!important;width:auto!important;height:auto!important;min-height:0!important;flex:none!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
+}
+@media (max-width:700.4px){ #awards>.stage>.pn.mid.glassy:nth-of-type(-n+2),#awards>.stage>.pn.mid.glassy.r1{padding-top:64px!important} }
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="vl-intro" aria-hidden="true"><div class="vl-ring"><img src="img3/ring-top.webp" alt=""><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg></div><span class="vl-pct">00</span></div><script>(function(){var seen=false;try{seen=sessionStorage.getItem("vocci-intro")==="1"}catch(e){}var L=document.querySelector(".vl-intro");if(seen){L&&L.remove();return}document.documentElement.classList.add("vl-on");document.body.appendChild(L)})()</script><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-v2.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
@@ -4292,6 +4302,9 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
     if(s!==step){ step=s; st.scrollTo({left:leftOf(s),behavior:'smooth'}); } }
   addEventListener('scroll',tick,{passive:true}); tick();
 })();
+
+/* 1011-zz68 · phone awards: tag the first-row cells so they clear the fixed nav */
+(function(){ var c=document.querySelectorAll('#awards .stage>.pn.mid.glassy'); if(c[0]) c[0].classList.add('r1'); if(c[1]) c[1].classList.add('r1'); })();
 
 </script>
 </body></html>
