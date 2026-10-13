@@ -325,7 +325,9 @@
 /* 1011-k · screen 6 personas: one open at a time; cycles every 5 s while on screen until someone picks */
 (function(){ var sec=document.getElementById('needs'), items=sec?Array.prototype.slice.call(sec.querySelectorAll('.pz-i')):[]; if(!items.length) return;
   var k=0, t=null, held=false, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function open(i){ k=i; items.forEach(function(it,j){ it.classList.toggle('on',j===i); it.querySelector('.pz-h').setAttribute('aria-expanded',j===i); }); }
+  var scenes=Array.prototype.slice.call(sec.querySelectorAll('.pz-scene'));   /* 1011-zz43 · the scene follows the open persona */
+  scenes.forEach(function(im){ im.loading='eager'; });
+  function open(i){ k=i; items.forEach(function(it,j){ it.classList.toggle('on',j===i); it.querySelector('.pz-h').setAttribute('aria-expanded',j===i); }); scenes.forEach(function(im,j){ im.classList.toggle('on',j===i); }); }
   function stop(){ clearInterval(t); t=null; } function play(){ stop(); if(held||reduce) return; t=setInterval(function(){ open((k+1)%items.length); },5000); }
   items.forEach(function(it,i){ var h=it.querySelector('.pz-h'); h.addEventListener('click',function(){ held=true; stop(); open(i); }); h.addEventListener('mouseenter',function(){ stop(); open(i); }); });
   sec.querySelector('.pz-acc').addEventListener('mouseleave',play);
