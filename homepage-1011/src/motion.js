@@ -327,14 +327,14 @@
   var k=0, t=null, held=false, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var scenes=Array.prototype.slice.call(sec.querySelectorAll('.pz-scene'));   /* 1011-zz43 · the scene follows the open persona */
   scenes.forEach(function(im){ im.loading='eager'; });
-  function open(i){ k=i; items.forEach(function(it,j){ it.classList.toggle('on',j===i); it.querySelector('.pz-h').setAttribute('aria-expanded',j===i); }); scenes.forEach(function(im,j){ im.classList.toggle('on',j===i); }); if(scenes[0]) scenes[0].parentNode.classList.toggle('qb-off',i!==0); }   /* owner quotes belong to the default view only */
+  function open(i){ k=i; items.forEach(function(it,j){ it.classList.toggle('on',j===i); it.querySelector('.pz-h').setAttribute('aria-expanded',j===i); }); scenes.forEach(function(im,j){ im.classList.toggle('on',j===i); }); if(scenes[0]){ scenes[0].parentNode.classList.toggle('qb-off',i!==0); scenes[0].parentNode.dataset.k=i; } }   /* owner quotes belong to the default view only */
   function stop(){ clearInterval(t); t=null; } function play(){ stop(); if(held||reduce) return; t=setInterval(function(){ open((k+1)%items.length); },5000); }
   items.forEach(function(it,i){ var h=it.querySelector('.pz-h'); h.addEventListener('click',function(){ held=true; stop(); open(i); }); h.addEventListener('mouseenter',function(){ stop(); open(i); }); });
   sec.querySelector('.pz-acc').addEventListener('mouseleave',play);
   new IntersectionObserver(function(es){ es[0].isIntersecting?play():stop(); },{threshold:.4}).observe(sec); })();
 
 /* 1011-l · screen 6 owner bubbles take turns in focus while on screen */
-(function(){ var sec=document.getElementById('needs'), qb=sec?Array.prototype.slice.call(sec.querySelectorAll('.pz-qb')):[]; if(!qb.length) return; var k=0, t=null;
+(function(){ var sec=document.getElementById('needs'), qb=sec?Array.prototype.slice.call(sec.querySelectorAll('.pz-qb:not(.pz-qb2)')):[]; if(!qb.length) return; var k=0, t=null;
   new IntersectionObserver(function(es){ if(es[0].isIntersecting){ sec.classList.add('qb-in'); if(!t){ qb[0].classList.add('on'); t=setInterval(function(){ qb[k].classList.remove('on'); k=(k+1)%qb.length; qb[k].classList.add('on'); },3400); } } else { clearInterval(t); t=null; } },{threshold:.35}).observe(sec); })();
 
 /* 1011-u · nav panel: the menu button grows the panel out of the bar */

@@ -651,3 +651,26 @@ _b = '<div class="pn lazy hasimg" style="--gc:4/span 1;--gr:2/span 1;--tc:2/span
 assert _a in _t and _b in _t
 _t = _t.replace(_a, '@@A@@', 1).replace(_b, _a, 1).replace('@@A@@', _b, 1)
 _put('hardware', _t)
+
+# 1011-zz76 · needs: quote bubbles are links to the owner's post (Discord / Reddit / YouTube), with a visible "View on …" cue;
+# every persona gets its own bubble, shown with its scene (the default founders view keeps its three)
+_LINK = {'Discord': 'https://discord.gg/2KZKzdpvN3', 'Reddit': '#', 'YouTube': 'https://www.youtube.com/@vocci-ai'}   # Reddit permalinks pending from the client
+_t = _sec('needs').group()
+def _qb(m):
+    style, body, src = m.group(1), m.group(2), m.group(3)
+    href = _LINK.get(src, '#')
+    return ('<a class="pz-qb" style="%s" href="%s"%s aria-label="View this post on %s">%s<em class="qb-go">View on %s <b>↗</b></em></figcaption></a>'
+            % (style, href, '' if href == '#' else ' target="_blank" rel="noopener"', src, body, src))
+_t, _n = re.subn(r'<figure class="pz-qb" style="([^"]*)">(.*?<span><b>(\w+)</b>[^<]*</span>)</figcaption></figure>', _qb, _t, flags=re.S)
+assert _n == 3, _n
+_EXTRA = [(1, 'S', 'I can look my client in the eye instead of typing. The follow-up email is drafted before I reach the car.', 'Discord', 'Account executive', '56%', '8%'),
+          (2, 'E', 'Our stand-ups go straight into Claude. I ask what we decided instead of digging through notes.', 'Reddit', 'Engineer', '54%', '8%'),
+          (3, 'R', 'Interviews, reading notes, hallway questions—everything lands in one place my AI can actually search.', 'Discord', 'Researcher', '56%', '64%'),
+          (4, 'C', 'This tiny AI assistant changed my workflow.', 'YouTube', 'Product manager', '6%', '66%')]
+_more = ''.join('<a class="pz-qb pz-qb2" data-k="%d" style="left:%s;top:%s" href="%s"%s aria-label="View this post on %s"><i>%s</i><figcaption><q>%s</q><span><b>%s</b> %s</span><em class="qb-go">View on %s <b>↗</b></em></figcaption></a>'
+                % (k, x, y, _LINK[src], '' if _LINK[src] == '#' else ' target="_blank" rel="noopener"', src, ini, q, src, who, src) for k, ini, q, src, who, x, y in _EXTRA)
+_t = _t.replace('<div class="pn pz-title"', _more.join(['', '']) + '@@MORE@@<div class="pn pz-title"', 1) if False else _t
+# insert the extra bubbles inside the scene picture, after its last default bubble
+_i = _t.index('</div>', _t.index('class="pn pic pz-pic"'))
+_t = _t[:_i] + _more + _t[_i:]
+_put('needs', _t)
