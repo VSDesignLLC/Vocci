@@ -2002,3 +2002,5 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 #kol .kv-hint .hh-b{width:40px;height:40px;border-radius:50%;background:transparent;display:grid;place-items:center;cursor:pointer;padding:0}
 #kol .kv-hint .hh-b svg{width:16px;height:16px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 #kol .kv-hint .hh-b:disabled{opacity:.35;cursor:default}
+/* 1011-zz29 · every prev/next pager button uses the desktop shape: 40px rounded square, hairline border */
+.hh-b,#how .how-hint .hh-b,#kol .kv-hint .hh-b,#kol .kol-b,#kol .kv-arw{width:40px!important;height:40px!important;border-radius:7px!important;background:transparent!important}
