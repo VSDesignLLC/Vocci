@@ -2143,3 +2143,55 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 /* 1011-zz63 · phone/tablet grid dots where the edge / centre lines meet the horizontal lines (same 5px white dot as desktop) */
 .m-dot{position:absolute;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%;background:#fff;z-index:7;pointer-events:none}
 @media(min-width:1101px){ .m-dot{display:none} }
+/* 1011-zz64 · phone only (≤700px; not remapped to tablet): every screen is one screen tall, the picture flexes to absorb the difference,
+   and the desktop's pinned moments come back — hero pinned under the page, screen 2 pinned while its three steps flip, footer revealed from under FAQ */
+@media (max-width:700.4px){
+  #hero,#needs,#colors,#breather,#privacy,#kol,#awards,#hardware,#faq,#footer{height:100svh!important;min-height:0!important;overflow:hidden}
+  #hero>.stage,#needs>.stage,#colors>.stage,#breather>.stage,#privacy>.stage,#kol>.stage,#awards>.stage,#hardware>.stage,#faq>.stage{height:100svh!important;min-height:0!important;display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important}
+  #hero>.stage>*,#needs>.stage>.pn,#colors>.stage>.pn,#breather>.stage>.pn,#privacy>.stage>.pn,#kol>.stage>*,#awards>.stage>.pn,#hardware>.stage>*,#faq>.stage>.pn{flex:0 0 auto}
+  /* the picture of each screen takes whatever height is left */
+  #hero>.stage>img.bgimg{flex:1 1 0!important;height:auto!important;min-height:0!important}
+  #needs>.stage>.pn.pz-pic,#colors>.stage>.pn.fnx-stage,#privacy>.stage>.pn.pic,#faq>.stage>.pn.fq5-pic,#hardware>.stage>.pn.exploded{flex:1 1 0!important;height:auto!important;min-height:0!important;aspect-ratio:auto!important}
+  #breather>.stage>.pn{flex:1 1 0!important;height:auto!important;min-height:0!important}
+  #awards>.stage>.pn.mid.glassy{flex:1 1 0!important;height:auto!important;min-height:0!important}
+  #awards>.stage{flex-direction:row!important;flex-wrap:wrap!important;align-content:stretch}
+  #awards>.stage>.pn.mid.glassy{flex:0 0 50%!important;width:50%!important;height:calc((100svh - 230px)/2)!important}
+  #awards>.stage>.pn.mid.quote{flex:0 0 100%!important;width:100%!important;height:230px!important}
+  #kol>.stage>.kv-scroll{flex:1 1 0!important;min-height:0!important;align-items:stretch}
+  #kol .kv-slide{height:auto!important;max-height:100%}
+  #kol .kv-slide>.kv-pic{flex:1 1 0!important;min-height:0!important;height:auto!important}
+  #kol .kv-hint{padding:8px 0 16px!important}
+  /* hardware: the three spec cards become one swipeable row */
+  #hardware .m-hrow{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 20px 20px;scrollbar-width:none;flex:0 0 auto}
+  #hardware .m-hrow::-webkit-scrollbar{display:none}
+  #hardware .m-hrow>.pn{flex:0 0 78%!important;width:78%!important;height:auto!important;min-height:0!important;scroll-snap-align:start;border-radius:12px;background:#f3f3f1!important;padding:14px 16px 18px!important}
+  #hardware .m-hrow>.pn img.half{height:96px!important;object-fit:cover;border-radius:8px}
+  /* footer: compact enough for one screen, then pinned underneath so FAQ slides away from it */
+  #footer{position:sticky!important;bottom:0;z-index:0}
+  #faq{position:relative;z-index:2}
+  #footer .ft2 .pn{padding-top:14px!important;padding-bottom:14px!important}
+  #footer .ft2-mark{padding-top:70px!important}
+  #footer .ft2-say h2{font-size:26px!important;margin-bottom:12px!important}
+  #footer .fg2 a,#footer .ft2-c a{font-size:14px!important;line-height:1.35!important}
+  #footer .ft2-c h4,#footer .ft2-c .label{margin-bottom:6px!important}
+  /* screen 2 pinned: the section is three screens long, its content stays put while the steps flip */
+  #how.m-pin-on{height:300svh!important}
+  #how .m-pin{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;overflow:hidden}
+  #how .m-pin>.stage{flex:1 1 0;min-height:0}
+}
+/* 1011-zz65 · phone: FAQ keeps to one screen — the product picture yields its space to the questions, which scroll inside the screen when answers open; footer a touch tighter */
+@media (max-width:700.4px){
+  #faq>.stage>.pn.fq5-pic{display:none!important}
+  #faq>.stage>.pn.fq5-list{flex:1 1 0!important;min-height:0!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  #footer .ft2-mark{padding-top:58px!important}
+  #footer .ft2 .pn{padding-top:12px!important;padding-bottom:12px!important}
+  #footer .ft2-legal p,#footer .ft2-legal a,#footer .f-copy{line-height:1.5!important}
+}
+@media (max-width:700.4px){ #footer .ft2-mark{padding-top:48px!important} #footer .ft2-say{padding-bottom:6px!important} }
+/* 1011-zz66 · tablet: hardware card photos run flush to the card's top and side edges (no empty band above them) */
+@media(min-width:700.5px) and (max-width:1100px){
+  #hardware .stage>.pn.hasimg{padding-top:0!important}
+  #hardware .stage>.pn.hasimg>img.half{margin:0 -40px 14px!important;width:calc(100% + 80px)!important;max-width:none}
+}
+@media(max-width:700.4px){ #hardware .m-hrow>.pn{padding-top:0!important;overflow:hidden} #hardware .m-hrow>.pn>img.half{margin:0 -16px 10px!important;width:calc(100% + 32px)!important;max-width:none;border-radius:0!important} }
+@media (max-width:700.4px){ #footer .ft2-say{padding-top:4px!important} #footer .ft2-mark{padding-top:44px!important} }

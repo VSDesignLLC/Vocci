@@ -642,8 +642,12 @@
       var ys={0:1}, st=sec.querySelector('.stage'), mids=[];
       /* layout offsets, not on-screen rects: cells may still be mid slide-in */
       function off(el){ var x=0,y=0; for(var e=el;e&&e!==sec;e=e.offsetParent){ x+=e.offsetLeft; y+=e.offsetTop; } return {x:x,y:y}; }
-      if(st) [].forEach.call(st.querySelectorAll(':scope>.pn'),function(c){ if(!c.offsetHeight||getComputedStyle(c).display==='none') return;
-        var o=off(c), y=Math.round(o.y); if(y>2&&y<sb.height-2) ys[y]=1;
+      /* only where a horizontal grid line is actually drawn: a visible top border spanning the full width */
+      function hasLine(c){ var cs=getComputedStyle(c), w=parseFloat(cs.borderTopWidth)||0, col=cs.borderTopColor, a=col.match(/rgba?\(([^)]+)\)/);
+        var alpha=a?(a[1].split(',')[3]===undefined?1:parseFloat(a[1].split(',')[3])):0; return w>=1&&alpha>0.05; }
+      var pinned=sec.classList.contains('m-pin-on')||sec.id==='why';
+      if(st&&!pinned) [].forEach.call(st.querySelectorAll(':scope>.pn'),function(c){ if(!c.offsetHeight||getComputedStyle(c).display==='none') return;
+        var o=off(c), y=Math.round(o.y); if(y>2&&y<sb.height-2&&hasLine(c)&&c.offsetWidth>=sb.width*.9) ys[y]=1;
         if(c.classList.contains('col-l')){ var x=Math.round(o.x+c.offsetWidth); mids.push([x,y],[x,Math.round(o.y+c.offsetHeight)]); } });
       var add=function(x,y){ var d=document.createElement('i'); d.className='m-dot'; d.style.left=x+'px'; d.style.top=y+'px'; sec.appendChild(d); };
       Object.keys(ys).forEach(function(y){ add(inset,+y); add(sb.width-inset,+y); });
@@ -652,4 +656,23 @@
   }
   var t=null; function later(){ clearTimeout(t); t=setTimeout(build,250); }
   addEventListener('resize',later); addEventListener('load',function(){ setTimeout(build,1500); }); setTimeout(build,2500);
+})();
+
+/* 1011-zz64 · phone (<700.5px): pinned screen 2 — scrolling through it flips the three steps like the desktop 3D walk;
+   hardware cards wrapped into one swipe row */
+(function(){
+  if(innerWidth>=700.5) return;
+  var hw=document.querySelector('#hardware .stage');
+  if(hw && !hw.querySelector('.m-hrow')){ var cards=[].filter.call(hw.querySelectorAll(':scope>.pn.hasimg'),function(c){ return true; });
+    if(cards.length){ var row=document.createElement('div'); row.className='m-hrow'; cards[0].parentNode.insertBefore(row,cards[0]); cards.forEach(function(c){ row.appendChild(c); }); } }
+  var how=document.getElementById('how'); if(!how) return;
+  var st=how.querySelector(':scope>.stage'); if(!st) return;
+  var pin=document.createElement('div'); pin.className='m-pin';
+  [].slice.call(how.children).forEach(function(c){ pin.appendChild(c); }); how.appendChild(pin); how.classList.add('m-pin-on');
+  var step=-1;
+  function leftOf(i){ var pics=[].filter.call(st.querySelectorAll(':scope>.pn.pic'),function(p){ return p.offsetWidth>0; }); if(!pics.length) return i*st.clientWidth; var k=Math.min(i,pics.length-1); return pics[k].offsetLeft-pics[0].offsetLeft; }
+  function tick(){ var r=how.getBoundingClientRect(), span=how.offsetHeight-innerHeight; if(span<=0) return;
+    var p=Math.min(1,Math.max(0,-r.top/span)), s=Math.min(2,Math.floor(p*3));
+    if(s!==step){ step=s; st.scrollTo({left:leftOf(s),behavior:'smooth'}); } }
+  addEventListener('scroll',tick,{passive:true}); tick();
 })();
