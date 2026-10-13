@@ -622,3 +622,10 @@
   }
   (function wait(){ if(!hook()) setTimeout(wait,400); })();
 })();
+
+/* 1011-zz60 · mark left-column cells in two-up layouts on phone/tablet so they can draw the vertical grid line */
+(function(){
+  function run(){ ['awards','footer'].forEach(function(id){ var st=document.querySelector('#'+id+' .stage'); if(!st) return; var b=st.getBoundingClientRect();
+    [].forEach.call(st.querySelectorAll(':scope>.pn'),function(c){ var r=c.getBoundingClientRect(); c.classList.toggle('col-l', innerWidth<=1100 && r.width>0 && r.width<b.width*.75 && r.left-b.left<4); }); }); }
+  addEventListener('resize',run); addEventListener('load',run); setTimeout(run,1200);
+})();

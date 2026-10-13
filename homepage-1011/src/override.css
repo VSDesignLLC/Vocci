@@ -2128,3 +2128,5 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 #footer .ft2-legal a:hover{color:var(--accent-text)!important}
 /* 1011-zz52 · footer: clear glass instead of frosted — no blur, a faint white tint and a hairline highlight on each cell edge, so the particle ring stays crisp */
 #footer .ft2 .pn{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.08))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.75),inset 1px 0 0 rgba(255,255,255,.45)!important}
+/* 1011-zz60 · phone/tablet: where cells sit two-up (awards, footer), the left cell draws the centre grid line on its right edge */
+@media(max-width:700px){ #awards .stage>.pn.col-l,#footer .stage>.pn.col-l{box-shadow:inset -1px 0 0 rgba(255,255,255,.35)!important} }
