@@ -2413,3 +2413,13 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 /* 1011-zz75 · step-3 Claude mock: no desktop window dots on a phone screen */
 .r3-ph.a4 .ex>i{display:none!important}
 .r3-ph.a4 .ex{gap:0!important}
+/* 1011-zz76 · needs bubbles are links: pointer, lift + orange edge on hover, a "View on …" cue; per-persona bubbles follow the open item */
+#needs a.pz-qb{text-decoration:none;color:inherit;cursor:pointer;transition:opacity .45s ease,translate .45s ease,transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+#needs a.pz-qb .qb-go{display:inline-flex;align-items:center;gap:4px;margin-top:8px;font:500 11px/1 var(--font-mono);font-style:normal;letter-spacing:.02em;color:var(--accent-text)}
+#needs a.pz-qb .qb-go b{font-weight:500;transition:transform .3s ease}
+#needs a.pz-qb:hover{border-color:rgba(244,117,70,.6)!important;transform:translateY(-2px)}
+#needs a.pz-qb:hover .qb-go b{transform:translate(2px,-2px)}
+#needs a.pz-qb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#needs .pz-qb2{opacity:0!important;pointer-events:none;translate:0 8px}
+#needs .pn.pz-pic[data-k="1"] .pz-qb2[data-k="1"],#needs .pn.pz-pic[data-k="2"] .pz-qb2[data-k="2"],#needs .pn.pz-pic[data-k="3"] .pz-qb2[data-k="3"],#needs .pn.pz-pic[data-k="4"] .pz-qb2[data-k="4"]{opacity:1!important;pointer-events:auto;translate:0 0;transition-delay:.25s}
+#needs .pn.pz-pic.qb-off .pz-qb2{transform:none}
