@@ -3374,6 +3374,19 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 #kol .kv-hint .hh-b:disabled{opacity:.35;cursor:default}
 /* 1011-zz29 · every prev/next pager button uses the desktop shape: 40px rounded square, hairline border */
 .hh-b,#how .how-hint .hh-b,#kol .kv-hint .hh-b,#kol .kol-b,#kol .kv-arw{width:40px!important;height:40px!important;border-radius:7px!important;background:transparent!important}
+/* 1011-zz30 · consistency pass: one section-title size per breakpoint, one body size */
+#faq .fq5-head h2{font-size:clamp(26px,2.3vw,33px)!important;line-height:1.12!important;letter-spacing:-.03em!important;font-weight:600!important}
+#faq .fq5-head p{font-size:14px!important;line-height:1.55!important}
+#needs .pz-join p{font-size:14px!important;line-height:1.55!important}
+@media(max-width:1100px){
+  #faq .fq5-head h2{font-size:26px!important}
+  #how .how-head h2{font-weight:600!important;letter-spacing:-.03em!important;line-height:1.12!important}
+}
+@media(min-width:700.5px) and (max-width:1100px){
+  #faq .fq5-head h2{font-size:42px!important;line-height:1.1!important}
+  #faq .fq5-head p,#needs .pz-join p{font-size:17px!important}
+}
+@media(min-width:700.5px) and (max-width:1100px){ .gridall #awards h2.aw-h{font-size:28px!important;line-height:1.15!important} }   /* the press line sits inside the quote card, a step below section titles — as on desktop and phone */
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="vl-intro" aria-hidden="true"><div class="vl-ring"><img src="img3/ring-top.webp" alt=""><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg></div><span class="vl-pct">00</span></div><script>document.documentElement.classList.add("vl-on");document.body.appendChild(document.querySelector(".vl-intro"))</script><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-v2.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
