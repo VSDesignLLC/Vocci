@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vocci Design System · 1011</title>
+<meta name="description" content="Vocci 首页 1011 版设计系统：颜色、字体、间距、圆角、组件与动效规范。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ink:#141416;--body:#55555c;--label:#5f5f66;--muted:#8a8a90;
+  --accent:#f47546;--accent-text:#d9551f;--accent-soft:rgba(244,117,70,.12);
+  --white:#fff;--stone:#e8e8e5;--mist:#ececeb;--hair:#d6d6d2;
+  --line:rgba(20,20,22,.08);--border:rgba(20,20,22,.18);
+  --glass-panel:rgba(255,255,255,.66);--glass-ctl:rgba(255,255,255,.5);--glass-float:rgba(255,255,255,.9);
+  --ease:cubic-bezier(.22,.61,.21,1);
+  --sans:'Manrope',Helvetica,Arial,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--stone);color:var(--body);font:400 14px/22px var(--sans);letter-spacing:-.003em}
+a{color:inherit}
+h1,h2,h3,h4,p{margin:0}
+.mono{font-family:var(--mono)}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px;position:relative}
+.grid-bg{position:absolute;inset:0;pointer-events:none;display:grid;grid-template-columns:repeat(4,1fr)}
+.grid-bg i{border-left:1px solid rgba(255,255,255,.35)}
+.grid-bg i:last-child{border-right:1px solid rgba(255,255,255,.35)}
+
+header.top{position:relative;background:var(--white);overflow:hidden}
+header.top .wrap{padding-top:96px;padding-bottom:56px}
+.eyebrow{font:500 12px/14px var(--mono);letter-spacing:.02em;color:var(--label)}
+header.top h1{margin-top:16px;color:var(--ink);font:600 56px/58px var(--sans);letter-spacing:-.035em;max-width:14ch}
+header.top h1 .o{display:inline-block;width:.72em;height:.72em;border:.11em solid var(--ink);border-radius:50%;vertical-align:-.04em;margin:0 .02em}
+header.top p.lead{margin-top:20px;max-width:56ch;font-size:16px;line-height:24px}
+.meta{margin-top:28px;display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--glass-float);font:500 12px/12px var(--mono);color:var(--label);text-decoration:none}
+a.chip:hover{border-color:var(--ink);color:var(--ink)}
+
+nav.toc{position:sticky;top:0;z-index:10;background:rgba(250,250,248,.82);-webkit-backdrop-filter:blur(26px) saturate(1.2);backdrop-filter:blur(26px) saturate(1.2);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+nav.toc .wrap::-webkit-scrollbar{display:none}
+nav.toc a{flex:none;display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 12px;border-radius:8px;text-decoration:none;color:var(--body);font:500 14px/18px var(--sans)}
+nav.toc a b{font:500 12px/12px var(--mono);color:var(--muted)}
+nav.toc a:hover,nav.toc a.on{background:var(--white);color:var(--ink)}
+nav.toc a.on b{color:var(--accent-text)}
+
+section.blk{padding:72px 0;border-top:1px solid rgba(255,255,255,.6)}
+section.blk:nth-of-type(even){background:var(--mist)}
+.blk-head{display:grid;grid-template-columns:1fr 3fr;gap:28px;margin-bottom:36px}
+.blk-head .num{font:500 12px/14px var(--mono);color:var(--accent-text)}
+.blk-head h2{margin-top:8px;color:var(--ink);font:600 33px/37px var(--sans);letter-spacing:-.03em}
+.blk-head p{max-width:62ch;align-self:end}
+h3.sub{margin:36px 0 14px;color:var(--ink);font:600 16px/22px var(--sans);display:flex;align-items:baseline;gap:10px}
+h3.sub .mono{font-size:12px;color:var(--label);font-weight:500}
+.note{margin-top:12px;font-size:13px;line-height:18px;color:var(--label)}
+
+.card{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:24px}
+.cards{display:grid;gap:12px}
+.c4{grid-template-columns:repeat(4,1fr)}.c3{grid-template-columns:repeat(3,1fr)}.c2{grid-template-columns:repeat(2,1fr)}
+
+/* principles */
+.pr .k{font:500 12px/12px var(--mono);color:var(--accent-text)}
+.pr h4{margin-top:14px;color:var(--ink);font:600 18px/22px var(--sans);letter-spacing:-.02em}
+.pr p{margin-top:8px}
+
+/* ---------- color ---------- */
+.sw{border-radius:8px;overflow:hidden;background:var(--white);border:1px solid var(--line);cursor:pointer;text-align:left;padding:0;font:inherit;color:inherit;transition:border-color .3s}
+.sw:hover{border-color:var(--border)}
+.sw .chipc{height:88px;position:relative}
+.sw .chipc.chk{background-image:linear-gradient(45deg,#cfcfcb 25%,transparent 25%),linear-gradient(-45deg,#cfcfcb 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#cfcfcb 75%),linear-gradient(-45deg,transparent 75%,#cfcfcb 75%);background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0}
+.sw .chipc i{position:absolute;inset:0}
+.sw .t{padding:12px 14px 14px}
+.sw .t b{display:block;color:var(--ink);font:600 14px/18px var(--sans)}
+.sw .t code{display:block;margin-top:4px;font:500 12px/16px var(--mono);color:var(--label)}
+.sw .t span{display:block;margin-top:6px;font-size:12px;line-height:16px;color:var(--body)}
+.sw.copied .t code{color:var(--accent-text)}
+
+/* ---------- type ---------- */
+table.spec{width:100%;border-collapse:collapse;background:var(--white);border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+table.spec th,table.spec td{text-align:left;vertical-align:top;padding:14px 16px;border-bottom:1px solid var(--line)}
+table.spec tr:last-child td{border-bottom:0}
+table.spec th{font:500 12px/14px var(--mono);color:var(--label);background:#fafaf8}
+table.spec td{font-size:13px;line-height:18px}
+table.spec td.n{white-space:nowrap;color:var(--ink);font-family:var(--mono);font-size:12px}
+table.spec td.tok b{display:block;color:var(--ink);font:600 14px/18px var(--sans)}
+table.spec td.tok span{display:block;margin-top:2px;font-size:12px;line-height:16px;color:var(--label)}
+.scroll{overflow-x:auto;border-radius:8px}
+.spec .sample{color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:360px}
+
+.fam{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fam .card .big{color:var(--ink);font-size:56px;line-height:60px;letter-spacing:-.03em;font-weight:600}
+.fam .card .big.m{font-family:var(--mono);font-weight:500;letter-spacing:0;font-size:44px}
+.fam .card .w{margin-top:16px;display:flex;flex-wrap:wrap;gap:16px;color:var(--ink);font-size:16px;line-height:22px}
+
+/* ---------- spacing ---------- */
+.scale{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap}
+.scale div{display:flex;flex-direction:column;align-items:center;gap:8px}
+.scale i{display:block;background:var(--accent-soft);border:1px solid rgba(244,117,70,.45);border-radius:2px}
+.scale span{font:500 12px/12px var(--mono);color:var(--label)}
+
+.anat{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.anat .frame{position:relative;background:var(--glass-panel);border:1px dashed rgba(244,117,70,.6);border-radius:8px}
+.anat .inner{position:relative;background:var(--white);border-radius:2px}
+.anat .lbl{position:absolute;font:500 11px/11px var(--mono);color:var(--accent-text)}
+.anat .k{font:500 12px/14px var(--mono);color:var(--label);margin-bottom:10px}
+.anat .h{color:var(--ink);font-weight:600;letter-spacing:-.03em}
+.anat .gap{position:relative;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font:500 11px/11px var(--mono);color:var(--accent-text)}
+.anat .btnm{display:inline-flex;align-items:center;background:var(--ink);color:#fff;border-radius:8px;font:600 14px/14px var(--sans)}
+
+.bp{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.bp .card b{display:block;color:var(--ink);font:600 18px/22px var(--sans)}
+.bp .card code{display:block;margin-top:6px;font:500 12px/16px var(--mono);color:var(--accent-text)}
+.bp .card ul{margin:12px 0 0;padding-left:18px}
+.bp .card li{margin-top:4px}
+
+/* ---------- radius / surfaces ---------- */
+.rad .shape{height:72px;background:var(--stone);border:1px solid var(--border);margin-bottom:14px}
+.glass-demo{position:relative;border-radius:8px;overflow:hidden;min-height:220px;background:
+  radial-gradient(circle at 22% 30%,#f2c3ad 0 14%,transparent 15%),radial-gradient(circle at 70% 64%,#1c1c1f 0 16%,transparent 17%),
+  radial-gradient(circle at 48% 20%,#c9a063 0 9%,transparent 10%),linear-gradient(135deg,#ddd 0,#bdbdb8 100%);display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:24px;align-items:end}
+.gl{border-radius:8px;padding:16px;min-height:120px;display:flex;flex-direction:column;justify-content:flex-end;gap:4px}
+.gl b{color:var(--ink);font:600 14px/18px var(--sans)}
+.gl code{font:500 12px/16px var(--mono);color:var(--label)}
+.gl.p{background:var(--glass-panel);-webkit-backdrop-filter:blur(26px) saturate(1.15);backdrop-filter:blur(26px) saturate(1.15)}
+.gl.c{background:var(--glass-ctl);-webkit-backdrop-filter:blur(18px) saturate(1.2);backdrop-filter:blur(18px) saturate(1.2)}
+.gl.f{background:var(--glass-float);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid rgba(20,20,22,.06)}
+.gl.n{background:rgba(250,250,248,.74);-webkit-backdrop-filter:blur(26px) saturate(1.2);backdrop-filter:blur(26px) saturate(1.2)}
+
+/* ---------- components (live) ---------- */
+.comp{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.comp .card{display:flex;flex-direction:column;gap:16px}
+.comp .stagey{background:var(--stone);border-radius:8px;padding:24px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;min-height:104px}
+.comp .card h4{color:var(--ink);font:600 16px/22px var(--sans)}
+.comp .card .specl{font:500 12px/18px var(--mono);color:var(--label)}
+.comp .card .specl b{color:var(--ink);font-weight:500}
+
+.btn{position:relative;overflow:hidden;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 26px;border-radius:8px;background:var(--ink);border:1px solid var(--ink);color:#fff;font:600 14px/14px var(--sans);letter-spacing:-.005em;text-decoration:none;cursor:pointer;transition:color .35s ease,border-color .35s ease}
+.btn.ghost{background:rgba(255,255,255,.72);color:var(--ink);border-color:var(--border)}
+.btn.ghost:hover{border-color:var(--ink)}
+.btn .rip{position:absolute;z-index:-1;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%) scale(0);background:radial-gradient(circle,rgba(244,117,70,.0) 0 52%,rgba(244,117,70,.85) 53% 56%,rgba(244,117,70,0) 57%);animation:rip .9s var(--ease) forwards}
+@keyframes rip{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
+.tlink{color:var(--accent-text);font:600 14px/18px var(--sans);text-decoration:none}
+.tlink::after{content:" →"}
+.tlink:hover{text-decoration:underline;text-underline-offset:3px}
+
+.rail{display:flex;justify-content:space-between;gap:16px;width:100%;max-width:320px;position:relative;padding-bottom:10px}
+.rail button{border:0;background:none;padding:0;font:500 14px/14px var(--sans);color:var(--muted);cursor:pointer;display:flex;gap:6px;align-items:baseline}
+.rail button b{font:500 12px/12px var(--mono);color:var(--muted)}
+.rail button.on{color:var(--ink)}.rail button.on b{color:var(--accent-text)}
+.rail .bar{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(20,20,22,.1);border-radius:2px}
+.rail .bar i{position:absolute;left:0;top:0;bottom:0;width:33%;background:var(--ink);border-radius:2px;transition:width .5s var(--ease)}
+
+.cats{display:flex;gap:8px;flex-wrap:wrap}
+.cat{display:inline-flex;align-items:center;gap:12px;height:46px;padding:0 20px;border-radius:8px;border:0;background:var(--glass-ctl);color:var(--ink);font:500 14px/18px var(--sans);cursor:pointer}
+.cat em{font:500 12px/12px var(--mono);font-style:normal;color:var(--muted)}
+.cat.on{background:var(--ink);color:#fff}.cat.on em{color:var(--accent)}
+
+.views{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:rgba(20,20,22,.06)}
+.views button{height:34px;padding:0 14px;border:0;border-radius:999px;background:none;color:var(--body);font:500 14px/18px var(--sans);cursor:pointer}
+.views button.on{background:#fff;color:var(--ink)}
+
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%;max-width:320px}
+.tile{display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;border:1px solid rgba(20,20,22,.1);background:rgba(255,255,255,.5);text-align:left;font:inherit;cursor:pointer}
+.tile.on{background:#fff;border-color:var(--ink)}
+.tile i{flex:none;width:24px;height:24px;border-radius:50%;border:1px solid rgba(20,20,22,.12)}
+.tile b{display:block;color:var(--ink);font:600 14px/18px var(--sans)}
+.tile span{display:block;font-size:12px;line-height:16px;color:var(--body)}
+
+.faq{width:100%;display:flex;gap:10px}
+.faq .q{flex:1;display:flex;align-items:center;min-height:56px;padding:12px 20px;border-radius:8px;background:var(--glass-ctl);color:var(--ink);font:500 16px/22px var(--sans)}
+.faq .b{flex:none;width:56px;height:56px;border-radius:8px;background:var(--ink);position:relative;border:0;cursor:pointer;transition:background .35s}
+.faq .b::before,.faq .b::after{content:"";position:absolute;left:50%;top:50%;width:18px;height:2px;margin:-1px 0 0 -9px;background:#fff;transition:transform .45s var(--ease)}
+.faq .b::after{transform:rotate(90deg)}
+.faq.open .b{background:var(--accent)}.faq.open .b::before{transform:rotate(45deg)}.faq.open .b::after{transform:rotate(135deg)}
+
+.feat{display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 12px;border-radius:8px;background:rgba(255,255,255,.5);border:1px solid rgba(20,20,22,.08);color:var(--ink);font:500 13px/18px var(--sans)}
+.feat svg{width:18px;height:18px;stroke:var(--accent);fill:none;stroke-width:1.6}
+.ico{width:40px;height:40px;display:grid;place-items:center;border-radius:8px;border:1px solid var(--border);background:transparent;cursor:pointer;transition:border-color .3s}
+.ico:hover{border-color:var(--ink)}
+.ico svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.lab{font:500 12px/14px var(--mono);letter-spacing:.02em;color:var(--label)}
+.pill{display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--glass-float);font:500 12px/12px var(--mono);letter-spacing:.06em;color:var(--label)}
+.qb{max-width:270px;padding:12px 14px;border-radius:14px;background:var(--glass-float);border:1px solid rgba(20,20,22,.06);color:var(--ink);font-size:13px;line-height:18px}
+.qb small{display:block;margin-top:8px;font:500 12px/12px var(--mono);color:var(--accent-text)}
+.askq{display:inline-flex;align-items:center;gap:12px;height:44px;padding:0 16px;border-radius:999px;background:var(--ink);color:#f4f4f2;font:400 14px/18px var(--sans)}
+.askq i{width:3px;height:10px;border-radius:2px;background:var(--accent);display:inline-block;margin-right:2px}
+.aska{padding:12px 16px;border-radius:12px;background:var(--glass-float);font-size:14px;line-height:18px;color:var(--ink)}
+.aska b{display:block;font:500 12px/16px var(--mono);color:var(--accent-text)}
+.dotdemo{position:relative;width:120px;height:72px}
+.dotdemo::before{content:"";position:absolute;left:0;right:0;top:36px;border-top:1px solid rgba(255,255,255,.9)}
+.dotdemo::after{content:"";position:absolute;top:0;bottom:0;left:60px;border-left:1px solid rgba(255,255,255,.9)}
+.dotdemo i{position:absolute;left:58px;top:34px;width:5px;height:5px;border-radius:50%;background:#fff;z-index:1}
+.navdemo{display:flex;align-items:center;gap:12px;height:56px;padding:0 8px 0 18px;border-radius:10px;background:rgba(250,250,248,.74);-webkit-backdrop-filter:blur(26px);backdrop-filter:blur(26px)}
+.navdemo .wm{font:600 18px/18px var(--sans);letter-spacing:.08em;color:var(--ink);margin-right:8px}
+.navdemo .btn{height:40px;padding:0 16px}
+
+/* motion */
+.mo{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.mo .card code{display:block;margin-top:8px;font:500 12px/16px var(--mono);color:var(--accent-text)}
+.mo .card h4{color:var(--ink);font:600 16px/22px var(--sans)}
+.mo .card p{margin-top:6px}
+.ringdemo{height:96px;display:grid;place-items:center;position:relative;margin-bottom:12px}
+.ringdemo .r{width:28px;height:28px;border-radius:50%;border:3px solid #b9bcc0}
+.ringdemo .w{position:absolute;width:28px;height:28px;border-radius:50%;border:1px solid var(--accent);animation:pulse 2.4s var(--ease) infinite}
+.ringdemo .w.b{animation-delay:.6s}
+@keyframes pulse{0%{transform:scale(1);opacity:.9}100%{transform:scale(3.2);opacity:0}}
+
+footer.end{padding:40px 0 56px;background:var(--white);border-top:1px solid var(--line)}
+footer.end .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font:400 11px/16px var(--mono);color:var(--muted)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .wrap{padding:0 40px}
+  .c4,.mo,.anat{grid-template-columns:repeat(2,1fr)}
+  .glass-demo{grid-template-columns:repeat(2,1fr)}
+  .blk-head{grid-template-columns:1fr;gap:12px}
+  header.top h1{font-size:42px;line-height:46px}
+  .blk-head h2{font-size:42px;line-height:46px}
+}
+@media (max-width:700px){
+  .wrap{padding:0 20px}
+  header.top .wrap{padding-top:56px;padding-bottom:40px}
+  header.top h1{font-size:34px;line-height:38px}
+  .blk-head h2{font-size:26px;line-height:30px}
+  section.blk{padding:48px 0}
+  .c4,.c3,.c2,.comp,.mo,.bp,.fam,.anat{grid-template-columns:1fr}
+  .glass-demo{grid-template-columns:1fr 1fr;padding:16px}
+  .btn{height:40px;padding:0 20px}
+  .faq .q{font-size:16px;min-height:52px;padding:12px 16px}.faq .b{width:52px;height:52px}
+  table.spec th,table.spec td{padding:12px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="grid-bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <div class="eyebrow">VOCCI · HOMEPAGE 1011 · DESIGN SYSTEM</div>
+    <h1>V<span class="o" aria-hidden="true"></span>cci 设计系统</h1>
+    <p class="lead">首页 1011 版所用的全部颜色、字体、间距、圆角、组件与动效规范。所有数值都取自线上页面，均为整数像素；页面上的组件示例就是按同一套规则实时渲染的。</p>
+    <div class="meta">
+      <a class="chip" href="https://vsdesignllc.github.io/Vocci/homepage-1011/">↗ 查看首页</a>
+      <span class="chip">更新 2026-10-13</span>
+      <span class="chip">依据 Homepage 框架 3.0</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="目录">
+  <div class="wrap">
+    <a href="#principles"><b>01</b>原则</a>
+    <a href="#color"><b>02</b>颜色</a>
+    <a href="#type"><b>03</b>字体</a>
+    <a href="#space"><b>04</b>间距与布局</a>
+    <a href="#surface"><b>05</b>圆角与材质</a>
+    <a href="#components"><b>06</b>组件</a>
+    <a href="#motion"><b>07</b>动效</a>
+  </div>
+</nav>
+
+<!-- 01 -->
+<section class="blk" id="principles">
+  <div class="wrap">
+    <div class="blk-head"><div><div class="num">01</div><h2>原则</h2></div><p>四条规则决定了页面上的每一个数值。遇到没写到的情况，回到这四条来判断。</p></div>
+    <div class="cards c4">
+      <div class="card pr"><div class="k">GRID</div><h4>网格优先</h4><p>桌面每屏是 4 列 × 2 行的网格，图片、文字、卡片都吸附在格子里。网格线本身就是视觉的一部分。</p></div>
+      <div class="card pr"><div class="k">CIRCLE</div><h4>圆是品牌符号</h4><p>戒指的圆贯穿全站：入场揭幕、按钮 hover 的圆形扩散、footer 里的戒指 O、网格交点的小圆点。</p></div>
+      <div class="card pr"><div class="k">RESTRAINT</div><h4>克制</h4><p>灰白为底，只有一种强调色，只用两款字体，不用投影。层次靠字号、灰阶和磨砂玻璃建立。</p></div>
+      <div class="card pr"><div class="k">INTEGER</div><h4>整数像素</h4><p>所有字号、行高、内外边距都是整数像素。字号按断点分档，不随窗口连续缩放。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="blk" id="color">
+  <div class="wrap">
+    <div class="blk-head"><div><div class="num">02</div><h2>颜色</h2></div><p>文字只用四档灰，强调色只有品牌橙。橙色只给序号、图标、文字链接和动效，不做大面积底色。点任意色块可复制色值。</p></div>
+
+    <h3 class="sub">文字 <span class="mono">TEXT</span></h3>
+    <div class="cards c4">
+      <button class="sw" data-c="#141416"><div class="chipc" style="background:#141416"></div><div class="t"><b>Ink 墨黑</b><code>#141416</code><span>标题、主按钮、选中文字</span></div></button>
+      <button class="sw" data-c="#55555C"><div class="chipc" style="background:#55555c"></div><div class="t"><b>Body 正文灰</b><code>#55555C</code><span>正文、描述、导航链接</span></div></button>
+      <button class="sw" data-c="#5F5F66"><div class="chipc" style="background:#5f5f66"></div><div class="t"><b>Label 标签灰</b><code>#5F5F66</code><span>mono 小标签</span></div></button>
+      <button class="sw" data-c="#8A8A90"><div class="chipc" style="background:#8a8a90"></div><div class="t"><b>Muted 次要灰</b><code>#8A8A90</code><span>未选中 tab、法律细则</span></div></button>
+    </div>
+
+    <h3 class="sub">品牌 <span class="mono">BRAND</span></h3>
+    <div class="cards c4">
+      <button class="sw" data-c="#F47546"><div class="chipc" style="background:#f47546"></div><div class="t"><b>Orange 品牌橙</b><code>#F47546</code><span>图标、网格动效、进度条、FAQ 展开、深色底上的数字</span></div></button>
+      <button class="sw" data-c="#D9551F"><div class="chipc" style="background:#d9551f"></div><div class="t"><b>Orange Text 文字橙</b><code>#D9551F</code><span>浅底上的文字链接与序号（深一档，读得清）</span></div></button>
+      <button class="sw" data-c="rgba(244,117,70,.12)"><div class="chipc chk"><i style="background:rgba(244,117,70,.12)"></i></div><div class="t"><b>Orange Soft</b><code>rgba(244,117,70,.12)</code><span>浅橙底，标注与高亮区域</span></div></button>
+      <button class="sw" data-c="#FFFFFF"><div class="chipc" style="background:#fff;border-bottom:1px solid rgba(20,20,22,.08)"></div><div class="t"><b>White 白</b><code>#FFFFFF</code><span>主按钮文字、选中控件底</span></div></button>
+    </div>
+
+    <h3 class="sub">背景与线 <span class="mono">SURFACE · LINE</span></h3>
+    <div class="cards c4">
+      <button class="sw" data-c="#E8E8E5"><div class="chipc" style="background:#e8e8e5"></div><div class="t"><b>Stone 石灰</b><code>#E8E8E5</code><span>工作流、红人、媒体、参数、FAQ 的底</span></div></button>
+      <button class="sw" data-c="#ECECEB"><div class="chipc" style="background:#ececeb"></div><div class="t"><b>Mist 雾灰</b><code>#ECECEB</code><span>Needs 人群屏的底</span></div></button>
+      <button class="sw" data-c="#D6D6D2"><div class="chipc" style="background:#d6d6d2"></div><div class="t"><b>Hairline 发丝线</b><code>#D6D6D2</code><span>分隔线</span></div></button>
+      <button class="sw" data-c="rgba(20,20,22,.18)"><div class="chipc chk"><i style="background:rgba(20,20,22,.18)"></i></div><div class="t"><b>Border 描边</b><code>rgba(20,20,22,.18)</code><span>次按钮、图标按钮、标签描边</span></div></button>
+      <button class="sw" data-c="rgba(255,255,255,.35)"><div class="chipc" style="background:#9a9a96"><i style="background:linear-gradient(90deg,transparent 49.5%,rgba(255,255,255,.35) 49.5% 50.5%,transparent 50.5%)"></i></div><div class="t"><b>Grid Line 网格线</b><code>rgba(255,255,255,.35)</code><span>1px，全站网格</span></div></button>
+      <button class="sw" data-c="rgba(255,255,255,.6)"><div class="chipc" style="background:#9a9a96"><i style="background:linear-gradient(90deg,transparent 49.5%,rgba(255,255,255,.6) 49.5% 50.5%,transparent 50.5%)"></i></div><div class="t"><b>Edge Line 边线</b><code>rgba(255,255,255,.6)</code><span>手机 / 平板左右边线与中线</span></div></button>
+      <button class="sw" data-c="rgba(20,20,22,.10)"><div class="chipc chk"><i style="background:rgba(20,20,22,.1)"></i></div><div class="t"><b>Border Light</b><code>rgba(20,20,22,.10)</code><span>颜色选择块描边</span></div></button>
+      <button class="sw" data-c="rgba(20,20,22,.08)"><div class="chipc chk"><i style="background:rgba(20,20,22,.08)"></i></div><div class="t"><b>Border Faint</b><code>rgba(20,20,22,.08)</code><span>特性小卡、证言气泡（.06）</span></div></button>
+    </div>
+
+    <h3 class="sub">产品配色 <span class="mono">FINISHES</span></h3>
+    <div class="cards c4">
+      <button class="sw" data-c="#E9E8E4"><div class="chipc" style="background:#e9e8e4"></div><div class="t"><b>Lumen</b><code>#E9E8E4</code><span>镜面银</span></div></button>
+      <button class="sw" data-c="#1C1C1F"><div class="chipc" style="background:#1c1c1f"></div><div class="t"><b>Midnight</b><code>#1C1C1F</code><span>哑光黑</span></div></button>
+      <button class="sw" data-c="#C9A063"><div class="chipc" style="background:#c9a063"></div><div class="t"><b>Dawn</b><code>#C9A063</code><span>镜面金</span></div></button>
+      <button class="sw" data-c="linear-gradient(135deg,#D6D7D9,#A9ABAE)"><div class="chipc" style="background:linear-gradient(135deg,#d6d7d9,#a9abae)"></div><div class="t"><b>Lux</b><code>#D6D7D9 → #A9ABAE</code><span>哑光银（渐变）</span></div></button>
+    </div>
+    <p class="note">磨砂玻璃的透明度见「05 圆角与材质」。</p>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="blk" id="type">
+  <div class="wrap">
+    <div class="blk-head"><div><div class="num">03</div><h2>字体</h2></div><p>只用两款字体。字号按断点分档，桌面再按窗口宽度分三档（1101 / 1280 / 1440px），全部为整数像素。表中写法为「字号 / 行高」。</p></div>
+
+    <div class="fam">
+      <div class="card"><div class="lab">SANS · 标题 / 正文 / 按钮</div><div class="big" style="margin-top:16px">Manrope</div><div class="w"><span style="font-weight:400">Regular 400</span><span style="font-weight:500">Medium 500</span><span style="font-weight:600">Semibold 600</span></div></div>
+      <div class="card"><div class="lab">MONO · 标签 / 序号 / 法律细则</div><div class="big m" style="margin-top:20px">IBM Plex Mono</div><div class="w" style="font-family:var(--mono);font-size:14px"><span style="font-weight:400">Regular 400</span><span style="font-weight:500">Medium 500</span></div></div>
+    </div>
+
+    <h3 class="sub">字号层级 <span class="mono">TYPE SCALE</span></h3>
+    <div class="scroll">
+    <table class="spec">
+      <thead><tr><th>层级</th><th>桌面 1101 / 1280 / 1440+</th><th>平板</th><th>手机</th><th>字重 · 字间距</th><th>示例</th></tr></thead>
+      <tbody>
+        <tr><td class="tok"><b>Display</b><span>footer 结尾句</span></td><td class="n">40/42 · 46/48 · 52/54<br>1560+ 56/58</td><td class="n">42/46</td><td class="n">26/28</td><td class="n">600 · −0.035em</td><td><div class="sample" style="font:600 28px/32px var(--sans);letter-spacing:-.035em">Real life, carried forward.</div></td></tr>
+        <tr><td class="tok"><b>H1 / H2</b><span>板块标题</span></td><td class="n">26/30 · 30/34 · 33/37</td><td class="n">42/46</td><td class="n">26/30</td><td class="n">600 · −0.03em</td><td><div class="sample" style="font:600 26px/30px var(--sans);letter-spacing:-.03em">Where Vocci fits into your day.</div></td></tr>
+        <tr><td class="tok"><b>H3</b><span>卡片标题</span></td><td class="n">18/22 · 20/24 · 22/26</td><td class="n">24/30</td><td class="n">18/22</td><td class="n">600 · −0.02em</td><td><div class="sample" style="font:600 20px/24px var(--sans);letter-spacing:-.02em">Start recording in a moment.</div></td></tr>
+        <tr><td class="tok"><b>Quote</b><span>媒体引语</span></td><td class="n">18/26 · 18/26 · 20/28</td><td class="n">18/26</td><td class="n">17/24</td><td class="n">400 · −0.01em</td><td><div class="sample" style="font:400 18px/26px var(--sans);color:var(--body)">“This AI Ring Ditches Health Tracking…”</div></td></tr>
+        <tr><td class="tok"><b>Lead</b><span>FAQ 问题、表单标签</span></td><td class="n">16/22</td><td class="n">16/22</td><td class="n">16/22</td><td class="n">500（标签 600）</td><td><div class="sample" style="font:500 16px/22px var(--sans);color:var(--ink)">How do I start recording?</div></td></tr>
+        <tr><td class="tok"><b>Footer Link</b><span>footer 导航链接</span></td><td class="n">16/20 · 16/20 · 18/22</td><td class="n">14/18</td><td class="n">14/18</td><td class="n">400 · −0.01em</td><td><div class="sample" style="font:400 16px/20px var(--sans);color:var(--ink)">Support Center</div></td></tr>
+        <tr><td class="tok"><b>Body</b><span>正文</span></td><td class="n">14/22</td><td class="n">15/23</td><td class="n">14/22</td><td class="n">400 · −0.003em</td><td><div class="sample" style="font:400 14px/22px var(--sans)">Double-click to start or stop recording…</div></td></tr>
+        <tr><td class="tok"><b>Action</b><span>按钮、tab、文字链接</span></td><td class="n">14/14 · tab 14/18</td><td class="n">14</td><td class="n">14 · tab 13/16</td><td class="n">按钮 / 链接 600 · tab 500</td><td><div class="sample" style="font:600 14px/18px var(--sans);color:var(--accent-text)">Get a sizing kit →</div></td></tr>
+        <tr><td class="tok"><b>Small</b><span>小列表、特性</span></td><td class="n">13/18</td><td class="n">13/18</td><td class="n">13/18</td><td class="n">400 / 500</td><td><div class="sample" style="font:500 13px/18px var(--sans);color:var(--ink)">IP67 water resistance</div></td></tr>
+        <tr><td class="tok"><b>Caption</b><span>颜色说明、表单提示</span></td><td class="n">12/16</td><td class="n">12/16</td><td class="n">12/16（提示 12/20）</td><td class="n">400</td><td><div class="sample" style="font:400 12px/16px var(--sans)">Mirror-polished silver</div></td></tr>
+        <tr><td class="tok"><b>Label</b><span>mono 标签</span></td><td class="n">12/14</td><td class="n">12/14</td><td class="n">12/14</td><td class="n">Mono 500 · +0.02em</td><td><div class="sample lab">Finish · View</div></td></tr>
+        <tr><td class="tok"><b>Index</b><span>序号 01 02 03</span></td><td class="n">12/12</td><td class="n">12/12</td><td class="n">12/12</td><td class="n">Mono 500</td><td><div class="sample" style="font:500 12px/12px var(--mono);color:var(--accent-text)">01 <span style="color:var(--muted)">02 03</span></div></td></tr>
+        <tr><td class="tok"><b>Legal</b><span>法律条款、版权</span></td><td class="n">11/16</td><td class="n">11/16</td><td class="n">11/16</td><td class="n">Mono 400 · +0.02em</td><td><div class="sample" style="font:400 11px/16px var(--mono);color:var(--muted)">Privacy policy · © 2026, Vocci</div></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">桌面窗口高度 ≤ 800px 时，第三屏章节面板使用紧凑字号：卡片标题 16/20、正文 13/19、列表 12/16。</p>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="blk" id="space">
+  <div class="wrap">
+    <div class="blk-head"><div><div class="num">04</div><h2>间距与布局</h2></div><p>三个断点，每个断点一套固定的页边距、格子内边距和元素间距。所有间距都取自下面这把尺子。</p></div>
+
+    <h3 class="sub">间距尺 <span class="mono">SPACING SCALE · PX</span></h3>
+    <div class="card"><div class="scale">
+      <div><i style="width:4px;height:4px"></i><span>4</span></div>
+      <div><i style="width:6px;height:6px"></i><span>6</span></div>
+      <div><i style="width:8px;height:8px"></i><span>8</span></div>
+      <div><i style="width:12px;height:12px"></i><span>12</span></div>
+      <div><i style="width:14px;height:14px"></i><span>14</span></div>
+      <div><i style="width:16px;height:16px"></i><span>16</span></div>
+      <div><i style="width:20px;height:20px"></i><span>20</span></div>
+      <div><i style="width:24px;height:24px"></i><span>24</span></div>
+      <div><i style="width:28px;height:28px"></i><span>28</span></div>
+      <div><i style="width:36px;height:36px"></i><span>36</span></div>
+      <div><i style="width:40px;height:40px"></i><span>40</span></div>
+    </div></div>
+
+    <h3 class="sub">断点 <span class="mono">BREAKPOINTS</span></h3>
+    <div class="bp">
+      <div class="card"><b>手机</b><code>≤ 700px</code><ul><li>单列阅读</li><li>左右边线 60% 白，内收 8px</li><li>第二、三屏固定一屏翻页；视频 / 步骤 / 参数左右滑</li></ul></div>
+      <div class="card"><b>平板</b><code>701 – 1100px</code><ul><li>单列阅读，更大的字号</li><li>左右边线内收 16px</li><li>横屏时部分板块两列</li></ul></div>
+      <div class="card"><b>桌面</b><code>≥ 1101px</code><ul><li>4 列 × 2 行网格，每屏 100vh</li><li>字号在 1280 / 1440px 再分档</li><li>高度 ≤ 800px 的窗口启用紧凑排版</li></ul></div>
+    </div>
+
+    <h3 class="sub">间距规则 <span class="mono">SPACING TOKENS</span></h3>
+    <div class="scroll">
+    <table class="spec">
+      <thead><tr><th>位置</th><th>桌面</th><th>平板</th><th>手机</th></tr></thead>
+      <tbody>
+        <tr><td class="tok"><b>页面左右边距</b><span>文字到屏幕边缘</span></td><td class="n">28（格子内边距）</td><td class="n">40</td><td class="n">20</td></tr>
+        <tr><td class="tok"><b>文字格内边距</b><span>上 / 左右 / 下</span></td><td class="n">28 / 28 / 28</td><td class="n">36 / 40 / 40</td><td class="n">24 / 20 / 28</td></tr>
+        <tr><td class="tok"><b>卡片内边距</b><span>步骤卡、视频卡、章节卡</span></td><td class="n">—（内容直接在 28 的格子里）</td><td class="n">24</td><td class="n">20（底 24）</td></tr>
+        <tr><td class="tok"><b>标题 → 正文</b></td><td class="n">16</td><td class="n">16</td><td class="n">14</td></tr>
+        <tr><td class="tok"><b>正文 → 按钮</b></td><td class="n">按钮贴格子底部</td><td class="n">28</td><td class="n">24</td></tr>
+        <tr><td class="tok"><b>按钮组间距</b><span>行 / 列</span></td><td class="n">12 / 20</td><td class="n">12 / 20</td><td class="n">12 / 20</td></tr>
+        <tr><td class="tok"><b>章节 tab → 内容</b></td><td class="n">12</td><td class="n">12</td><td class="n">12</td></tr>
+        <tr><td class="tok"><b>控件内边距</b><span>FAQ 问题框 / 答案框</span></td><td class="n">12×20 / 16×20</td><td class="n">12×16</td><td class="n">12×16</td></tr>
+        <tr><td class="tok"><b>选择块间距</b><span>颜色块 / FAQ 分类</span></td><td class="n">6 / 8</td><td class="n">6 / 8</td><td class="n">6 / 8</td></tr>
+        <tr><td class="tok"><b>网格交点圆点</b></td><td class="n">5px 白</td><td class="n">5px 白</td><td class="n">5px 白</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 class="sub">文字格结构 <span class="mono">CELL ANATOMY</span></h3>
+    <div class="anat">
+      <div><div class="k">桌面 · 28 / 16 / 底对齐</div>
+        <div class="frame" style="padding:28px;height:300px;display:flex;flex-direction:column">
+          <span class="lbl" style="top:8px;left:28px">28</span>
+          <div class="inner h" style="font-size:22px;line-height:26px;padding:4px">Your data, handled with care.</div>
+          <div class="gap" style="height:16px">16</div>
+          <div class="inner" style="padding:4px;font-size:12px;line-height:18px">Vocci safeguards your recordings with encryption and access controls.</div>
+          <div style="flex:1;display:flex;align-items:center;justify-content:center" class="gap">auto</div>
+          <div><span class="btnm" style="height:44px;padding:0 26px">Trust Center</span></div>
+        </div></div>
+      <div><div class="k">平板 · 36·40 / 16 / 28</div>
+        <div class="frame" style="padding:36px 40px 40px">
+          <span class="lbl" style="top:12px;left:40px">36</span>
+          <div class="inner h" style="font-size:24px;line-height:28px;padding:4px">Your data, handled with care.</div>
+          <div class="gap" style="height:16px">16</div>
+          <div class="inner" style="padding:4px;font-size:12px;line-height:18px">Vocci safeguards your recordings with encryption and access controls.</div>
+          <div class="gap" style="height:28px">28</div>
+          <div><span class="btnm" style="height:40px;padding:0 20px">Trust Center</span></div>
+        </div></div>
+      <div><div class="k">手机 · 24·20 / 14 / 24</div>
+        <div class="frame" style="padding:24px 20px 28px">
+          <span class="lbl" style="top:8px;left:20px">24</span>
+          <div class="inner h" style="font-size:20px;line-height:24px;padding:4px">Your data, handled with care.</div>
+          <div class="gap" style="height:14px">14</div>
+          <div class="inner" style="padding:4px;font-size:12px;line-height:18px">Vocci safeguards your recordings with encryption and access controls.</div>
+          <div class="gap" style="height:24px">24</div>
+          <div><span class="btnm" style="height:40px;padding:0 20px">Trust Center</span></div>
+        </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="blk" id="surface">
+  <div class="wrap">
+    <div class="blk-head"><div><div class="num">05</div><h2>圆角与材质</h2></div><p>方形组件一律 8px；胶囊用来区分「切换器和标签」，对话气泡更圆，表示「这是一句话」。不用投影，层次靠磨砂玻璃和细线。</p></div>
+
+    <h3 class="sub">圆角 <span class="mono">RADIUS</span></h3>
+    <div class="cards c4 rad">
+      <div class="card"><div class="shape" style="border-radius:8px"></div><b style="color:var(--ink)">8px</b><p>按钮、卡片、输入框、图标按钮、FAQ 行、颜色块、特性小卡</p></div>
+      <div class="card"><div class="shape" style="border-radius:10px"></div><b style="color:var(--ink)">10px</b><p>导航栏容器</p></div>
+      <div class="card"><div class="shape" style="border-radius:14px"></div><b style="color:var(--ink)">12 / 14px</b><p>AI 回复气泡 / 用户证言气泡</p></div>
+      <div class="card"><div class="shape" style="border-radius:999px"></div><b style="color:var(--ink)">999px 胶囊 · 50% 圆</b><p>视图切换、标签、AI 指令条；播放按钮、AI 图标、网格圆点</p></div>
+    </div>
+
+    <h3 class="sub">磨砂玻璃 <span class="mono">GLASS</span></h3>
+    <div class="glass-demo">
+      <div class="gl p"><b>Panel 大面板</b><code>白 66% · blur 26 · sat 1.15</code><span style="font-size:12px;line-height:16px">叠在图片上的文字格</span></div>
+      <div class="gl c"><b>Control 控件</b><code>白 50% · blur 18 · hover 72%</code><span style="font-size:12px;line-height:16px">FAQ 问题框、分类、颜色块</span></div>
+      <div class="gl f"><b>Float 浮层</b><code>白 90% · blur 12</code><span style="font-size:12px;line-height:16px">证言气泡、AI 回复、标签</span></div>
+      <div class="gl n"><b>Nav 导航</b><code>#FAFAF8 74% · blur 26</code><span style="font-size:12px;line-height:16px">顶部导航栏</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="blk" id="components">
+  <div class="wrap">
+    <div class="blk-head"><div><div class="num">06</div><h2>组件</h2></div><p>下面的组件都可以点击，与线上首页的样式和交互一致。手机端按钮高度为 40px，其余同桌面。</p></div>
+    <div class="comp">
+      <div class="card"><h4>主按钮 / 次按钮</h4>
+        <div class="stagey"><a class="btn rp" href="#components">Buy now</a><a class="btn ghost rp" href="#components">Reddit</a></div>
+        <div class="specl"><b>高</b> 44（手机 40）· <b>左右</b> 26（手机 20）· <b>字</b> 14/600 · <b>圆角</b> 8<br><b>主</b> 墨黑底白字 · <b>次</b> 白 72% 底 + 18% 描边<br><b>hover</b> 从鼠标位置向外的品牌橙圆形扩散</div></div>
+      <div class="card"><h4>文字链接</h4>
+        <div class="stagey"><a class="tlink" href="#components">Get a sizing kit</a><a class="tlink" href="#components">Watch review</a></div>
+        <div class="specl"><b>字</b> 14/18 · 600 · #D9551F · 结尾「→」<br><b>用于</b> 卡片内的行动入口（Sizing kit、Watch review、Connect your AI）</div></div>
+      <div class="card"><h4>章节 tab</h4>
+        <div class="stagey"><div class="rail" id="rail"><button class="on"><b>01</b>Record</button><button><b>02</b>Ask</button><button><b>03</b>Connect</button><span class="bar"><i></i></span></div></div>
+        <div class="specl"><b>文字</b> 14（手机 13）/ 500 · <b>序号</b> Mono 12<br><b>选中</b> 序号橙 #D9551F + 文字墨黑 · <b>未选中</b> #8A8A90<br><b>进度条</b> 2px · 同规则用于 Needs 人群列表</div></div>
+      <div class="card"><h4>分类按钮</h4>
+        <div class="stagey"><div class="cats" id="cats"><button class="cat on">Product <em>4</em></button><button class="cat">Hardware <em>4</em></button><button class="cat">Privacy <em>2</em></button></div></div>
+        <div class="specl"><b>高</b> 46（手机 56，两行）· <b>内边距</b> 0 20 · <b>圆角</b> 8<br><b>选中</b> 墨黑底白字，数字品牌橙 · <b>未选中</b> 白 50% 玻璃</div></div>
+      <div class="card"><h4>视图切换（胶囊）</h4>
+        <div class="stagey"><div class="views" id="views"><button class="on">On hand</button><button>Ring</button><button>Charging case</button></div></div>
+        <div class="specl"><b>轨道</b> 墨黑 6% · 内边距 4 · 999 · <b>选项</b> 高 34 · 左右 14<br><b>选中</b> 白底墨黑字 · <b>未选中</b> 正文灰</div></div>
+      <div class="card"><h4>颜色选择块</h4>
+        <div class="stagey"><div class="tiles" id="tiles">
+          <button class="tile on"><i style="background:#e9e8e4"></i><span><b>Lumen</b><span>Mirror-polished silver</span></span></button>
+          <button class="tile"><i style="background:#1c1c1f"></i><span><b>Midnight</b><span>Deep matte black</span></span></button>
+          <button class="tile"><i style="background:#c9a063"></i><span><b>Dawn</b><span>Polished gold</span></span></button>
+          <button class="tile"><i style="background:linear-gradient(135deg,#d6d7d9,#a9abae)"></i><span><b>Lux</b><span>Matte silver</span></span></button>
+        </div></div>
+        <div class="specl"><b>2×2</b> 间距 6 · 等高 · <b>内边距</b> 10 · <b>圆角</b> 8<br><b>选中</b> 白底 + 1px 墨黑描边 · <b>未选中</b> 白 50% + 10% 描边</div></div>
+      <div class="card"><h4>FAQ 行</h4>
+        <div class="stagey"><div class="faq" id="faq"><div class="q">How do I start recording?</div><button class="b" aria-label="展开"></button></div></div>
+        <div class="specl"><b>问题框</b> 最小高 56（手机 52）· 12×20 · 白 50% · 8<br><b>展开钮</b> 固定正方形 56（手机 52），墨黑 → 展开后品牌橙，+ 旋转成 ×</div></div>
+      <div class="card"><h4>特性小卡 / 标签</h4>
+        <div class="stagey"><span class="feat"><svg viewBox="0 0 20 20"><path d="M10 3c3 4 5 6.4 5 9a5 5 0 0 1-10 0c0-2.6 2-5 5-9z"/></svg>IP67 water resistance</span><span class="lab">Finish</span><span class="pill">As featured in</span></div>
+        <div class="specl"><b>特性小卡</b> 高 40 · 10×12 · 白 50% · 8% 描边 · 13/18 · 图标品牌橙<br><b>标签</b> Mono 12 #5F5F66 · <b>胶囊标签</b> 高 30 · 0 14 · 白 90% · 999</div></div>
+      <div class="card"><h4>图标按钮</h4>
+        <div class="stagey">
+          <button class="ico" aria-label="上一个"><svg viewBox="0 0 20 20"><path d="M12 5l-5 5 5 5"/></svg></button>
+          <button class="ico" aria-label="下一个"><svg viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></button>
+          <button class="ico" aria-label="Instagram"><svg viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="4"/><circle cx="10" cy="10" r="3.2"/></svg></button>
+          <button class="ico" aria-label="YouTube"><svg viewBox="0 0 20 20"><rect x="2.5" y="4.5" width="15" height="11" rx="3"/><path d="M8.5 7.8v4.4l3.8-2.2z"/></svg></button>
+        </div>
+        <div class="specl"><b>尺寸</b> 40×40（手机社交图标 36）· <b>圆角</b> 8 · 1px 18% 描边<br><b>hover</b> 描边变墨黑 · 图标 18px，线宽 1.6，在框内正中</div></div>
+      <div class="card"><h4>对话气泡</h4>
+        <div class="stagey" style="flex-direction:column;align-items:flex-start;gap:10px">
+          <span class="askq"><span><i></i><i></i><i></i></span>Send Maya the new launch date in Slack.</span>
+          <div class="aska"><b>Vocci AI</b>Drafting a follow-up in Slack…</div>
+          <div class="qb">“I am always wearing it which makes it super easy to click &amp; record.”<small>View on Discord ↗</small></div>
+        </div>
+        <div class="specl"><b>AI 指令</b> 墨黑胶囊 · 12×16 · <b>AI 回复</b> 白 90% · 12 圆角<br><b>用户证言</b> 白 90% · 14 圆角 · 12×14 · 可点击跳原帖</div></div>
+      <div class="card"><h4>导航 / 网格圆点</h4>
+        <div class="stagey" style="background:linear-gradient(135deg,#d9d9d5,#b9b9b4)"><div class="navdemo"><span class="wm">VOCCI</span><a class="btn rp" href="#components">Buy now</a></div><span class="dotdemo"><i></i></span></div>
+        <div class="specl"><b>导航</b> 高 56 · 圆角 10 · 导航玻璃；滚过首屏后收成居中胶囊（logo + Buy now），hover 展开<br><b>手机</b> 收成 Buy now + 菜单按钮 38 · <b>圆点</b> 5px 白，只在真实网格交点</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="blk" id="motion">
+  <div class="wrap">
+    <div class="blk-head"><div><div class="num">07</div><h2>动效</h2></div><p>所有动效都围绕「圆」，节奏统一用同一条缓动曲线：起步快、落地轻。</p></div>
+    <div class="mo">
+      <div class="card"><div class="ringdemo"><span class="w"></span><span class="w b"></span><span class="r"></span></div><h4>缓动曲线</h4><p>默认 ease，进出场 ease-io。</p><code>--ease: cubic-bezier(.22,.61,.21,1)</code><code>--ease-io: cubic-bezier(.65,0,.35,1)</code></div>
+      <div class="card"><h4>时长</h4><p>颜色 / 描边变化 0.3–0.35s；内容淡入 0.5s，上浮 0.7s（14–18px），错开 0.15–0.25s；展开钮旋转 0.45s。</p><code>hover .35s · fade .5s · rise .7s</code></div>
+      <div class="card"><h4>按钮 hover</h4><p>从鼠标位置向外扩散一圈品牌橙圆环，呼应戒指形状；文字和描边同步变色。把鼠标移到上面的按钮上试试。</p><code>ripple .9s · ease</code></div>
+      <div class="card"><h4>入场动画</h4><p>戒指顶视图 + 橙色进度圈 → 飞到首页照片中的戒指 → 以它为圆心圆形揭开首页。每次访问播一次。</p><code>2–3s · 每次会话一次</code></div>
+      <div class="card"><h4>首屏 → 第二屏</h4><p>照片里的戒指飞起、翻转，落成第二屏的 3D 实时渲染戒指；继续滚动，戒指依次走过三个步骤。仅桌面端。</p><code>滚动驱动</code></div>
+      <div class="card"><h4>Footer 光环</h4><p>第一次滑到 footer 时，logo 里的戒指 O 向外荡开两圈品牌橙细光环，前后错开；背景是缓慢流动的半枚粒子戒指。</p><code>两圈 · 错开 · 仅一次</code></div>
+    </div>
+  </div>
+</section>
+
+<footer class="end"><div class="wrap"><span>VOCCI · HOMEPAGE 1011 · DESIGN SYSTEM</span><span>© 2026 Vocci · 数值取自线上页面 2026-10-13</span></div></footer>
+
+<script>
+// copy colour values
+document.querySelectorAll('.sw').forEach(function(b){b.addEventListener('click',function(){var v=b.getAttribute('data-c');var done=function(){b.classList.add('copied');var c=b.querySelector('code'),o=c.textContent;c.textContent='已复制 '+v;setTimeout(function(){c.textContent=o;b.classList.remove('copied')},1200)};try{navigator.clipboard.writeText(v).then(done,done)}catch(e){done()}})});
+// button ripple (same idea as the homepage)
+document.querySelectorAll('.rp').forEach(function(b){b.addEventListener('mouseenter',function(e){var r=b.getBoundingClientRect(),s=document.createElement('span'),d=Math.max(r.width,r.height)*2.4;s.className='rip';s.style.width=s.style.height=d+'px';s.style.left=(e.clientX-r.left)+'px';s.style.top=(e.clientY-r.top)+'px';b.appendChild(s);setTimeout(function(){s.remove()},950)});b.addEventListener('click',function(e){e.preventDefault()})});
+// single-select groups
+function group(id,cls,cb){var g=document.getElementById(id);if(!g)return;g.querySelectorAll(cls).forEach(function(x,i){x.addEventListener('click',function(){g.querySelectorAll(cls).forEach(function(y){y.classList.remove('on')});x.classList.add('on');cb&&cb(i)})})}
+group('rail','button',function(i){document.querySelector('#rail .bar i').style.width=(33+i*33.5)+'%'});
+group('cats','.cat');group('views','button');group('tiles','.tile');
+document.querySelector('#faq .b').addEventListener('click',function(){document.getElementById('faq').classList.toggle('open')});
+// toc highlight
+var links=[].slice.call(document.querySelectorAll('nav.toc a'));
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('section.blk').forEach(function(s){io.observe(s)});
+</script>
+</body>
+</html>
