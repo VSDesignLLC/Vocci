@@ -2526,3 +2526,10 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 @media (min-width:700.5px) and (max-width:1100px){ #why .ov-ask{bottom:28px!important} }
 #faq .fq5-b{align-self:center!important;aspect-ratio:1/1;height:auto!important}
 #footer .ft2-soc a{display:grid!important;place-items:center!important;padding:0!important;margin:0!important}
+
+/* zz88 — phone/tablet: chapter card hugs its own content (no blank tail); outgoing cards fade out on top, out of flow */
+@media (max-width:1100px){
+  #why .rec-cards{display:block!important;position:relative!important}
+  #why .rec-cards>.rec-card{position:absolute!important;left:0;right:0;top:0;height:auto!important}
+  #why .stage[data-ch="0"] .rec-card[data-ch="0"],#why .stage[data-ch="1"] .rec-card[data-ch="1"],#why .stage[data-ch="2"] .rec-card[data-ch="2"]{position:relative!important}
+}
