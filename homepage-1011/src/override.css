@@ -2716,3 +2716,9 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 }
 @media (max-width:700.4px){ #why .pn.rec-pn{padding:16px 20px 20px!important} }
 @media (min-width:700.5px) and (max-width:1100px){ #why .pn.rec-pn{padding:20px 40px 28px!important} }
+/* zz96 · desktop: one title → body gap (16px) in every text cell, as tablet (16) and phone (14) already have */
+@media (min-width:1101px){
+  #colors .fnx-copy,#privacy .pv-card,#faq .fq5-head,#kol .kv-title,#breather .stage>.pn:not(.pic),#hardware .stage>.pn:not(.pic):not(.hasimg){row-gap:16px!important}
+  #privacy .pv-card h2{margin-bottom:0!important}
+}
+.gridall #privacy .stage>.pn.pv-card{background:rgba(255,255,255,.66)!important}
