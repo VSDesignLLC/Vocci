@@ -2708,3 +2708,11 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 /* zz94 · Needs: the active persona reads like the screen-3 chapter tabs — label in ink, only the number in orange */
 #needs .pz-i.on .pz-h,#needs .pz-i.on .pz-h span,#needs .pz-i.on .pz-h em{color:var(--ink)!important}
 #needs .pz-i.on .pz-h b{color:var(--accent-text)!important}
+/* zz95 · phone/tablet: every card uses the 8px radius (step cards, part cards, creator cards); screen-3 card lines up with every other card at the 20px gutter */
+@media (max-width:1100px){
+  #how .m-pin .pn.pic,#how .m-hrow>.pn.pic,#how .pn.pic{border-radius:8px 8px 0 0!important}
+  #how .m-pin .pn.lazy,#how .m-hrow>.pn.lazy,#how .pn.lazy{border-radius:0 0 8px 8px!important}
+  #hardware .pn.lazy,#hardware .m-hrow>.pn,#kol .kv-slide{border-radius:8px!important}
+}
+@media (max-width:700.4px){ #why .pn.rec-pn{padding:16px 20px 20px!important} }
+@media (min-width:700.5px) and (max-width:1100px){ #why .pn.rec-pn{padding:20px 40px 28px!important} }
