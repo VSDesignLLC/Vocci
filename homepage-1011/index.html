@@ -3855,6 +3855,36 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 /* 1011-zz85 · screen 3 hand: anchored to the bottom edge at every window shape (any letterboxing goes above the hand, never below the wrist) */
 #why .rec-fig{bottom:0!important}
 #why .rec-fig img{object-position:50% 100%!important}
+/* 1011-zz86 · short desktop windows (≤800px tall): half-height cells get compact versions so nothing is clipped */
+@media (min-width:1101px) and (max-height:800px){
+  /* screen 3 chapter card */
+  #why .rec-pn{padding:14px!important;gap:8px!important}
+  #why .rec-card{padding:16px 18px!important}
+  #why .rec-card h3{font-size:16px!important;margin-bottom:6px!important}
+  #why .rec-card .rec-p{font-size:13px!important;line-height:1.45!important;margin-bottom:0!important}
+  #why .rec-card .rec-steps{gap:4px!important;margin-top:8px!important}
+  #why .rec-card .rec-steps li{font-size:12.5px!important;line-height:1.35!important}
+  #why .rec-card .btns{margin-top:10px!important}
+  #why .rec-card .btn{height:36px!important}
+  /* colours: finish tabs show the name only (the description is shown above them) */
+  #colors .fnx-ctl{gap:8px!important;padding-top:22px!important;padding-bottom:22px!important}
+  #colors .fnx-f span{font-size:0!important}
+  #colors .fnx-f span b{font-size:14px!important;display:block}
+  #colors .fnx-f{padding-top:10px!important;padding-bottom:10px!important}
+  /* privacy: badge and button on one row */
+  #privacy .pn.pv-card .pv-foot{flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:16px!important}
+  #privacy .pn.pv-card .pv-foot img{width:60px!important}
+  #privacy .pn.pv-card{padding-top:22px!important;padding-bottom:22px!important}
+}
+@media (min-width:1101px) and (max-height:800px){
+  #why .rec-cards{height:auto!important;min-height:0!important;flex:1 1 auto}
+  #why .rec-card{height:auto!important;min-height:0!important}
+}
+/* 1011-zz86b · short desktops: the screen-3 chapter cell and the reliability text cell take the whole left column (content stays bottom-aligned) */
+@media (min-width:1101px) and (max-height:800px){
+  #breather .stage>.pn:not(.pic){grid-row:1/span 2!important;justify-content:flex-end!important}
+  #why .stage>.pn.rec-pn{grid-row:1/span 2!important;justify-content:flex-end!important}
+}
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="vl-intro" aria-hidden="true"><div class="vl-ring"><img src="img3/ring-top.webp" alt=""><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg></div><span class="vl-pct">00</span></div><script>(function(){var seen=false;try{seen=sessionStorage.getItem("vocci-intro")==="1"}catch(e){}var L=document.querySelector(".vl-intro");if(seen){L&&L.remove();return}document.documentElement.classList.add("vl-on");document.body.appendChild(L)})()</script><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-v2.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
