@@ -3186,7 +3186,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 #awards .aw-title h2{margin:0}
 @media(max-width:1100px){ #awards .stage>.pn.aw-title{width:100%!important;flex:0 0 100%!important;padding:28px var(--pad) 8px!important;height:auto!important} }
 #why .rec-card .rec-band{display:none!important}
-#why .rec-card .btns{flex-wrap:nowrap;gap:14px} #why .rec-card .btn{height:38px;padding:0 16px;font-size:13.5px!important;white-space:nowrap} #why .rec-card .btns .tlink{font-size:13.5px!important;white-space:nowrap} #why .rec-steps{gap:8px}
+#why .rec-card .btns{flex-wrap:nowrap;gap:14px} #why .rec-card .btn{height:38px;padding:0 16px;font-size:14px!important;white-space:nowrap} #why .rec-card .btns .tlink{font-size:14px!important;white-space:nowrap} #why .rec-steps{gap:8px}
 #why .pn.rec-pn{gap:12px!important} #why .rec-card{padding:18px!important;gap:10px!important}
 @media(min-width:1101px) and (max-height:880px){ #why .pn.rec-pn{--pad:18px;gap:10px!important} #why .rec-card{padding:14px 16px!important;gap:8px!important} #why .rec-steps{gap:5px} #why .rec-steps li{font-size:12px} #why .ch-rail{padding-bottom:4px} }
 @media(max-width:1100px) and (max-height:740px){ #why .pn.rec-stage{height:38%!important} #why .pn.rec-pn{height:62%!important} #why .rec-card .rec-p{font-size:12.5px;line-height:1.4} }
@@ -3944,8 +3944,7 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 @media (min-width:700.5px) and (max-width:1100px){
   .gridall section .pn h1,.gridall section .pn h2,#faq .fq5-head h2,.gridall #awards h2.aw-h{font-size:42px!important;line-height:46px!important}
   .gridall section .pn h3,#why .rec-card h3{line-height:30px!important}
-  #how .stage .pn h3{font-size:20px!important;line-height:24px!important}
-  #how .m-pin h3,#how .stage>.pn:not(.pic) h3{line-height:24px!important}
+  #how .stage .pn h3,#how .m-pin h3,#how .stage>.pn:not(.pic) h3{font-size:24px!important;line-height:30px!important}
   #awards .pn.mid.quote p{font-size:18px!important;line-height:26px!important}
   #faq .fq5-q{font-size:16px!important;line-height:22px!important}
   .gridall section .pn p:not(.r3-app p):not(.quote p),#faq .fq5-a p,#hardware span.cu{line-height:23px!important}
@@ -4047,6 +4046,35 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #why .rec-card .rec-steps li{font-size:12px!important;line-height:16px!important}
 }
 @media (min-width:1101px) and (max-height:720px){ #why .stage>.pn.rec-pn{gap:8px!important} #why .rec-card{gap:6px!important} }
+
+/* ============ 1011-zz93 · second system pass ============ */
+/* regressions from zz92: intro paragraphs back on the 22 / 23px body rhythm */
+#faq .fq5-head p,#needs .pz-join p{line-height:22px!important}
+@media (min-width:700.5px) and (max-width:1100px){ #faq .fq5-head p,#needs .pz-join p{line-height:23px!important} #hero>.stage>.pn h1,#hero h1{line-height:46px!important} }
+/* body copy is body grey everywhere (persona descriptions were heading black) */
+#needs p.pz-d{color:#55555c!important}
+/* letter-spacing: titles −0.03em, card titles −0.02em, on every section */
+.gridall #awards .pn.mid.quote .aw-h,#how .how-ov h3{letter-spacing:-.03em!important}
+#why .rec-card h3{letter-spacing:-.02em!important}
+/* mono labels 12px everywhere (legal fine print stays 11px) */
+#awards .label,#awards .pill{font-size:12px!important}
+#awards .label{line-height:16px!important}
+#awards .pill{line-height:12px!important;letter-spacing:.06em!important}
+/* type scale clean-up: 17 → 18 menu links, 15 → 16 form label and FAQ questions on phone */
+.gridall>.nav.nav3 .n3-mg a,.n3-mob .n3-mg a{font-size:18px!important;line-height:22px!important}
+#footer .f-sub label{font-size:16px!important;line-height:24px!important}
+@media (max-width:700.4px){ #faq .fq5-q{font-size:16px!important;line-height:22px!important} }
+/* tablet: small lists 13px like desktop and phone; footer sign-off at section-title size (it is the page's last title) */
+@media (min-width:700.5px) and (max-width:1100px){
+  #why .rec-steps li,.pn ul.feats li{font-size:13px!important;line-height:18px!important}
+  #footer .ft2-say h2{font-size:42px!important;line-height:46px!important}
+}
+/* containers carry the same integer size as their text */
+#needs .pz-h,#colors .fnx-f,#faq .fq5-c{font-size:14px!important}
+@media (max-width:700.4px){ #needs .pz-h,#faq .fq5-c{font-size:13px!important} }
+#faq .fq5-h{font-size:16px!important}
+/* radius: the cart icon joins the 8px family */
+.gridall>.nav.nav3 .cart,.gridall>.nav .cart{border-radius:8px!important}
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="vl-intro" aria-hidden="true"><div class="vl-ring"><img src="img3/ring-top.webp" alt=""><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg></div><span class="vl-pct">00</span></div><script>(function(){var seen=false;try{seen=sessionStorage.getItem("vocci-intro")==="1"}catch(e){}var L=document.querySelector(".vl-intro");if(seen){L&&L.remove();return}document.documentElement.classList.add("vl-on");document.body.appendChild(L)})()</script><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-v2.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
