@@ -2515,3 +2515,14 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #breather .stage>.pn:not(.pic){grid-row:1/span 2!important;justify-content:flex-end!important}
   #why .stage>.pn.rec-pn{grid-row:1/span 2!important;justify-content:flex-end!important}
 }
+
+/* zz87 — iPhone fixes: screen-3 cell split follows the card (tabs never under the photo), ask bubbles at the photo's bottom, FAQ toggle fixed square, footer social icons centred */
+@media (max-width:1100px){
+  #why .stage.rec3{display:flex!important;flex-direction:column!important}
+  #why .pn.rec-stage{position:relative!important;top:auto!important;left:auto!important;right:auto!important;flex:1 1 0!important;height:auto!important;min-height:0!important;overflow:hidden!important}
+  #why .pn.rec-pn{position:relative!important;bottom:auto!important;left:auto!important;right:auto!important;flex:0 0 auto!important;height:auto!important;justify-content:flex-start!important;z-index:6!important}
+  #why .ov-ask{top:auto!important;bottom:16px!important}
+}
+@media (min-width:700.5px) and (max-width:1100px){ #why .ov-ask{bottom:28px!important} }
+#faq .fq5-b{align-self:center!important;aspect-ratio:1/1;height:auto!important}
+#footer .ft2-soc a{display:grid!important;place-items:center!important;padding:0!important;margin:0!important}
