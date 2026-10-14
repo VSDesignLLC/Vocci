@@ -2485,3 +2485,33 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 /* 1011-zz85 · screen 3 hand: anchored to the bottom edge at every window shape (any letterboxing goes above the hand, never below the wrist) */
 #why .rec-fig{bottom:0!important}
 #why .rec-fig img{object-position:50% 100%!important}
+/* 1011-zz86 · short desktop windows (≤800px tall): half-height cells get compact versions so nothing is clipped */
+@media (min-width:1101px) and (max-height:800px){
+  /* screen 3 chapter card */
+  #why .rec-pn{padding:14px!important;gap:8px!important}
+  #why .rec-card{padding:16px 18px!important}
+  #why .rec-card h3{font-size:16px!important;margin-bottom:6px!important}
+  #why .rec-card .rec-p{font-size:13px!important;line-height:1.45!important;margin-bottom:0!important}
+  #why .rec-card .rec-steps{gap:4px!important;margin-top:8px!important}
+  #why .rec-card .rec-steps li{font-size:12.5px!important;line-height:1.35!important}
+  #why .rec-card .btns{margin-top:10px!important}
+  #why .rec-card .btn{height:36px!important}
+  /* colours: finish tabs show the name only (the description is shown above them) */
+  #colors .fnx-ctl{gap:8px!important;padding-top:22px!important;padding-bottom:22px!important}
+  #colors .fnx-f span{font-size:0!important}
+  #colors .fnx-f span b{font-size:14px!important;display:block}
+  #colors .fnx-f{padding-top:10px!important;padding-bottom:10px!important}
+  /* privacy: badge and button on one row */
+  #privacy .pn.pv-card .pv-foot{flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:16px!important}
+  #privacy .pn.pv-card .pv-foot img{width:60px!important}
+  #privacy .pn.pv-card{padding-top:22px!important;padding-bottom:22px!important}
+}
+@media (min-width:1101px) and (max-height:800px){
+  #why .rec-cards{height:auto!important;min-height:0!important;flex:1 1 auto}
+  #why .rec-card{height:auto!important;min-height:0!important}
+}
+/* 1011-zz86b · short desktops: the screen-3 chapter cell and the reliability text cell take the whole left column (content stays bottom-aligned) */
+@media (min-width:1101px) and (max-height:800px){
+  #breather .stage>.pn:not(.pic){grid-row:1/span 2!important;justify-content:flex-end!important}
+  #why .stage>.pn.rec-pn{grid-row:1/span 2!important;justify-content:flex-end!important}
+}
