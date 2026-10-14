@@ -674,3 +674,9 @@ _t = _t.replace('<div class="pn pz-title"', _more.join(['', '']) + '@@MORE@@<div
 _i = _t.index('</div>', _t.index('class="pn pic pz-pic"'))
 _t = _t[:_i] + _more + _t[_i:]
 _put('needs', _t)
+
+# 1011-zz92 · screen-3 Connect card: in-card CTA is a text link (same pattern as the creator cards' "Watch review")
+_t = _sec('why').group()
+_old = '<div class="btns"><a class="btn" href="https://vocci.ai/pages/connect-your-ai">Connect your AI</a></div>'
+assert _t.count(_old) == 1, _t.count(_old)
+_put('why', _t.replace(_old, '<div class="btns"><a class="tlink" href="https://vocci.ai/pages/connect-your-ai">Connect your AI</a></div>'))
