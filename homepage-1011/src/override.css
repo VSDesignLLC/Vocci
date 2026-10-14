@@ -2655,3 +2655,16 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 @media (max-width:700.4px){ #how .how-head h2{line-height:30px!important} #how .how-head p{font-size:14px!important;line-height:22px!important} }
 @media (min-width:700.5px) and (max-width:1100px){ #how .how-head h2{font-size:42px!important;line-height:46px!important} #how .how-head p{line-height:23px!important} }
 .n3-mob .n3-mg a{line-height:22px!important}
+
+/* zz91 · desktop screen 3: the chapter panel takes the whole left column at every window height (content still sits at the bottom),
+   with the same 28px cell padding as every other text cell and a roomy 24px card — no more tabs pressed against the top edge */
+@media (min-width:1101px){
+  #why .stage>.pn.rec-pn{grid-row:1/span 2!important;justify-content:flex-end!important;padding:28px!important;gap:16px!important}
+  #why .rec-card{padding:24px!important;gap:12px!important}
+  #why .rec-card h3{margin-bottom:0!important}
+  #why .rec-card .rec-p{font-size:14px!important;line-height:22px!important}
+  #why .rec-card .rec-steps{gap:8px!important;margin-top:8px!important}
+  #why .rec-card .rec-steps li{font-size:13px!important;line-height:18px!important}
+  #why .rec-card .btns{margin-top:12px!important}
+  #why .rec-card .btn{height:44px!important}
+}
