@@ -2533,3 +2533,9 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #why .rec-cards>.rec-card{position:absolute!important;left:0;right:0;top:0;height:auto!important}
   #why .stage[data-ch="0"] .rec-card[data-ch="0"],#why .stage[data-ch="1"] .rec-card[data-ch="1"],#why .stage[data-ch="2"] .rec-card[data-ch="2"]{position:relative!important}
 }
+
+/* zz89 — phone/tablet footer: glass highlight insets were stacking on the grid borders (2px lines); one 1px line per edge like every other section */
+@media (max-width:1100px){
+  #footer .stage>.pn{box-shadow:none!important}
+  #footer .stage>.pn.col-l{box-shadow:inset -1px 0 0 rgba(255,255,255,.6)!important}
+}
