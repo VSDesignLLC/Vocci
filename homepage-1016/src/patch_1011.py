@@ -722,3 +722,15 @@ for _cls, _lab in (('hs1', 'Double-click'), ('hs2', 'Press &amp; hold')):
           '<span class="m-gest-lg"><img src="img3/gest-icon-%s.svg" alt=""><span class="label">%s</span></span></span>') % ('g1' if _cls == 'hs1' else 'g2', 'double' if _cls == 'hs1' else 'hold', _lab)
     _t = _t[:_e] + _g + _t[_e:]
 _put('how', _t)
+
+# 1016 · Needs: community buttons carry their network's icon (same line style as the footer social icons)
+_DC = ('<svg class="btn-ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 6c3-1.5 7-1.5 10 0l1.5 7c-1.5 1.2-3 1.8-4 2l-.8-1.5M5 6L3.5 13c1.5 1.2 3 1.8 4 2l.8-1.5M7.5 12.5c1.6.7 3.4.7 5 0"/>'
+       '<circle cx="8" cy="10" r=".7"/><circle cx="12" cy="10" r=".7"/></svg>')
+_RD = ('<svg class="btn-ico" viewBox="0 0 20 20" aria-hidden="true"><ellipse cx="10" cy="12.2" rx="6.5" ry="4.6"/><circle cx="3.9" cy="9.2" r="1.3"/><circle cx="16.1" cy="9.2" r="1.3"/>'
+       '<path d="M10 7.6l1-4.1 3.4.8"/><circle cx="15.6" cy="4.6" r="1.1"/><circle cx="7.6" cy="11.6" r=".7"/><circle cx="12.4" cy="11.6" r=".7"/><path d="M7.6 14.2c1.5.9 3.3.9 4.8 0"/></svg>')
+_t = _sec('needs').group()
+_a = '<a class="btn" href="https://discord.gg/2KZKzdpvN3">Discord</a>'
+_b = '<a class="btn ghost" href="#">Reddit</a>'
+assert _t.count(_a) == 1 and _t.count(_b) == 1, (_t.count(_a), _t.count(_b))
+_t = _t.replace(_a, '<a class="btn" href="https://discord.gg/2KZKzdpvN3">' + _DC + 'Discord</a>').replace(_b, '<a class="btn ghost" href="#">' + _RD + 'Reddit</a>')
+_put('needs', _t)

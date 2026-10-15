@@ -2884,3 +2884,6 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #needs .pz-vid{grid-template-columns:minmax(0,1fr)}
   #needs .pz-vnav{grid-column:1;grid-row:3}
 }
+/* Needs · community buttons with their network icon (footer social icon style: 1.6 line, round caps) */
+#needs .pz-join .btn{gap:8px}
+#needs .pz-join .btn .btn-ico{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;position:relative;z-index:1}
