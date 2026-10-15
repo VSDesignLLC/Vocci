@@ -699,3 +699,21 @@
   function place(){ if(innerWidth<=1100){ if(o.parentNode!==cell) cell.appendChild(o); } else if(o.parentNode!==home){ home.insertBefore(o,next); } }
   place(); addEventListener('resize',place);
 })();
+
+/* 1011-zz97 · phone/tablet compact nav: measure the compact pill once so its left edge can slide (CSS cannot animate to left:auto) */
+(function(){
+  var nav=document.querySelector('.gridall>.nav.nav3'); if(!nav) return;
+  function measure(){
+    if(innerWidth>1100) return;
+    var had=nav.classList.contains('show-buy');
+    nav.classList.add('nav-measure','show-buy');
+    var oldL=nav.style.left; nav.style.setProperty('left','auto','important');
+    var w=Math.ceil(nav.getBoundingClientRect().width);
+    nav.style.left=oldL; nav.style.removeProperty('left'); if(oldL) nav.style.left=oldL;
+    if(!had) nav.classList.remove('show-buy');
+    void nav.offsetWidth; nav.classList.remove('nav-measure');
+    if(w>40) nav.style.setProperty('--navc', w+'px');
+  }
+  var t; addEventListener('resize',function(){clearTimeout(t);t=setTimeout(measure,150)});
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(measure); measure();
+})();

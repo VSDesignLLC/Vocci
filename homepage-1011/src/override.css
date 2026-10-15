@@ -2722,3 +2722,24 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #privacy .pv-card h2{margin-bottom:0!important}
 }
 .gridall #privacy .stage>.pn.pv-card{background:rgba(255,255,255,.66)!important}
+
+/* ============ 1011-zz97 · 10/15 round (安田 feedback) ============ */
+/* 1 · compact nav animates instead of snapping — one curve (--ease, .55s) for every moving part */
+@media (min-width:1101px){
+  .page.gridall>.nav.nav3{transition:opacity .2s,transform .3s var(--ease),width .55s var(--ease)!important}
+  .page.gridall>.nav.nav3.show-buy:not(:hover):not(:focus-within){margin-left:auto!important;margin-right:auto!important}
+  .page.gridall>.nav.nav3 .n3-bar{width:100%!important}
+  .page.gridall>.nav.nav3 .n3-tabs{max-width:800px}
+  .page.gridall>.nav.nav3 .n3-r .cart,.page.gridall>.nav.nav3 .n3-r .n3-acct{max-width:40px}
+  .page.gridall>.nav.nav3.show-buy:not(:hover):not(:focus-within) .n3-r .cart,
+  .page.gridall>.nav.nav3.show-buy:not(:hover):not(:focus-within) .n3-r .n3-acct{width:40px!important;border-width:1px!important}
+}
+.page.gridall>.nav.nav3 .n3-buy{transition:max-width .55s var(--ease),padding .55s var(--ease),opacity .3s ease .1s,color .35s ease,border-color .35s ease!important}
+@media (max-width:1100px){
+  .page.gridall>.nav.nav3{transition:left .55s var(--ease),opacity .2s!important}
+  .page.gridall>.nav.nav3 .n3-bar{transition:padding .55s var(--ease),background .4s!important}
+  .page.gridall>.nav.nav3 .wordmark{transition:opacity .25s,max-width .55s var(--ease),margin .55s var(--ease)!important}
+  .page.gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])){left:calc(100% - var(--nav-gut,8px) - var(--navc,160px))!important;right:var(--nav-gut,8px)!important}
+  .nav.nav3.nav-measure,.nav.nav3.nav-measure *{transition:none!important}
+}
+@media (min-width:700.5px) and (max-width:1100px){ .page.gridall>.nav.nav3{--nav-gut:16px} }
