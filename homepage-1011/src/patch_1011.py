@@ -680,3 +680,40 @@ _t = _sec('why').group()
 _old = '<div class="btns"><a class="btn" href="https://vocci.ai/pages/connect-your-ai">Connect your AI</a></div>'
 assert _t.count(_old) == 1, _t.count(_old)
 _put('why', _t.replace(_old, '<div class="btns"><a class="tlink" href="https://vocci.ai/pages/connect-your-ai">Connect your AI</a></div>'))
+
+# 1016 · Needs: the five personas move up under the title; the community copy + Discord / Reddit move to the bottom of the same column (安田 + Ian)
+_t = _sec('needs').group()
+_m = re.search(r'<div class="pn pz-list"[^>]*>(<ol class="pz-acc">.*?</ol>)</div>', _t, re.S)
+assert _m, 'pz-list'
+_ol = _m.group(1)
+_t = _t[:_m.start()] + _t[_m.end():]
+_i = _t.index('<div class="end', _t.index('class="pn pz-title"'))
+_t = _t[:_i] + _ol + _t[_i:]
+_put('needs', _t)
+
+# 1016 · Needs › Content creators: the scene panel shows the creators' YouTube reviews of Vocci Ring (Ian: reviews of the product, not comments)
+_k = _sec('kol').group()
+_pics = re.findall(r'<a aria-label="[^"]*" class="pn pic kv-pic" href="([^"]*)"[^>]*><img[^>]*src="([^"]+)"[^>]*?(?:style="([^"]*)")?[^>]*>', _k)
+_txts = re.findall(r'<div class="pn kv-txt"[^>]*><span class="label">(.*?)</span><h3>(.*?)</h3>', _k, re.S)
+assert len(_pics) >= 3 and len(_txts) >= 3, (len(_pics), len(_txts))
+_cards = ''.join(
+    '<a class="pz-vid" href="%s"%s><span class="pz-vid-img"><img loading="lazy" decoding="async" src="%s" alt=""%s><i class="vc-play" aria-hidden="true"></i></span>'
+    '<span class="label">%s</span><b class="pz-vid-t">%s</b><span class="tlink">Watch review</span></a>'
+    % (h, '' if h == '#' else ' target="_blank" rel="noopener"', src, (' style="%s"' % st) if st else '', lab, ttl)
+    for (h, src, st), (lab, ttl) in zip(_pics[:3], _txts[:3]))
+_t = _sec('needs').group()
+_i = _t.index('</div>', _t.index('class="pn pic pz-pic"'))
+_t = _t[:_i] + '<div class="pz-vids" aria-label="Creator reviews on YouTube">' + _cards + '</div>' + _t[_i:]
+_put('needs', _t)
+
+# 1016 · phone/tablet screen 2: a small 2D ring gesture next to the app screen — double-click (step 1), press & hold (step 2) (Ian 10/13)
+_t = _sec('how').group()
+for _cls, _lab in (('hs1', 'Double-click'), ('hs2', 'Press &amp; hold')):
+    _m = re.search(r'<div class="pn pic[^"]*\b%s\b[^"]*"[^>]*>' % _cls, _t)
+    assert _m, _cls
+    _e = _t.index('>', _t.index('<img', _m.end())) + 1   # after the step's own image (motion.js swaps the first <img> of each cell)
+    _g = ('<span class="m-gest %s" aria-hidden="true"><span class="m-gest-ring"><img class="s1" src="img3/gest-press.svg" alt="" decoding="async">'
+          '<img class="s2" src="img3/gest-led.svg" alt="" decoding="async"><i class="gp"></i><i class="gp"></i><svg class="gh" viewBox="0 0 40 40"><circle cx="20" cy="20" r="17"/></svg><i class="gl"></i></span>'
+          '<span class="m-gest-lg"><img src="img3/gest-icon-%s.svg" alt=""><span class="label">%s</span></span></span>') % ('g1' if _cls == 'hs1' else 'g2', 'double' if _cls == 'hs1' else 'hold', _lab)
+    _t = _t[:_e] + _g + _t[_e:]
+_put('how', _t)

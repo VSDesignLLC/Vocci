@@ -2743,3 +2743,124 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   .nav.nav3.nav-measure,.nav.nav3.nav-measure *{transition:none!important}
 }
 @media (min-width:700.5px) and (max-width:1100px){ .page.gridall>.nav.nav3{--nav-gut:16px} }
+/* 2 · section titles (H1 / H2) in Regular — 安田 10/15. Card titles (H3) and the footer sign-off keep 600 */
+.gridall section .pn h1,.gridall section .pn h2,.gridall section h2,#faq .fq5-head h2,.gridall #awards .pn.mid.quote .aw-h,.gridall #awards h2.aw-h,#how .how-ov h3,#how .how-head h2{font-weight:400!important}
+/* IBM Plex Mono: −0.5px tracking everywhere it is used (its default spacing is too open) */
+.n3-mh,.pn .label,.label,.label b,.pn .pill,#awards .pill,
+#how .r3-pill .t,#how .r3-ph .ag,#how .hold,#how .hold span,#how .r3-ph .cite,#how .cite b,#how .mcp span,#how .cmd t,
+#why .ch-rail b,#why .ask-a b,#why .rec-card b,
+#needs .pz-h b,#needs .pz-qb i,#needs .pz-qb span,#needs .pz-src,#needs .qb-go,#needs .qb-go b,
+#faq .fq5-c em,#footer .fg2 h5,#footer .ft2-legal,#footer .ft2-legal a,#footer .ft2-legal p,#footer .f-copy,.vl-intro .vl-pct{letter-spacing:-.5px!important}
+/* 6 · creators (desktop): the title cell takes the whole left column — title + subtitle at the top-left, CTA and the pager arrows side by side at the bottom-left */
+@media (min-width:1101px){
+  #kol .stage>.pn.kv-title{grid-row:1/span 2!important;display:grid!important;grid-template-columns:auto auto 1fr;grid-template-rows:auto auto 1fr auto;row-gap:16px!important;column-gap:12px!important;align-items:end;justify-content:stretch!important}
+  #kol .kv-title>h2,#kol .kv-title>p{grid-column:1/-1;align-self:start;margin:0!important}
+  #kol .kv-title>.btns{grid-column:1;grid-row:4;margin:0!important}
+  #kol .kv-title>.kv-nav{grid-column:2;grid-row:4;margin:0!important;align-self:center}
+}
+/* 7 · awards: the hover image under each award and the quote card's liquid-metal background both sit under the design system's Panel glass (white 66%, blur 26, sat 1.15) */
+.pn.glassy .gbg::after{background:rgba(255,255,255,.66)!important;-webkit-backdrop-filter:blur(26px) saturate(1.15)!important;backdrop-filter:blur(26px) saturate(1.15)!important}
+.pn.mid.glassy:hover .label,.pn.mid.glassy:hover .cb{text-shadow:none!important}
+#awards .pn.mid.quote{background:url(img3/quote-liquid.jpg) center/cover no-repeat!important;isolation:isolate}
+#awards .pn.mid.quote::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(255,255,255,.66);-webkit-backdrop-filter:blur(26px) saturate(1.15);backdrop-filter:blur(26px) saturate(1.15);pointer-events:none}
+/* 4 · Needs: one left column — title, the five personas right under it, community copy + Discord / Reddit at the bottom */
+#needs .pz-title>.pz-acc{margin:16px 0 0!important;width:100%}
+#needs .pz-title>.end{margin-top:auto!important;padding-top:24px}
+@media (min-width:1101px){
+  #needs .stage>.pn.pz-title{grid-row:1/span 2!important;gap:0!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;padding:28px!important}
+  #needs .pz-title>.end{padding-top:28px}
+}
+@media (max-width:1100px){
+  #needs .pn.pz-title{padding-bottom:28px!important}
+  #needs .pz-title>.pz-acc{margin-top:16px!important}
+  #needs .pz-title>.end{margin-top:0!important;padding-top:28px}
+}
+@media (max-width:700.4px){
+  #needs .pn.pz-title{padding-bottom:28px!important}
+  #needs .pz-title>.pz-acc{margin-top:14px!important}
+  #needs .pz-title>.end{padding-top:24px}
+}
+#needs .stage>.pn.pz-title{gap:0!important;row-gap:0!important}
+#needs .pz-title>h2{margin-bottom:0!important}
+/* Needs › Content creators: three creator reviews take over the scene panel (one per grid column on desktop) */
+#needs .pz-vids{position:absolute;inset:0;z-index:4;display:grid;grid-template-columns:repeat(3,1fr);align-items:center;opacity:0;visibility:hidden;transition:opacity .6s var(--ease),visibility 0s linear .6s}
+#needs .pz-pic[data-k="4"] .pz-vids{opacity:1;visibility:visible;transition:opacity .6s var(--ease) .1s,visibility 0s}
+#needs .pz-pic[data-k="4"]>img.pz-scene,#needs .pz-pic[data-k="4"] .pz-qb{opacity:0!important;pointer-events:none!important}
+#needs .pz-vid{display:flex;flex-direction:column;gap:12px;padding:28px;color:var(--ink);text-decoration:none}
+#needs .pz-vid-img{position:relative;display:block;aspect-ratio:4/5;border-radius:8px;overflow:hidden;background:var(--stone,#e8e8e5);margin-bottom:4px}
+#needs .pz-vid-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:scale .9s var(--ease)}
+#needs .pz-vid .vc-play{background:rgba(20,20,22,.32);transition:background .35s ease}
+#needs .pz-vid:hover .vc-play{background:var(--accent)}
+#needs .pz-vid:hover .pz-vid-img img{scale:1.03}
+#needs .pz-vid .label{color:#5f5f66}
+#needs .pz-vid-t{display:block;font-weight:600;letter-spacing:-.02em;font-size:18px;line-height:22px}
+@media (min-width:1280px){ #needs .pz-vid-t{font-size:20px;line-height:24px} }
+@media (min-width:1440px){ #needs .pz-vid-t{font-size:22px;line-height:26px} }
+#needs .pz-vid .tlink{margin:0!important}
+#needs .pz-pic[data-k="4"] a.pz-qb,#needs .pz-pic[data-k="4"] a.pz-qb.pz-qb2[data-k="4"],#needs .pn.pz-pic[data-k="4"] .pz-qb2{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+#needs .pz-vids{align-items:start!important;align-content:center}
+@media (max-width:1100px){
+  #needs .pn.pz-pic[data-k="4"]{aspect-ratio:auto!important;height:auto!important;min-height:0!important}
+  #needs .pz-pic[data-k="4"] .pz-vids{position:relative;inset:auto}
+  #needs .pz-vids{display:flex!important;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:24px 20px 28px;scrollbar-width:none}
+  #needs .pz-vids::-webkit-scrollbar{display:none}
+  #needs .pz-vid{flex:0 0 72%;scroll-snap-align:start;padding:0}
+  #needs .pz-vid-img{aspect-ratio:16/10}
+}
+@media (min-width:700.5px) and (max-width:1100px){
+  #needs .pz-vids{padding:28px 40px 40px;gap:16px}
+  #needs .pz-vid{flex:0 0 40%}
+  #needs .pz-vid-t{font-size:24px;line-height:30px}
+}
+@media (max-width:1100px){ #needs .pz-vids{scroll-padding-inline:20px} }
+@media (min-width:700.5px) and (max-width:1100px){ #needs .pz-vids{scroll-padding-inline:40px} }
+/* 9 · phone/tablet screen 2: ring gesture hints in the style of the app's "Use of Device" guide (same flat ring + finger artwork).
+   Loop: finger on the button → orange feedback (two taps / a filling hold ring) → the ring with its LED lit. Orange = highlight, label = mono 12 */
+.m-gest{display:none}
+@media (max-width:1100px){
+  #how .pn.pic .m-gest{position:absolute;z-index:3;left:4%;top:50%;width:27%;max-width:150px;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none}
+  #how .m-gest-ring{position:relative;display:block;width:100%;aspect-ratio:112/47}
+  #how .m-gest-ring img{position:absolute;inset:0;width:100%;height:100%}
+  #how .m-gest-ring .s2{opacity:0}
+  #how .m-gest .gp,#how .m-gest .gh{position:absolute;left:49.5%;top:42%;width:34%;aspect-ratio:1;translate:-50% -50%;border-radius:50%}
+  #how .m-gest .gp{border:1.5px solid #F47546;opacity:0}
+  #how .m-gest .gh{display:none;fill:none;stroke:#F47546;stroke-width:3;stroke-linecap:round;stroke-dasharray:107;stroke-dashoffset:107;rotate:-90deg}
+  #how .m-gest .gl{position:absolute;left:48.3%;top:42%;width:12%;height:7%;translate:-50% -50%;border-radius:999px;background:#F47546;box-shadow:0 0 10px 3px rgba(244,117,70,.55);opacity:0}
+  #how .m-gest-lg{display:flex;flex-direction:column;align-items:center;gap:6px}
+  #how .m-gest-lg img{width:26px;height:auto}
+  #how .m-gest .label{font-size:12px;line-height:14px;white-space:nowrap}
+  #how .m-gest .s1{animation:gS1 3.2s var(--ease) infinite}
+  #how .m-gest .s2{animation:gS2 3.2s var(--ease) infinite}
+  #how .m-gest .gl{animation:gLed 3.2s var(--ease) infinite}
+  #how .m-gest.g1 .gp{animation:gTap 3.2s var(--ease) infinite}
+  #how .m-gest.g1 .gp+.gp{animation-delay:.28s}
+  #how .m-gest.g2 .gp{display:none}
+  #how .m-gest.g2 .gh{display:block;animation:gHold 3.2s linear infinite}
+}
+@keyframes gTap{0%,4%{opacity:0;scale:.5}8%{opacity:1;scale:.6}24%{opacity:0;scale:1.5}100%{opacity:0;scale:1.5}}
+@keyframes gHold{0%,6%{stroke-dashoffset:107;opacity:1}38%{stroke-dashoffset:0;opacity:1}46%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes gS1{0%,40%{opacity:1}50%,88%{opacity:0}96%,100%{opacity:1}}
+@keyframes gS2{0%,40%{opacity:0}50%,88%{opacity:1}96%,100%{opacity:0}}
+@keyframes gLed{0%,48%{opacity:0}56%{opacity:1}64%{opacity:.35}72%{opacity:1}80%{opacity:.35}88%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){ #how .m-gest *{animation:none!important} }
+@media (max-width:1100px){
+  #how .pn.pic .m-gest{left:3%;width:24%}
+  #how .pn.pic .m-gest-lg img{position:static!important;inset:auto!important;width:26px!important;height:auto!important;object-fit:contain!important;transform:none!important;opacity:1!important}
+}
+/* tablet: the phone mock is too wide to leave a side gap, so the hint sits in a band above it (ring + icon/label side by side) */
+@media (min-width:700.5px) and (max-width:1100px){
+  #how .pn.pic.hs1,#how .pn.pic.hs2{--gband:96px}
+  #how .pn.pic.hs1 .r3-app,#how .pn.pic.hs2 .r3-app{padding-top:96px!important;box-sizing:border-box}
+  #how .pn.pic .m-gest{left:50%;top:24px;width:auto;max-width:none;transform:translateX(-50%);flex-direction:row;gap:16px}
+  #how .pn.pic .m-gest-ring{width:132px}
+  #how .pn.pic .m-gest-lg{flex-direction:row;gap:8px}
+}
+@media (min-width:700.5px) and (max-width:1100px){
+  #how .pn.pic.hs1 .r3-app,#how .pn.pic.hs2 .r3-app{padding-top:0!important;top:96px!important;bottom:0!important;height:auto!important}
+}
+/* creators title cell: CTA (194) + arrows (88) only fit side by side from 1440 up; narrower desktops stack the arrows above the CTA, still bottom-left */
+@media (min-width:1101px) and (max-width:1439.9px){
+  #kol .stage>.pn.kv-title{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto 1fr auto auto!important}
+  #kol .kv-title>.kv-nav{grid-column:1!important;grid-row:4!important;align-self:end!important}
+  #kol .kv-title>.btns{grid-column:1!important;grid-row:5!important}
+}
