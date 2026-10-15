@@ -2983,3 +2983,14 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 #colors .fnx-ctl>.fnx-desc{margin:16px 0 0!important;max-width:none}
 #colors .fnx-ctl>.end{margin-top:24px!important}
 #colors .fnx-v.run::after{display:none!important}   /* 1016: no progress line */
+/* 1016 · FAQ (desktop): one row only, everything top-aligned with the title; lighter veil; photo centred */
+@media (min-width:1101px){
+  #faq{height:auto!important;min-height:0!important}
+  #faq>.stage{height:auto!important;min-height:50vh!important;grid-template-rows:minmax(50vh,auto)!important}
+  #faq>.stage>.rowline{display:none!important}
+  #faq .stage>.pn.fq5-cats,#faq .stage>.pn.fq5-list{padding-top:28px!important}
+  #faq .stage>.pn.fq5-list{grid-row:1!important;overflow:visible!important;height:auto!important}
+  #faq .stage>.pn.fq5-head,#faq .stage>.pn.fq5-cats{height:auto!important;min-height:0!important}
+}
+#faq .stage>.pn.fq5-pic img{object-position:50% 50%!important}
+#faq .stage>.pn.fq5-pic::after{background:rgba(255,255,255,.4)!important;-webkit-backdrop-filter:blur(4px)!important;backdrop-filter:blur(4px)!important}
