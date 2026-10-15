@@ -2887,3 +2887,44 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 /* Needs · community buttons with their network icon (footer social icon style: 1.6 line, round caps) */
 #needs .pz-join .btn{gap:8px}
 #needs .pz-join .btn .btn-ico{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;position:relative;z-index:1}
+
+/* ============ 1016 · nav compaction, smoother + a little showier ============
+   soft spring on the size · menu items blur/shrink out from the outside in · Buy now scales in late · one orange glint runs round the pill's edge (the ring motif) */
+@property --nav-a{syntax:"<angle>";inherits:false;initial-value:0deg}
+.page.gridall>.nav.nav3{--nav-spring:cubic-bezier(.25,1.15,.35,1)}
+.page.gridall>.nav.nav3::after{content:"";position:absolute;inset:-1px;border-radius:11px;padding:1.5px;pointer-events:none;z-index:3;opacity:0;
+  background:conic-gradient(from var(--nav-a),transparent 0 70%,rgba(244,117,70,.0) 72%,rgba(244,117,70,.95) 86%,rgba(255,190,160,.9) 90%,transparent 94%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+@keyframes navGlint{0%{opacity:0;--nav-a:0deg}15%{opacity:1}80%{opacity:1}100%{opacity:0;--nav-a:360deg}}
+@media (min-width:1101px){
+  .page.gridall>.nav.nav3{transition:opacity .2s,transform .3s var(--ease),width .75s var(--nav-spring)!important}
+  .page.gridall>.nav.nav3.show-buy:not(:hover):not(:focus-within)::after{animation:navGlint 1.1s cubic-bezier(.45,.05,.3,1) .35s 1 both}
+  /* the tab strip itself stays opaque; its items do the leaving */
+  .page.gridall>.nav.nav3.show-buy:not(:hover):not(:focus-within) .n3-tabs{opacity:1!important}
+  .page.gridall>.nav.nav3 .n3-tabs .n3-t{transition:opacity .3s ease,filter .35s ease,transform .45s var(--ease)!important}
+  .page.gridall>.nav.nav3.show-buy:not(:hover):not(:focus-within) .n3-tabs .n3-t{opacity:0;filter:blur(6px);transform:scale(.92)}
+  .page.gridall>.nav.nav3.show-buy:not(:hover):not(:focus-within) .n3-tabs .n3-t:nth-child(1),.page.gridall>.nav.nav3.show-buy:not(:hover):not(:focus-within) .n3-tabs .n3-t:nth-child(5){transition-delay:0s}
+  .page.gridall>.nav.nav3.show-buy:not(:hover):not(:focus-within) .n3-tabs .n3-t:nth-child(2),.page.gridall>.nav.nav3.show-buy:not(:hover):not(:focus-within) .n3-tabs .n3-t:nth-child(4){transition-delay:.035s}
+  .page.gridall>.nav.nav3.show-buy:not(:hover):not(:focus-within) .n3-tabs .n3-t:nth-child(3){transition-delay:.07s}
+  .page.gridall>.nav.nav3 .n3-tabs .n3-t{transition-delay:.12s}   /* coming back: items settle in after the bar has opened */
+  .page.gridall>.nav.nav3 .n3-r .cart,.page.gridall>.nav.nav3 .n3-r .n3-acct{transition:opacity .3s ease,filter .35s ease,transform .45s var(--ease),max-width .75s var(--nav-spring),margin .75s var(--nav-spring)!important}
+  .page.gridall>.nav.nav3.show-buy:not(:hover):not(:focus-within) .n3-r .cart,
+  .page.gridall>.nav.nav3.show-buy:not(:hover):not(:focus-within) .n3-r .n3-acct{filter:blur(4px);transform:scale(.6)}
+}
+.page.gridall>.nav.nav3 .n3-buy{transform:scale(.85);filter:blur(4px);transition:max-width .75s var(--nav-spring),padding .75s var(--nav-spring),opacity .35s ease .18s,transform .55s var(--nav-spring) .18s,filter .4s ease .18s,color .35s ease,border-color .35s ease!important}
+.page.gridall>.nav.nav3.show-buy .n3-buy{transform:none;filter:none}
+@media (max-width:1100px){
+  .page.gridall>.nav.nav3{transition:left .75s var(--nav-spring),opacity .2s!important}
+  .page.gridall>.nav.nav3 .wordmark{transition:opacity .3s ease,filter .35s ease,max-width .75s var(--nav-spring),margin .75s var(--nav-spring)!important}
+  .page.gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"])) .wordmark{filter:blur(6px)}
+  .page.gridall>.nav.nav3.show-buy:not(:has(.n3-burger[aria-expanded="true"]))::after{animation:navGlint 1.1s cubic-bezier(.45,.05,.3,1) .35s 1 both}
+}
+@media (prefers-reduced-motion:reduce){
+  .page.gridall>.nav.nav3::after{display:none}
+  .page.gridall>.nav.nav3 .n3-tabs .n3-t,.page.gridall>.nav.nav3 .n3-buy,.page.gridall>.nav.nav3 .wordmark,.page.gridall>.nav.nav3 .cart,.page.gridall>.nav.nav3 .n3-acct{filter:none!important;transform:none!important}
+}
+@media (min-width:1101px){
+  /* the tab strip collapses in step with the pill so Buy now is never pushed out of view mid-way */
+  .page.gridall>.nav.nav3 .n3-tabs{transition:max-width .45s cubic-bezier(.4,0,.2,1),margin .45s cubic-bezier(.4,0,.2,1),opacity .3s ease!important}
+  .page.gridall>.nav.nav3:hover .n3-tabs,.page.gridall>.nav.nav3:focus-within .n3-tabs,.page.gridall>.nav.nav3:not(.show-buy) .n3-tabs{transition:max-width .75s var(--nav-spring),margin .75s var(--nav-spring),opacity .3s ease!important}
+}
