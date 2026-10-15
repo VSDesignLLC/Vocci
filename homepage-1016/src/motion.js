@@ -159,7 +159,7 @@
         if(k===2) f=function(q){ var h=band(q,.05,.45); txt($(a,'q'),CMD.slice(0,Math.round(CMD.length*h))); tog($(a,'.hold'),'on',q<.55); tog(a,'holding',q>=.05&&q<.45); tog($(a,'.send'),'hot',q>=.45); txt($(a,'.send'),q>=.55?'Sent':'Send to Agent'); tog($(a,'.think'),'in',q>=.55&&q<.62); tog($(a,'.res'),'in',q>=.62); tog($(a,'.r2'),'in',q>=.7); };
         if(k===3) f=function(q){ var r=band(q,0,.9); tog($(a,'.pull'),'in',r>.05); tog($(a,'.pull'),'done',r>.25); txt($(a,'.typ'),ANS.slice(0,Math.round(ANS.length*band(r,.25,.8)))); tog($(a,'.cite'),'in',r>.8); tog($(a,'.mcp'),'in',r>.9); };
         loops.push({el:pic, f:f}); });
-      function fit(){ $$(how,'.r3m .r3-ph').forEach(function(ph){ var c=ph.parentNode.parentNode; var band=parseFloat(getComputedStyle(c).getPropertyValue('--gband'))||0; ph.style.setProperty('--appk',(band?Math.min(c.clientWidth/310,(c.clientHeight-24-band)/470):Math.min(c.clientWidth/310,c.clientHeight/500)).toFixed(3)); }); } fit(); addEventListener('resize',fit);
+      function fit(){ $$(how,'.r3m .r3-ph').forEach(function(ph){ var c=ph.parentNode.parentNode; var cs=getComputedStyle(c), sp=parseFloat(cs.getPropertyValue('--gsplit'))||0, band=parseFloat(cs.getPropertyValue('--gband'))||0; ph.style.setProperty('--appk',((sp||band)?Math.min(c.clientWidth*(sp||1)/310,(c.clientHeight-24-band)/470):Math.min(c.clientWidth/310,c.clientHeight/500)).toFixed(3)); }); } fit(); addEventListener('resize',fit);
       loops.forEach(function(L){ var t0=0, raf=0, vis=false; L.f(0); function tick(now){ if(!t0) t0=now; L.f(((now-t0)%9000)/9000); raf=vis?requestAnimationFrame(tick):0; }
         new IntersectionObserver(function(es){ es.forEach(function(e){ vis=e.isIntersecting; if(vis&&!raf){ t0=0; raf=requestAnimationFrame(tick); } }); },{threshold:.35}).observe(L.el); });
     })();
@@ -687,8 +687,8 @@
 (function(){
   var how=document.getElementById('how'); if(!how||!window.ResizeObserver) return;
   function fit(ph){ var c=ph.parentNode&&ph.parentNode.parentNode; if(!c||!c.clientHeight) return;
-    var band=parseFloat(getComputedStyle(c).getPropertyValue('--gband'))||0;   /* 1016 · tablet: room above the phone for the ring gesture hint */
-    ph.style.setProperty('--appk',Math.min(c.clientWidth/310,(c.clientHeight-24-band)/470).toFixed(3)); }
+    var cs=getComputedStyle(c), sp=parseFloat(cs.getPropertyValue('--gsplit'))||1, band=parseFloat(cs.getPropertyValue('--gband'))||0;   /* 1016 · steps 1–2: phone = right half (phone) / below a gesture band (tablet) */
+    ph.style.setProperty('--appk',Math.min(c.clientWidth*sp/310,(c.clientHeight-24-band)/470).toFixed(3)); }
   var ro=new ResizeObserver(function(es){ es.forEach(function(e){ e.target.querySelectorAll('.r3m .r3-ph').forEach(fit); }); });
   function hook(){ var cells=how.querySelectorAll('.stage>.pn.pic'); if(!cells.length||!how.querySelector('.r3m .r3-ph')) return setTimeout(hook,400);
     cells.forEach(function(c){ ro.observe(c); c.querySelectorAll('.r3m .r3-ph').forEach(fit); }); }
