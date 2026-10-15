@@ -696,11 +696,16 @@ _k = _sec('kol').group()
 _pics = re.findall(r'<a aria-label="[^"]*" class="pn pic kv-pic" href="([^"]*)"[^>]*><img[^>]*src="([^"]+)"[^>]*?(?:style="([^"]*)")?[^>]*>', _k)
 _txts = re.findall(r'<div class="pn kv-txt"[^>]*><span class="label">(.*?)</span><h3>(.*?)</h3>', _k, re.S)
 assert len(_pics) >= 3 and len(_txts) >= 3, (len(_pics), len(_txts))
+_ARW = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"></path></svg>'
+_n = 3
 _cards = ''.join(
-    '<a class="pz-vid" href="%s"%s><span class="pz-vid-img"><img loading="lazy" decoding="async" src="%s" alt=""%s><i class="vc-play" aria-hidden="true"></i></span>'
-    '<span class="label">%s</span><b class="pz-vid-t">%s</b><span class="tlink">Watch review</span></a>'
-    % (h, '' if h == '#' else ' target="_blank" rel="noopener"', src, (' style="%s"' % st) if st else '', lab, ttl)
-    for (h, src, st), (lab, ttl) in zip(_pics[:3], _txts[:3]))
+    '<div class="pz-vid%s" data-i="%d"><a class="pz-vid-link" href="%s"%s><span class="pz-vid-img"><img loading="lazy" decoding="async" src="%s" alt=""%s><i class="vc-play" aria-hidden="true"></i></span>'
+    '<span class="pz-vid-meta"><span class="label">%s</span><b class="pz-vid-t">%s</b><span class="tlink">Watch review</span></span></a>'
+    '<span class="pz-vnav"><span class="pz-vcount label">%02d / %02d</span>'
+    '<button class="pz-arw prev" type="button" aria-label="Previous review"%s>%s</button><button class="pz-arw next" type="button" aria-label="Next review"%s>%s</button></span></div>'
+    % (' on' if i == 0 else '', i, h, '' if h == '#' else ' target="_blank" rel="noopener"', src, (' style="%s"' % st) if st else '', lab, ttl,
+       i + 1, _n, ' disabled' if i == 0 else '', _ARW, ' disabled' if i == _n - 1 else '', _ARW)
+    for i, ((h, src, st), (lab, ttl)) in enumerate(zip(_pics[:_n], _txts[:_n])))
 _t = _sec('needs').group()
 _i = _t.index('</div>', _t.index('class="pn pic pz-pic"'))
 _t = _t[:_i] + '<div class="pz-vids" aria-label="Creator reviews on YouTube">' + _cards + '</div>' + _t[_i:]
