@@ -750,3 +750,14 @@ _t = re.sub(r'<div class="pn fnx-copy" style="--gc:1/span 1;--gr:2/span 1;--tc:1
 assert 'fnx-copy" style="--gc:1/span 1;--gr:1/span 1' in _t and 'fnx-ctl" style="--gc:1/span 1;--gr:2/span 1' in _t
 _t = re.sub(r'(<div class="pn pic fnx-stage" style=")[^"]*"', r'\1--gc:1/span 4;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1"', _t, 1)
 _put('colors', _t)
+
+# 1016 · colours: the finish description sits right under the finish tiles it describes (choose → read → buy)
+_t = _sec('colors').group()
+_m = re.search(r'<p class="fnx-desc">.*?</p>', _t, re.S)
+assert _m, 'fnx-desc'
+_d = _m.group()
+_t = _t[:_m.start()] + _t[_m.end():]
+_i = _t.index('</div>', _t.index('<div class="fnx-tabs"'))
+_j = _t.index('</button></div>', _t.index('<div class="fnx-tabs"')) + len('</button></div>')
+_t = _t[:_j] + _d + _t[_j:]
+_put('colors', _t)
