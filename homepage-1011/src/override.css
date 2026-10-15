@@ -2963,3 +2963,19 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 @media (min-width:1101px){ #faq .stage>.pn.fq5-cats,#faq .stage>.pn.fq5-list{padding-top:96px!important} }   /* clear the floating nav pill, which sits over columns 2–3 */
 #colors .pn.fnx-stage>.fnx-views{background:rgba(255,255,255,.9)!important;-webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important}   /* floats on the photo → Float glass */
 #colors .pn.fnx-stage>.fnx-views .fnx-v.on{background:rgba(20,20,22,.06)}
+
+/* 1016 · screen-2 steps 1–2 (phone/tablet): half and half — ring gesture (the action) on the left, the app (the result) on the right */
+@media (max-width:1100px){
+  #how .pn.pic.hs1,#how .pn.pic.hs2{--gsplit:.5;--gband:0px}
+  #how .pn.pic.hs1 .r3-app,#how .pn.pic.hs2 .r3-app{left:50%!important;right:0!important;top:0!important;bottom:0!important;width:auto!important;height:auto!important;padding:0!important}
+  #how .pn.pic .m-gest{left:0!important;top:0!important;bottom:0;width:50%!important;max-width:none!important;transform:none!important;flex-direction:column!important;justify-content:center;gap:12px!important}
+  #how .pn.pic .m-gest-ring{width:72%!important;max-width:200px}
+  #how .pn.pic .m-gest-lg{flex-direction:column!important;gap:6px!important}
+}
+/* tablet: the step cards are tall, so the split runs top / bottom — gesture band (≈¼) above, the app at full size below */
+@media (min-width:700.5px) and (max-width:1100px){
+  #how .pn.pic.hs1,#how .pn.pic.hs2{--gsplit:0;--gband:150px}
+  #how .pn.pic.hs1 .r3-app,#how .pn.pic.hs2 .r3-app{left:0!important;top:150px!important}
+  #how .pn.pic .m-gest{width:100%!important;height:150px;bottom:auto!important;flex-direction:row!important;gap:20px!important;align-items:center;justify-content:center}
+  #how .pn.pic .m-gest-ring{width:160px!important}
+}
