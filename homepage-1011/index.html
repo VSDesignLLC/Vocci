@@ -5122,5 +5122,16 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   show(0);
 })();
 
+/* 1016 · colours: the finish description reserves the height of its longest version, so switching finishes never shifts the tiles */
+(function(){
+  var sec=document.getElementById('colors'); if(!sec) return; var d=sec.querySelector('.fnx-desc'); if(!d) return;
+  var fs=[].slice.call(sec.querySelectorAll('.fnx-f'));
+  function lock(){ var keep=d.innerHTML, h=0; d.style.minHeight='';
+    fs.forEach(function(b){ if(!b.dataset.desc) return; d.innerHTML='<b></b> '; d.firstChild.textContent=b.querySelector('b').textContent; d.appendChild(document.createTextNode(b.dataset.desc)); h=Math.max(h,d.offsetHeight); });
+    d.innerHTML=keep; if(h) d.style.minHeight=h+'px'; }
+  var t; addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(lock,150); });
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(lock); lock();
+})();
+
 </script>
 </body></html>
