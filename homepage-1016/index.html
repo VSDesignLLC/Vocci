@@ -4821,8 +4821,8 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
       i.style.cssText+=';inset:auto;left:'+x+'px;top:'+y+'px;width:'+dw+'px;height:'+dh+'px;max-width:none;object-fit:fill;transform:none;scale:none;translate:none';
     });
     var cx0=innerWidth>1100?W*.625:W/2;
-    /* 1016 · charging-case view: the case body (not the case + ring pair) sits on the same centre */
-    var C={lumen:[.341,.396],midnight:[.316,.398],dawn:[.326,.382],lux:[.329,.391]};
+    /* 1016 · charging-case view: the case + ring pair, as one group, sits on the same centre (bounding-box centre of both) */
+    var C={lumen:[.493,.486],midnight:[.491,.489],dawn:[.498,.485],lux:[.478,.464]};
     st.querySelectorAll('img.fnx-case').forEach(function(i){ var c=C[i.dataset.f]; if(!c||!i.naturalWidth||!i.offsetWidth) return;
       var bw=i.offsetWidth, bh=i.offsetHeight, k=Math.min(bw/i.naturalWidth,bh/i.naturalHeight), dw=i.naturalWidth*k, dh=i.naturalHeight*k;
       var px=i.offsetLeft+(bw-dw)/2+c[0]*dw, py=i.offsetTop+(bh-dh)/2+c[1]*dh;
