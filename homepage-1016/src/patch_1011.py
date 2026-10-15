@@ -734,3 +734,19 @@ _b = '<a class="btn ghost" href="#">Reddit</a>'
 assert _t.count(_a) == 1 and _t.count(_b) == 1, (_t.count(_a), _t.count(_b))
 _t = _t.replace(_a, '<a class="btn" href="https://discord.gg/2KZKzdpvN3">' + _DC + 'Discord</a>').replace(_b, '<a class="btn ghost" href="#">' + _RD + 'Reddit</a>')
 _put('needs', _t)
+
+# 1016 · colours (安田): finishes + Buy now live in the left column; the right side keeps only the view switch, floating on the photo
+_t = _sec('colors').group()
+_m = re.search(r'<span class="label">View</span>(<div class="fnx-views">.*?</div>)', _t, re.S)
+assert _m, 'fnx-views'
+_views = _m.group(1)
+_t = _t[:_m.start()] + _t[_m.end():]
+_i = _t.index('>', _t.index('class="pn pic fnx-stage"')) + 1
+_t = _t[:_i] + _views + _t[_i:]
+_t = _t.replace('<div class="pn fnx-ctl" style="--gc:4/span 1;--gr:2/span 1;--tc:1/span 2;--tr:2/span 1">',
+                '<div class="pn fnx-ctl" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1">')
+_t = re.sub(r'<div class="pn fnx-copy" style="--gc:1/span 1;--gr:2/span 1;--tc:1/span 2;--tr:3/span 1">',
+            '<div class="pn fnx-copy" style="--gc:1/span 1;--gr:1/span 1;--tc:1/span 2;--tr:1/span 1">', _t)
+assert 'fnx-copy" style="--gc:1/span 1;--gr:1/span 1' in _t and 'fnx-ctl" style="--gc:1/span 1;--gr:2/span 1' in _t
+_t = re.sub(r'(<div class="pn pic fnx-stage" style=")[^"]*"', r'\1--gc:1/span 4;--gr:1/span 2;--tc:1/span 2;--tr:2/span 1"', _t, 1)
+_put('colors', _t)
