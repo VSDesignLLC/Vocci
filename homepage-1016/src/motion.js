@@ -419,12 +419,22 @@
     var W=st.clientWidth,H=st.clientHeight; if(!W||!H) return;
     st.querySelectorAll('img.fnx-wear').forEach(function(i){
       var f=F[i.dataset.f]; if(!f||!i.naturalWidth) return;
-      var s=Math.max(W/i.naturalWidth,H/i.naturalHeight)*f[2], dw=i.naturalWidth*s, dh=i.naturalHeight*s;
-      var x=Math.min(0,Math.max(W-dw,W/2-f[0]*dw)), y=Math.min(0,Math.max(H-dh,H/2-f[1]*dh));
+      var cx=innerWidth>1100?W*.625:W/2, cy=H/2, nw=i.naturalWidth, nh=i.naturalHeight;
+      /* scale up only as far as needed so the ring can sit exactly on (cx,cy) without exposing an edge */
+      var s=Math.max(W/nw,H/nh)*f[2], need=Math.max(cx/(f[0]*nw),(W-cx)/((1-f[0])*nw),cy/(f[1]*nh),(H-cy)/((1-f[1])*nh));
+      s=Math.max(s,need); var dw=nw*s, dh=nh*s;   /* 1016 · desktop: the left column is covered, so the ring centres on the three right columns */
+      var x=Math.min(0,Math.max(W-dw,cx-f[0]*dw)), y=Math.min(0,Math.max(H-dh,cy-f[1]*dh));
       i.style.cssText+=';inset:auto;left:'+x+'px;top:'+y+'px;width:'+dw+'px;height:'+dh+'px;max-width:none;object-fit:fill;transform:none;scale:none;translate:none';
     });
+    var cx0=innerWidth>1100?W*.625:W/2;
+    /* 1016 · charging-case view: the case body (not the case + ring pair) sits on the same centre */
+    var C={lumen:[.341,.396],midnight:[.316,.398],dawn:[.326,.382],lux:[.329,.391]};
+    st.querySelectorAll('img.fnx-case').forEach(function(i){ var c=C[i.dataset.f]; if(!c||!i.naturalWidth||!i.offsetWidth) return;
+      var bw=i.offsetWidth, bh=i.offsetHeight, k=Math.min(bw/i.naturalWidth,bh/i.naturalHeight), dw=i.naturalWidth*k, dh=i.naturalHeight*k;
+      var px=i.offsetLeft+(bw-dw)/2+c[0]*dw, py=i.offsetTop+(bh-dh)/2+c[1]*dh;
+      i.style.setProperty('translate',Math.round(cx0-px)+'px '+Math.round(H/2-py)+'px','important'); });
   }
-  st.querySelectorAll('img.fnx-wear').forEach(function(i){ i.addEventListener('load',fit); });
+  st.querySelectorAll('img.fnx-wear,img.fnx-case').forEach(function(i){ i.addEventListener('load',fit); });
   addEventListener('resize',fit); fit(); setTimeout(fit,600);
 })();
 

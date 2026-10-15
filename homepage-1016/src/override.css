@@ -2994,3 +2994,5 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 }
 #faq .stage>.pn.fq5-pic img{object-position:50% 50%!important}
 #faq .stage>.pn.fq5-pic::after{background:rgba(255,255,255,.4)!important;-webkit-backdrop-filter:blur(4px)!important;backdrop-filter:blur(4px)!important}
+/* 1016 · colours (desktop): ring / case renders centre on the three right columns (the left column holds the copy and the finish picker) */
+@media (min-width:1101px){ #colors .fnx-stage{container-type:inline-size} #colors .fnx-stage>img.fnx-img:not(.fnx-wear){translate:12.5cqw 0!important} }
