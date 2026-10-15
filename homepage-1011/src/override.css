@@ -2979,3 +2979,7 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #how .pn.pic .m-gest{width:100%!important;height:150px;bottom:auto!important;flex-direction:row!important;gap:20px!important;align-items:center;justify-content:center}
   #how .pn.pic .m-gest-ring{width:160px!important}
 }
+/* colours: description directly under the tiles (16), then the buttons (24) */
+#colors .fnx-ctl>.fnx-desc{margin:16px 0 0!important;max-width:none}
+#colors .fnx-ctl>.end{margin-top:24px!important}
+#colors .fnx-v.run::after{display:none!important}   /* 1016: no progress line */

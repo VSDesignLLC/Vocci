@@ -250,9 +250,9 @@
     fs.forEach(function(b){ var on=b.dataset.f===f; b.classList.toggle('on',on); b.setAttribute('aria-selected',on); }); var dsc=sec.querySelector('.fnx-desc'), cur=sec.querySelector('.fnx-f[data-f="'+f+'"]'); if(dsc&&cur&&cur.dataset.desc){ dsc.innerHTML='<b></b> '; dsc.firstChild.textContent=cur.querySelector('b').textContent; dsc.appendChild(document.createTextNode(cur.dataset.desc)); }
     vs.forEach(function(b){ var on=b.dataset.v===v; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on); }); st.dataset.view=v; }
   function stop(){ clearInterval(t); t=null; vs.forEach(function(b){ b.classList.remove('run'); }); }
-  /* 1016 · the three views cycle (4.5 s) with a progress line on the active one; finishes are the visitor's choice */
+  /* 1016 · the three views cycle every 3 s (no progress line); finishes are the visitor's choice */
   function prog(){ vs.forEach(function(b){ b.classList.remove('run'); }); var a=sec.querySelector('.fnx-v.on'); if(a&&t){ void a.offsetWidth; a.classList.add('run'); } }
-  function play(){ stop(); if(reduce) return; t=setInterval(function(){ var k=0; vs.forEach(function(b,i){ if(b.dataset.v===v) k=i; }); v=vs[(k+1)%vs.length].dataset.v; show(); prog(); },4500); prog(); }
+  function play(){ stop(); if(reduce) return; t=setInterval(function(){ var k=0; vs.forEach(function(b,i){ if(b.dataset.v===v) k=i; }); v=vs[(k+1)%vs.length].dataset.v; show(); prog(); },3000); prog(); }
   fs.forEach(function(b){ b.addEventListener('click',function(){ f=b.dataset.f; show(); }); });
   vs.forEach(function(b){ b.addEventListener('click',function(){ v=b.dataset.v; show(); if(t) play(); }); });
   im.forEach(function(i){ if(i.dataset.v==='wear') i.loading='eager'; });
