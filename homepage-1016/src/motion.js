@@ -718,3 +718,12 @@
   var t; addEventListener('resize',function(){clearTimeout(t);t=setTimeout(measure,150)});
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(measure); measure();
 })();
+
+/* 1016 · Needs › Content creators: one creator review at a time, prev / next below it */
+(function(){
+  var box=document.querySelector('#needs .pz-vids'); if(!box) return;
+  var cards=[].slice.call(box.querySelectorAll('.pz-vid')), i=0;
+  function show(n){ i=Math.max(0,Math.min(cards.length-1,n)); cards.forEach(function(c,k){ c.classList.toggle('on',k===i); c.setAttribute('aria-hidden',k===i?'false':'true'); }); }
+  box.addEventListener('click',function(e){ var b=e.target.closest('.pz-arw'); if(!b||b.disabled) return; e.preventDefault(); show(i+(b.classList.contains('next')?1:-1)); });
+  show(0);
+})();
