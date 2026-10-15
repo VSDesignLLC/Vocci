@@ -2928,3 +2928,6 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   .page.gridall>.nav.nav3 .n3-tabs{transition:max-width .45s cubic-bezier(.4,0,.2,1),margin .45s cubic-bezier(.4,0,.2,1),opacity .3s ease!important}
   .page.gridall>.nav.nav3:hover .n3-tabs,.page.gridall>.nav.nav3:focus-within .n3-tabs,.page.gridall>.nav.nav3:not(.show-buy) .n3-tabs{transition:max-width .75s var(--nav-spring),margin .75s var(--nav-spring),opacity .3s ease!important}
 }
+/* 1016 · awards: a lighter "image veil" (white 40%, blur 4) — the liquid-metal pattern stays visible, text stays readable */
+.pn.glassy .gbg::after{background:rgba(255,255,255,.4)!important;-webkit-backdrop-filter:blur(4px)!important;backdrop-filter:blur(4px)!important}
+#awards .pn.mid.quote::before{background:rgba(255,255,255,.4)!important;-webkit-backdrop-filter:blur(4px)!important;backdrop-filter:blur(4px)!important}
