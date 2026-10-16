@@ -522,5 +522,6 @@ _W = {'500':'400','600':'500'}
 s = re.sub(r'(font-weight\s*:\s*)(500|600)\b', lambda m: m.group(1)+_W[m.group(2)], s)
 s = re.sub(r'(font\s*:\s*(?:italic\s+)?)(500|600)(\s)', lambda m: m.group(1)+_W[m.group(2)]+m.group(3), s)
 s = re.sub(r'(font-weight=")(500|600)"', lambda m: m.group(1)+_W[m.group(2)]+'"', s)
+s = s.replace('<body>', '<body><script>\n' + (R/'src/capture.js').read_text() + '\n</script>', 1)
 (R/'index.html').write_text(s)
 print('built', len(s))
