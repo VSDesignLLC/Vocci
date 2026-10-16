@@ -761,3 +761,14 @@ _i = _t.index('</div>', _t.index('<div class="fnx-tabs"'))
 _j = _t.index('</button></div>', _t.index('<div class="fnx-tabs"')) + len('</button></div>')
 _t = _t[:_j] + _d + _t[_j:]
 _put('colors', _t)
+
+# 1016 · FAQ: all ten questions listed, grouped by category (the category buttons jump to their group)
+_t = _sec('faq').group()
+_cats = dict(re.findall(r'<button class="fq5-c[^"]*"[^>]*data-c="(\d)"[^>]*><span>(.*?)</span>', _t))
+assert len(_cats) == 3, _cats
+_t = _t.replace('<li class="fq5-i" data-c="1" hidden>', '<li class="fq5-i" data-c="1">').replace('<li class="fq5-i" data-c="2" hidden>', '<li class="fq5-i" data-c="2">')
+for _c in ('0', '1', '2'):
+    _i = _t.index('<li class="fq5-i" data-c="%s">' % _c)
+    _t = _t[:_i] + '<li class="fq5-g" data-c="%s" id="faq-g%s"><span class="label">%s</span></li>' % (_c, _c, _cats[_c]) + _t[_i:]
+assert ' hidden>' not in _t.split('fq5-list')[1]
+_put('faq', _t)
