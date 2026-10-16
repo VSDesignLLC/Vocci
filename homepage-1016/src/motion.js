@@ -383,19 +383,9 @@
 (function(){ var it=Array.prototype.slice.call(document.querySelectorAll('#faq .fq5-i')); if(!it.length) return;
   it.forEach(function(i){ i.querySelector('.fq5-h').addEventListener('click',function(){ var on=!i.classList.contains('open'); it.forEach(function(x){ x.classList.remove('open'); x.querySelector('.fq5-h').setAttribute('aria-expanded','false'); }); i.classList.toggle('open',on); i.querySelector('.fq5-h').setAttribute('aria-expanded',on); }); }); })();
 
-/* 1016 · FAQ: every question is listed, grouped; the category buttons jump to their group and follow the reading position */
-(function(){ var sec=document.getElementById('faq'), cs=sec?Array.prototype.slice.call(sec.querySelectorAll('.fq5-c')):[]; if(!cs.length) return;
-  var gs=Array.prototype.slice.call(sec.querySelectorAll('.fq5-g'));
-  function mark(c){ cs.forEach(function(x){ var on=x.dataset.c===c; x.classList.toggle('on',on); x.setAttribute('aria-pressed',on); }); }
-  var lock=0;
-  cs.forEach(function(b){ b.addEventListener('click',function(){ var g=sec.querySelector('.fq5-g[data-c="'+b.dataset.c+'"]'); if(!g) return; mark(b.dataset.c); lock=Date.now()+1200;
-    var r=g.getBoundingClientRect(), nx=gs[gs.indexOf(g)+1], end=nx?nx.getBoundingClientRect().top:sec.querySelector('.fq5-list').getBoundingClientRect().bottom;
-    if(r.top>=96&&end<=innerHeight) return;   /* the group is already on screen: only the highlight moves */
-    var y=r.top+scrollY-110; if(window.__lenis&&__lenis.scrollTo) __lenis.scrollTo(y); else scrollTo({top:y,behavior:'smooth'}); }); });
-  function spy(){ if(Date.now()<lock) return; var l=sec.querySelector('.fq5-list').getBoundingClientRect(); if(l.bottom<0||l.top>innerHeight) return;
-    if(l.top>=0&&l.bottom<=innerHeight){ return; }   /* the whole list is visible: keep the reader's choice */
-    var c=gs[0].dataset.c; gs.forEach(function(g){ if(g.getBoundingClientRect().top<=innerHeight*.4) c=g.dataset.c; }); mark(c); }
-  addEventListener('scroll',spy,{passive:true});
+/* 1016 · FAQ: every question is listed, grouped; the category cards are a static overview (name + count), not controls */
+(function(){ var sec=document.getElementById('faq'); if(!sec) return;
+  sec.querySelectorAll('.fq5-c').forEach(function(b){ b.classList.remove('on'); b.removeAttribute('aria-pressed'); b.disabled=true; b.tabIndex=-1; });
 })();
 
 /* 1011-zs · nav Buy now: collapses while scrolling down, expands when scrolling back up; never while the hero's own Buy now is on screen (all breakpoints) */
