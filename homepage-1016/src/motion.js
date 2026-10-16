@@ -543,11 +543,12 @@
   var cx=cv.getContext('2d'), DPR=Math.min(devicePixelRatio||1,1.5), W=0,H=0,R=0,OX=0,OY=0, P=[], N=0, born=0, on=false, raf=0, mx=-1e4, my=-1e4, last=0;
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, D2R=Math.PI/180;
   function g(){ var u=0,v=0; while(!u)u=Math.random(); while(!v)v=Math.random(); var z=Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); return Math.max(-2.2,Math.min(2.2,z)); }   /* 1016: tails clipped → crisp edges */
-  function pick(){   /* angle (from 12 o'clock), radius in R units, band half-width */
-    var r=Math.random();
-    if(r<.84){ var gap=33*D2R; return {a:gap+Math.random()*(2*Math.PI-2*gap), r:1+g()*.026, arc:0}; }
-    if(r<.93) return {a:(Math.random()*2-1)*25*D2R, r:1.07+g()*.008, arc:1};
-    return {a:(Math.random()*2-1)*26*D2R, r:.93+g()*.008, arc:2};
+  function pick(){   /* 1016 · sampled from the logo's O (nav wordmark, r=24): main stroke 7 (±.146R) with a ±33° top gap,
+                        outer arc r 26.3 / inner arc r 21.2, both stroke 2.6 (±.054R) over ±25° / ±26° — uniform across each stroke, crisp edges */
+    var r=Math.random(), u=Math.random()*2-1;
+    if(r<.86){ var gap=33*D2R; return {a:gap+Math.random()*(2*Math.PI-2*gap), r:1+u*.146, arc:0}; }
+    if(r<.93) return {a:(Math.random()*2-1)*25*D2R, r:26.3/24+u*.054, arc:1};
+    return {a:(Math.random()*2-1)*26*D2R, r:21.2/24+u*.054, arc:2};
   }
   function build(){
     var b=st.getBoundingClientRect(); W=b.width; H=b.height; cv.width=W*DPR; cv.height=H*DPR; cx.setTransform(DPR,0,0,DPR,0,0);
@@ -573,7 +574,7 @@
     if(!born) born=now; var t=now-born, spin=reduce?0:t*.000045;    /* the whole ring turns ~1 rev / 2.3 min */
     cx.clearRect(0,0,W,H);
     for(var i=0;i<N;i++){ var p=P[i], k=reduce?1:Math.min(1,Math.max(0,(t-p.d)/1900)), e=ease(k);
-      var a=p.a+spin+(p.arc?0:t*p.w*.0004), br=p.r*R*(1+Math.sin(t*.0009+p.ph)*.006);     /* drift along the band + breathing */
+      var G=33*D2R, SP=2*Math.PI-2*G, a=p.arc?p.a+spin:G+(((p.a-G+t*p.w*.0004)%SP)+SP)%SP+spin, br=p.r*R*(1+Math.sin(t*.0009+p.ph)*.006);     /* drift along the band (wrapping, so the logo's top gap stays clear) + breathing */
       var tx=OX+Math.sin(a)*br, ty=OY-Math.cos(a)*br;
       var x=p.sx+(tx-p.sx)*e, y=p.sy+(ty-p.sy)*e;
       var dx=x-mx, dy=y-my, dd=dx*dx+dy*dy;
