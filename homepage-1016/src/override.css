@@ -553,7 +553,7 @@
   #hardware.hw3d .pn.hasimg.lit{clip-path:inset(0 0 0 0)!important}
   .hw-bp{position:absolute;inset:0;z-index:1;pointer-events:none;display:none}
   #hardware.hw3d .hw-bp{display:block}
-  .hw-bp .axis{position:absolute;left:6%;right:6%;top:50%;height:0;border-top:1px dashed rgba(29,29,31,.18)}
+  .hw-bp .axis{position:absolute;left:6%;right:6%;top:50%;height:0;border-top:1px dashed rgba(20,20,22,.18)}
   .hw-bp .axis::after{content:"";position:absolute;left:50%;top:-40%;height:0;width:0}
     .hw-lines{position:absolute;inset:0;width:100%;height:100%;z-index:5;pointer-events:none;overflow:visible}
   .hw-lines .lead path{fill:none;stroke:rgba(29,29,31,.45);stroke-width:1;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke .3s,stroke-width .3s}
@@ -1693,7 +1693,7 @@
 #faq .fq5-i.open .fq5-b{background:var(--accent)}
 #faq .fq5-i.open .fq5-b::before{transform:rotate(45deg)}#faq .fq5-i.open .fq5-b::after{transform:rotate(135deg)}
 @media(min-width:1101px){ #faq .stage.fq5s{height:100svh} }
-@media(min-width:1101px) and (max-height:880px){ #faq .fq5-q{min-height:48px;padding:10px 18px} #faq .fq5-b{width:48px} #faq .fq5-list ol{gap:8px} #faq .fq5-a p{margin-right:58px} }
+@media(min-width:1101px) and (max-height:880px){ #faq .fq5-q{min-height:48px;padding:12px 20px} #faq .fq5-b{width:48px} #faq .fq5-list ol{gap:8px} #faq .fq5-a p{margin-right:58px} }
 @media(max-width:700px){
   #faq .fq5s .pn{height:auto!important;min-height:0!important;overflow:visible}
   #faq .fq5-head h2{font-size:36px}
@@ -1740,7 +1740,7 @@
 #footer .pn.ft2-say{align-items:flex-end;text-align:right;gap:24px}
 #footer .ft2-say h2{margin:0;font-size:clamp(34px,3.6vw,56px);line-height:1.04;letter-spacing:-.035em;font-weight:600}
 #footer .ft2-say .f-sub{width:min(420px,100%);text-align:left;margin-top:auto}
-#footer .ft2-c{gap:32px;padding-top:36px!important}
+#footer .ft2-c{gap:28px;padding-top:36px!important}
 #footer .fg2 h5{margin:0 0 14px;font:500 12px/1 var(--font-mono);letter-spacing:.06em;color:var(--ink)}
 #footer .fg2 ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 #footer .fg2 a{font:400 clamp(16px,1.3vw,19px)/1.25 var(--font-body);letter-spacing:-.01em;color:#141416;text-decoration:none;transition:color .25s}
@@ -2497,14 +2497,14 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #why .rec-card .btns{margin-top:10px!important}
   #why .rec-card .btn{height:36px!important}
   /* colours: finish tabs show the name only (the description is shown above them) */
-  #colors .fnx-ctl{gap:8px!important;padding-top:22px!important;padding-bottom:22px!important}
+  #colors .fnx-ctl{gap:8px!important;padding-top:20px!important;padding-bottom:20px!important}
   #colors .fnx-f span{font-size:0!important}
   #colors .fnx-f span b{font-size:14px!important;display:block}
   #colors .fnx-f{padding-top:10px!important;padding-bottom:10px!important}
   /* privacy: badge and button on one row */
   #privacy .pn.pv-card .pv-foot{flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:16px!important}
   #privacy .pn.pv-card .pv-foot img{width:60px!important}
-  #privacy .pn.pv-card{padding-top:22px!important;padding-bottom:22px!important}
+  #privacy .pn.pv-card{padding-top:20px!important;padding-bottom:20px!important}
 }
 @media (min-width:1101px) and (max-height:800px){
   #why .rec-cards{height:auto!important;min-height:0!important;flex:1 1 auto}
@@ -3097,3 +3097,7 @@ html.cap #how,html.cap #why{height:auto!important;min-height:0!important}
 #faq .fq5-c em{color:#8a8a90!important}
 /* 1016 · creators: the pager only shows when there are more than three videos to page through (all breakpoints) */
 #kol .kv-title .kv-nav.off{display:none!important}
+
+/* 1016 · integer line height for the step captions (was 1.6 → 22.4px) */
+.pic-cap{line-height:22px!important}
+#how .r3-pill,#how .r3-pill .t{font-size:11px!important;line-height:11px!important}
