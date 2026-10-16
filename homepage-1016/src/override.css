@@ -3040,3 +3040,9 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 }
 /* 1016 · footer display line in Regular too, like the section titles */
 .gridall #footer .ft2-say h2,#footer .ft2-say h2{font-weight:400!important}
+/* 1016 · FAQ (desktop): the question list is one merged cell (cols 3–4 × rows 1–2), so no grid line runs under it — the row line stops at column 3, the col 3/4 line is dropped */
+@media (min-width:1101px){
+  #faq>.stage>i.vl:nth-of-type(4){display:none!important}
+  #faq>.stage>.rowline{clip-path:inset(-4px calc(50% - 3px) -4px -4px)}
+  #faq>.stage>.rowline>i:nth-child(4),#faq>.stage>.rowline>i:nth-child(5){display:none}
+}
