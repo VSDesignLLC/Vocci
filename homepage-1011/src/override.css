@@ -3038,3 +3038,5 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 @media (min-width:700.5px) and (max-width:1100px) and (min-aspect-ratio:1/1){
   #how .how-head>p{max-width:640px!important}
 }
+/* 1016 · footer display line in Regular too, like the section titles */
+.gridall #footer .ft2-say h2,#footer .ft2-say h2{font-weight:400!important}
