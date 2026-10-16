@@ -3087,3 +3087,8 @@ html.cap main section{position:relative!important}
 
 /* 1016 · persona list: integer line height (was 1.3 → 18.2px) */
 #needs .pz-h{line-height:18px!important}
+html.cap #footer,html.cap #footer *{visibility:visible!important}
+/* capture: nothing is pinned — the hero, the pinned stages and the footer that waits under the page all sit in normal flow from the first paint */
+html.cap #hero,html.cap #footer,html.cap #how>.stage,html.cap #why>.stage,html.cap #how>.m-pin{position:relative!important;top:auto!important;bottom:auto!important}
+html.cap #footer{visibility:visible!important}
+html.cap #how,html.cap #why{height:auto!important;min-height:0!important}
