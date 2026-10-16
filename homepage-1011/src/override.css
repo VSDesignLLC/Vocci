@@ -3084,3 +3084,6 @@ html.cap main section{position:relative!important}
   #needs .pz-vnav .pz-vcount{display:none!important}
   #needs .pz-vid-meta{grid-column:1/-1!important;grid-row:2!important;gap:4px!important}
 }
+
+/* 1016 · persona list: integer line height (was 1.3 → 18.2px) */
+#needs .pz-h{line-height:18px!important}
