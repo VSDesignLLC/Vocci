@@ -1821,7 +1821,7 @@
 @media(min-width:1101px) and (max-height:880px){ #why .pn.rec-pn{--pad:18px;gap:10px!important} #why .rec-card{padding:14px 16px!important;gap:8px!important} #why .rec-steps{gap:5px} #why .rec-steps li{font-size:12px} #why .ch-rail{padding-bottom:4px} }
 @media(max-width:700px) and (max-height:740px){ #why .pn.rec-stage{height:38%!important} #why .pn.rec-pn{height:62%!important} #why .rec-card .rec-p{font-size:12.5px;line-height:1.4} }
 @media(max-width:700px) and (max-height:740px){ #why .pn.rec-pn{padding:12px 16px 12px!important;gap:8px!important} #why .rec-card{padding:12px 14px!important;gap:6px!important} #why .rec-steps{gap:4px} #why .rec-card .btn{height:34px} }
-@media(max-width:700px){ #why .pn.rec-pn{padding:14px 18px!important;gap:10px!important} #why .rec-card{padding:14px 16px!important;gap:7px!important} #why .rec-steps{gap:5px} }
+@media(max-width:700px){ #why .pn.rec-pn{padding:14px 18px!important;gap:10px!important} #why .rec-card{padding:14px 16px!important;gap:8px!important} #why .rec-steps{gap:5px} }
 #colors .fnx-wear[data-f="lux"]{object-position:62% 58%!important}
 /* 1011-zo · ring renders shown at one size (the Lux render's ring footprint, ~48% of its canvas) */
 #colors .fnx-ring[data-f="lumen"]{scale:.76}
@@ -1969,7 +1969,7 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 .btn.ghost,.pn .btn.ghost{--ghost-bg:rgba(255,255,255,.72);background:rgba(255,255,255,.72)!important;color:var(--ink)!important}
 .btn.ghost .cta-fx{display:none!important}
 /* 1011-zz22 · screen 3 card: orange point icons, a touch more room */
-#why .rec-card .rec-steps{gap:9px!important;margin-top:14px!important}
+#why .rec-card .rec-steps{gap:8px!important;margin-top:14px!important}
 #why .rec-card .rec-steps li{gap:14px!important;align-items:flex-start!important}
 #why .rec-card .rec-steps li .ico{flex:0 0 22px;margin-top:.3em;color:#F47546!important;stroke:#F47546!important;opacity:.7;transition:opacity .3s}
 #why .rec-card .rec-steps li .ico *{stroke:#F47546!important}
@@ -3054,3 +3054,33 @@ html.cap #pagebg{position:absolute!important}
 html.cap .rowline{transform:none!important}
 @media (min-width:1101px){ html.cap #how .pn.pic .r3-app{display:grid!important;place-items:center;position:absolute;inset:0;z-index:2} html.cap #how .pn.pic .m-gest{display:none!important} }
 html.cap main section{position:relative!important}
+
+/* ============ 1016 · token clean-up (all breakpoints) ============ */
+/* card surface: one colour, Surface/Card #F4F4F2 (replaces #ECEBE7 · #E9E9E6 · #F3F3F1 · #F4F6F5) */
+#how .stage .pn.pic.still3d.appon,#how .stage .pn.lazy,#privacy .stage>.pn.pic,#hardware .m-hrow>.pn.lazy,#hardware .stage .pn.lazy,#kol .kv-slide{background-color:#F4F4F2!important}
+/* dark fills → Ink */
+#needs .pz-qb>i,#faq .stage>.pn.pic{background-color:#141416!important}
+/* translucent ink → Border 18% / Border Light 10% */
+.how-hint .hh-d i:not(.on){background:rgba(20,20,22,.18)!important}
+.gridall>.nav .n3-burger{border-color:rgba(20,20,22,.18)!important}
+#hardware .m-hrow>.pn.lazy,#hardware .stage .pn.lazy{border-color:rgba(20,20,22,.10)!important}
+/* gaps on the spacing scale */
+#awards .stage>.pn.mid{gap:20px!important}
+#awards .pn.mid .pq{gap:16px!important}
+#how .how-hint,#kol .how-hint,.how-hint{gap:16px!important}
+#how .pic-cap{padding-top:16px!important;padding-bottom:16px!important}
+/* hit areas on the scale (phone + tablet) */
+@media (max-width:1100px){
+  #why .ch-rail button{padding-top:12px!important;margin-top:-12px!important}
+  #colors .fnx-v{padding-top:12px!important;padding-bottom:12px!important}
+  .tlink{padding-top:8px!important;padding-bottom:8px!important;margin-top:-8px!important;margin-bottom:-8px!important}
+}
+/* phone · Needs › creators: the review fits its picture cell — arrows beside the video, counter dropped (the index is in the label) */
+@media (max-width:700.4px){
+  #needs .pz-vids{padding:20px 20px 24px!important;align-content:start!important}
+  #needs .pz-vid{grid-template-columns:minmax(0,1fr) auto!important;column-gap:12px!important;row-gap:12px!important}
+  #needs .pz-vid-img{grid-column:1!important;grid-row:1!important}
+  #needs .pz-vnav{grid-column:2!important;grid-row:1!important;flex-direction:column!important;align-self:end!important;gap:8px!important}
+  #needs .pz-vnav .pz-vcount{display:none!important}
+  #needs .pz-vid-meta{grid-column:1/-1!important;grid-row:2!important;gap:4px!important}
+}

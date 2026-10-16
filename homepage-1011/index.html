@@ -1,12 +1,12 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body><script>
 /* 1016 · ?capture=1 — a still, fully revealed page for importing into Figma (html.to.design).
    No intro, no 3D, no motion; every section shows its finished first state; pinned sections are laid flat;
-   viewport height is frozen (default 900 desktop / 874 phone·tablet, or &h=…) so 100vh cells keep their designed size
+   viewport height is frozen (default 900 desktop / 1180 tablet / 874 phone, or &h=…) so 100vh cells keep their designed size
    even when the importer renders the page in a very tall window. Normal visits never run any of this. */
 (function(){
   var q=location.search; if(!/[?&]capture=1\b/.test(q)) return;
   var root=document.documentElement; root.classList.add('cap');
-  var m=q.match(/[?&]h=(\d{3,4})/), H=m?+m[1]:(innerWidth>1100?900:874);
+  var m=q.match(/[?&]h=(\d{3,4})/), H=m?+m[1]:(innerWidth>1100?900:innerWidth>700?1180:874);
   window.__CAP_H=H;
   try{ sessionStorage.setItem('vocci-intro','1'); }catch(e){}
   try{ Object.defineProperty(window,'innerHeight',{configurable:true,get:function(){return H;}}); }catch(e){}
@@ -3226,7 +3226,7 @@ section.lined{background-image:none;isolation:isolate;overflow:hidden}
 @media(min-width:1101px) and (max-height:880px){ #why .pn.rec-pn{--pad:18px;gap:10px!important} #why .rec-card{padding:14px 16px!important;gap:8px!important} #why .rec-steps{gap:5px} #why .rec-steps li{font-size:12px} #why .ch-rail{padding-bottom:4px} }
 @media(max-width:1100px) and (max-height:740px){ #why .pn.rec-stage{height:38%!important} #why .pn.rec-pn{height:62%!important} #why .rec-card .rec-p{font-size:12.5px;line-height:1.4} }
 @media(max-width:1100px) and (max-height:740px){ #why .pn.rec-pn{padding:12px 16px 12px!important;gap:8px!important} #why .rec-card{padding:12px 14px!important;gap:6px!important} #why .rec-steps{gap:4px} #why .rec-card .btn{height:34px} }
-@media(max-width:1100px){ #why .pn.rec-pn{padding:14px 18px!important;gap:10px!important} #why .rec-card{padding:14px 16px!important;gap:7px!important} #why .rec-steps{gap:5px} }
+@media(max-width:1100px){ #why .pn.rec-pn{padding:14px 18px!important;gap:10px!important} #why .rec-card{padding:14px 16px!important;gap:8px!important} #why .rec-steps{gap:5px} }
 #colors .fnx-wear[data-f="lux"]{object-position:62% 58%!important}
 /* 1011-zo · ring renders shown at one size (the Lux render's ring footprint, ~48% of its canvas) */
 #colors .fnx-ring[data-f="lumen"]{scale:.76}
@@ -3374,7 +3374,7 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 .btn.ghost,.pn .btn.ghost{--ghost-bg:rgba(255,255,255,.72);background:rgba(255,255,255,.72)!important;color:var(--ink)!important}
 .btn.ghost .cta-fx{display:none!important}
 /* 1011-zz22 · screen 3 card: orange point icons, a touch more room */
-#why .rec-card .rec-steps{gap:9px!important;margin-top:14px!important}
+#why .rec-card .rec-steps{gap:8px!important;margin-top:14px!important}
 #why .rec-card .rec-steps li{gap:14px!important;align-items:flex-start!important}
 #why .rec-card .rec-steps li .ico{flex:0 0 22px;margin-top:.3em;color:#F47546!important;stroke:#F47546!important;opacity:.7;transition:opacity .3s}
 #why .rec-card .rec-steps li .ico *{stroke:#F47546!important}
@@ -4460,6 +4460,36 @@ html.cap .rowline{transform:none!important}
 @media (min-width:1101px){ html.cap #how .pn.pic .r3-app{display:grid!important;place-items:center;position:absolute;inset:0;z-index:2} html.cap #how .pn.pic .m-gest{display:none!important} }
 html.cap main section{position:relative!important}
 
+/* ============ 1016 · token clean-up (all breakpoints) ============ */
+/* card surface: one colour, Surface/Card #F4F4F2 (replaces #ECEBE7 · #E9E9E6 · #F3F3F1 · #F4F6F5) */
+#how .stage .pn.pic.still3d.appon,#how .stage .pn.lazy,#privacy .stage>.pn.pic,#hardware .m-hrow>.pn.lazy,#hardware .stage .pn.lazy,#kol .kv-slide{background-color:#F4F4F2!important}
+/* dark fills → Ink */
+#needs .pz-qb>i,#faq .stage>.pn.pic{background-color:#141416!important}
+/* translucent ink → Border 18% / Border Light 10% */
+.how-hint .hh-d i:not(.on){background:rgba(20,20,22,.18)!important}
+.gridall>.nav .n3-burger{border-color:rgba(20,20,22,.18)!important}
+#hardware .m-hrow>.pn.lazy,#hardware .stage .pn.lazy{border-color:rgba(20,20,22,.10)!important}
+/* gaps on the spacing scale */
+#awards .stage>.pn.mid{gap:20px!important}
+#awards .pn.mid .pq{gap:16px!important}
+#how .how-hint,#kol .how-hint,.how-hint{gap:16px!important}
+#how .pic-cap{padding-top:16px!important;padding-bottom:16px!important}
+/* hit areas on the scale (phone + tablet) */
+@media (max-width:1100px){
+  #why .ch-rail button{padding-top:12px!important;margin-top:-12px!important}
+  #colors .fnx-v{padding-top:12px!important;padding-bottom:12px!important}
+  .tlink{padding-top:8px!important;padding-bottom:8px!important;margin-top:-8px!important;margin-bottom:-8px!important}
+}
+/* phone · Needs › creators: the review fits its picture cell — arrows beside the video, counter dropped (the index is in the label) */
+@media (max-width:700.4px){
+  #needs .pz-vids{padding:20px 20px 24px!important;align-content:start!important}
+  #needs .pz-vid{grid-template-columns:minmax(0,1fr) auto!important;column-gap:12px!important;row-gap:12px!important}
+  #needs .pz-vid-img{grid-column:1!important;grid-row:1!important}
+  #needs .pz-vnav{grid-column:2!important;grid-row:1!important;flex-direction:column!important;align-self:end!important;gap:8px!important}
+  #needs .pz-vnav .pz-vcount{display:none!important}
+  #needs .pz-vid-meta{grid-column:1/-1!important;grid-row:2!important;gap:4px!important}
+}
+
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="vl-intro" aria-hidden="true"><div class="vl-ring"><img src="img3/ring-top.webp" alt=""><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg></div><span class="vl-pct">00</span></div><script>(function(){var seen=false;try{seen=sessionStorage.getItem("vocci-intro")==="1"}catch(e){}var L=document.querySelector(".vl-intro");if(seen){L&&L.remove();return}document.documentElement.classList.add("vl-on");document.body.appendChild(L)})()</script><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-v2.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
 <path stroke-width="2.6" d="M58.39 3.66A26.30 26.30 0 0 1 80.61 3.66"/>
@@ -5259,6 +5289,11 @@ html.cap main section{position:relative!important}
   if(window.ResizeObserver) new ResizeObserver(fit).observe(pic);
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit); fit(); setTimeout(fit,800);
 })();
+
+/* 1016 · screen 3 (phone/tablet): the card area keeps the height of its tallest chapter, so Ask / Connect never push past the screen — the picture takes what is left */
+(function(){ var box=document.querySelector('#why .rec-cards'); if(!box) return;
+  function fit(){ if(innerWidth>1100){ box.style.minHeight=''; return; } var h=0; box.querySelectorAll('.rec-card').forEach(function(c){ h=Math.max(h,c.offsetHeight); }); box.style.minHeight=h?h+'px':''; }
+  fit(); addEventListener('resize',fit); document.fonts&&document.fonts.ready.then(fit); addEventListener('load',fit); })();
 
 </script>
 </body></html>

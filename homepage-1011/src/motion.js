@@ -772,3 +772,8 @@
   if(window.ResizeObserver) new ResizeObserver(fit).observe(pic);
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit); fit(); setTimeout(fit,800);
 })();
+
+/* 1016 · screen 3 (phone/tablet): the card area keeps the height of its tallest chapter, so Ask / Connect never push past the screen — the picture takes what is left */
+(function(){ var box=document.querySelector('#why .rec-cards'); if(!box) return;
+  function fit(){ if(innerWidth>1100){ box.style.minHeight=''; return; } var h=0; box.querySelectorAll('.rec-card').forEach(function(c){ h=Math.max(h,c.offsetHeight); }); box.style.minHeight=h?h+'px':''; }
+  fit(); addEventListener('resize',fit); document.fonts&&document.fonts.ready.then(fit); addEventListener('load',fit); })();
