@@ -3034,3 +3034,7 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #awards>.stage>.pn.mid.quote{padding:24px 20px 28px!important}
 }
 @media (min-width:1101px) and (max-height:760px){ #faq .fq5-g{margin-top:12px} #faq .fq5-g:first-child{margin-top:0} }
+/* 1016 · landscape tablet: screen 2 is one pinned screen, so the intro runs wider (2 lines) to give the step pictures — and the app — more height */
+@media (min-width:700.5px) and (max-width:1100px) and (min-aspect-ratio:1/1){
+  #how .how-head>p{max-width:640px!important}
+}

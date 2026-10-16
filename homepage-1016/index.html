@@ -4404,6 +4404,10 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #awards>.stage>.pn.mid.quote{padding:24px 20px 28px!important}
 }
 @media (min-width:1101px) and (max-height:760px){ #faq .fq5-g{margin-top:12px} #faq .fq5-g:first-child{margin-top:0} }
+/* 1016 · landscape tablet: screen 2 is one pinned screen, so the intro runs wider (2 lines) to give the step pictures — and the app — more height */
+@media (min-width:700.5px) and (max-width:1100px) and (min-aspect-ratio:1/1){
+  #how .how-head>p{max-width:640px!important}
+}
 
 </style><div id="pagebg" aria-hidden="true"><i class="lq lq1"></i><i class="lq lq2"></i><i class="lq lq3"></i></div><main class="page gridall" data-ui="classic" data-skin="v2" data-round="0928"><section id="hero" data-bgop="0"><div class="vl-intro" aria-hidden="true"><div class="vl-ring"><img src="img3/ring-top.webp" alt=""><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg></div><span class="vl-pct">00</span></div><script>(function(){var seen=false;try{seen=sessionStorage.getItem("vocci-intro")==="1"}catch(e){}var L=document.querySelector(".vl-intro");if(seen){L&&L.remove();return}document.documentElement.classList.add("vl-on");document.body.appendChild(L)})()</script><div class="stage "><img class="bgimg" fetchpriority="high" decoding="async" src="img3/hero-desk-v2.jpg" alt="Vocci rings and charging case on a desk" style="object-position:50% 45%;opacity:1"><i class="vl" style="left:0"></i><i class="vl" style="left:25%"></i><i class="vl" style="left:50%"></i><i class="vl" style="left:75%"></i><i class="vl" style="left:calc(100% - 1px)"></i><i class="hl" style="top:0"></i><i class="sqr" style="left:0;top:0"></i><i class="sqr" style="left:25%;top:0"></i><i class="sqr" style="left:50%;top:0"></i><i class="sqr" style="left:75%;top:0"></i><i class="sqr" style="left:100%;top:0"></i><i class="hl" style="top:calc(100% - 1px)"></i><i class="sqr" style="left:0;top:calc(100% - 1px)"></i><i class="sqr" style="left:25%;top:calc(100% - 1px)"></i><i class="sqr" style="left:50%;top:calc(100% - 1px)"></i><i class="sqr" style="left:75%;top:calc(100% - 1px)"></i><i class="sqr" style="left:100%;top:calc(100% - 1px)"></i><nav class="nav nav3"><div class="navbar n3-bar"><a class="wordmark" href="#hero" aria-label="VOCCI"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 56" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="7" stroke-linejoin="round" d="M4.2 2.5L18.6 49.2L33 2.5"/>
 <path stroke-width="7" d="M82.57 7.37A24.00 24.00 0 1 1 56.43 7.37"/>
@@ -4591,7 +4595,7 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
         if(k===2) f=function(q){ var h=band(q,.05,.45); txt($(a,'q'),CMD.slice(0,Math.round(CMD.length*h))); tog($(a,'.hold'),'on',q<.55); tog(a,'holding',q>=.05&&q<.45); tog($(a,'.send'),'hot',q>=.45); txt($(a,'.send'),q>=.55?'Sent':'Send to Agent'); tog($(a,'.think'),'in',q>=.55&&q<.62); tog($(a,'.res'),'in',q>=.62); tog($(a,'.r2'),'in',q>=.7); };
         if(k===3) f=function(q){ var r=band(q,0,.9); tog($(a,'.pull'),'in',r>.05); tog($(a,'.pull'),'done',r>.25); txt($(a,'.typ'),ANS.slice(0,Math.round(ANS.length*band(r,.25,.8)))); tog($(a,'.cite'),'in',r>.8); tog($(a,'.mcp'),'in',r>.9); };
         loops.push({el:pic, f:f}); });
-      function fit(){ $$(how,'.r3m .r3-ph').forEach(function(ph){ var c=ph.parentNode.parentNode; var cs=getComputedStyle(c), sp=parseFloat(cs.getPropertyValue('--gsplit'))||0, band=parseFloat(cs.getPropertyValue('--gband'))||0; ph.style.setProperty('--appk',((sp||band)?Math.min(c.clientWidth*(sp||1)/310,(c.clientHeight-24-band)/470):Math.min(c.clientWidth/310,c.clientHeight/500)).toFixed(3)); }); } fit(); addEventListener('resize',fit);
+      function fit(){ $$(how,'.r3m .r3-ph').forEach(function(ph){ var c=ph.parentNode.parentNode; var cs=getComputedStyle(c), sp=parseFloat(cs.getPropertyValue('--gsplit'))||0, band=parseFloat(cs.getPropertyValue('--gband'))||0; ph.style.setProperty('--appk',((sp||band)?Math.min(c.clientWidth*(sp||1)/310,(c.clientHeight-(sp?12:24)-band)/470):Math.min(c.clientWidth/310,c.clientHeight/500)).toFixed(3)); }); } fit(); addEventListener('resize',fit);
       loops.forEach(function(L){ var t0=0, raf=0, vis=false; L.f(0); function tick(now){ if(!t0) t0=now; L.f(((now-t0)%9000)/9000); raf=vis?requestAnimationFrame(tick):0; }
         new IntersectionObserver(function(es){ es.forEach(function(e){ vis=e.isIntersecting; if(vis&&!raf){ t0=0; raf=requestAnimationFrame(tick); } }); },{threshold:.35}).observe(L.el); });
     })();
@@ -5140,7 +5144,7 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   var how=document.getElementById('how'); if(!how||!window.ResizeObserver) return;
   function fit(ph){ var c=ph.parentNode&&ph.parentNode.parentNode; if(!c||!c.clientHeight) return;
     var cs=getComputedStyle(c), sp=parseFloat(cs.getPropertyValue('--gsplit'))||1, band=parseFloat(cs.getPropertyValue('--gband'))||0;   /* 1016 · steps 1–2: phone = right half (phone) / below a gesture band (tablet) */
-    ph.style.setProperty('--appk',Math.min(c.clientWidth*sp/310,(c.clientHeight-24-band)/470).toFixed(3)); }
+    ph.style.setProperty('--appk',Math.min(c.clientWidth*sp/310,(c.clientHeight-(sp<1?12:24)-band)/470).toFixed(3)); }
   var ro=new ResizeObserver(function(es){ es.forEach(function(e){ e.target.querySelectorAll('.r3m .r3-ph').forEach(fit); }); });
   function hook(){ var cells=how.querySelectorAll('.stage>.pn.pic'); if(!cells.length||!how.querySelector('.r3m .r3-ph')) return setTimeout(hook,400);
     cells.forEach(function(c){ ro.observe(c); c.querySelectorAll('.r3m .r3-ph').forEach(fit); }); }
