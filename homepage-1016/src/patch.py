@@ -517,5 +517,10 @@ s = s.replace('</main>\n</body>', '</main>\n<script src="https://cdn.jsdelivr.ne
 # 1007-f · tablet follows the phone structure: phone rules (≤700) now cover ≤1100; tablet-only tuning uses 700.5px
 s = (s.replace('max-width:700px', 'max-width:1100px').replace('min-width:701px', 'min-width:1101px')
        .replace('innerWidth<=700', 'innerWidth<=1100').replace('innerWidth>700', 'innerWidth>1100'))
+# 1016 · type weights one step lighter (安田 10/16): Medium 500 → Regular 400, SemiBold 600 → Medium 500 — every weight declaration in the page
+_W = {'500':'400','600':'500'}
+s = re.sub(r'(font-weight\s*:\s*)(500|600)\b', lambda m: m.group(1)+_W[m.group(2)], s)
+s = re.sub(r'(font\s*:\s*(?:italic\s+)?)(500|600)(\s)', lambda m: m.group(1)+_W[m.group(2)]+m.group(3), s)
+s = re.sub(r'(font-weight=")(500|600)"', lambda m: m.group(1)+_W[m.group(2)]+'"', s)
 (R/'index.html').write_text(s)
 print('built', len(s))
