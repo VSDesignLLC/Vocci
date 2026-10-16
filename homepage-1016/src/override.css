@@ -3046,3 +3046,11 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #faq>.stage>.rowline{clip-path:inset(-4px calc(50% - 3px) -4px -4px)}
   #faq>.stage>.rowline>i:nth-child(4),#faq>.stage>.rowline>i:nth-child(5){display:none}
 }
+/* 1016 · ?capture=1 (Figma import): stills only */
+html.cap *,html.cap *::before,html.cap *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+html.cap .vl-intro{display:none!important}
+html.cap .gridall>.nav{position:absolute!important}
+html.cap #pagebg{position:absolute!important}
+html.cap .rowline{transform:none!important}
+@media (min-width:1101px){ html.cap #how .pn.pic .r3-app{display:grid!important;place-items:center;position:absolute;inset:0;z-index:2} html.cap #how .pn.pic .m-gest{display:none!important} }
+html.cap main section{position:relative!important}
