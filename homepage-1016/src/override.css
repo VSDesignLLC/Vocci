@@ -2972,13 +2972,7 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #how .pn.pic .m-gest-ring{width:72%!important;max-width:200px}
   #how .pn.pic .m-gest-lg{flex-direction:column!important;gap:6px!important}
 }
-/* tablet: the step cards are tall, so the split runs top / bottom — gesture band (≈¼) above, the app at full size below */
-@media (min-width:700.5px) and (max-width:1100px){
-  #how .pn.pic.hs1,#how .pn.pic.hs2{--gsplit:0;--gband:150px}
-  #how .pn.pic.hs1 .r3-app,#how .pn.pic.hs2 .r3-app{left:0!important;top:150px!important}
-  #how .pn.pic .m-gest{width:100%!important;height:150px;bottom:auto!important;flex-direction:row!important;gap:20px!important;align-items:center;justify-content:center}
-  #how .pn.pic .m-gest-ring{width:160px!important}
-}
+/* tablet uses the same left / right split as the phone (the app stays readable) */
 /* colours: description directly under the tiles (16), then the buttons (24) */
 #colors .fnx-ctl>.fnx-desc{margin:16px 0 0!important;max-width:none}
 #colors .fnx-ctl>.end{margin-top:24px!important}
