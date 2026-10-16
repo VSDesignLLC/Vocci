@@ -24,10 +24,16 @@
     /* pinned sections: the stage sticks inside a taller section — lay it flat at one screen */
     document.querySelectorAll('main section').forEach(function(s){ var st=Array.prototype.find.call(s.children,function(k){ return getComputedStyle(k).position==='sticky'; }); if(!st) return;
       if(s.offsetHeight>st.offsetHeight*1.3){ s.style.setProperty('height','auto','important'); s.style.setProperty('min-height','0','important'); st.style.setProperty('position','relative','important'); st.style.setProperty('top','0','important'); } });
-    /* canvases (sound ring, footer particles) become plain images */
-    document.querySelectorAll('canvas').forEach(function(c){ if(!c.width||!c.offsetWidth) return; try{ var u=c.toDataURL('image/png'); if(u.length<2000) return; var im=new Image(); im.src=u; im.alt=''; im.className=c.className; im.setAttribute('style',c.getAttribute('style')||''); var cs=getComputedStyle(c);
-      ['position','top','left','right','bottom','width','height','inset','transform','opacity','z-index'].forEach(function(p){ im.style.setProperty(p,cs.getPropertyValue(p)); }); c.replaceWith(im); }catch(e){} });
-    root.classList.add('cap-ready');
+    /* nothing sticks or hides while the importer scrolls: every sticky / fixed block (the pinned hero, the footer that waits under the page) sits in normal flow, and the footer is shown */
+    document.querySelectorAll('main *, main').forEach(function(e){ var c=getComputedStyle(e); if((c.position==='sticky'||c.position==='fixed')&&!e.classList.contains('nav')){ e.style.setProperty('position','relative','important'); e.style.setProperty('top','auto','important'); e.style.setProperty('bottom','auto','important'); } });
+    var ft=document.getElementById('footer'); if(ft){ ft.style.setProperty('visibility','visible','important'); ft.querySelectorAll('*').forEach(function(e){ if(getComputedStyle(e).visibility==='hidden') e.style.setProperty('visibility','visible','important'); }); }
+    /* canvases (sound ring, footer particles) only draw once they are on screen: visit each, then turn them into plain images */
+    var cvs=Array.prototype.slice.call(document.querySelectorAll('canvas')), k=0;
+    (function next(){ if(k>=cvs.length){ scrollTo(0,0); root.classList.add('cap-ready'); return; }
+      var c=cvs[k++], r=c.getBoundingClientRect(); scrollTo(0, Math.max(0, r.top+scrollY-H/3));
+      setTimeout(function(){ snap(c); next(); }, 900); })();
   }
+  function snap(c){ if(!c.isConnected||!c.width||!c.offsetWidth) return; try{ var u=c.toDataURL('image/png'); if(u.length<4000) return; var im=new Image(); im.src=u; im.alt=''; im.className=c.className; im.setAttribute('style',c.getAttribute('style')||''); var cs=getComputedStyle(c);
+      ['position','top','left','right','bottom','width','height','inset','transform','opacity','z-index'].forEach(function(p){ im.style.setProperty(p,cs.getPropertyValue(p)); }); c.replaceWith(im); }catch(e){} }
   addEventListener('load',function(){ setTimeout(flat,1800); });
 })();
