@@ -3092,3 +3092,6 @@ html.cap #footer,html.cap #footer *{visibility:visible!important}
 html.cap #hero,html.cap #footer,html.cap #how>.stage,html.cap #why>.stage,html.cap #how>.m-pin{position:relative!important;top:auto!important;bottom:auto!important}
 html.cap #footer{visibility:visible!important}
 html.cap #how,html.cap #why{height:auto!important;min-height:0!important}
+/* 1016 · FAQ categories are an overview, not buttons: no pointer, no hover, no selected state */
+#faq .fq5-c,#faq .fq5-c:disabled{cursor:default!important;pointer-events:none;color:var(--ink)!important;opacity:1!important;background:rgba(255,255,255,.5)!important}
+#faq .fq5-c em{color:#8a8a90!important}
