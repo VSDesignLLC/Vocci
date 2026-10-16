@@ -3101,3 +3101,4 @@ html.cap #how,html.cap #why{height:auto!important;min-height:0!important}
 /* 1016 · integer line height for the step captions (was 1.6 → 22.4px) */
 .pic-cap{line-height:22px!important}
 #how .r3-pill,#how .r3-pill .t{font-size:11px!important;line-height:11px!important}
+html.cap{scrollbar-width:none}html.cap::-webkit-scrollbar{display:none}
