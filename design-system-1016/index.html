@@ -236,6 +236,19 @@ footer.end .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:w
   .faq .q{font-size:16px;min-height:52px;padding:12px 16px}.faq .b{width:52px;height:52px}
   table.spec th,table.spec td{padding:12px}
 }
+
+/* 1016 · section layouts */
+.comp .card.wide{grid-column:1/-1}
+.ico-btn .btn-ico{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-right:8px;vertical-align:-4px;position:relative;z-index:1}
+.lay{display:grid;max-width:760px;gap:1px;background:rgba(255,255,255,.9);border-radius:8px;overflow:hidden;width:100%;font:500 11px/14px var(--mono);color:var(--label);letter-spacing:-.5px}
+.lay>div{background:var(--stone);padding:10px;min-height:44px;position:relative}
+.lay>div.hot{background:#ecebe7}
+.lay>div b{display:block;color:var(--ink);font:600 12px/16px var(--sans);letter-spacing:0;margin-bottom:4px}
+.lay .vid{aspect-ratio:16/9;width:min(100%,280px);background:#1c1c1f;border-radius:6px;margin-top:6px;display:grid;place-items:center;color:#fff}
+.lay .arw{display:inline-block;width:20px;height:20px;border:1px solid rgba(20,20,22,.18);border-radius:4px;margin-left:4px;vertical-align:middle}
+.lay .pill{position:absolute;right:10px;bottom:10px;background:rgba(255,255,255,.9);border-radius:999px;padding:4px 10px}
+.gest{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.gest img{height:72px;width:auto}
 </style>
 </head>
 <body>
@@ -510,6 +523,33 @@ footer.end .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:w
           <div class="qb">“I am always wearing it which makes it super easy to click &amp; record.”<small>View on Discord ↗</small></div>
         </div>
         <div class="specl"><b>AI 指令</b> 墨黑胶囊 · 12×16 · <b>AI 回复</b> 白 90% · 12 圆角<br><b>用户证言</b> 白 90% · 14 圆角 · 12×14 · 可点击跳原帖</div></div>
+      <div class="card"><h4>社区按钮（带图标）</h4>
+        <div class="stagey"><a class="btn ghost rp ico-btn" href="#components"><svg class="btn-ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 6c3-1.5 7-1.5 10 0l1.5 7c-1.5 1.2-3 1.8-4 2l-.8-1.5M5 6L3.5 13c1.5 1.2 3 1.8 4 2l.8-1.5M7.5 12.5c1.6.7 3.4.7 5 0"/><circle cx="8" cy="10" r=".7"/><circle cx="12" cy="10" r=".7"/></svg>Discord</a><a class="btn ghost rp ico-btn" href="#components"><svg class="btn-ico" viewBox="0 0 20 20" aria-hidden="true"><ellipse cx="10" cy="12.2" rx="6.5" ry="4.6"/><circle cx="3.9" cy="9.2" r="1.3"/><circle cx="16.1" cy="9.2" r="1.3"/><path d="M10 7.6l1-4.1 3.4.8"/><circle cx="15.6" cy="4.6" r="1.1"/><circle cx="7.6" cy="11.6" r=".7"/><circle cx="12.4" cy="11.6" r=".7"/><path d="M7.6 14.2c1.5.9 3.3.9 4.8 0"/></svg>Reddit</a></div>
+        <div class="specl"><b>同次按钮</b>，文字前加社区图标 · <b>图标</b> 18px · 线宽 1.6 · 跟随文字色 · 与文字间距 8<br><b>用于</b> Needs 板块底部的 Discord / Reddit</div></div>
+      <div class="card"><h4>戒指手势提示</h4>
+        <div class="stagey gest"><img src="../homepage-1016/img3/gest-press.svg" alt="双击"><img src="../homepage-1016/img3/gest-icon-double.svg" alt="双击图标"><img src="../homepage-1016/img3/gest-icon-hold.svg" alt="长按图标"><img src="../homepage-1016/img3/gest-led.svg" alt="指示灯"></div>
+        <div class="specl"><b>画风</b> 沿用《Use of Equipment》线稿：戒指 + 手指 · 单色线 + 品牌橙动效<br><b>双击</b> 两圈橙色涟漪 · <b>长按</b> 橙色进度圈画满 · <b>指示灯</b> LED 呼吸<br><b>手机</b> 左半屏手势 / 右半屏 App · <b>平板</b> 上方 150px 手势横条 / 下方 App · <b>桌面</b> 不显示（3D 戒指演示）</div></div>
+      <div class="card wide"><h4>Needs · 达人视频轮播</h4>
+        <div class="stagey"><div class="lay" style="grid-template-columns:1fr 2fr">
+          <div class="hot"><b>Where Vocci fits into your day.</b>01 Founders &amp; executives<br>02 Sales &amp; BD<br>03 Engineers …<br><br>[Discord] [Reddit]</div>
+          <div><b>单条视频 16:9</b><div class="vid">▶</div><div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center"><span>标题 · 出处 &nbsp; 1 / 3</span><span><i class="arw"></i><i class="arw"></i></span></div></div>
+        </div></div>
+        <div class="specl"><b>一次只放一条</b> YouTube 达人测评，16:9，点击跳 YouTube · 下方一行：标题 + 出处、计数「1 / 3」、40×40 图标按钮（上一个 / 下一个）<br><b>对齐</b> 桌面端视频顶部对齐左侧人群列表顶部，按钮行底部对齐 Discord / Reddit 按钮底部 · 与 Creators 板块（多卡横排）区分<br><b>平板 / 手机</b> 上下堆叠，视频满宽，箭头在视频下方右侧</div></div>
+      <div class="card wide"><h4>Colors · 左右分屏</h4>
+        <div class="stagey"><div class="lay" style="grid-template-columns:1fr 3fr;grid-template-rows:auto 1fr">
+          <div class="hot" style="grid-column:1;grid-row:1"><b>Four finishes, each with its own character.</b>标题 · 左上格</div>
+          <div style="grid-column:2;grid-row:1/span 2;min-height:150px"><b>大图（戒指居中于右侧 3 列）</b>佩戴图 / 戒指 / 充电仓<span class="pill">On hand · Ring · Case</span></div>
+          <div class="hot" style="grid-column:1;grid-row:2"><b>颜色块 2×2</b>描述（距色块 16）<br>[Buy now] Get a sizing kit →（距描述 24）</div>
+        </div></div>
+        <div class="specl"><b>桌面</b> 左列上：标题；左列下：标签 + 颜色块 + 描述 + 按钮；右 3 列：大图，主体（戒指 / 戒指 + 充电仓整体）居中<br><b>视图胶囊</b> 浮在图片右下 · 浮层玻璃 · 每 3s 自动切换，无进度条 · 描述区按最长文案预留高度，切换颜色不跳动<br><b>平板 / 手机</b> 标题 → 大图 → 控制区 上下排列</div></div>
+      <div class="card wide"><h4>FAQ · 分组列表</h4>
+        <div class="stagey"><div class="lay" style="grid-template-columns:1fr 1fr 2fr;grid-template-rows:auto auto">
+          <div class="hot" style="grid-column:1;grid-row:1"><b>Questions before you put it on?</b>标题</div>
+          <div class="hot" style="grid-column:2;grid-row:1"><b>分类按钮</b>Product 4<br>Hardware 4<br>Privacy 2</div>
+          <div class="hot" style="grid-column:3;grid-row:1/span 2"><b>全部 10 个问题</b>Product &amp; Capabilities（Mono 标签）<br>· 4 行 FAQ<br>Hardware &amp; Maintenance<br>· 4 行 FAQ<br>Privacy &amp; Security<br>· 2 行 FAQ</div>
+          <div style="grid-column:1/span 2;grid-row:2;min-height:60px">第二行空格（网格延续）</div>
+        </div></div>
+        <div class="specl"><b>背景</b> 整屏戒指大图，主体居中 · 上盖 Veil 玻璃（白 40% · blur 4）<br><b>桌面</b> 两行网格：第 1 列标题、第 2 列分类、第 3–4 列跨两行放全部问题；分组标签 Mono 12 #5F5F66，组间距 16（矮屏 12），行间距 8<br><b>分类按钮</b> 不再筛选：点击跳到对应分组（已在屏内则只切换高亮），滚动时跟随阅读位置高亮 · <b>平板 / 手机</b> 标题 → 分类 → 列表 上下排列</div></div>
       <div class="card"><h4>导航 / 网格圆点</h4>
         <div class="stagey" style="background:linear-gradient(135deg,#d9d9d5,#b9b9b4)"><div class="navdemo"><span class="wm">VOCCI</span><a class="btn rp" href="#components">Buy now</a></div><span class="dotdemo"><i></i></span></div>
         <div class="specl"><b>导航</b> 高 56 · 圆角 10 · 导航玻璃；滚过首屏后以 0.75s 弹簧曲线收成居中胶囊（logo + Buy now），菜单项由外向内模糊淡出，Buy now 延迟 0.18s 放大淡入，收好后一道橙色流光绕边一圈；hover 展开<br><b>手机 / 平板</b> 左边缘平滑滑向右侧，收成 Buy now + 菜单按钮 38 · <b>圆点</b> 5px 白，只在真实网格交点</div></div>

@@ -3006,3 +3006,37 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
   #needs .pz-vid{grid-template-rows:minmax(0,1fr) auto!important;height:100%;min-height:0}
   #needs .pz-vid-img{aspect-ratio:auto!important;height:100%;min-height:0}
 }
+
+/* ============ 1016 · audit round ============ */
+/* FAQ: back to the two-row grid; all ten questions listed in groups across columns 3–4; photo centred behind */
+@media (min-width:1101px){
+  #faq>.stage{min-height:100vh!important;grid-template-rows:minmax(50vh,auto) minmax(50vh,auto)!important}
+  #faq>.stage>.rowline{display:block!important}
+  #faq .stage>.pn.fq5-list{grid-row:1/span 2!important}
+}
+#faq .fq5-list ol{display:flex;flex-direction:column;gap:8px}
+#faq .fq5-g{list-style:none;padding:0;margin:16px 0 0}
+#faq .fq5-g:first-child{margin-top:0}
+#faq .fq5-g .label{display:block;margin:0}
+#faq .fq5-i[hidden]{display:block!important}
+#faq .stage>.pn.fq5-pic img{object-position:50% 50%!important}
+
+/* 1 · Ask prompt is a pill at every width */
+#why .ask-q{border-radius:999px!important}
+/* 2 · nav Buy now uses the button weight */
+.gridall>.nav.nav3 .n3-buy,.page.gridall>.nav.nav3 .n3-buy{font-weight:600!important}
+/* 3 · footer link columns: the 28px cell padding (desktop) */
+@media (min-width:1101px){ #footer .stage>.pn.ft2-c{padding:28px!important} }
+/* 4 · tablet text cells: 36 / 40 / 40 (the cells that clear the floating nav keep their extra top) */
+@media (min-width:700.5px) and (max-width:1100px){
+  #why .pn.rec-pn,#needs .pn.pz-title,#faq .stage>.pn.fq5-cats,#faq .stage>.pn.fq5-list,#footer .stage>.pn.ft2-say,#footer .stage>.pn.ft2-c{padding:36px 40px 40px!important}
+  #awards>.stage>.pn.mid.glassy:not(.r1):not(:nth-of-type(-n+2)){padding:36px 40px 40px!important}
+  #awards>.stage>.pn.mid.quote{padding:36px 40px 40px!important}
+}
+/* 5 · phone text cells: 24 / 20 / 28 */
+@media (max-width:700.4px){
+  #why .pn.rec-pn,#needs .pn.pz-title,#faq .stage>.pn.fq5-cats,#faq .stage>.pn.fq5-list,#footer .stage>.pn.ft2-say,#footer .stage>.pn.ft2-c{padding:24px 20px 28px!important}
+  #awards>.stage>.pn.mid.glassy:not(.r1):not(:nth-of-type(-n+2)){padding:24px 20px 28px!important}
+  #awards>.stage>.pn.mid.quote{padding:24px 20px 28px!important}
+}
+@media (min-width:1101px) and (max-height:760px){ #faq .fq5-g{margin-top:12px} #faq .fq5-g:first-child{margin-top:0} }
