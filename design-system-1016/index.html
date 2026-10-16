@@ -340,6 +340,55 @@ table.spec td.ff{color:var(--ink);font:400 13px/18px var(--sans);min-width:150px
 @media (max-width:700px){.srow{grid-template-columns:repeat(2,minmax(0,1fr))}.cardset{grid-template-columns:minmax(0,1fr)}.cv .btn{padding:0 12px}}
 .fqo{width:100%;display:flex;flex-direction:column;gap:8px}.fa{padding:12px 16px;border-radius:8px;background:var(--glass-ctl);font:400 13px/18px var(--sans);color:var(--body)}
 @media (max-width:700px){.glass-demo{grid-template-columns:repeat(2,minmax(0,1fr))!important}.glass-demo .gl{min-width:0}.glass-demo .gl code{word-break:break-word}}
+
+/* ---------- device switch ---------- */
+.devsw{margin-left:auto;flex:none;display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:rgba(20,20,22,.06)}
+.devsw button{height:30px;padding:0 14px;border:0;border-radius:999px;background:none;color:var(--body);font:400 13px/16px var(--sans);cursor:pointer}
+.devsw button.on{background:var(--white);color:var(--ink)}
+html[data-dev="desktop"] [data-only="mobile"],html[data-dev="mobile"] [data-only="desktop"],html[data-dev="desktop"] [data-only="tablet"],html[data-dev="mobile"] [data-only="tablet"]{display:none!important}
+html[data-dev="desktop"] [data-col="mobile"],html[data-dev="desktop"] [data-col="tablet"],html[data-dev="mobile"] [data-col="desktop"],html[data-dev="mobile"] [data-col="tablet"]{display:none!important}
+.devnote{display:none;margin:0 0 24px;padding:12px 16px;border-radius:8px;background:var(--white);font:400 13px/18px var(--sans);color:var(--body)}
+html[data-dev="desktop"] .devnote.d,html[data-dev="mobile"] .devnote.m{display:block}
+/* ---------- grid ---------- */
+.gsplit{display:grid;grid-template-columns:3fr 2fr;gap:12px;align-items:start}
+.gd{position:relative;width:100%;aspect-ratio:16/10;border-radius:8px;overflow:hidden;background:linear-gradient(135deg,#cfcfca,#a9a9a3)}
+.gd .v,.gd .h{position:absolute;background:rgba(255,255,255,.35)}.gd .v{top:0;bottom:0;width:1px}.gd .h{left:0;right:0;height:1px}
+.gd .dot{position:absolute;width:5px;height:5px;margin:-2px 0 0 -2px;border-radius:50%;background:#fff}
+.gd .lab{position:absolute;font:400 11px/14px var(--mono);letter-spacing:-.5px;color:#fff}
+.gd .cellx{position:absolute;left:0;top:50%;width:25%;height:50%;background:rgba(255,255,255,.66);box-sizing:border-box;padding:4.5%  2% 0 2%}
+.gd .cellx i{display:block;position:absolute;inset:6.2% 7.8%;border:1px dashed rgba(244,117,70,.7);border-radius:2px}
+.gd .cellx em{position:absolute;left:8%;top:8%;font:400 11px/14px var(--mono);font-style:normal;color:var(--accent-text)}
+.spg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.spg .card{display:flex;flex-direction:column;gap:10px}
+.spg .g{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);aspect-ratio:16/10;gap:1px;background:rgba(255,255,255,.9);border-radius:6px;overflow:hidden}
+.spg .g>*{background:var(--stone)}
+.spg .g .ph{background-size:cover;background-position:center}
+.spg .g .tx{background:rgba(255,255,255,.85);position:relative}.spg .g .tx::after{content:"";position:absolute;left:12%;right:30%;top:16%;height:7%;background:var(--ink);border-radius:2px;opacity:.75}
+.spg .g .ov{grid-area:1/1/3/5;background-size:cover;background-position:center}
+.spg b{color:var(--ink);font:500 14px/18px var(--sans)}.spg span{font:400 12px/18px var(--mono);letter-spacing:-.5px;color:var(--label)}
+.md{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.mph{position:relative;margin:0 auto;width:201px;border-radius:12px;overflow:hidden;background:var(--white);border:1px solid var(--line)}
+.mph .e{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.6);z-index:2}
+.mph .blk{position:relative}.mph .ph{background-size:cover;background-position:center}
+.mph .tx{background:var(--glass-panel);padding:12px 10px 14px}.mph .tx b{display:block;height:7px;width:70%;background:var(--ink);border-radius:2px;opacity:.75}.mph .tx i{display:block;height:4px;margin-top:6px;background:var(--muted);border-radius:2px;opacity:.5}
+.mph .row{display:flex;gap:6px;padding:10px 10px 12px;overflow:hidden}.mph .row>*{flex:0 0 148px;height:110px;border-radius:4px;background-size:cover;background-position:center}
+.mph .two{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.9)}.mph .two>*{height:70px;background:var(--stone)}
+.mlab{margin-top:10px;text-align:center}.mlab b{display:block;color:var(--ink);font:500 14px/18px var(--sans)}.mlab span{font:400 12px/18px var(--mono);letter-spacing:-.5px;color:var(--label)}
+/* ---------- imagery ---------- */
+.imc{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.imc .card{display:flex;flex-direction:column;gap:12px}
+.imc .th{display:grid;gap:4px;border-radius:6px;overflow:hidden}
+.imc .th>*{background-size:cover;background-position:center;border-radius:4px;min-height:110px}
+.imc .th.one{grid-template-columns:1fr}.imc .th.one>*{aspect-ratio:16/10}
+.imc .th.three{grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr}.imc .th.three>:first-child{grid-row:1/3}
+.imc .th.png>*{background-size:contain;background-repeat:no-repeat;background-color:var(--stone)}
+.imc h4{color:var(--ink);font:500 16px/22px var(--sans)}.imc h4 small{margin-left:6px;font:400 12px/14px var(--mono);letter-spacing:-.5px;color:var(--label)}
+.imc p{font-size:13px;line-height:20px}
+.imc .use{font:400 12px/18px var(--mono);letter-spacing:-.5px;color:var(--accent-text)}
+.rules{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+.rules .card h4{color:var(--ink);font:500 16px/22px var(--sans);margin-bottom:8px}.rules ul{margin:0;padding-left:18px}.rules li{font-size:13px;line-height:21px}
+@media (max-width:1100px){.gsplit,.spg,.md,.imc,.rules{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){.gsplit,.spg,.md,.imc,.rules{grid-template-columns:minmax(0,1fr)}.devsw button{padding:0 10px}}
 </style>
 </head>
 <body>
@@ -349,7 +398,7 @@ table.spec td.ff{color:var(--ink);font:400 13px/18px var(--sans);min-width:150px
   <div class="wrap">
     <div class="eyebrow">VOCCI · WEB DESIGN SYSTEM · V1.0</div>
     <h1>VOCCI 设计系统</h1>
-    <p class="lead">VOCCI 官网的视觉语言与组件规范：颜色、字体、间距、圆角、材质、组件与动效。适用于桌面、平板、手机三个端口，所有数值均为整数像素（px）。本页的组件示例可直接点击，样式与交互与官网一致。</p>
+    <p class="lead">VOCCI 官网的视觉语言与组件规范：颜色、字体、间距、圆角、材质、组件与动效。适用于桌面、平板、手机三个端口，所有数值均为整数像素（px）。本页的组件示例可直接点击，样式与交互与官网一致。用顶部目录栏右侧的「桌面 / 手机」切换，可以分别查看两端各自的规范。</p>
     <div class="meta">
       <span class="chip">版本 1.0</span>
       <span class="chip">2026 年 10 月</span>
@@ -363,12 +412,15 @@ table.spec td.ff{color:var(--ink);font:400 13px/18px var(--sans);min-width:150px
     <a href="#principles"><b>01</b>原则</a>
     <a href="#color"><b>02</b>颜色</a>
     <a href="#type"><b>03</b>字体</a>
-    <a href="#space"><b>04</b>间距与布局</a>
-    <a href="#surface"><b>05</b>圆角与材质</a>
-    <a href="#components"><b>06</b>组件</a>
-    <a href="#states"><b>07</b>组件状态</a>
-    <a href="#cards"><b>08</b>卡片</a>
-    <a href="#motion"><b>09</b>动效</a>
+    <a href="#grid"><b>04</b>排版网格</a>
+    <a href="#space"><b>05</b>间距与布局</a>
+    <a href="#surface"><b>06</b>圆角与材质</a>
+    <a href="#imagery"><b>07</b>图片风格</a>
+    <a href="#components"><b>08</b>组件</a>
+    <a href="#states"><b>09</b>组件状态</a>
+    <a href="#cards"><b>10</b>卡片</a>
+    <a href="#motion"><b>11</b>动效</a>
+    <div class="devsw" role="group" aria-label="端口"><button data-d="all" class="on">全部</button><button data-d="desktop">桌面 Desktop</button><button data-d="mobile">手机 Mobile</button></div>
   </div>
 </nav>
 
@@ -466,10 +518,76 @@ table.spec td.ff{color:var(--ink);font:400 13px/18px var(--sans);min-width:150px
   </div>
 </section>
 
+
+<!-- grid -->
+<section class="blk" id="grid">
+  <div class="wrap">
+    <div class="blk-head"><div><div class="num">04</div><h2>排版网格</h2></div><p>桌面端每一屏是一个 4 列 × 2 行的网格，图片、文字格和卡片都对齐到格子，网格线与交点圆点本身就是可见的视觉元素。手机端为单列阅读，每个板块按「标题 → 图片 → 正文」纵向排列。</p></div>
+    <p class="devnote d">当前显示：桌面端网格（≥ 1101px）</p><p class="devnote m">当前显示：手机端网格（≤ 700px）</p>
+
+    <div data-only="desktop">
+    <h3 class="sub">桌面 <span class="mono">DESKTOP · 4 × 2</span></h3>
+    <div class="gsplit">
+      <div class="gd">
+        <i class="v" style="left:25%"></i><i class="v" style="left:50%"></i><i class="v" style="left:75%"></i><i class="h" style="top:50%"></i><i class="dot" style="left:0%;top:0%"></i><i class="dot" style="left:25%;top:0%"></i><i class="dot" style="left:50%;top:0%"></i><i class="dot" style="left:75%;top:0%"></i><i class="dot" style="left:100%;top:0%"></i><i class="dot" style="left:0%;top:50%"></i><i class="dot" style="left:25%;top:50%"></i><i class="dot" style="left:50%;top:50%"></i><i class="dot" style="left:75%;top:50%"></i><i class="dot" style="left:100%;top:50%"></i><i class="dot" style="left:0%;top:100%"></i><i class="dot" style="left:25%;top:100%"></i><i class="dot" style="left:50%;top:100%"></i><i class="dot" style="left:75%;top:100%"></i><i class="dot" style="left:100%;top:100%"></i>
+        <span class="lab" style="left:9%;top:3%">360</span><span class="lab" style="left:26%;top:22%">450</span>
+        <div class="cellx"><i></i><em>28</em></div>
+      </div>
+      <div class="scroll"><table class="spec">
+        <thead><tr><th>项目</th><th>规格（以 1440 × 900 为例）</th></tr></thead>
+        <tbody>
+          <tr><td class="tok"><b>一屏</b></td><td>宽 100%，高 = 一个视口高度（1440 × 900）</td></tr>
+          <tr><td class="tok"><b>列</b></td><td class="n">4 列 · 每列 25%（360）</td></tr>
+          <tr><td class="tok"><b>行</b></td><td class="n">2 行 · 每行 50%（450）</td></tr>
+          <tr><td class="tok"><b>列 / 行间距</b></td><td class="n">0 · 格子相接，用 1px 网格线分隔</td></tr>
+          <tr><td class="tok"><b>网格线</b></td><td class="n">1px · 白 35%</td></tr>
+          <tr><td class="tok"><b>交点圆点</b></td><td class="n">5px 白 · 只在网格交点</td></tr>
+          <tr><td class="tok"><b>文字格内边距</b></td><td class="n">28 / 28 / 28</td></tr>
+          <tr><td class="tok"><b>窗口 1101–1439</b></td><td>列宽按比例缩放，字号在 1280 / 1440 分档；窗口高度 ≤ 800 时启用紧凑排版</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <h3 class="sub">常用跨格组合 <span class="mono">SPAN PATTERNS</span></h3>
+    <div class="spg">
+      <div class="card"><div class="g"><div class="ov" style="background-image:url('../homepage-1016/img3/hero-desk-v2.jpg')"></div></div><b>整屏照片 + 单格文字</b><span>照片 4 × 2 · 文字格放第 1 列第 2 行（大面板玻璃）· 首屏、可靠性、隐私</span></div>
+      <div class="card"><div class="g"><div class="ph" style="background-image:url('../homepage-1016/img3/how-ring.webp')" ></div><div class="ph" style="background-image:url('../homepage-1016/img3/how-static-2.jpg')"></div><div class="ph" style="background-image:url('../homepage-1016/img3/how-static-3.jpg')"></div><div class="ph" style="background-image:url('../homepage-1016/img3/how-static-4.jpg')"></div><div class="tx"></div><div class="tx"></div><div class="tx"></div><div class="tx"></div></div><b>四图 + 四文</b><span>上排 4 张图、下排 4 个文字格一一对应 · 产品工作流</span></div>
+      <div class="card"><div class="g"><div class="tx" style="grid-area:1/1/3/2"></div><div class="ph" style="grid-area:1/2/3/5;background-image:url('../homepage-1016/img3/scene-founders.webp')"></div></div><b>标题格 + 三格照片</b><span>第 1 列跨两行放标题与内容，2–4 列跨两行放照片 · 使用场景</span></div>
+      <div class="card"><div class="g"><div class="tx" style="grid-area:1/1/3/2"></div><div class="ph" style="background-image:url('../homepage-1016/img2/creator-01.jpg')"></div><div class="ph" style="background-image:url('../homepage-1016/img2/v09.jpg')"></div><div class="ph" style="background-image:url('../homepage-1016/img2/v18.jpg')"></div><div class="tx" style="grid-area:2/2"></div><div class="tx" style="grid-area:2/3"></div><div class="tx" style="grid-area:2/4"></div></div><b>标题格 + 三列视频</b><span>第 1 列标题；2–4 列上图下文 · 达人测评</span></div>
+      <div class="card"><div class="g"><div class="tx"></div><div class="ph" style="grid-area:1/2/3/4;background-size:contain;background-repeat:no-repeat;background-image:url('../homepage-1016/img3/detail-exploded-cut.webp')"></div><div class="ph" style="grid-area:1/4;background-image:url('../homepage-1016/img3/detail-button.jpg')"></div><div class="ph" style="grid-area:2/1;background-image:url('../homepage-1016/img3/case-dome.webp')"></div><div class="ph" style="grid-area:2/4;background-image:url('../homepage-1016/img3/detail-ruler.jpg')"></div></div><b>中心大图 + 角落卡片</b><span>2–3 列跨两行放主图，三个角放参数卡 · 硬件参数</span></div>
+      <div class="card"><div class="g"><div class="ov" style="opacity:.55;background-image:url('../homepage-1016/img3/ring-ridged-2k.jpg')"></div><div class="tx" style="grid-area:1/1"></div><div class="tx" style="grid-area:1/2"></div><div class="tx" style="grid-area:1/3/3/5"></div></div><b>标题 + 分类 + 两列宽列表</b><span>第 3–4 列跨两行放列表，列表区域内不画网格线 · 常见问题</span></div>
+    </div>
+    </div>
+
+    <div data-only="mobile">
+    <h3 class="sub">手机 <span class="mono">MOBILE · SINGLE COLUMN</span></h3>
+    <div class="gsplit">
+      <div class="md">
+        <div><div class="mph"><i class="e" style="left:4px"></i><i class="e" style="right:4px"></i><div class="blk ph" style="height:250px;background-image:url('../homepage-1016/img3/hero-desk-v2.jpg')"></div><div class="blk tx"><b></b><i></i><i style="width:60%"></i></div></div><div class="mlab"><b>图片 + 文字格</b><span>大部分板块</span></div></div>
+        <div><div class="mph"><i class="e" style="left:4px"></i><i class="e" style="right:4px"></i><div class="blk tx"><b></b><i></i></div><div class="row"><div style="background-image:url('../homepage-1016/img2/creator-01.jpg')"></div><div style="background-image:url('../homepage-1016/img2/v09.jpg')"></div></div></div><div class="mlab"><b>横向滑动</b><span>步骤 · 视频 · 参数卡</span></div></div>
+        <div><div class="mph"><i class="e" style="left:4px"></i><i class="e" style="right:4px"></i><i class="e" style="left:50%"></i><div class="two"><div></div><div></div><div></div><div></div></div><div class="blk tx"><b></b><i></i></div></div><div class="mlab"><b>两列格</b><span>奖项 · 页脚链接</span></div></div>
+      </div>
+      <div class="scroll"><table class="spec">
+        <thead><tr><th>项目</th><th>规格（以 402 宽为例）</th></tr></thead>
+        <tbody>
+          <tr><td class="tok"><b>宽度</b></td><td class="n">402 设计基准 · 375–700 自适应</td></tr>
+          <tr><td class="tok"><b>页边距</b></td><td class="n">20</td></tr>
+          <tr><td class="tok"><b>边线</b></td><td class="n">左右各一条，内收 8px · 白 60% · 两列格加一条中线</td></tr>
+          <tr><td class="tok"><b>板块高度</b></td><td>约一屏（402 × 874）；内容多时随内容延长（常见问题、页脚）</td></tr>
+          <tr><td class="tok"><b>排列顺序</b></td><td>标题 → 图片 → 正文 / 按钮</td></tr>
+          <tr><td class="tok"><b>文字格内边距</b></td><td class="n">24 / 20 / 28</td></tr>
+          <tr><td class="tok"><b>横向滑动行</b></td><td class="n">左右内边距 20 · 卡片间距 12 · 露出下一张的边缘</td></tr>
+          <tr><td class="tok"><b>两列格</b></td><td class="n">2 × 201 · 中线 1px</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    </div>
+  </div>
+</section>
+
 <!-- 04 -->
 <section class="blk" id="space">
   <div class="wrap">
-    <div class="blk-head"><div><div class="num">04</div><h2>间距与布局</h2></div><p>三个断点各有一套固定的页边距、格子内边距与元素间距，所有数值都取自下方的间距尺。</p></div>
+    <div class="blk-head"><div><div class="num">05</div><h2>间距与布局</h2></div><p>三个断点各有一套固定的页边距、格子内边距与元素间距，所有数值都取自下方的间距尺。</p></div>
 
     <h3 class="sub">间距尺 <span class="mono">SPACING SCALE · PX</span></h3>
     <div class="card"><div class="scale">
@@ -488,9 +606,9 @@ table.spec td.ff{color:var(--ink);font:400 13px/18px var(--sans);min-width:150px
 
     <h3 class="sub">断点 <span class="mono">BREAKPOINTS</span></h3>
     <div class="bp">
-      <div class="card"><b>手机</b><code>≤ 700px</code><ul><li>单列阅读</li><li>左右边线 60% 白，内收 8px</li><li>产品工作流与功能章节在一屏内切换；视频、步骤、参数可左右滑动</li></ul></div>
-      <div class="card"><b>平板</b><code>701 – 1100px</code><ul><li>单列阅读，更大的字号</li><li>左右边线内收 16px</li><li>横屏时部分板块两列</li></ul></div>
-      <div class="card"><b>桌面</b><code>≥ 1101px</code><ul><li>4 列 × 2 行网格，每屏一个视口高度</li><li>字号在 1280 / 1440px 再分档</li><li>窗口高度 ≤ 800px 时启用紧凑排版</li></ul></div>
+      <div class="card" data-only="mobile"><b>手机</b><code>≤ 700px</code><ul><li>单列阅读</li><li>左右边线 60% 白，内收 8px</li><li>产品工作流与功能章节在一屏内切换；视频、步骤、参数可左右滑动</li></ul></div>
+      <div class="card" data-only="tablet"><b>平板</b><code>701 – 1100px</code><ul><li>单列阅读，更大的字号</li><li>左右边线内收 16px</li><li>横屏时部分板块两列</li></ul></div>
+      <div class="card" data-only="desktop"><b>桌面</b><code>≥ 1101px</code><ul><li>4 列 × 2 行网格，每屏一个视口高度</li><li>字号在 1280 / 1440px 再分档</li><li>窗口高度 ≤ 800px 时启用紧凑排版</li></ul></div>
     </div>
 
     <h3 class="sub">间距规则 <span class="mono">SPACING TOKENS</span></h3>
@@ -514,7 +632,7 @@ table.spec td.ff{color:var(--ink);font:400 13px/18px var(--sans);min-width:150px
 
     <h3 class="sub">文字格结构 <span class="mono">CELL ANATOMY</span></h3>
     <div class="anat">
-      <div><div class="k">桌面 · 28 / 16 / 底对齐</div>
+      <div data-only="desktop"><div class="k">桌面 · 28 / 16 / 底对齐</div>
         <div class="frame" style="padding:28px;height:300px;display:flex;flex-direction:column">
           <span class="lbl" style="top:8px;left:28px">28</span>
           <div class="inner h" style="font-size:22px;line-height:26px;padding:4px">Your data, handled with care.</div>
@@ -523,7 +641,7 @@ table.spec td.ff{color:var(--ink);font:400 13px/18px var(--sans);min-width:150px
           <div style="flex:1;display:flex;align-items:center;justify-content:center" class="gap">auto</div>
           <div><span class="btnm" style="height:44px;padding:0 26px">Trust Center</span></div>
         </div></div>
-      <div><div class="k">平板 · 36·40 / 16 / 28</div>
+      <div data-only="tablet"><div class="k">平板 · 36·40 / 16 / 28</div>
         <div class="frame" style="padding:36px 40px 40px">
           <span class="lbl" style="top:12px;left:40px">36</span>
           <div class="inner h" style="font-size:24px;line-height:28px;padding:4px">Your data, handled with care.</div>
@@ -532,7 +650,7 @@ table.spec td.ff{color:var(--ink);font:400 13px/18px var(--sans);min-width:150px
           <div class="gap" style="height:28px">28</div>
           <div><span class="btnm" style="height:40px;padding:0 20px">Trust Center</span></div>
         </div></div>
-      <div><div class="k">手机 · 24·20 / 14 / 24</div>
+      <div data-only="mobile"><div class="k">手机 · 24·20 / 14 / 24</div>
         <div class="frame" style="padding:24px 20px 28px">
           <span class="lbl" style="top:8px;left:20px">24</span>
           <div class="inner h" style="font-size:20px;line-height:24px;padding:4px">Your data, handled with care.</div>
@@ -548,7 +666,7 @@ table.spec td.ff{color:var(--ink);font:400 13px/18px var(--sans);min-width:150px
 <!-- 05 -->
 <section class="blk" id="surface">
   <div class="wrap">
-    <div class="blk-head"><div><div class="num">05</div><h2>圆角与材质</h2></div><p>方形组件统一 8px 圆角；胶囊形用于切换器与标签；对话气泡更圆，表示「这是一句话」。不使用投影，层次由磨砂玻璃与细线建立。</p></div>
+    <div class="blk-head"><div><div class="num">06</div><h2>圆角与材质</h2></div><p>方形组件统一 8px 圆角；胶囊形用于切换器与标签；对话气泡更圆，表示「这是一句话」。不使用投影，层次由磨砂玻璃与细线建立。</p></div>
 
     <h3 class="sub">圆角 <span class="mono">RADIUS</span></h3>
     <div class="cards c4 rad">
@@ -569,10 +687,46 @@ table.spec td.ff{color:var(--ink);font:400 13px/18px var(--sans);min-width:150px
   </div>
 </section>
 
+
+<!-- imagery -->
+<section class="blk" id="imagery">
+  <div class="wrap">
+    <div class="blk-head"><div><div class="num">07</div><h2>图片风格</h2></div><p>图片以「真实使用中的戒指」为中心：柔和的自然光，中性暖灰、银与黑白色调，干净的背景，并为文字格留出位置。下列七类是官网使用的图片类型，每类都附官网实际用图作为参考。</p></div>
+    <div class="imc">
+      <div class="card"><div class="th one"><div style="background-image:url('../homepage-1016/img3/hero-desk-v2.jpg')"></div></div><h4>桌面静物 <small>STILL LIFE</small></h4><p>俯视角的工作台面：产品与日常物件（纸张、笔、玻璃珠）一起出现。暖米色台面，斜射的自然光带出长而柔和的影子。主体落在画面中上部，左下方留给文字格。</p><span class="use">首屏</span></div>
+      <div class="card"><div class="th three"><div style="background-image:url('../homepage-1016/img3/scene-founders.webp')"></div><div style="background-image:url('../homepage-1016/img3/scene-sales.webp')"></div><div style="background-image:url('../homepage-1016/img3/scene-research.webp')"></div></div><h4>场景俯拍 <small>OVERHEAD SCENES</small></h4><p>白底正俯拍的会议与工作场景，人物不看镜头，大面积留白。每个目标人群一张，构图保持一致，留白处可以叠放用户证言气泡。</p><span class="use">使用场景</span></div>
+      <div class="card"><div class="th three"><div style="background-image:url('../homepage-1016/img3/wear-lumen-v3.jpg')"></div><div style="background-image:url('../homepage-1016/img3/rec-hand.webp')" ></div><div style="background-image:url('../homepage-1016/img3/pool.webp')"></div></div><h4>手部佩戴 <small>ON HAND</small></h4><p>手部特写，戒指清晰可辨、位于视觉中心或网格交点。背景简洁：深色衣物、浅灰底或水面。表现日常佩戴和防水等真实场景。</p><span class="use">产品配色 · 功能章节 · 可靠性</span></div>
+      <div class="card"><div class="th three png"><div style="background-image:url('../homepage-1016/img3/how-ring.webp')"></div><div style="background-size:cover;background-image:url('../homepage-1016/img3/ring-macro.jpg')"></div><div style="background-size:cover;background-image:url('../homepage-1016/img3/detail-button.jpg')"></div></div><h4>产品微距与渲染 <small>PRODUCT</small></h4><p>银色金属质感，黑白灰为主，突出按键、指示灯、厚度等细节。透明底的渲染图用于需要居中排版的格子，四种颜色的渲染图尺寸和角度统一。</p><span class="use">产品工作流 · 隐私 · 硬件参数 · 产品配色</span></div>
+      <div class="card"><div class="th three"><div style="background-image:url('../homepage-1016/img3/quote-liquid.jpg')"></div><div style="background-image:url('../homepage-1016/img3/glass-2.jpg')"></div><div style="background-image:url('../homepage-1016/img3/ring-ridged-2k.jpg')"></div></div><h4>抽象质感 <small>ABSTRACT</small></h4><p>液态金属与玻璃的黑白抽象图，只作为背景使用，上面叠 40% 白色蒙版，让文字和标志保持清晰。</p><span class="use">媒体报道 · 常见问题</span></div>
+      <div class="card"><div class="th three"><div style="background-image:url('../homepage-1016/img2/creator-01.jpg')"></div><div style="background-image:url('../homepage-1016/img2/v09.jpg')"></div><div style="background-image:url('../homepage-1016/img2/v18.jpg')"></div></div><h4>达人视频封面 <small>CREATOR COVERS</small></h4><p>来自达人视频的真实使用画面，16:9 原图，在桌面格内裁成竖向。封面中央放 56px 圆形播放按钮（墨黑 32%），悬停时变为高亮橙。</p><span class="use">达人测评 · 使用场景</span></div>
+      <div class="card"><div class="th three png"><div style="background-image:url('../homepage-1016/img3/gest-press.svg')"></div><div style="background-image:url('../homepage-1016/img3/gest-led.svg')"></div><div style="background-image:url('../homepage-1016/img3/gest-icon-hold.svg')"></div></div><h4>线稿插画 <small>LINE ART</small></h4><p>单色线稿表现手势与指示灯，风格沿用产品使用说明。高亮橙只用于动作提示（涟漪、进度圈、指示灯）。</p><span class="use">产品工作流（手机 / 平板）</span></div>
+    </div>
+
+    <div class="rules">
+      <div class="card"><h4>色调与光线</h4><ul><li>中性暖灰、银色、黑白为主；照片中不出现大面积饱和色（产品配色本身除外）。</li><li>高亮橙只在界面上使用，不出现在照片里。</li><li>柔和的自然光或方向光，可以有长影；避免闪光灯和强烈色偏。</li></ul></div>
+      <div class="card"><h4>构图</h4><ul><li>主体对齐网格交点或格子中心。例如产品配色屏的戒指位于第 3 列中心，四种颜色的位置一致。</li><li>整屏照片要为文字格留出第 1 列第 2 行（桌面）。</li><li>同一张图需要同时适配桌面横向（16:10）和手机竖向裁切，主体不能贴边。</li></ul></div>
+      <div class="card"><h4>叠加处理</h4><ul><li>照片上的文字格：大面板玻璃（白 66% · blur 26）。</li><li>装饰背景图：蒙版玻璃（白 40% · blur 4）。</li><li>隐私屏：清晰图下叠一层 62% 透明度的模糊图。</li><li>不加投影，不加滤镜色调。</li></ul></div>
+      <div class="card"><h4>文件规格</h4><ul><li>照片：JPG 或 WebP，长边 1600–2400px，单张 ≤ 500KB。</li><li>透明底产品图：PNG 或 WebP，长边 ≥ 1100px。</li><li>线稿与图标：SVG。</li><li>视频封面：16:9，宽 ≥ 1280px。</li></ul></div>
+    </div>
+
+    <h3 class="sub">各位置的裁切比例 <span class="mono">CROPS</span></h3>
+    <div class="scroll"><table class="spec">
+      <thead><tr><th>位置</th><th>桌面</th><th>手机</th></tr></thead>
+      <tbody>
+        <tr><td class="tok"><b>整屏照片</b><span>首屏、可靠性、隐私、产品配色</span></td><td class="n">1440 × 900 · 16:10</td><td class="n">402 × 394–665 · 竖向</td></tr>
+        <tr><td class="tok"><b>三格照片</b><span>使用场景</span></td><td class="n">1080 × 900 · 6:5</td><td class="n">402 × 335</td></tr>
+        <tr><td class="tok"><b>格内照片</b><span>达人视频封面</span></td><td class="n">360 × 450 · 4:5</td><td class="n">297 × 223 · 4:3</td></tr>
+        <tr><td class="tok"><b>参数卡细节图</b><span>硬件参数</span></td><td class="n">360 × 225 · 16:10</td><td class="n">282 × 96</td></tr>
+        <tr><td class="tok"><b>透明底产品图</b><span>产品工作流、硬件参数</span></td><td class="n">在格内等比缩放，四周留白</td><td class="n">同左</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
 <!-- 06 -->
 <section class="blk" id="components">
   <div class="wrap">
-    <div class="blk-head"><div><div class="num">06</div><h2>组件</h2></div><p>以下组件均可点击体验，样式与交互与官网一致。平板与手机端按钮高 40px，其余规格同桌面端。</p></div>
+    <div class="blk-head"><div><div class="num">08</div><h2>组件</h2></div><p>以下组件均可点击体验，样式与交互与官网一致。平板与手机端按钮高 40px，其余规格同桌面端。</p></div>
     <div class="comp">
       <div class="card"><h4>主按钮 / 次按钮</h4>
         <div class="stagey"><a class="btn rp" href="#components">Buy now</a><a class="btn ghost rp" href="#components">Reddit</a></div>
@@ -656,7 +810,7 @@ table.spec td.ff{color:var(--ink);font:400 13px/18px var(--sans);min-width:150px
 <!-- 07 -->
 <section class="blk" id="states">
   <div class="wrap">
-    <div class="blk-head"><div><div class="num">07</div><h2>组件状态</h2></div><p>每个可交互组件列出它实际拥有的状态。悬停与按下只出现在有鼠标的设备上；在触屏设备上，点击即进入选中或展开状态。</p></div>
+    <div class="blk-head"><div><div class="num">09</div><h2>组件状态</h2></div><p>每个可交互组件列出它实际拥有的状态。悬停与按下只出现在有鼠标的设备上；在触屏设备上，点击即进入选中或展开状态。</p></div>
     <div class="sgrid">
       <div class="card sg"><h4>主按钮 <span class="en">Primary</span></h4><div class="srow" style="--n:4"><div class="si"><span class="sl">默认 Default</span><div class="cv"><span class="btn">Buy now</span></div><span class="cap">墨黑底 · 白字</span></div><div class="si"><span class="sl">悬停 Hover</span><div class="cv"><span class="btn s-hover">Buy now</span></div><span class="cap">橙色圆从中心铺满，两道细圆环向外荡开</span></div><div class="si"><span class="sl">按下 Pressed</span><div class="cv"><span class="btn s-press">Buy now</span></div><span class="cap">缩小到 98%</span></div><div class="si"><span class="sl">聚焦 Focus</span><div class="cv"><span class="btn s-focus">Buy now</span></div><span class="cap">键盘聚焦：同悬停</span></div></div></div>
       <div class="card sg"><h4>次按钮 <span class="en">Secondary</span></h4><div class="srow" style="--n:3"><div class="si"><span class="sl">默认 Default</span><div class="cv"><span class="btn ghost">Reddit</span></div><span class="cap">白 72% · 18% 描边</span></div><div class="si"><span class="sl">悬停 Hover</span><div class="cv"><span class="btn ghost s-hover">Reddit</span></div><span class="cap">描边变为墨黑</span></div><div class="si"><span class="sl">按下 Pressed</span><div class="cv"><span class="btn ghost s-press">Reddit</span></div><span class="cap">缩小到 98%</span></div></div></div>
@@ -684,7 +838,7 @@ table.spec td.ff{color:var(--ink);font:400 13px/18px var(--sans);min-width:150px
 <!-- 08 -->
 <section class="blk" id="cards">
   <div class="wrap">
-    <div class="blk-head"><div><div class="num">08</div><h2>卡片</h2></div><p>卡片统一使用 Card #F4F4F2 底色、8px 圆角、不加投影；叠在图片上时改用磨砂玻璃。卡片内的文字层级固定为：标签 → 标题 → 正文 → 行动入口。</p></div>
+    <div class="blk-head"><div><div class="num">10</div><h2>卡片</h2></div><p>卡片统一使用 Card #F4F4F2 底色、8px 圆角、不加投影；叠在图片上时改用磨砂玻璃。卡片内的文字层级固定为：标签 → 标题 → 正文 → 行动入口。</p></div>
     <div class="cardset">
       <div class="card"><h4>步骤卡</h4>
         <div class="stagey"><div class="k-step"><span class="k-lab"><b>01</b></span><span class="k-h3">Start recording in a moment.</span><span class="k-p">Double-click to start or stop recording—whether it’s a meeting, a conversation, or an idea worth keeping.</span></div></div>
@@ -711,7 +865,7 @@ table.spec td.ff{color:var(--ink);font:400 13px/18px var(--sans);min-width:150px
 <!-- 09 -->
 <section class="blk" id="motion">
   <div class="wrap">
-    <div class="blk-head"><div><div class="num">09</div><h2>动效</h2></div><p>所有动效都围绕「圆」展开，节奏统一使用同一条缓动曲线：起步快、落地轻。</p></div>
+    <div class="blk-head"><div><div class="num">11</div><h2>动效</h2></div><p>所有动效都围绕「圆」展开，节奏统一使用同一条缓动曲线：起步快、落地轻。</p></div>
     <div class="mo">
       <div class="card"><div class="ringdemo"><span class="w"></span><span class="w b"></span><span class="r"></span></div><h4>缓动曲线</h4><p>常规过渡用 ease，进场与出场用 ease-io。</p><code>--ease: cubic-bezier(.22,.61,.21,1)</code><code>--ease-io: cubic-bezier(.65,0,.35,1)</code></div>
       <div class="card"><h4>时长</h4><p>颜色与描边变化 0.3–0.35 秒；内容淡入 0.5 秒、上浮 0.7 秒（14–18px），依次错开 0.15–0.25 秒；展开按钮旋转 0.45 秒。</p><code>颜色 .35s · 淡入 .5s · 上浮 .7s</code></div>
@@ -740,6 +894,18 @@ document.querySelector('#faq .b').addEventListener('click',function(){document.g
 var links=[].slice.call(document.querySelectorAll('nav.toc a'));
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-40% 0px -55% 0px'});
 document.querySelectorAll('section.blk').forEach(function(s){io.observe(s)});
+
+// device switch: show the desktop or the mobile specification on its own
+(function(){
+  var cols={'桌面':'desktop','平板':'tablet','手机':'mobile'};
+  document.querySelectorAll('table.spec').forEach(function(t){ var map=[]; t.querySelectorAll('thead th').forEach(function(th,i){ var k=Object.keys(cols).find(function(c){ return th.textContent.indexOf(c)===0; }); map[i]=k?cols[k]:null; if(k) th.setAttribute('data-col',cols[k]); });
+    t.querySelectorAll('tbody tr').forEach(function(tr){ Array.prototype.forEach.call(tr.children,function(td,i){ if(map[i]) td.setAttribute('data-col',map[i]); }); }); });
+  var bs=[].slice.call(document.querySelectorAll('.devsw button'));
+  function set(d){ document.documentElement.setAttribute('data-dev',d); bs.forEach(function(b){ b.classList.toggle('on',b.dataset.d===d); }); try{ localStorage.setItem('vocci-ds-dev',d); }catch(e){} }
+  bs.forEach(function(b){ b.addEventListener('click',function(){ set(b.dataset.d); }); });
+  var q=(location.search.match(/[?&]dev=(desktop|mobile|all)/)||[])[1], saved=null; try{ saved=localStorage.getItem('vocci-ds-dev'); }catch(e){}
+  set(q||saved||'all');
+})();
 </script>
 </body>
 </html>
