@@ -1,11 +1,11 @@
 /* 1016 · ?capture=1 — a still, fully revealed page for importing into Figma (html.to.design).
    No intro, no 3D, no motion; every section shows its finished first state; pinned sections are laid flat;
-   viewport height is frozen (default 900 desktop / 874 phone·tablet, or &h=…) so 100vh cells keep their designed size
+   viewport height is frozen (default 900 desktop / 1180 tablet / 874 phone, or &h=…) so 100vh cells keep their designed size
    even when the importer renders the page in a very tall window. Normal visits never run any of this. */
 (function(){
   var q=location.search; if(!/[?&]capture=1\b/.test(q)) return;
   var root=document.documentElement; root.classList.add('cap');
-  var m=q.match(/[?&]h=(\d{3,4})/), H=m?+m[1]:(innerWidth>1100?900:874);
+  var m=q.match(/[?&]h=(\d{3,4})/), H=m?+m[1]:(innerWidth>1100?900:innerWidth>700?1180:874);
   window.__CAP_H=H;
   try{ sessionStorage.setItem('vocci-intro','1'); }catch(e){}
   try{ Object.defineProperty(window,'innerHeight',{configurable:true,get:function(){return H;}}); }catch(e){}
