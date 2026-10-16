@@ -750,3 +750,15 @@
   var t; addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(lock,150); });
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(lock); lock();
 })();
+
+/* 1016 · Needs › creators: the review block lines up with the left column — top with the persona list, bottom with the community buttons */
+(function(){
+  var sec=document.getElementById('needs'); if(!sec) return; var pic=sec.querySelector('.pz-pic'), box=sec.querySelector('.pz-vids'), acc=sec.querySelector('.pz-acc'), btns=sec.querySelector('.pz-join .btns');
+  if(!pic||!box||!acc||!btns) return;
+  function fit(){ if(innerWidth<=1100){ box.style.removeProperty('--vt'); box.style.removeProperty('--vb'); return; }
+    var p=pic.getBoundingClientRect(), a=acc.getBoundingClientRect(), b=btns.getBoundingClientRect();
+    box.style.setProperty('--vt',Math.max(28,Math.round(a.top-p.top))+'px'); box.style.setProperty('--vb',Math.max(28,Math.round(p.bottom-b.bottom))+'px'); }
+  var t; addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(fit,120); });
+  if(window.ResizeObserver) new ResizeObserver(fit).observe(pic);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit); fit(); setTimeout(fit,800);
+})();

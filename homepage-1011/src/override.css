@@ -2996,3 +2996,13 @@ section .btns>*{margin-top:0!important;margin-bottom:0!important;align-self:cent
 #faq .stage>.pn.fq5-pic::after{background:rgba(255,255,255,.4)!important;-webkit-backdrop-filter:blur(4px)!important;backdrop-filter:blur(4px)!important}
 /* 1016 · colours (desktop): ring / case renders centre on the three right columns (the left column holds the copy and the finish picker) */
 @media (min-width:1101px){ #colors .fnx-stage{container-type:inline-size} #colors .fnx-stage>img.fnx-img:not(.fnx-wear){translate:12.5cqw 0!important} }
+/* 1016 · Needs: persona numbers sit on the label's baseline in every state (no absolute positioning) */
+#needs .pz-h{padding-left:30px!important;text-indent:-30px}
+#needs .pz-h b{position:static!important;translate:none!important;top:auto!important;display:inline-block;width:30px;min-width:30px;text-indent:0;vertical-align:baseline}
+#needs .pz-h span,#needs .pz-h em{text-indent:0}
+/* the video fills the height between the persona list top and the buttons' bottom */
+@media (min-width:1101px){
+  #needs .pz-vids{padding:var(--vt,28px) 28px var(--vb,28px)!important;align-content:stretch!important}
+  #needs .pz-vid{grid-template-rows:minmax(0,1fr) auto!important;height:100%;min-height:0}
+  #needs .pz-vid-img{aspect-ratio:auto!important;height:100%;min-height:0}
+}
